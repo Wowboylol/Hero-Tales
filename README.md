@@ -2,7 +2,7 @@
 Description placeholder
 
 ## To-do
-### Development cycle 1
+### Development Cycle 1
 - [ ] Create Main class
 - [ ] Implement singleton Simulator class
 - [ ] Implement Player class
@@ -10,5 +10,15 @@ Description placeholder
 - [ ] Draw tiles in world
 - [ ] Create object interactions
 - [ ] Add sound effects
-- [ ] Add unit tests
-- [ ] Refactor
+- [ ] Create unit tests
+- [ ] Refactoring
+
+### Development Cycle 2
+- [ ] Add game states
+- [ ] Create NPCs
+- [ ] Implement hero system
+- [ ] Add dialogue interactions
+- [ ] Implement title screen
+- [ ] Add events interactions
+- [ ] Create unit tests
+- [ ] Refactoring
