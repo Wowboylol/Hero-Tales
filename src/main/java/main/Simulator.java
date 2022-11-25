@@ -16,18 +16,19 @@ import java.awt.Graphics2D;
 
 public class Simulator extends JPanel implements Runnable
 {
+    // Screen settings
+    private final int originalTileSize = 16;
+    private final int tileScale = 3;
+    private final int tileSize = originalTileSize * tileScale;   // 48 pixels
+    private final int maxScreenCol = 20;
+    private final int maxScreenRow = 15;
+    private final int screenWidth = tileSize * maxScreenCol;     // 960 pixels
+    private final int screenHeight = tileSize * maxScreenRow;    // 720 pixels
+
     // Attributes
     private static Simulator instance = null;
-    private static Thread gameThread;
-
-    // Screen settings
-    private static final int originalTileSize = 16;
-    private static final int tileScale = 3;
-    private static final int tileSize = originalTileSize * tileScale;   // 48 pixels
-    private static final int maxScreenCol = 20;
-    private static final int maxScreenRow = 15;
-    private static final int screenWidth = tileSize * maxScreenCol;     // 960 pixels
-    private static final int screenHeight = tileSize * maxScreenRow;    // 720 pixels
+    private Thread gameThread;
+    private Keyboard keyboard = new Keyboard();
 
     // Constructor (Singletons have a private constructor that creates a global instance on get_instance())
     private Simulator()
@@ -35,6 +36,8 @@ public class Simulator extends JPanel implements Runnable
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
+        this.addKeyListener(keyboard);
+        this.setFocusable(true);
     }
 
     // Getter for Simulator instance, creates a Simulator if it doesn't already exist
