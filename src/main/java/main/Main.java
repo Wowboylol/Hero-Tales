@@ -19,12 +19,15 @@ public class Main
         window.setTitle("Hero Tales");
 
         // Integrate Simulator into the window
-        Simulator simulator = Simulator.get_instance();
+        Simulator simulator = Simulator.getInstance();
         window.add(simulator);
         window.pack();
 
         // Center and display window
         window.setLocationRelativeTo(null);
         window.setVisible(true);
+
+        // Start running the game
+        simulator.startGameThread();
     }
 }
