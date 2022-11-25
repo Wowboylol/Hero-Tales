@@ -17,6 +17,13 @@ public class Main
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
         window.setTitle("Hero Tales");
+
+        // Integrate Simulator into the window
+        Simulator simulator = Simulator.get_instance();
+        window.add(simulator);
+        window.pack();
+
+        // Center and display window
         window.setLocationRelativeTo(null);
         window.setVisible(true);
     }

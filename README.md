@@ -3,7 +3,7 @@ Description placeholder
 
 ## To-do
 ### Development Cycle 1
-- [ ] Create Main class
+- [X] Create Main class
 - [ ] Implement singleton Simulator class
 - [ ] Implement Player class
 - [ ] Implement world camera
