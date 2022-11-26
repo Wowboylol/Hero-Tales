@@ -9,6 +9,9 @@
 
 package main;
 import javax.swing.JPanel;
+
+import entities.Direction;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -24,11 +27,17 @@ public class Simulator extends JPanel implements Runnable
     private final int maxScreenRow = 15;
     private final int screenWidth = tileSize * maxScreenCol;     // 960 pixels
     private final int screenHeight = tileSize * maxScreenRow;    // 720 pixels
+    private final int FPS = 60;
 
     // Attributes
     private static Simulator instance = null;
-    private Thread gameThread;
     private Keyboard keyboard = new Keyboard();
+    private Thread gameThread;
+
+    // FIXME: Player attributes (to be removed)
+    private int playerX = 100;
+    private int playerY = 100;
+    private int playerSpeed = 4;
 
     // Constructor (Singletons have a private constructor that creates a global instance on get_instance())
     private Simulator()
@@ -55,24 +64,50 @@ public class Simulator extends JPanel implements Runnable
         gameThread.start();
     }
 
-    // Called though gameThread.start() and executes specified instructions repeatedly until stopped
+    // Called though gameThread.start() and updates game at specified FPS
     @Override
     public void run()
     {
+        double drawInterval = 1000000000/FPS;
+        double delta = 0;
+        long lastTime = System.nanoTime();
+        long currentTime = 0;
+
         while(gameThread != null)
         {
-            // Update information of the game
-            update();
+            currentTime = System.nanoTime();
+            delta += (currentTime - lastTime) / drawInterval;
+            lastTime = currentTime;
 
-            // Draw UI with updated information
-            repaint();
+            if(delta >= 1)
+            {
+                update();
+                repaint();
+                delta--;
+            }
         }
     }
 
     // Update information of the game
     public void update()
     {
-
+        // FIXME: Update player position (to be removed)
+        if(keyboard.getDirection(Direction.UP) == true)
+        {
+            playerY -= playerSpeed;
+        }
+        if(keyboard.getDirection(Direction.DOWN) == true)
+        {
+            playerY += playerSpeed;
+        }
+        if(keyboard.getDirection(Direction.LEFT) == true)
+        {
+            playerX -= playerSpeed;
+        }
+        if(keyboard.getDirection(Direction.RIGHT) == true)
+        {
+            playerX += playerSpeed;
+        }
     }
 
     // Draw UI with updated information, called by repaint()
@@ -81,10 +116,10 @@ public class Simulator extends JPanel implements Runnable
     {
         super.paintComponent(g);
 
-        // Graphics is an abstract class so we typecast and setup
+        // Graphics is an abstract class so typecast and setup
         Graphics2D g2 = (Graphics2D)g;
         g2.setColor(Color.white);
-        g2.fillRect(100, 100, tileSize, tileSize);
+        g2.fillRect(playerX, playerY, tileSize, tileSize);
         g2.dispose();
     }
 }

@@ -1,18 +1,42 @@
 /*  
  *  Keyboard.java
  *  
- *  Description: Gets input from keyboard;
+ *  Description: Gets input from keyboard.
  *
 */
 
 package main;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import entities.Direction;
 
 public class Keyboard implements KeyListener
 {
     // Attributes
     private boolean upPressed, downPressed, leftPressed, rightPressed;
+
+    // Returns whether direction is pressed (throw if invalid direction)
+    public boolean getDirection(Direction d)
+    {
+        try {
+            switch(d) {
+                case UP:
+                    return upPressed;
+                case DOWN:
+                    return downPressed;
+                case LEFT:
+                    return leftPressed;
+                case RIGHT:
+                    return rightPressed;
+                default:
+                    throw new IllegalArgumentException();
+            }
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
     @Override
     public void keyPressed(KeyEvent e)
