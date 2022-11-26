@@ -2,6 +2,8 @@
  *  Main.java
  *  
  *  Description: Sets up window of game and runs Simulator.
+ * 
+ *  Running Project: java -jar target/Hero-Tales-1.0-SNAPSHOT.jar
  *
 */
 
