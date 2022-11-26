@@ -4,7 +4,7 @@ Description placeholder
 ## To-do
 ### Development Cycle 1
 - [X] Create Main class
-- [ ] Implement singleton Simulator class
+- [X] Implement singleton Simulator class
 - [ ] Implement Player class
 - [ ] Implement world camera
 - [ ] Draw tiles in world
