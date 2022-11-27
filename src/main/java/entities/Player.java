@@ -50,16 +50,6 @@ public class Player extends AnimateEntity
     // Move player based on which directional (WASD) key is pressed
     public void movePlayer()
     {
-        if(keyboard.getDirection(Direction.UP) == true)
-        {
-            this.setDirection(Direction.UP);
-            this.setCoordinateY(getCoordinateY() - getMoveSpeed());
-        }
-        if(keyboard.getDirection(Direction.DOWN) == true)
-        {
-            this.setDirection(Direction.DOWN);
-            this.setCoordinateY(getCoordinateY() + getMoveSpeed());
-        }
         if(keyboard.getDirection(Direction.LEFT) == true)
         {
             this.setDirection(Direction.LEFT);
@@ -69,6 +59,16 @@ public class Player extends AnimateEntity
         {
             this.setDirection(Direction.RIGHT);
             this.setCoordinateX(getCoordinateX() + getMoveSpeed());
+        }
+        if(keyboard.getDirection(Direction.UP) == true)
+        {
+            this.setDirection(Direction.UP);
+            this.setCoordinateY(getCoordinateY() - getMoveSpeed());
+        }
+        if(keyboard.getDirection(Direction.DOWN) == true)
+        {
+            this.setDirection(Direction.DOWN);
+            this.setCoordinateY(getCoordinateY() + getMoveSpeed());
         }
     }
 
