@@ -40,10 +40,12 @@ public class Player extends AnimateEntity
     // Update the class data via the Simulator
     public void update()
     {
-        if(keyboard.isWASDPressed() == true)
+        isMovingSetter();
+        this.animateSprite();
+        
+        if(this.getIsMoving() == true)
         {
             movePlayer();
-            this.animateSprite();
         }
     }
 
@@ -145,4 +147,7 @@ public class Player extends AnimateEntity
             return false;
         }
     }
+
+    // Helper function: Determines whether player is moving in given frame
+    private void isMovingSetter() { this.setIsMoving(keyboard.isWASDPressed()); }
 }

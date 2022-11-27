@@ -17,6 +17,7 @@ public abstract class AnimateEntity extends Entity
     private int actionCount = 0;
     private int spriteNum = 1;
     private int animationSpeed;
+    private boolean isMoving = false;
 
     // Default constructor
     public AnimateEntity(int setX, int setY)
@@ -32,19 +33,25 @@ public abstract class AnimateEntity extends Entity
     public Direction getDirection() { return this.direction; }
     public int getActionCount() { return this.actionCount; }
     public int getSpriteNum() { return this.spriteNum; }
+    public boolean getIsMoving() { return this.isMoving; }
 
     // Setters
     public void setMoveSpeed(int speed) { this.moveSpeed = speed; }
     public void setDirection(Direction d) { this.direction = d; }
     public void setAnimationSpeed(int speed) { this.animationSpeed = speed;}
+    public void setIsMoving(boolean val) { this.isMoving = val; }
 
     // Increments actionCount which is used for sprite animation
     public void animateSprite() 
     {   
-        if(actionCount++ > animationSpeed)
+        // Change sprite animation if entity is moving or in the middle of moving animation
+        if(isMoving == true || (spriteNum % 2) == 0)
         {
-            spriteNum = (spriteNum < 4) ? (spriteNum + 1) : 1;
-            actionCount = 0;
+            if(actionCount++ > animationSpeed)
+            {
+                spriteNum = (spriteNum < 4) ? (spriteNum + 1) : 1;
+                actionCount = 0;
+            }
         }
     }
 }
