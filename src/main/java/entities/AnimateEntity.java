@@ -9,7 +9,7 @@ package entities;
 
 public abstract class AnimateEntity extends Entity
 {
-    // Attributes
+    // Defaults
     private int moveSpeed;
 
     // Default constructor

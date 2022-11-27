@@ -5,7 +5,7 @@ Description placeholder
 ### Development Cycle 1
 - [X] Create Main class
 - [X] Implement singleton Simulator class
-- [ ] Implement Player class
+- [X] Implement Player class
 - [ ] Implement world camera
 - [ ] Draw tiles in world
 - [ ] Create object interactions
