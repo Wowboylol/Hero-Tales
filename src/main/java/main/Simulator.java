@@ -18,13 +18,13 @@ import java.awt.Color;
 public class Simulator extends JPanel implements Runnable
 {
     // Screen settings
-    private final int originalTileSize = 16;
-    private final int tileScale = 3;
-    private final int tileSize = originalTileSize * tileScale;   // 48 pixels
-    private final int maxScreenCol = 20;
-    private final int maxScreenRow = 15;
-    private final int screenWidth = tileSize * maxScreenCol;     // 960 pixels
-    private final int screenHeight = tileSize * maxScreenRow;    // 720 pixels
+    private final int ORIGINAL_TILE_SIZE = 16;
+    private final int TILE_SCALE = 3;
+    private final int TILE_SIZE = ORIGINAL_TILE_SIZE * TILE_SCALE;   // 48 pixels
+    private final int MAX_SCREEN_COL = 20;
+    private final int MAX_SCREEN_ROW = 15;
+    private final int SCREEN_WIDTH = TILE_SIZE * MAX_SCREEN_COL;     // 960 pixels
+    private final int SCREEN_HEIGHT = TILE_SIZE * MAX_SCREEN_ROW;    // 720 pixels
     private final int FPS = 60;
 
     // Attributes
@@ -36,7 +36,7 @@ public class Simulator extends JPanel implements Runnable
     // Constructor (Singletons have a private constructor that creates a global instance on get_instance())
     private Simulator()
     {
-        this.setPreferredSize(new Dimension(screenWidth, screenHeight));
+        this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyboard);
@@ -46,7 +46,7 @@ public class Simulator extends JPanel implements Runnable
     // Getters
     public Keyboard getKeyboard() { return this.keyboard; }
     public Player getPlayer() { return this.player; }
-    public int getTileSize() { return this.tileSize; }
+    public int getTileSize() { return this.TILE_SIZE; }
 
     // Getter for Simulator instance, creates a Simulator if it doesn't already exist
     public static Simulator getInstance()

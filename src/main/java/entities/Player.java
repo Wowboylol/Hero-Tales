@@ -13,9 +13,9 @@ import java.awt.Color;
 public class Player extends AnimateEntity
 {
     // Defaults
-    private static final int spawnX = 100;
-    private static final int spawnY = 100;
-    private final int baseMoveSpeed = 4;
+    private static final int SPAWN_X = 100;
+    private static final int SPAWN_Y = 100;
+    private final int BASE_MOVE_SPEED = 4;
 
     // Attributes
     private Simulator sim;
@@ -24,16 +24,10 @@ public class Player extends AnimateEntity
     // Default constructor (starting coordinate based on defaults)
     public Player(Simulator sim)
     {
-        super(spawnX, spawnY);
+        super(SPAWN_X, SPAWN_Y);
         this.sim = sim;
         this.keyboard = sim.getKeyboard();
-        init();
-    }
-
-    // Override and adjust superclass attributes
-    private void init()
-    {
-        this.setMoveSpeed(baseMoveSpeed);
+        this.setMoveSpeed(BASE_MOVE_SPEED);
     }
 
     // Update the class data via the Simulator
