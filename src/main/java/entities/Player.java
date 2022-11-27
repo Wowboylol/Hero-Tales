@@ -18,7 +18,7 @@ public class Player extends AnimateEntity
     private static final int SPAWN_X = 100;
     private static final int SPAWN_Y = 100;
     private final int BASE_MOVE_SPEED = 3;
-    private final int ANIMATION_SPEED = 15;
+    private final int ANIMATION_SPEED = 14;
 
     // Attributes
     private Simulator sim;

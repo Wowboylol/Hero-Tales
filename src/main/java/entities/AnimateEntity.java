@@ -14,7 +14,7 @@ public abstract class AnimateEntity extends Entity
     protected BufferedImage up1, up2, up3, down1, down2, down3, left1, left2, left3, right1, right2, right3;
     private int moveSpeed;
     private Direction direction;
-    private int spriteCounter = 0;
+    private int actionCount = 0;
     private int spriteNum = 1;
     private int animationSpeed;
 
@@ -30,7 +30,7 @@ public abstract class AnimateEntity extends Entity
     // Getters
     public int getMoveSpeed() { return this.moveSpeed; }
     public Direction getDirection() { return this.direction; }
-    public int getSpriteCounter() { return this.spriteCounter; }
+    public int getActionCount() { return this.actionCount; }
     public int getSpriteNum() { return this.spriteNum; }
 
     // Setters
@@ -38,13 +38,13 @@ public abstract class AnimateEntity extends Entity
     public void setDirection(Direction d) { this.direction = d; }
     public void setAnimationSpeed(int speed) { this.animationSpeed = speed;}
 
-    // Increments spriteCount which is used for sprite animation
+    // Increments actionCount which is used for sprite animation
     public void animateSprite() 
     {   
-        if(spriteCounter++ > animationSpeed)
+        if(actionCount++ > animationSpeed)
         {
             spriteNum = (spriteNum < 4) ? (spriteNum + 1) : 1;
-            spriteCounter = 0;
+            actionCount = 0;
         }
     }
 }
