@@ -15,7 +15,7 @@ public class Keyboard implements KeyListener
     // Attributes
     private boolean upPressed, downPressed, leftPressed, rightPressed;
 
-    // Returns whether direction is pressed (throw if invalid direction)
+    // Returns whether requested direction is pressed (throw if invalid direction)
     public boolean getDirection(Direction d)
     {
         try {
@@ -36,6 +36,12 @@ public class Keyboard implements KeyListener
             e.printStackTrace();
             return false;
         }
+    }
+
+    // Returns whether ANY directional (WASD) key is pressed
+    public boolean isWASDPressed()
+    {
+        return (upPressed==true || downPressed==true || leftPressed==true || rightPressed==true) ? true : false;
     }
 
     @Override

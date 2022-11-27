@@ -17,7 +17,8 @@ public class Player extends AnimateEntity
     // Defaults
     private static final int SPAWN_X = 100;
     private static final int SPAWN_Y = 100;
-    private final int BASE_MOVE_SPEED = 4;
+    private final int BASE_MOVE_SPEED = 3;
+    private final int ANIMATION_SPEED = 15;
 
     // Attributes
     private Simulator sim;
@@ -29,33 +30,44 @@ public class Player extends AnimateEntity
         super(SPAWN_X, SPAWN_Y);
         this.sim = sim;
         this.keyboard = sim.getKeyboard();
-        this.getSprite();
+        getSprite();
         
         // Super class overriding
         this.setMoveSpeed(BASE_MOVE_SPEED);
+        this.setAnimationSpeed(ANIMATION_SPEED);
     }
 
     // Update the class data via the Simulator
     public void update()
     {
+        if(keyboard.isWASDPressed() == true)
+        {
+            movePlayer();
+            this.animateSprite();
+        }
+    }
+
+    // Move player based on which directional (WASD) key is pressed
+    public void movePlayer()
+    {
         if(keyboard.getDirection(Direction.UP) == true)
         {
-            setDirection(Direction.UP);
+            this.setDirection(Direction.UP);
             this.setCoordinateY(getCoordinateY() - getMoveSpeed());
         }
         if(keyboard.getDirection(Direction.DOWN) == true)
         {
-            setDirection(Direction.DOWN);
+            this.setDirection(Direction.DOWN);
             this.setCoordinateY(getCoordinateY() + getMoveSpeed());
         }
         if(keyboard.getDirection(Direction.LEFT) == true)
         {
-            setDirection(Direction.LEFT);
+            this.setDirection(Direction.LEFT);
             this.setCoordinateX(getCoordinateX() - getMoveSpeed());
         }
         if(keyboard.getDirection(Direction.RIGHT) == true)
         {
-            setDirection(Direction.RIGHT);
+            this.setDirection(Direction.RIGHT);
             this.setCoordinateX(getCoordinateX() + getMoveSpeed());
         }
     }
@@ -67,16 +79,44 @@ public class Player extends AnimateEntity
         switch(this.getDirection())
         {
             case UP:
-                image = up1;
+                if(this.getSpriteNum() == 1)
+                    image = up1;
+                if(this.getSpriteNum() == 2)
+                    image = up2;
+                if(this.getSpriteNum() == 3)
+                    image = up1;
+                if(this.getSpriteNum() == 4)
+                    image = up3;
                 break;
             case DOWN:
-                image = down1;
+                if(this.getSpriteNum() == 1)
+                    image = down1;
+                if(this.getSpriteNum() == 2)
+                    image = down2;
+                if(this.getSpriteNum() == 3)
+                    image = down1;
+                if(this.getSpriteNum() == 4)
+                    image = down3;
                 break;
             case LEFT:
-                image = left1;
+                if(this.getSpriteNum() == 1)
+                    image = left1;
+                if(this.getSpriteNum() == 2)
+                    image = left2;
+                if(this.getSpriteNum() == 3)
+                    image = left1;
+                if(this.getSpriteNum() == 4)
+                    image = left3;
                 break;
             case RIGHT:
-                image = right1;
+                if(this.getSpriteNum() == 1)
+                    image = right1;
+                if(this.getSpriteNum() == 2)
+                    image = right2;
+                if(this.getSpriteNum() == 3)
+                    image = right1;
+                if(this.getSpriteNum() == 4)
+                    image = right3;
                 break;
         }
         g2.drawImage(image, getCoordinateX(), getCoordinateY(), sim.getTileSize(), sim.getTileSize(), null);
