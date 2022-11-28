@@ -121,7 +121,7 @@ public class Player extends AnimateEntity
                     image = right3;
                 break;
         }
-        g2.drawImage(image, getCoordinateX(), getCoordinateY(), sim.getTileSize(), sim.getTileSize(), null);
+        g2.drawImage(image, getCoordinateX(), getCoordinateY(), sim.TILE_SIZE, sim.TILE_SIZE, null);
     }
 
     // Load player sprites into BufferedImage, returns true if successful
