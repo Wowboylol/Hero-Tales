@@ -20,9 +20,9 @@ public abstract class AnimateEntity extends Entity
     private boolean isMoving = false;
 
     // Default constructor
-    public AnimateEntity(int setX, int setY)
+    public AnimateEntity(Coordinate spawnPosition)
     {
-        super(setX, setY);
+        super(spawnPosition);
         this.moveSpeed = 3;
         this.direction = Direction.DOWN;
         this.animationSpeed = 15;

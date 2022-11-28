@@ -15,8 +15,7 @@ import javax.imageio.ImageIO;
 public class Player extends AnimateEntity
 {
     // Defaults
-    private static final int SPAWN_X = 100;
-    private static final int SPAWN_Y = 100;
+    public static final Coordinate PLAYER_SPAWN_POSITION = new Coordinate(100, 100);
     private final int BASE_MOVE_SPEED = 3;
     private final int ANIMATION_SPEED = 14;
 
@@ -27,7 +26,7 @@ public class Player extends AnimateEntity
     // Default constructor (starting coordinate based on defaults)
     public Player(Simulator sim)
     {
-        super(SPAWN_X, SPAWN_Y);
+        super(PLAYER_SPAWN_POSITION);
         this.sim = sim;
         this.keyboard = sim.getKeyboard();
         getSprite();

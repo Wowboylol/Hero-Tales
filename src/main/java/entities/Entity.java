@@ -13,9 +13,9 @@ public abstract class Entity
     private Coordinate position;
     
     // Default constructor
-    public Entity(int setX, int setY)
+    public Entity(Coordinate spawnPosition)
     {
-        this.position = new Coordinate(setX, setY);
+        this.position = spawnPosition;
     }
 
     // Getters
