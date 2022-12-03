@@ -17,7 +17,7 @@ public class Player extends AnimateEntity
     // Defaults
     public static final Coordinate PLAYER_SPAWN_POSITION = new Coordinate(100, 100);
     private final int BASE_MOVE_SPEED = 3;
-    private final int ANIMATION_SPEED = 14;
+    private final int ANIMATION_SPEED = 13;
 
     // Attributes
     private Simulator sim;
