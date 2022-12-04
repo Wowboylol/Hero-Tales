@@ -7,7 +7,7 @@ Description placeholder
 - [X] Implement singleton Simulator class
 - [X] Implement Player class
 - [ ] Implement world camera
-- [ ] Draw tiles in world
+- [X] Draw tiles in world
 - [ ] Create object interactions
 - [ ] Add sound effects
 - [ ] Create unit tests
