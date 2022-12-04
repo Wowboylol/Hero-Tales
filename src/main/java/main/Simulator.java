@@ -8,12 +8,13 @@
 */
 
 package main;
-import entities.*;
 import javax.swing.JPanel;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Color;
+import entities.*;
+import graphics.*;
 
 public class Simulator extends JPanel implements Runnable
 {
@@ -30,6 +31,7 @@ public class Simulator extends JPanel implements Runnable
     // Attributes
     private static Simulator instance = null;
     private Thread gameThread;
+    private TileHandler tileHandler = new TileHandler(this);
     private Keyboard keyboard = new Keyboard();
     private Player player = new Player(this);
 
@@ -102,6 +104,7 @@ public class Simulator extends JPanel implements Runnable
         Graphics2D g2 = (Graphics2D)g;
 
         // Draw graphics by passing Graphics2D to various classes
+        tileHandler.draw(g2);
         player.draw(g2);
 
         // Clean up resources
