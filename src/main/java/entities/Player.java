@@ -20,14 +20,14 @@ public class Player extends AnimateEntity
     private final int ANIMATION_SPEED = 13;
 
     // Attributes
-    private Simulator sim;
+    private Simulator simulator;
     private Keyboard keyboard;
 
     // Default constructor (starting coordinate based on defaults)
     public Player(Simulator sim)
     {
         super(PLAYER_SPAWN_POSITION);
-        this.sim = sim;
+        this.simulator = sim;
         this.keyboard = sim.getKeyboard();
         getSprite();
         
@@ -120,7 +120,7 @@ public class Player extends AnimateEntity
                     image = right3;
                 break;
         }
-        g2.drawImage(image, getCoordinateX(), getCoordinateY(), sim.TILE_SIZE, sim.TILE_SIZE, null);
+        g2.drawImage(image, getCoordinateX(), getCoordinateY(), simulator.TILE_SIZE, simulator.TILE_SIZE, null);
     }
 
     // Load player sprites into BufferedImage, returns true if successful
