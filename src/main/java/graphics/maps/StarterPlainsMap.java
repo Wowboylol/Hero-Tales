@@ -8,10 +8,7 @@
 
 package graphics.maps;
 import java.awt.Graphics2D;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import javax.imageio.ImageIO;
 import graphics.Tile;
 import main.Simulator;
@@ -23,15 +20,16 @@ public class StarterPlainsMap implements MapStrategy
     private final int MAP_SIZE_X = 50;
     private final int MAP_SIZE_Y = 50;
     private Tile tileImages[];
+    private MapLoader mapLoader;
     private int mapTileGrid[][];
 
     // Default constructor
     public StarterPlainsMap()
     {
         this.tileImages = new Tile[MAP_TILES];
-        this.mapTileGrid = new int[MAP_SIZE_X][MAP_SIZE_Y];
+        this.mapLoader = new MapLoader();
+        this.mapTileGrid = this.mapLoader.loadMap("/maps/starter_plains.txt", MAP_SIZE_X, MAP_SIZE_Y);
         getTileImages();
-        loadMap("/maps/starter_plains.txt");
     }
 
     // Build map
@@ -57,40 +55,6 @@ public class StarterPlainsMap implements MapStrategy
                 rowNumber++;
                 coordinatePixelY += Simulator.TILE_SIZE;
             }
-        }
-    }
-
-    // Get map data from file and load into mapTileGrid
-    private void loadMap(String mapPath)
-    {
-        try {
-            InputStream mapFile = getClass().getResourceAsStream(mapPath);
-            BufferedReader mapDataReader = new BufferedReader(new InputStreamReader(mapFile));
-            int columnNumber = 0;
-            int rowNumber = 0;
-
-            while(columnNumber < MAP_SIZE_X && rowNumber < MAP_SIZE_Y)
-            {
-                String line = mapDataReader.readLine();
-
-                while(columnNumber < MAP_SIZE_X)
-                {
-                    String tileData[] = line.split(" ");
-                    int tileIndex = Integer.parseInt(tileData[columnNumber]);
-
-                    mapTileGrid[columnNumber][rowNumber] = tileIndex;
-                    columnNumber++;
-                }
-                if(columnNumber == MAP_SIZE_X)
-                {
-                    columnNumber = 0;
-                    rowNumber++;
-                }
-            }
-            mapDataReader.close();
-        }
-        catch(Exception exception) {
-            exception.printStackTrace();
         }
     }
 
