@@ -8,19 +8,16 @@
 
 package graphics;
 import java.awt.Graphics2D;
-import main.Simulator;
 import graphics.maps.MapStrategy;
 import graphics.maps.StarterPlainsMap;
 
 public class TileHandler 
 {
     // Attributes
-    private Simulator simulator;
     private MapStrategy strategy;
 
-    public TileHandler(Simulator sim)
+    public TileHandler()
     {
-        this.simulator = sim;
         this.strategy = new StarterPlainsMap(); // remove later
     }
 
@@ -28,8 +25,8 @@ public class TileHandler
     public void setStrategy(MapStrategy strategy) { this.strategy = strategy; }
 
     // Executes strategy of building a specific type of map
-    public void draw(Graphics2D g2)
+    public void draw(Graphics2D graphics2D)
     {
-        strategy.buildMap(g2);
+        strategy.buildMap(graphics2D);
     }
 }

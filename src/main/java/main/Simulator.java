@@ -19,19 +19,19 @@ import graphics.*;
 public class Simulator extends JPanel implements Runnable
 {
     // Screen settings
-    private final int ORIGINAL_TILE_SIZE = 16;
-    private final int TILE_SCALE = 3;
-    public final int TILE_SIZE = ORIGINAL_TILE_SIZE * TILE_SCALE;   // 48 pixels
-    public final int MAX_SCREEN_COL = 20;
-    public final int MAX_SCREEN_ROW = 15;
-    public final int SCREEN_WIDTH = TILE_SIZE * MAX_SCREEN_COL;     // 960 pixels
-    public final int SCREEN_HEIGHT = TILE_SIZE * MAX_SCREEN_ROW;    // 720 pixels
-    private final int FPS = 60;
+    private static final int ORIGINAL_TILE_SIZE = 16;
+    private static final int TILE_SCALE = 3;
+    public static final int TILE_SIZE = ORIGINAL_TILE_SIZE * TILE_SCALE;   // 48 pixels
+    public static final int MAX_SCREEN_COL = 20;
+    public static final int MAX_SCREEN_ROW = 15;
+    public static final int SCREEN_WIDTH = TILE_SIZE * MAX_SCREEN_COL;     // 960 pixels
+    public static final int SCREEN_HEIGHT = TILE_SIZE * MAX_SCREEN_ROW;    // 720 pixels
+    private static final int FPS = 60;
 
     // Attributes
     private static Simulator instance = null;
     private Thread gameThread;
-    private TileHandler tileHandler = new TileHandler(this);
+    private TileHandler tileHandler = new TileHandler();
     private Keyboard keyboard = new Keyboard();
     private Player player = new Player(this);
 
@@ -101,13 +101,13 @@ public class Simulator extends JPanel implements Runnable
         super.paintComponent(g);
 
         // Graphics is an abstract class so typecast and setup
-        Graphics2D g2 = (Graphics2D)g;
+        Graphics2D graphics2D = (Graphics2D)g;
 
         // Draw graphics by passing Graphics2D to various classes
-        tileHandler.draw(g2);
-        player.draw(g2);
+        tileHandler.draw(graphics2D);
+        player.draw(graphics2D);
 
         // Clean up resources
-        g2.dispose();
+        graphics2D.dispose();
     }
 }

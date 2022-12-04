@@ -11,5 +11,5 @@ import java.awt.Graphics2D;
 
 public interface MapStrategy 
 {
-    public void buildMap(Graphics2D g2);
+    public void buildMap(Graphics2D graphics2D);
 }

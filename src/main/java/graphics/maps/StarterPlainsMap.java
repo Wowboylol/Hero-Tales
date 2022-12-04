@@ -11,7 +11,7 @@ import java.awt.Graphics2D;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import graphics.Tile;
-import main.*;
+import main.Simulator;
 
 public class StarterPlainsMap implements MapStrategy
 {
@@ -27,9 +27,27 @@ public class StarterPlainsMap implements MapStrategy
     }
 
     // Build map
-    public void buildMap(Graphics2D g2)
+    public void buildMap(Graphics2D graphics2D)
     {
-        g2.drawImage(tiles[0].getImage(), 0, 0, Simulator.getInstance().TILE_SIZE, Simulator.getInstance().TILE_SIZE, null);
+        int col = 0;
+        int row = 0;
+        int x = 0;
+        int y = 0;
+
+        while(col < Simulator.MAX_SCREEN_COL && row < Simulator.MAX_SCREEN_ROW)
+        {
+            graphics2D.drawImage(tiles[0].getImage(), x, y, Simulator.TILE_SIZE, Simulator.TILE_SIZE, null);
+            col++;
+            x += Simulator.TILE_SIZE;
+
+            if(col == Simulator.MAX_SCREEN_COL)
+            {
+                col = 0;
+                x = 0;
+                row++;
+                y += Simulator.TILE_SIZE;
+            }
+        }
     }
 
     // Get tile images

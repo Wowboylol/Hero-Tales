@@ -20,15 +20,13 @@ public class Player extends AnimateEntity
     private final int ANIMATION_SPEED = 13;
 
     // Attributes
-    private Simulator simulator;
     private Keyboard keyboard;
 
     // Default constructor (starting coordinate based on defaults)
-    public Player(Simulator sim)
+    public Player(Simulator simulator)
     {
         super(PLAYER_SPAWN_POSITION);
-        this.simulator = sim;
-        this.keyboard = sim.getKeyboard();
+        this.keyboard = simulator.getKeyboard();
         getSprite();
         
         // Super class overriding
@@ -74,7 +72,7 @@ public class Player extends AnimateEntity
     }
 
     // Draw the class in window via the Simulator
-    public void draw(Graphics2D g2)
+    public void draw(Graphics2D graphics2D)
     {
         BufferedImage image = null;
         switch(this.getDirection())
@@ -120,7 +118,7 @@ public class Player extends AnimateEntity
                     image = right3;
                 break;
         }
-        g2.drawImage(image, getCoordinateX(), getCoordinateY(), simulator.TILE_SIZE, simulator.TILE_SIZE, null);
+        graphics2D.drawImage(image, getCoordinateX(), getCoordinateY(), Simulator.TILE_SIZE, Simulator.TILE_SIZE, null);
     }
 
     // Load player sprites into BufferedImage, returns true if successful
