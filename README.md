@@ -6,7 +6,7 @@ Description placeholder
 - [X] Create Main class
 - [X] Implement singleton Simulator class
 - [X] Implement Player class
-- [ ] Implement world camera
+- [X] Implement world camera
 - [X] Draw tiles in world
 - [ ] Create object interactions
 - [ ] Add sound effects

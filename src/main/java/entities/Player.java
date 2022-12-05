@@ -16,10 +16,10 @@ public class Player extends AnimateEntity
 {
     // Defaults
     public static final Coordinate PLAYER_SPAWN_POSITION = new Coordinate(Simulator.TILE_SIZE*8, Simulator.TILE_SIZE*8);
-    private final int SCREEN_COORDINATE_X = Simulator.SCREEN_WIDTH/2 - (Simulator.TILE_SIZE/2);
-    private final int SCREEN_COORDINATE_Y = Simulator.SCREEN_HEIGHT/2 - (Simulator.TILE_SIZE/2);
-    private final int BASE_MOVE_SPEED = 3;
-    private final int ANIMATION_SPEED = 13;
+    public final int PLAYER_SCREEN_X = Simulator.SCREEN_WIDTH/2 - (Simulator.TILE_SIZE/2);
+    public final int PLAYER_SCREEN_Y = Simulator.SCREEN_HEIGHT/2 - (Simulator.TILE_SIZE/2);
+    public final int BASE_MOVE_SPEED = 3;
+    public final int ANIMATION_SPEED = 13;
 
     // Attributes
     private Keyboard keyboard;
@@ -120,7 +120,7 @@ public class Player extends AnimateEntity
                     image = right3;
                 break;
         }
-        graphics2D.drawImage(image, SCREEN_COORDINATE_X, SCREEN_COORDINATE_Y, Simulator.TILE_SIZE, Simulator.TILE_SIZE, null);
+        graphics2D.drawImage(image, PLAYER_SCREEN_X, PLAYER_SCREEN_Y, Simulator.TILE_SIZE, Simulator.TILE_SIZE, null);
     }
 
     // Load player sprites into BufferedImage, returns true if successful

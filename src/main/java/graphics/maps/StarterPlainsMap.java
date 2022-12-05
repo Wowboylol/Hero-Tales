@@ -10,8 +10,9 @@ package graphics.maps;
 import java.awt.Graphics2D;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import graphics.Tile;
 import main.Simulator;
+import graphics.Tile;
+import graphics.Camera;
 
 public class StarterPlainsMap implements MapStrategy
 {
@@ -19,15 +20,15 @@ public class StarterPlainsMap implements MapStrategy
     private final int MAP_TILES = 55;
     private final int MAP_SIZE_TILE_X = 50;
     private final int MAP_SIZE_TILE_Y = 50;
-    private final int MAP_SIZE_PIXEL_X = MAP_SIZE_TILE_X * Simulator.TILE_SIZE;
-    private final int MAP_SIZE_PIXEL_Y = MAP_SIZE_TILE_Y * Simulator.TILE_SIZE;
     private Tile tileImages[];
     private int mapTileGrid[][];
     private MapLoader mapLoader;
+    private Camera camera;
 
     // Default constructor
-    public StarterPlainsMap()
+    public StarterPlainsMap(Camera camera)
     {
+        this.camera = camera;
         this.tileImages = new Tile[MAP_TILES];
         this.mapLoader = new MapLoader();
         this.mapTileGrid = this.mapLoader.loadMap("/maps/starter_plains.txt", MAP_SIZE_TILE_X, MAP_SIZE_TILE_Y);
@@ -37,25 +38,24 @@ public class StarterPlainsMap implements MapStrategy
     // Build map
     public void buildMap(Graphics2D graphics2D)
     {
-        int columnNumber = 0;
-        int rowNumber = 0;
-        int coordinatePixelX = 0;
-        int coordinatePixelY = 0;
+        int mapColumn = 0;
+        int mapRow = 0;
 
-        while(columnNumber < MAP_SIZE_TILE_X && rowNumber < MAP_SIZE_TILE_Y)
+        while(mapColumn < MAP_SIZE_TILE_X && mapRow < MAP_SIZE_TILE_Y)
         {
-            int tileIndex = mapTileGrid[columnNumber][rowNumber];
+            int tileIndex = mapTileGrid[mapColumn][mapRow];
+            int mapPixelX = mapColumn * Simulator.TILE_SIZE;
+            int mapPixelY = mapRow * Simulator.TILE_SIZE;
+            int tileScreenPositionX = mapPixelX - camera.getPlayerScreenX();
+            int tileScreenPositionY = mapPixelY - camera.getPlayerScreenY();
 
-            graphics2D.drawImage(tileImages[tileIndex].getImage(), coordinatePixelX, coordinatePixelY, Simulator.TILE_SIZE, Simulator.TILE_SIZE, null);
-            columnNumber++;
-            coordinatePixelX += Simulator.TILE_SIZE;
+            graphics2D.drawImage(tileImages[tileIndex].getImage(), tileScreenPositionX, tileScreenPositionY, Simulator.TILE_SIZE, Simulator.TILE_SIZE, null);
+            mapColumn++;
 
-            if(columnNumber == MAP_SIZE_TILE_X)
+            if(mapColumn == MAP_SIZE_TILE_X)
             {
-                columnNumber = 0;
-                coordinatePixelX = 0;
-                rowNumber++;
-                coordinatePixelY += Simulator.TILE_SIZE;
+                mapColumn = 0;
+                mapRow++;
             }
         }
     }

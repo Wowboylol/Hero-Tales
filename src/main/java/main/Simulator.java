@@ -28,12 +28,12 @@ public class Simulator extends JPanel implements Runnable
     public static final int SCREEN_HEIGHT = TILE_SIZE * MAX_SCREEN_ROW;    // 720 pixels
     private static final int FPS = 60;
 
-    // Attributes
+    // Class storage
     private static Simulator instance = null;
     private Thread gameThread;
-    private TileHandler tileHandler = new TileHandler();
     private Keyboard keyboard = new Keyboard();
     private Player player = new Player(this);
+    private TileHandler tileHandler = new TileHandler(this);
 
     // Constructor (Singletons have a private constructor that creates a global instance on get_instance())
     private Simulator()
