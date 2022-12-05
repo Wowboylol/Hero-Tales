@@ -17,18 +17,20 @@ public class StarterPlainsMap implements MapStrategy
 {
     // Attributes
     private final int MAP_TILES = 55;
-    private final int MAP_SIZE_X = 50;
-    private final int MAP_SIZE_Y = 50;
+    private final int MAP_SIZE_TILE_X = 50;
+    private final int MAP_SIZE_TILE_Y = 50;
+    private final int MAP_SIZE_PIXEL_X = MAP_SIZE_TILE_X * Simulator.TILE_SIZE;
+    private final int MAP_SIZE_PIXEL_Y = MAP_SIZE_TILE_Y * Simulator.TILE_SIZE;
     private Tile tileImages[];
-    private MapLoader mapLoader;
     private int mapTileGrid[][];
+    private MapLoader mapLoader;
 
     // Default constructor
     public StarterPlainsMap()
     {
         this.tileImages = new Tile[MAP_TILES];
         this.mapLoader = new MapLoader();
-        this.mapTileGrid = this.mapLoader.loadMap("/maps/starter_plains.txt", MAP_SIZE_X, MAP_SIZE_Y);
+        this.mapTileGrid = this.mapLoader.loadMap("/maps/starter_plains.txt", MAP_SIZE_TILE_X, MAP_SIZE_TILE_Y);
         getTileImages();
     }
 
@@ -40,7 +42,7 @@ public class StarterPlainsMap implements MapStrategy
         int coordinatePixelX = 0;
         int coordinatePixelY = 0;
 
-        while(columnNumber < MAP_SIZE_X && rowNumber < MAP_SIZE_Y)
+        while(columnNumber < MAP_SIZE_TILE_X && rowNumber < MAP_SIZE_TILE_Y)
         {
             int tileIndex = mapTileGrid[columnNumber][rowNumber];
 
@@ -48,7 +50,7 @@ public class StarterPlainsMap implements MapStrategy
             columnNumber++;
             coordinatePixelX += Simulator.TILE_SIZE;
 
-            if(columnNumber == MAP_SIZE_X)
+            if(columnNumber == MAP_SIZE_TILE_X)
             {
                 columnNumber = 0;
                 coordinatePixelX = 0;
