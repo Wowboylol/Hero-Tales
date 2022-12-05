@@ -10,21 +10,21 @@ package entities;
 public abstract class Entity 
 {
     // Attributes
-    private Coordinate position;
+    private Coordinate worldPosition;
     
     // Default constructor
     public Entity(Coordinate spawnPosition)
     {
-        this.position = spawnPosition;
+        this.worldPosition = spawnPosition;
     }
 
     // Getters
-    public Coordinate getCoordinate() { return this.position; }
-    public int getCoordinateX() { return this.position.get_X(); }
-    public int getCoordinateY() { return this.position.get_Y(); }
+    public Coordinate getWorldCoordinate() { return this.worldPosition; }
+    public int getWorldCoordinateX() { return this.worldPosition.get_X(); }
+    public int getWorldCoordinateY() { return this.worldPosition.get_Y(); }
 
     // Setters
-    public void setCoordinate(Coordinate coordinate) { this.position = coordinate; }
-    public void setCoordinateX(int X) { this.position.set_X(X); }
-    public void setCoordinateY(int Y) { this.position.set_Y(Y); }
+    public void setWorldCoordinate(Coordinate coordinate) { this.worldPosition = coordinate; }
+    public void setWorldCoordinateX(int X) { this.worldPosition.set_X(X); }
+    public void setWorldCoordinateY(int Y) { this.worldPosition.set_Y(Y); }
 }

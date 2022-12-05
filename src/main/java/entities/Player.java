@@ -52,22 +52,22 @@ public class Player extends AnimateEntity
         if(keyboard.getDirection(Direction.LEFT) == true)
         {
             this.setDirection(Direction.LEFT);
-            this.setCoordinateX(getCoordinateX() - getMoveSpeed());
+            this.setWorldCoordinateX(getWorldCoordinateX() - getMoveSpeed());
         }
         if(keyboard.getDirection(Direction.RIGHT) == true)
         {
             this.setDirection(Direction.RIGHT);
-            this.setCoordinateX(getCoordinateX() + getMoveSpeed());
+            this.setWorldCoordinateX(getWorldCoordinateX() + getMoveSpeed());
         }
         if(keyboard.getDirection(Direction.UP) == true)
         {
             this.setDirection(Direction.UP);
-            this.setCoordinateY(getCoordinateY() - getMoveSpeed());
+            this.setWorldCoordinateY(getWorldCoordinateY() - getMoveSpeed());
         }
         if(keyboard.getDirection(Direction.DOWN) == true)
         {
             this.setDirection(Direction.DOWN);
-            this.setCoordinateY(getCoordinateY() + getMoveSpeed());
+            this.setWorldCoordinateY(getWorldCoordinateY() + getMoveSpeed());
         }
     }
 
@@ -118,7 +118,7 @@ public class Player extends AnimateEntity
                     image = right3;
                 break;
         }
-        graphics2D.drawImage(image, getCoordinateX(), getCoordinateY(), Simulator.TILE_SIZE, Simulator.TILE_SIZE, null);
+        graphics2D.drawImage(image, getWorldCoordinateX(), getWorldCoordinateY(), Simulator.TILE_SIZE, Simulator.TILE_SIZE, null);
     }
 
     // Load player sprites into BufferedImage, returns true if successful
