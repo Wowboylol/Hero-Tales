@@ -17,9 +17,11 @@ import graphics.Camera;
 public class StarterPlainsMap implements MapStrategy
 {
     // Attributes
-    private final int MAP_TILES = 55;
-    private final int MAP_SIZE_TILE_X = 50;
-    private final int MAP_SIZE_TILE_Y = 50;
+    public final int MAP_TILES = 55;
+    public final int MAP_SIZE_TILE_X = 50;
+    public final int MAP_SIZE_TILE_Y = 50;
+    public final int MAP_SIZE_PIXEL_X = MAP_SIZE_TILE_X * Simulator.TILE_SIZE;
+    public final int MAP_SIZE_PIXEL_Y = MAP_SIZE_TILE_Y * Simulator.TILE_SIZE;
     private Tile tileImages[];
     private int mapTileGrid[][];
     private MapLoader mapLoader;
@@ -45,12 +47,12 @@ public class StarterPlainsMap implements MapStrategy
         {
             int tileIndex = mapTileGrid[mapColumn][mapRow];
 
-            if(camera.isTileOnScreen(mapColumn, mapRow) == true)
+            if(camera.isTileOnScreen(mapColumn, mapRow) == true || camera.isScreenAtMapEdge(MAP_SIZE_PIXEL_X, MAP_SIZE_PIXEL_Y))
             {
                 graphics2D.drawImage(
                     tileImages[tileIndex].getImage(), 
-                    camera.getTileScreenPositionX(mapColumn), 
-                    camera.getTileScreenPositionY(mapRow), 
+                    camera.getTileScreenPositionX(mapColumn, MAP_SIZE_PIXEL_X), 
+                    camera.getTileScreenPositionY(mapRow, MAP_SIZE_PIXEL_Y), 
                     Simulator.TILE_SIZE, Simulator.TILE_SIZE, null
                 );
             }

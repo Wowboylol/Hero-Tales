@@ -21,7 +21,7 @@ public class TileHandler
     public TileHandler(Simulator simulator)
     {
         this.camera = new Camera(simulator);
-        this.strategy = new StarterPlainsMap(camera); // remove later
+        this.strategy = new StarterPlainsMap(camera); // FIXME: remove later
     }
 
     // Setters

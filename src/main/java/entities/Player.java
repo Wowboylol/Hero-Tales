@@ -120,7 +120,25 @@ public class Player extends AnimateEntity
                     image = right3;
                 break;
         }
-        graphics2D.drawImage(image, PLAYER_SCREEN_X, PLAYER_SCREEN_Y, Simulator.TILE_SIZE, Simulator.TILE_SIZE, null);
+        // FIXME: refactor this
+        int x = PLAYER_SCREEN_X;
+        int y = PLAYER_SCREEN_Y;
+
+        if(PLAYER_SCREEN_X > this.getWorldCoordinateX())
+            x = this.getWorldCoordinateX();
+
+        if(PLAYER_SCREEN_Y > this.getWorldCoordinateY())
+            y = this.getWorldCoordinateY();
+
+        int rightOffset = Simulator.SCREEN_WIDTH - PLAYER_SCREEN_X;
+        if(rightOffset > 2400 - this.getWorldCoordinateX())
+            x = Simulator.SCREEN_WIDTH - (2400 - this.getWorldCoordinateX());
+
+        int bottomOffset = Simulator.SCREEN_HEIGHT - PLAYER_SCREEN_Y;
+        if(bottomOffset > 2400 - this.getWorldCoordinateY())
+            y = Simulator.SCREEN_HEIGHT - (2400 - this.getWorldCoordinateY());
+
+        graphics2D.drawImage(image, x, y, Simulator.TILE_SIZE, Simulator.TILE_SIZE, null);
     }
 
     // Load player sprites into BufferedImage, returns true if successful

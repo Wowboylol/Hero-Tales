@@ -12,43 +12,71 @@ import entities.Player;
 public class Camera 
 {
     // Attributes
+    public final int RIGHT_OFFSET;
+    public final int BOTTOM_OFFSET;
     private Player player;
 
     // Default constructor
     public Camera(Simulator simulator)
     {
         this.player = simulator.getPlayer();
+        this.RIGHT_OFFSET = Simulator.SCREEN_WIDTH - player.PLAYER_SCREEN_X;
+        this.BOTTOM_OFFSET = Simulator.SCREEN_HEIGHT - player.PLAYER_SCREEN_Y;
     }
 
     // Get tile screen horizontal position based on tile's map columm number
-    public int getTileScreenPositionX(int mapTileX)
+    // Stops camera if it reaches the map right left borders.
+    public int getTileScreenPositionX(int mapTileX, int mapPixelWidth)
     {
         int mapCoordinateX = mapTileX * Simulator.TILE_SIZE;
-        return mapCoordinateX - player.getWorldCoordinateX() + player.PLAYER_SCREEN_X;
+        int tileScreenPositionX = mapCoordinateX - player.getWorldCoordinateX() + player.PLAYER_SCREEN_X;
+
+        if(player.PLAYER_SCREEN_X > player.getWorldCoordinateX())
+            tileScreenPositionX = mapCoordinateX;
+
+        if(RIGHT_OFFSET > mapPixelWidth - player.getWorldCoordinateX())
+            tileScreenPositionX = Simulator.SCREEN_WIDTH - (mapPixelWidth - mapCoordinateX);
+
+        return tileScreenPositionX;
     }
 
-    // Get tile screen vertical position based on tile's map row number
-    public int getTileScreenPositionY(int mapTileY)
+    // Get tile screen vertical position based on tile's map row number.
+    // Stops camera if it reaches the map top bottom borders.
+    public int getTileScreenPositionY(int mapTileY, int mapPixelHeight)
     {
         int mapCoordinateY = mapTileY * Simulator.TILE_SIZE;
-        return mapCoordinateY - player.getWorldCoordinateY() + player.PLAYER_SCREEN_Y;
+        int tileScreenPositionY = mapCoordinateY - player.getWorldCoordinateY() + player.PLAYER_SCREEN_Y;
+
+        if(player.PLAYER_SCREEN_Y > player.getWorldCoordinateY())
+            tileScreenPositionY = mapCoordinateY;
+        
+        if(BOTTOM_OFFSET > mapPixelHeight - player.getWorldCoordinateY())
+            tileScreenPositionY = Simulator.SCREEN_HEIGHT - (mapPixelHeight - mapCoordinateY);
+
+        return tileScreenPositionY;
     }
 
-    // Check if a map tile is in player's screen camera
+    // Check if a map tile is in player's screen camera.
     public boolean isTileOnScreen(int mapTileX, int mapTileY)
     {
         int tileSize = Simulator.TILE_SIZE;
         int mapCoordinateX = mapTileX * tileSize;
         int mapCoordinateY = mapTileY * tileSize;
 
-        if(mapCoordinateX + tileSize <= player.getWorldCoordinateX() - player.PLAYER_SCREEN_X)
-            return false;
-        if(mapCoordinateX - tileSize >= player.getWorldCoordinateX() + player.PLAYER_SCREEN_X)
-            return false;
-        if(mapCoordinateY + tileSize <= player.getWorldCoordinateY() - player.PLAYER_SCREEN_Y)
-            return false;
-        if(mapCoordinateY - tileSize >= player.getWorldCoordinateY() + player.PLAYER_SCREEN_Y)
-            return false;
+        if(mapCoordinateX + tileSize <= player.getWorldCoordinateX() - player.PLAYER_SCREEN_X) return false;
+        if(mapCoordinateX - tileSize >= player.getWorldCoordinateX() + player.PLAYER_SCREEN_X) return false;
+        if(mapCoordinateY + tileSize <= player.getWorldCoordinateY() - player.PLAYER_SCREEN_Y) return false;
+        if(mapCoordinateY - tileSize >= player.getWorldCoordinateY() + player.PLAYER_SCREEN_Y) return false;
         return true;
+    }
+
+    // Checks if the screen is at the edge of the map
+    public boolean isScreenAtMapEdge(int mapWidth, int mapHeight)
+    {
+        if(player.PLAYER_SCREEN_X > player.getWorldCoordinateX()) return true;
+        if(player.PLAYER_SCREEN_Y > player.getWorldCoordinateY()) return true;
+        if(RIGHT_OFFSET > mapWidth - player.getWorldCoordinateX()) return true;
+        if(BOTTOM_OFFSET > mapHeight - player.getWorldCoordinateY()) return true;
+        return false;
     }
 }
