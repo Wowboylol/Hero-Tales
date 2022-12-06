@@ -66,6 +66,10 @@ public class StarterPlainsMap implements MapStrategy
         }
     }
 
+    // Getters
+    public int getMapWidth() { return this.MAP_SIZE_PIXEL_X; }
+    public int getMapHeight() { return this.MAP_SIZE_PIXEL_Y; }
+
     // Get tile images and set consecutive indexs of tile image array to the loaded images
     private void getTileImages()
     {

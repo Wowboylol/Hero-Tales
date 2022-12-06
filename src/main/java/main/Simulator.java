@@ -48,6 +48,8 @@ public class Simulator extends JPanel implements Runnable
 
     // Getters
     public Player getPlayer() { return this.player; }
+    public int getMapWidth() { return this.mapHandler.getCurrentMapWidth(); }
+    public int getMapHeight() { return this.mapHandler.getCurrentMapHeight(); }
 
     // Getter for Simulator instance, creates a Simulator if it doesn't already exist
     public static Simulator getInstance()

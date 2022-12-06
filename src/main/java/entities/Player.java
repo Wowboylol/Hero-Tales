@@ -22,12 +22,14 @@ public class Player extends AnimateEntity
     public final int ANIMATION_SPEED = 13;
 
     // Attributes
+    private Simulator simulator;
     private Keyboard keyboard;
 
     // Default constructor (starting coordinate based on defaults)
     public Player(Simulator simulator, Keyboard keyboard)
     {
         super(PLAYER_SPAWN_POSITION);
+        this.simulator = simulator;
         this.keyboard = keyboard;
         getSprite();
         
@@ -120,25 +122,10 @@ public class Player extends AnimateEntity
                     image = right3;
                 break;
         }
-        // FIXME: refactor this
-        int x = PLAYER_SCREEN_X;
-        int y = PLAYER_SCREEN_Y;
-
-        if(PLAYER_SCREEN_X > this.getWorldCoordinateX())
-            x = this.getWorldCoordinateX();
-
-        if(PLAYER_SCREEN_Y > this.getWorldCoordinateY())
-            y = this.getWorldCoordinateY();
-
-        int rightOffset = Simulator.SCREEN_WIDTH - PLAYER_SCREEN_X;
-        if(rightOffset > 2400 - this.getWorldCoordinateX())
-            x = Simulator.SCREEN_WIDTH - (2400 - this.getWorldCoordinateX());
-
-        int bottomOffset = Simulator.SCREEN_HEIGHT - PLAYER_SCREEN_Y;
-        if(bottomOffset > 2400 - this.getWorldCoordinateY())
-            y = Simulator.SCREEN_HEIGHT - (2400 - this.getWorldCoordinateY());
-
-        graphics2D.drawImage(image, x, y, Simulator.TILE_SIZE, Simulator.TILE_SIZE, null);
+        graphics2D.drawImage(
+            image, playerScreenPositionX(), playerScreenPositionY(), 
+            Simulator.TILE_SIZE, Simulator.TILE_SIZE, null
+        );
     }
 
     // Load player sprites into BufferedImage, returns true if successful
@@ -167,4 +154,32 @@ public class Player extends AnimateEntity
 
     // Helper function: Determines whether player is moving in given frame
     private void isMovingSetter() { this.setIsMoving(keyboard.isWASDPressed()); }
+
+    // Helper function: Determines player horizontal screen position
+    private int playerScreenPositionX()
+    {
+        int x = PLAYER_SCREEN_X;
+        int rightOffset = Simulator.SCREEN_WIDTH - PLAYER_SCREEN_X;
+
+        if(PLAYER_SCREEN_X > this.getWorldCoordinateX()) x = this.getWorldCoordinateX();
+        if(rightOffset > simulator.getMapWidth() - this.getWorldCoordinateX())
+        {
+            x = Simulator.SCREEN_WIDTH - (2400 - this.getWorldCoordinateX());
+        }
+        return x;
+    }
+
+    // Helper function: Determines player vertical screen position
+    private int playerScreenPositionY()
+    {
+        int y = PLAYER_SCREEN_Y;
+        int bottomOffset = Simulator.SCREEN_HEIGHT - PLAYER_SCREEN_Y;
+
+        if(PLAYER_SCREEN_Y > this.getWorldCoordinateY()) y = this.getWorldCoordinateY();
+        if(bottomOffset > simulator.getMapHeight() - this.getWorldCoordinateY()) 
+        {
+            y = Simulator.SCREEN_HEIGHT - (2400 - this.getWorldCoordinateY());
+        }
+        return y;
+    }
 }

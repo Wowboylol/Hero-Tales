@@ -15,14 +15,25 @@ public class MapHandler
 {
     // Attributes
     private MapStrategy strategy;
+    private int mapWidth;
+    private int mapHeight;
 
     public MapHandler(Camera camera)
     {
-        this.strategy = new StarterPlainsMap(camera); // FIXME: remove later
+        setStrategy(new StarterPlainsMap(camera)); // FIXME: remove later
     }
 
     // Setters
-    public void setStrategy(MapStrategy strategy) { this.strategy = strategy; }
+    public void setStrategy(MapStrategy strategy) 
+    { 
+        this.mapWidth = strategy.getMapWidth();
+        this.mapHeight = strategy.getMapHeight();
+        this.strategy = strategy;
+    }
+
+    // Getters
+    public int getCurrentMapWidth() { return this.mapWidth; }
+    public int getCurrentMapHeight() { return this.mapHeight; }
 
     // Executes strategy of building a specific type of map
     public void draw(Graphics2D graphics2D)
