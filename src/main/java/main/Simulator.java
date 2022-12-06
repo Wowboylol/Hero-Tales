@@ -34,7 +34,7 @@ public class Simulator extends JPanel implements Runnable
     private Keyboard keyboard = new Keyboard();
     private Player player = new Player(this, keyboard);
     private Camera camera = new Camera(player);
-    private TileHandler tileHandler = new TileHandler(camera);
+    private MapHandler mapHandler = new MapHandler(camera);
 
     // Constructor (Singletons have a private constructor that creates a global instance on get_instance())
     private Simulator()
@@ -104,7 +104,7 @@ public class Simulator extends JPanel implements Runnable
         Graphics2D graphics2D = (Graphics2D)g;
 
         // Draw graphics by passing Graphics2D to various classes
-        tileHandler.draw(graphics2D);
+        mapHandler.draw(graphics2D);
         player.draw(graphics2D);
 
         // Clean up resources

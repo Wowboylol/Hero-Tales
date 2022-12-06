@@ -1,7 +1,7 @@
 /*  
  *  TileHandler.java
  *  
- *  Description: Handles all tile related operations.
+ *  Description: Handles map generation with tile rendering with map building strategies.
  *               Context for MapStrategy.
  *
 */
@@ -11,12 +11,12 @@ import java.awt.Graphics2D;
 import graphics.maps.MapStrategy;
 import graphics.maps.StarterPlainsMap;
 
-public class TileHandler 
+public class MapHandler 
 {
     // Attributes
     private MapStrategy strategy;
 
-    public TileHandler(Camera camera)
+    public MapHandler(Camera camera)
     {
         this.strategy = new StarterPlainsMap(camera); // FIXME: remove later
     }

@@ -2,7 +2,7 @@
  *  MapStrategy.java
  *  
  *  Description: Interface for map strategies which build a tile map.
- *               The context is TileHandler.
+ *               The context is MapHandler.
  *
 */
 
