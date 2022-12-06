@@ -44,12 +44,16 @@ public class StarterPlainsMap implements MapStrategy
         while(mapColumn < MAP_SIZE_TILE_X && mapRow < MAP_SIZE_TILE_Y)
         {
             int tileIndex = mapTileGrid[mapColumn][mapRow];
-            int mapPixelX = mapColumn * Simulator.TILE_SIZE;
-            int mapPixelY = mapRow * Simulator.TILE_SIZE;
-            int tileScreenPositionX = mapPixelX - camera.getPlayerScreenX();
-            int tileScreenPositionY = mapPixelY - camera.getPlayerScreenY();
 
-            graphics2D.drawImage(tileImages[tileIndex].getImage(), tileScreenPositionX, tileScreenPositionY, Simulator.TILE_SIZE, Simulator.TILE_SIZE, null);
+            if(camera.isTileOnScreen(mapColumn, mapRow) == true)
+            {
+                graphics2D.drawImage(
+                    tileImages[tileIndex].getImage(), 
+                    camera.getTileScreenPositionX(mapColumn), 
+                    camera.getTileScreenPositionY(mapRow), 
+                    Simulator.TILE_SIZE, Simulator.TILE_SIZE, null
+                );
+            }
             mapColumn++;
 
             if(mapColumn == MAP_SIZE_TILE_X)

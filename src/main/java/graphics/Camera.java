@@ -20,15 +20,35 @@ public class Camera
         this.player = simulator.getPlayer();
     }
 
-    // Get player's world position X with an offset of screen position X in pixels
-    public int getPlayerScreenX()
+    // Get tile screen horizontal position based on tile's map columm number
+    public int getTileScreenPositionX(int mapTileX)
     {
-        return player.getWorldCoordinateX() - player.PLAYER_SCREEN_X;
+        int mapCoordinateX = mapTileX * Simulator.TILE_SIZE;
+        return mapCoordinateX - player.getWorldCoordinateX() + player.PLAYER_SCREEN_X;
     }
 
-    // Get player's world position Y with an offset of screen position Y in pixels
-    public int getPlayerScreenY()
+    // Get tile screen vertical position based on tile's map row number
+    public int getTileScreenPositionY(int mapTileY)
     {
-        return player.getWorldCoordinateY() - player.PLAYER_SCREEN_Y;
+        int mapCoordinateY = mapTileY * Simulator.TILE_SIZE;
+        return mapCoordinateY - player.getWorldCoordinateY() + player.PLAYER_SCREEN_Y;
+    }
+
+    // Check if a map tile is in player's screen camera
+    public boolean isTileOnScreen(int mapTileX, int mapTileY)
+    {
+        int tileSize = Simulator.TILE_SIZE;
+        int mapCoordinateX = mapTileX * tileSize;
+        int mapCoordinateY = mapTileY * tileSize;
+
+        if(mapCoordinateX + tileSize <= player.getWorldCoordinateX() - player.PLAYER_SCREEN_X)
+            return false;
+        if(mapCoordinateX - tileSize >= player.getWorldCoordinateX() + player.PLAYER_SCREEN_X)
+            return false;
+        if(mapCoordinateY + tileSize <= player.getWorldCoordinateY() - player.PLAYER_SCREEN_Y)
+            return false;
+        if(mapCoordinateY - tileSize >= player.getWorldCoordinateY() + player.PLAYER_SCREEN_Y)
+            return false;
+        return true;
     }
 }
