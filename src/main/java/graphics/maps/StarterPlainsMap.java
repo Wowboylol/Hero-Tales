@@ -47,7 +47,7 @@ public class StarterPlainsMap implements MapStrategy
         {
             int tileIndex = mapTileGrid[mapColumn][mapRow];
 
-            if(camera.isTileOnScreen(mapColumn, mapRow) == true || camera.isScreenAtMapEdge(MAP_SIZE_PIXEL_X, MAP_SIZE_PIXEL_Y))
+            if(camera.isTileOnScreen(mapColumn, mapRow) || camera.isScreenAtMapEdge(MAP_SIZE_PIXEL_X, MAP_SIZE_PIXEL_Y))
             {
                 graphics2D.drawImage(
                     tileImages[tileIndex].getImage(), 

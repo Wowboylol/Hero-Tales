@@ -25,10 +25,10 @@ public class Player extends AnimateEntity
     private Keyboard keyboard;
 
     // Default constructor (starting coordinate based on defaults)
-    public Player(Simulator simulator)
+    public Player(Simulator simulator, Keyboard keyboard)
     {
         super(PLAYER_SPAWN_POSITION);
-        this.keyboard = simulator.getKeyboard();
+        this.keyboard = keyboard;
         getSprite();
         
         // Super class overriding

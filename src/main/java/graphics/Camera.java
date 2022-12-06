@@ -17,9 +17,9 @@ public class Camera
     private Player player;
 
     // Default constructor
-    public Camera(Simulator simulator)
+    public Camera(Player player)
     {
-        this.player = simulator.getPlayer();
+        this.player = player;
         this.RIGHT_OFFSET = Simulator.SCREEN_WIDTH - player.PLAYER_SCREEN_X;
         this.BOTTOM_OFFSET = Simulator.SCREEN_HEIGHT - player.PLAYER_SCREEN_Y;
     }
@@ -71,6 +71,7 @@ public class Camera
     }
 
     // Checks if the screen is at the edge of the map
+    // Alters playerScreenPosition when screen is at edge of map
     public boolean isScreenAtMapEdge(int mapWidth, int mapHeight)
     {
         if(player.PLAYER_SCREEN_X > player.getWorldCoordinateX()) return true;

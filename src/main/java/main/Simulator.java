@@ -32,8 +32,9 @@ public class Simulator extends JPanel implements Runnable
     private static Simulator instance = null;
     private Thread gameThread;
     private Keyboard keyboard = new Keyboard();
-    private Player player = new Player(this);
-    private TileHandler tileHandler = new TileHandler(this);
+    private Player player = new Player(this, keyboard);
+    private Camera camera = new Camera(player);
+    private TileHandler tileHandler = new TileHandler(camera);
 
     // Constructor (Singletons have a private constructor that creates a global instance on get_instance())
     private Simulator()
@@ -46,7 +47,6 @@ public class Simulator extends JPanel implements Runnable
     }
 
     // Getters
-    public Keyboard getKeyboard() { return this.keyboard; }
     public Player getPlayer() { return this.player; }
 
     // Getter for Simulator instance, creates a Simulator if it doesn't already exist

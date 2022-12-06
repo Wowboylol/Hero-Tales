@@ -8,19 +8,16 @@
 
 package graphics;
 import java.awt.Graphics2D;
-import main.Simulator;
 import graphics.maps.MapStrategy;
 import graphics.maps.StarterPlainsMap;
 
 public class TileHandler 
 {
     // Attributes
-    private Camera camera;
     private MapStrategy strategy;
 
-    public TileHandler(Simulator simulator)
+    public TileHandler(Camera camera)
     {
-        this.camera = new Camera(simulator);
         this.strategy = new StarterPlainsMap(camera); // FIXME: remove later
     }
 
