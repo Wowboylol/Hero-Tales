@@ -9,15 +9,17 @@ package entities;
 import main.*;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.awt.Rectangle;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Player extends AnimateEntity
 {
-    // Defaults
+    // Configurations
     public static final Coordinate PLAYER_SPAWN_POSITION = new Coordinate(Simulator.TILE_SIZE*8, Simulator.TILE_SIZE*8);
     public final int PLAYER_SCREEN_X = Simulator.SCREEN_WIDTH/2 - (Simulator.TILE_SIZE/2);
     public final int PLAYER_SCREEN_Y = Simulator.SCREEN_HEIGHT/2 - (Simulator.TILE_SIZE/2);
+    public final Rectangle HITBOX_CONFIGURATIONS = new Rectangle(9, 12, 30, 33);
     public final int BASE_MOVE_SPEED = 3;
     public final int ANIMATION_SPEED = 13;
 
@@ -34,6 +36,7 @@ public class Player extends AnimateEntity
         getSprite();
         
         // Super class overriding
+        this.setHitbox(HITBOX_CONFIGURATIONS);
         this.setMoveSpeed(BASE_MOVE_SPEED);
         this.setAnimationSpeed(ANIMATION_SPEED);
     }

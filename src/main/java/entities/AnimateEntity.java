@@ -7,26 +7,24 @@
 
 package entities;
 import java.awt.image.BufferedImage;
+import java.awt.Rectangle;
 
 public abstract class AnimateEntity extends Entity
 {
     // Attributes
     protected BufferedImage up1, up2, up3, down1, down2, down3, left1, left2, left3, right1, right2, right3;
-    private int moveSpeed;
-    private Direction direction;
     private int actionCount = 0;
     private int spriteNum = 1;
-    private int animationSpeed;
     private boolean isMoving = false;
 
+    // Defaults
+    private Rectangle hitbox = new Rectangle();
+    private int moveSpeed = 0;
+    private int animationSpeed = 0;
+    private Direction direction = Direction.DOWN;
+
     // Default constructor
-    public AnimateEntity(Coordinate spawnPosition)
-    {
-        super(spawnPosition);
-        this.moveSpeed = 3;
-        this.direction = Direction.DOWN;
-        this.animationSpeed = 15;
-    }
+    public AnimateEntity(Coordinate spawnPosition) { super(spawnPosition); }
 
     // Getters
     public int getMoveSpeed() { return this.moveSpeed; }
@@ -34,12 +32,14 @@ public abstract class AnimateEntity extends Entity
     public int getActionCount() { return this.actionCount; }
     public int getSpriteNum() { return this.spriteNum; }
     public boolean getIsMoving() { return this.isMoving; }
+    public Rectangle getHitbox() { return this.hitbox; }
 
     // Setters
     public void setMoveSpeed(int speed) { this.moveSpeed = speed; }
     public void setDirection(Direction d) { this.direction = d; }
     public void setAnimationSpeed(int speed) { this.animationSpeed = speed;}
     public void setIsMoving(boolean val) { this.isMoving = val; }
+    public void setHitbox(Rectangle hitbox) { this.hitbox = hitbox; }
 
     // Increments actionCount which is used for sprite animation
     public void animateSprite() 
