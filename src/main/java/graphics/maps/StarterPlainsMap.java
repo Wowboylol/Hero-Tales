@@ -37,7 +37,7 @@ public class StarterPlainsMap implements MapStrategy
         getTileImages();
     }
 
-    // Build map
+    @Override
     public void buildMap(Graphics2D graphics2D)
     {
         int mapColumn = 0;
