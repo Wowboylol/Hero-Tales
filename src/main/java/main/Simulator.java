@@ -18,7 +18,7 @@ import graphics.*;
 
 public class Simulator extends JPanel implements Runnable
 {
-    // Screen settings
+    // Screen configurations
     private static final int ORIGINAL_TILE_SIZE = 16;
     private static final int TILE_SCALE = 3;
     public static final int TILE_SIZE = ORIGINAL_TILE_SIZE * TILE_SCALE;   // 48 pixels
@@ -28,13 +28,15 @@ public class Simulator extends JPanel implements Runnable
     public static final int SCREEN_HEIGHT = TILE_SIZE * MAX_SCREEN_ROW;    // 720 pixels
     private static final int FPS = 60;
 
-    // Class storage
+    // Attributes
     private static Simulator instance = null;
     private Thread gameThread;
-    private Keyboard keyboard = new Keyboard();
-    private Player player = new Player(this, keyboard);
-    private Camera camera = new Camera(player);
-    private MapHandler mapHandler = new MapHandler(camera);
+
+    // Class storage
+    public final Keyboard keyboard = new Keyboard();
+    public final Player player = new Player(this, keyboard);
+    public final Camera camera = new Camera(player);
+    public final MapHandler mapHandler = new MapHandler(camera);
 
     // Constructor (Singletons have a private constructor that creates a global instance on get_instance())
     private Simulator()
@@ -47,7 +49,6 @@ public class Simulator extends JPanel implements Runnable
     }
 
     // Getters
-    public Player getPlayer() { return this.player; }
     public int getMapWidth() { return this.mapHandler.getCurrentMapWidth(); }
     public int getMapHeight() { return this.mapHandler.getCurrentMapHeight(); }
 
