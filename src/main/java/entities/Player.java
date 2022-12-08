@@ -52,39 +52,42 @@ public class Player extends AnimateEntity
     public void update()
     {
         isMovingSetter();
+        changeDirection();
         this.animateSprite();
         
-        if(this.getIsMoving() == true)
+        if(this.getIsMoving() && !collisionChecker.checkTileCollision(this))
         {
             movePlayer();
         }
     }
 
+    // Set player direction based on which directional (WASD) key is pressed
+    public void changeDirection()
+    {
+        if(keyboard.getDirection(Direction.LEFT) == true) this.setDirection(Direction.LEFT);
+        if(keyboard.getDirection(Direction.RIGHT) == true) this.setDirection(Direction.RIGHT);
+        if(keyboard.getDirection(Direction.UP) == true) this.setDirection(Direction.UP);
+        if(keyboard.getDirection(Direction.DOWN) == true) this.setDirection(Direction.DOWN);
+    }
+
     // Move player based on which directional (WASD) key is pressed
-    // Stops movement when colliding with wall
     public void movePlayer()
     {
-        boolean isColliding = collisionChecker.checkTileCollision(this);
-
-        if(keyboard.getDirection(Direction.LEFT) == true)
+        if(keyboard.getDirection(Direction.LEFT))
         {
-            this.setDirection(Direction.LEFT);
-            if(isColliding == false) this.setWorldCoordinateX(getWorldCoordinateX() - getMoveSpeed());
+            this.setWorldCoordinateX(getWorldCoordinateX() - getMoveSpeed());
         }
-        if(keyboard.getDirection(Direction.RIGHT) == true)
+        if(keyboard.getDirection(Direction.RIGHT))
         {
-            this.setDirection(Direction.RIGHT);
-            if(isColliding == false) this.setWorldCoordinateX(getWorldCoordinateX() + getMoveSpeed());
+            this.setWorldCoordinateX(getWorldCoordinateX() + getMoveSpeed());
         }
-        if(keyboard.getDirection(Direction.UP) == true)
+        if(keyboard.getDirection(Direction.UP))
         {
-            this.setDirection(Direction.UP);
-            if(isColliding == false) this.setWorldCoordinateY(getWorldCoordinateY() - getMoveSpeed());
+            this.setWorldCoordinateY(getWorldCoordinateY() - getMoveSpeed());
         }
-        if(keyboard.getDirection(Direction.DOWN) == true)
+        if(keyboard.getDirection(Direction.DOWN))
         {
-            this.setDirection(Direction.DOWN);
-            if(isColliding == false) this.setWorldCoordinateY(getWorldCoordinateY() + getMoveSpeed());
+            this.setWorldCoordinateY(getWorldCoordinateY() + getMoveSpeed());
         }
     }
 
