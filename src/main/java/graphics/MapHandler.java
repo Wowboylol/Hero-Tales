@@ -15,8 +15,6 @@ public class MapHandler
 {
     // Attributes
     private MapStrategy strategy;
-    private int mapWidth;
-    private int mapHeight;
 
     public MapHandler(Camera camera)
     {
@@ -26,14 +24,13 @@ public class MapHandler
     // Setters
     public void setStrategy(MapStrategy strategy) 
     { 
-        this.mapWidth = strategy.getMapWidth();
-        this.mapHeight = strategy.getMapHeight();
         this.strategy = strategy;
     }
 
     // Getters
-    public int getCurrentMapWidth() { return this.mapWidth; }
-    public int getCurrentMapHeight() { return this.mapHeight; }
+    public int getCurrentMapWidth() { return strategy.getMapWidth(); }
+    public int getCurrentMapHeight() { return strategy.getMapHeight(); }
+    public boolean getTileCollision(int col, int row) { return strategy.getTileCollision(col, row); }
 
     // Executes strategy of building a specific type of map
     public void draw(Graphics2D graphics2D)

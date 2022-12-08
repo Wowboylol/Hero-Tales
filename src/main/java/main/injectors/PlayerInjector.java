@@ -8,7 +8,8 @@ public class PlayerInjector implements Injector
     {
         simulator.player.inject(
             simulator, 
-            simulator.keyboard
+            simulator.keyboard,
+            simulator.collisionChecker
         );
     }
 }

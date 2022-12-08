@@ -67,8 +67,18 @@ public class StarterPlainsMap implements MapStrategy
     }
 
     // Getters
+    @Override
     public int getMapWidth() { return this.MAP_SIZE_PIXEL_X; }
+
+    @Override
     public int getMapHeight() { return this.MAP_SIZE_PIXEL_Y; }
+
+    @Override
+    public boolean getTileCollision(int col, int row) 
+    { 
+        int tileNum = this.mapTileGrid[col][row]; 
+        return tileImages[tileNum].getCanCollide();
+    }
 
     // Get tile images and set consecutive indexs of tile image array to the loaded images
     private void getTileImages()

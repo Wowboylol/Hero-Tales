@@ -37,6 +37,7 @@ public class Simulator extends JPanel implements Runnable
     public final Keyboard keyboard = new Keyboard();
     public final Player player = new Player();
     public final Camera camera = new Camera();
+    public final CollisionChecker collisionChecker = new CollisionChecker();
 
     // Dependent services
     public final MapHandler mapHandler = new MapHandler(camera);

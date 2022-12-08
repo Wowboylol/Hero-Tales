@@ -8,7 +8,7 @@ Description placeholder
 - [X] Implement Player class
 - [X] Implement world camera
 - [X] Draw tiles in world
-- [ ] Create object interactions
+- [X] Implement collision detection
 - [ ] Add sound effects
 - [ ] Create unit tests
 - [ ] Refactoring

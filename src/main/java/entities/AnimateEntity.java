@@ -16,6 +16,7 @@ public abstract class AnimateEntity extends Entity
     private int actionCount = 0;
     private int spriteNum = 1;
     private boolean isMoving = false;
+    private boolean collisionOn = false;
 
     // Defaults
     private Rectangle hitbox = new Rectangle();
@@ -33,6 +34,7 @@ public abstract class AnimateEntity extends Entity
     public int getSpriteNum() { return this.spriteNum; }
     public boolean getIsMoving() { return this.isMoving; }
     public Rectangle getHitbox() { return this.hitbox; }
+    public boolean getCollisionOn(boolean val) { return this.collisionOn; }
 
     // Setters
     public void setMoveSpeed(int speed) { this.moveSpeed = speed; }
@@ -40,6 +42,7 @@ public abstract class AnimateEntity extends Entity
     public void setAnimationSpeed(int speed) { this.animationSpeed = speed;}
     public void setIsMoving(boolean val) { this.isMoving = val; }
     public void setHitbox(Rectangle hitbox) { this.hitbox = hitbox; }
+    public void setCollisionOn(boolean val) { this.collisionOn = val; }
 
     // Increments actionCount which is used for sprite animation
     public void animateSprite() 

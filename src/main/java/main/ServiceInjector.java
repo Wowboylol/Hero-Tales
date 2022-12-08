@@ -25,6 +25,7 @@ public class ServiceInjector
     {
         toInject.add(new PlayerInjector());
         toInject.add(new CameraInjector());
+        toInject.add(new CollisionCheckerInjector());
     }
 
     public void injectDependencies()

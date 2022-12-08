@@ -19,4 +19,7 @@ public interface MapStrategy
 
     // Returns map height
     public int getMapHeight();
+
+    // Returns tile at tile coordinate
+    public boolean getTileCollision(int col, int row);
 }
