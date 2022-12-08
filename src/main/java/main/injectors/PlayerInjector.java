@@ -7,7 +7,6 @@ public class PlayerInjector implements Injector
     public void inject(Simulator simulator)
     {
         simulator.player.inject(
-            simulator, 
             simulator.keyboard,
             simulator.collisionChecker
         );

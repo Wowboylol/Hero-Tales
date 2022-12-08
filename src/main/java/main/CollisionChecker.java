@@ -15,6 +15,9 @@ public class CollisionChecker
     private MapHandler mapHandler;
 
     // Default constructor
+    public CollisionChecker(Simulator simulator) {}
+
+    // Inject dependencies
     public void inject(MapHandler mapHandler)
     {
         this.mapHandler = mapHandler;

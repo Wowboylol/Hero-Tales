@@ -29,9 +29,10 @@ public class Player extends AnimateEntity
     private CollisionChecker collisionChecker;
 
     // Default constructor (starting coordinate based on defaults)
-    public Player()
+    public Player(Simulator simulator)
     {
         super(PLAYER_SPAWN_POSITION);
+        this.simulator = simulator;
         getSprite();
         
         // Super class overriding
@@ -41,9 +42,8 @@ public class Player extends AnimateEntity
     }
 
     // External injector injects required dependencies
-    public void inject(Simulator simulator, Keyboard keyboard, CollisionChecker collisionCheck)
+    public void inject(Keyboard keyboard, CollisionChecker collisionCheck)
     {
-        this.simulator = simulator;
         this.keyboard = keyboard;
         this.collisionChecker = collisionCheck;
     }

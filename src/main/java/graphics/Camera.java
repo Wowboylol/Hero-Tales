@@ -17,7 +17,7 @@ public class Camera
     private Player player;
 
     // Default constructor
-    public Camera()
+    public Camera(Simulator simulator)
     {
         this.RIGHT_OFFSET = Simulator.SCREEN_WIDTH - Player.PLAYER_SCREEN_X;
         this.BOTTOM_OFFSET = Simulator.SCREEN_HEIGHT - Player.PLAYER_SCREEN_Y;
