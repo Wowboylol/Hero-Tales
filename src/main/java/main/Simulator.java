@@ -28,19 +28,23 @@ public class Simulator extends JPanel implements Runnable
     public static final int SCREEN_HEIGHT = TILE_SIZE * MAX_SCREEN_ROW;    // 720 pixels
     private static final int FPS = 60;
 
-    // Attributes
+    // Setup
     private static Simulator instance = null;
+    private ServiceInjector serviceInjector = new ServiceInjector(this);
     private Thread gameThread;
 
-    // Class storage
+    // Injectable services
     public final Keyboard keyboard = new Keyboard();
-    public final Player player = new Player(this, keyboard);
-    public final Camera camera = new Camera(player);
+    public final Player player = new Player();
+    public final Camera camera = new Camera();
+
+    // Dependent services
     public final MapHandler mapHandler = new MapHandler(camera);
 
     // Constructor (Singletons have a private constructor that creates a global instance on get_instance())
     private Simulator()
     {
+        serviceInjector.injectDependencies();
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);

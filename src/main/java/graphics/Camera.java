@@ -17,11 +17,16 @@ public class Camera
     private Player player;
 
     // Default constructor
-    public Camera(Player player)
+    public Camera()
+    {
+        this.RIGHT_OFFSET = Simulator.SCREEN_WIDTH - Player.PLAYER_SCREEN_X;
+        this.BOTTOM_OFFSET = Simulator.SCREEN_HEIGHT - Player.PLAYER_SCREEN_Y;
+    }
+
+    // External injector injects required dependencies
+    public void inject(Player player)
     {
         this.player = player;
-        this.RIGHT_OFFSET = Simulator.SCREEN_WIDTH - player.PLAYER_SCREEN_X;
-        this.BOTTOM_OFFSET = Simulator.SCREEN_HEIGHT - player.PLAYER_SCREEN_Y;
     }
 
     // Get tile screen horizontal position based on tile's map columm number
@@ -29,9 +34,9 @@ public class Camera
     public int getTileScreenPositionX(int mapTileX, int mapPixelWidth)
     {
         int mapCoordinateX = mapTileX * Simulator.TILE_SIZE;
-        int tileScreenPositionX = mapCoordinateX - player.getWorldCoordinateX() + player.PLAYER_SCREEN_X;
+        int tileScreenPositionX = mapCoordinateX - player.getWorldCoordinateX() + Player.PLAYER_SCREEN_X;
 
-        if(player.PLAYER_SCREEN_X > player.getWorldCoordinateX())
+        if(Player.PLAYER_SCREEN_X > player.getWorldCoordinateX())
             tileScreenPositionX = mapCoordinateX;
 
         if(RIGHT_OFFSET > mapPixelWidth - player.getWorldCoordinateX())
@@ -45,9 +50,9 @@ public class Camera
     public int getTileScreenPositionY(int mapTileY, int mapPixelHeight)
     {
         int mapCoordinateY = mapTileY * Simulator.TILE_SIZE;
-        int tileScreenPositionY = mapCoordinateY - player.getWorldCoordinateY() + player.PLAYER_SCREEN_Y;
+        int tileScreenPositionY = mapCoordinateY - player.getWorldCoordinateY() + Player.PLAYER_SCREEN_Y;
 
-        if(player.PLAYER_SCREEN_Y > player.getWorldCoordinateY())
+        if(Player.PLAYER_SCREEN_Y > player.getWorldCoordinateY())
             tileScreenPositionY = mapCoordinateY;
         
         if(BOTTOM_OFFSET > mapPixelHeight - player.getWorldCoordinateY())
@@ -63,10 +68,10 @@ public class Camera
         int mapCoordinateX = mapTileX * tileSize;
         int mapCoordinateY = mapTileY * tileSize;
 
-        if(mapCoordinateX + tileSize <= player.getWorldCoordinateX() - player.PLAYER_SCREEN_X) return false;
-        if(mapCoordinateX - tileSize >= player.getWorldCoordinateX() + player.PLAYER_SCREEN_X) return false;
-        if(mapCoordinateY + tileSize <= player.getWorldCoordinateY() - player.PLAYER_SCREEN_Y) return false;
-        if(mapCoordinateY - tileSize >= player.getWorldCoordinateY() + player.PLAYER_SCREEN_Y) return false;
+        if(mapCoordinateX + tileSize <= player.getWorldCoordinateX() - Player.PLAYER_SCREEN_X) return false;
+        if(mapCoordinateX - tileSize >= player.getWorldCoordinateX() + Player.PLAYER_SCREEN_X) return false;
+        if(mapCoordinateY + tileSize <= player.getWorldCoordinateY() - Player.PLAYER_SCREEN_Y) return false;
+        if(mapCoordinateY - tileSize >= player.getWorldCoordinateY() + Player.PLAYER_SCREEN_Y) return false;
         return true;
     }
 
@@ -74,8 +79,8 @@ public class Camera
     // Alters playerScreenPosition when screen is at edge of map
     public boolean isScreenAtMapEdge(int mapWidth, int mapHeight)
     {
-        if(player.PLAYER_SCREEN_X > player.getWorldCoordinateX()) return true;
-        if(player.PLAYER_SCREEN_Y > player.getWorldCoordinateY()) return true;
+        if(Player.PLAYER_SCREEN_X > player.getWorldCoordinateX()) return true;
+        if(Player.PLAYER_SCREEN_Y > player.getWorldCoordinateY()) return true;
         if(RIGHT_OFFSET > mapWidth - player.getWorldCoordinateX()) return true;
         if(BOTTOM_OFFSET > mapHeight - player.getWorldCoordinateY()) return true;
         return false;
