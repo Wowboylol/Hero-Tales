@@ -17,7 +17,7 @@ import graphics.Camera;
 public class StarterPlainsMap implements MapStrategy
 {
     // Attributes
-    public final int MAP_TILES = 55;
+    public final int MAP_TILES = 60;
     public final int MAP_SIZE_TILE_X = 50;
     public final int MAP_SIZE_TILE_Y = 50;
     public final int MAP_SIZE_PIXEL_X = MAP_SIZE_TILE_X * Simulator.TILE_SIZE;
@@ -140,6 +140,11 @@ public class StarterPlainsMap implements MapStrategy
             tileImages[52] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/tiles/mushroom_2.png")));
             tileImages[53] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/tiles/mushroom_3.png")));
             tileImages[54] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/tiles/mushroom_4.png")));
+            tileImages[55] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/water_lily_1.png")), true);
+            tileImages[56] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/water_lily_2.png")), true);
+            tileImages[57] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/water_lily_3.png")), true);
+            tileImages[58] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/water_lily_4.png")), true);
+            tileImages[59] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/water_lily_5.png")), true);
         }
         catch(IOException exception) {
             exception.printStackTrace();
