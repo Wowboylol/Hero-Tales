@@ -76,6 +76,7 @@ public class StarterPlainsMap implements MapStrategy
     @Override
     public boolean getTileCollision(int col, int row) 
     { 
+        if(col < 0 || row < 0 || col > MAP_SIZE_TILE_X-1 || row > MAP_SIZE_TILE_Y-1) return false;
         int tileNum = this.mapTileGrid[col][row]; 
         return tileImages[tileNum].getCanCollide();
     }
