@@ -8,26 +8,37 @@
 package main;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.HashSet;
+import java.util.Set;
 import entities.Direction;
 
 public class Keyboard implements KeyListener
 {
     // Attributes
-    private boolean upPressed, downPressed, leftPressed, rightPressed;
+    private final Set<Integer> pressedKeys = new HashSet<>();
 
     // Returns whether requested direction is pressed (throw if invalid direction)
     public boolean getDirection(Direction d)
     {
         try {
-            switch(d) {
+            switch(d)
+            {
                 case UP:
-                    return upPressed;
+                    return pressedKeys.contains(KeyEvent.VK_W);
                 case DOWN:
-                    return downPressed;
+                    return pressedKeys.contains(KeyEvent.VK_S);
                 case LEFT:
-                    return leftPressed;
+                    return pressedKeys.contains(KeyEvent.VK_A);
                 case RIGHT:
-                    return rightPressed;
+                    return pressedKeys.contains(KeyEvent.VK_D);
+                case UPLEFT:
+                    return (pressedKeys.contains(KeyEvent.VK_W) && pressedKeys.contains(KeyEvent.VK_A)) ? true : false;
+                case UPRIGHT:
+                    return (pressedKeys.contains(KeyEvent.VK_W) && pressedKeys.contains(KeyEvent.VK_D)) ? true : false;
+                case DOWNLEFT:
+                    return (pressedKeys.contains(KeyEvent.VK_S) && pressedKeys.contains(KeyEvent.VK_A)) ? true : false;
+                case DOWNRIGHT:
+                    return (pressedKeys.contains(KeyEvent.VK_S) && pressedKeys.contains(KeyEvent.VK_D)) ? true : false;
                 default:
                     throw new IllegalArgumentException();
             }
@@ -41,29 +52,22 @@ public class Keyboard implements KeyListener
     // Returns whether ANY directional (WASD) key is pressed
     public boolean isWASDPressed()
     {
-        return (upPressed==true || downPressed==true || leftPressed==true || rightPressed==true) ? true : false;
+        if(
+            pressedKeys.contains(KeyEvent.VK_W) || 
+            pressedKeys.contains(KeyEvent.VK_A) ||
+            pressedKeys.contains(KeyEvent.VK_S) || 
+            pressedKeys.contains(KeyEvent.VK_D)
+        ) return true;
+        return false;
     }
 
     @Override
     public void keyPressed(KeyEvent e)
     {
         int ASCII = e.getKeyCode();
-
-        if(ASCII == KeyEvent.VK_W)
+        if(ASCII == KeyEvent.VK_W || ASCII == KeyEvent.VK_S || ASCII == KeyEvent.VK_A || ASCII == KeyEvent.VK_D)
         {
-            upPressed = true;
-        }
-        if(ASCII == KeyEvent.VK_S)
-        {
-            downPressed = true;
-        }
-        if(ASCII == KeyEvent.VK_A)
-        {
-            leftPressed = true;
-        }
-        if(ASCII == KeyEvent.VK_D)
-        {
-            rightPressed = true;
+            pressedKeys.add(ASCII);
         }
     }
 
@@ -71,22 +75,9 @@ public class Keyboard implements KeyListener
     public void keyReleased(KeyEvent e)
     {
         int ASCII = e.getKeyCode();
-
-        if(ASCII == KeyEvent.VK_W)
+        if(ASCII == KeyEvent.VK_W || ASCII == KeyEvent.VK_S || ASCII == KeyEvent.VK_A || ASCII == KeyEvent.VK_D)
         {
-            upPressed = false;
-        }
-        if(ASCII == KeyEvent.VK_S)
-        {
-            downPressed = false;
-        }
-        if(ASCII == KeyEvent.VK_A)
-        {
-            leftPressed = false;
-        }
-        if(ASCII == KeyEvent.VK_D)
-        {
-            rightPressed = false;
+            pressedKeys.remove(ASCII);
         }
     }
 

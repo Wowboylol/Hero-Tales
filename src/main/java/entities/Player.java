@@ -64,10 +64,14 @@ public class Player extends AnimateEntity
     // Set player direction based on which directional (WASD) key is pressed
     public void changeDirection()
     {
-        if(keyboard.getDirection(Direction.LEFT) == true) this.setDirection(Direction.LEFT);
-        if(keyboard.getDirection(Direction.RIGHT) == true) this.setDirection(Direction.RIGHT);
-        if(keyboard.getDirection(Direction.UP) == true) this.setDirection(Direction.UP);
-        if(keyboard.getDirection(Direction.DOWN) == true) this.setDirection(Direction.DOWN);
+        if(keyboard.getDirection(Direction.UPLEFT) == true) this.setDirection(Direction.UPLEFT);
+        else if(keyboard.getDirection(Direction.UPRIGHT) == true) this.setDirection(Direction.UPRIGHT);
+        else if(keyboard.getDirection(Direction.DOWNLEFT) == true) this.setDirection(Direction.DOWNLEFT);
+        else if(keyboard.getDirection(Direction.DOWNRIGHT) == true) this.setDirection(Direction.DOWNRIGHT);
+        else if(keyboard.getDirection(Direction.LEFT) == true) this.setDirection(Direction.LEFT);
+        else if(keyboard.getDirection(Direction.RIGHT) == true) this.setDirection(Direction.RIGHT);
+        else if(keyboard.getDirection(Direction.UP) == true) this.setDirection(Direction.UP);
+        else if(keyboard.getDirection(Direction.DOWN) == true) this.setDirection(Direction.DOWN);
     }
 
     // Move player based on which directional (WASD) key is pressed
@@ -97,6 +101,8 @@ public class Player extends AnimateEntity
         BufferedImage image = null;
         switch(this.getDirection())
         {
+            case UPRIGHT:
+            case UPLEFT:
             case UP:
                 if(this.getSpriteNum() == 1)
                     image = up1;
@@ -107,6 +113,8 @@ public class Player extends AnimateEntity
                 if(this.getSpriteNum() == 4)
                     image = up3;
                 break;
+            case DOWNRIGHT:
+            case DOWNLEFT:
             case DOWN:
                 if(this.getSpriteNum() == 1)
                     image = down1;
