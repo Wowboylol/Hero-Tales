@@ -7,7 +7,6 @@
 
 package entities;
 import java.awt.image.BufferedImage;
-import java.awt.Rectangle;
 
 public abstract class AnimateEntity extends Entity
 {
@@ -18,8 +17,7 @@ public abstract class AnimateEntity extends Entity
     private boolean isMoving = false;
     private boolean collisionOn = false;
 
-    // Defaults
-    private Rectangle hitbox = new Rectangle();
+    // Defaultss
     private int moveSpeed = 0;
     private int animationSpeed = 0;
     private Direction direction = Direction.DOWN;
@@ -33,7 +31,6 @@ public abstract class AnimateEntity extends Entity
     public int getActionCount() { return this.actionCount; }
     public int getSpriteNum() { return this.spriteNum; }
     public boolean getIsMoving() { return this.isMoving; }
-    public Rectangle getHitbox() { return this.hitbox; }
     public boolean getCollisionOn(boolean val) { return this.collisionOn; }
 
     // Setters
@@ -41,7 +38,6 @@ public abstract class AnimateEntity extends Entity
     public void setDirection(Direction d) { this.direction = d; }
     public void setAnimationSpeed(int speed) { this.animationSpeed = speed;}
     public void setIsMoving(boolean val) { this.isMoving = val; }
-    public void setHitbox(Rectangle hitbox) { this.hitbox = hitbox; }
     public void setCollisionOn(boolean val) { this.collisionOn = val; }
 
     // Increments actionCount which is used for sprite animation
