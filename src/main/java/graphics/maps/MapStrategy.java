@@ -8,6 +8,7 @@
 
 package graphics.maps;
 import java.awt.Graphics2D;
+import graphics.TileType;
 
 public interface MapStrategy 
 {
@@ -20,6 +21,6 @@ public interface MapStrategy
     // Returns map height
     public int getMapHeight();
 
-    // Returns tile at tile coordinate
-    public boolean getTileCollision(int col, int row);
+    // Returns tile type at tile coordinate
+    public TileType getTileType(int col, int row);
 }

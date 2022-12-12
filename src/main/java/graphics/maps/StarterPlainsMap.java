@@ -74,11 +74,11 @@ public class StarterPlainsMap implements MapStrategy
     public int getMapHeight() { return this.MAP_SIZE_PIXEL_Y; }
 
     @Override
-    public boolean getTileCollision(int col, int row) 
+    public TileType getTileType(int col, int row) 
     { 
-        if(col < 0 || row < 0 || col > MAP_SIZE_TILE_X-1 || row > MAP_SIZE_TILE_Y-1) return false;
+        if(col < 0 || row < 0 || col > MAP_SIZE_TILE_X-1 || row > MAP_SIZE_TILE_Y-1) return TileType.DEFAULT;
         int tileNum = this.mapTileGrid[col][row]; 
-        return (tileImages[tileNum].getType() == TileType.WALL) ? true : false;
+        return tileImages[tileNum].getType();
     }
 
     // Get tile images and set consecutive indexs of tile image array to the loaded images

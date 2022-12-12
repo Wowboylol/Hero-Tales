@@ -20,7 +20,7 @@ public class Player extends AnimateEntity
     public static final int PLAYER_SCREEN_X = Simulator.SCREEN_WIDTH/2 - (Simulator.TILE_SIZE/2);
     public static final int PLAYER_SCREEN_Y = Simulator.SCREEN_HEIGHT/2 - (Simulator.TILE_SIZE/2);
     public final Rectangle HITBOX_CONFIGURATIONS = new Rectangle(9, 12, 30, 30);
-    public final int BASE_MOVE_SPEED = 3;
+    public final int BASE_MOVE_SPEED = 2;
     public final int ANIMATION_SPEED = 13;
 
     // Attributes
@@ -55,7 +55,7 @@ public class Player extends AnimateEntity
         changeDirection();
         this.animateSprite();
         
-        if(this.getIsMoving() && !collisionChecker.checkTileCollision(this))
+        if(this.getIsMoving() && !collisionChecker.checkTileWall(this))
         {
             movePlayer();
         }
@@ -75,23 +75,27 @@ public class Player extends AnimateEntity
     }
 
     // Move player based on which directional (WASD) key is pressed
+    // If player is on path, increase movespeed by 1
     public void movePlayer()
     {
+        int velocity = this.getMoveSpeed();
+        if(collisionChecker.checkTilePath(this)) velocity++;
+
         if(keyboard.getDirection(Direction.LEFT))
         {
-            this.setWorldCoordinateX(getWorldCoordinateX() - getMoveSpeed());
+            this.setWorldCoordinateX(getWorldCoordinateX() - velocity);
         }
         if(keyboard.getDirection(Direction.RIGHT))
         {
-            this.setWorldCoordinateX(getWorldCoordinateX() + getMoveSpeed());
+            this.setWorldCoordinateX(getWorldCoordinateX() + velocity);
         }
         if(keyboard.getDirection(Direction.UP))
         {
-            this.setWorldCoordinateY(getWorldCoordinateY() - getMoveSpeed());
+            this.setWorldCoordinateY(getWorldCoordinateY() - velocity);
         }
         if(keyboard.getDirection(Direction.DOWN))
         {
-            this.setWorldCoordinateY(getWorldCoordinateY() + getMoveSpeed());
+            this.setWorldCoordinateY(getWorldCoordinateY() + velocity);
         }
     }
 

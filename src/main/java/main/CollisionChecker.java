@@ -9,6 +9,7 @@ package main;
 import entities.AnimateEntity;
 import entities.Direction;
 import graphics.MapHandler;
+import graphics.TileType;
 
 public class CollisionChecker 
 {
@@ -24,8 +25,8 @@ public class CollisionChecker
         this.mapHandler = mapHandler;
     }
 
-    // Checks collision between animateEntity and tile
-    public boolean checkTileCollision(AnimateEntity entity)
+    // Checks if tile is a wall
+    public boolean checkTileWall(AnimateEntity entity)
     {
         int entityLeftWorldX = entity.getWorldCoordinateX() + entity.getHitbox().x;
         int entityRightWorldX = entity.getWorldCoordinateX() + entity.getHitbox().x + entity.getHitbox().width;
@@ -68,5 +69,13 @@ public class CollisionChecker
             if(tileCollisionA == true || tileCollisionB == true) { return true; }
         }
         return false;
+    }
+
+    // Checks if collided tile is a path
+    public boolean checkTilePath(AnimateEntity entity)
+    {
+        int entityOriginCol = (entity.getWorldCoordinateX() + entity.getHitboxOriginPointX())/Simulator.TILE_SIZE;
+        int entityOriginRow = (entity.getWorldCoordinateY() + entity.getHitboxOriginPointY())/Simulator.TILE_SIZE;
+        return (mapHandler.getTileType(entityOriginCol, entityOriginRow) == TileType.PATH) ? true : false;
     }
 }
