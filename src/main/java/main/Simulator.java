@@ -108,6 +108,9 @@ public class Simulator extends JPanel implements Runnable
     {
         super.paintComponent(g);
 
+        // DEBUG
+        long drawStart = System.nanoTime();
+
         // Graphics is an abstract class so typecast and setup
         Graphics2D graphics2D = (Graphics2D)g;
 
@@ -115,7 +118,19 @@ public class Simulator extends JPanel implements Runnable
         mapHandler.draw(graphics2D);
         player.draw(graphics2D);
 
+        // DEBUG
+        if(keyboard.getDebugConsole()) displayDrawTime(graphics2D, drawStart);
+
         // Clean up resources
         graphics2D.dispose();
+    }
+
+    // Debug console
+    public void displayDrawTime(Graphics2D graphics2d, long drawStart)
+    {
+        long drawEnd = System.nanoTime();
+        long drawTime = drawEnd - drawStart;
+        graphics2d.setColor(Color.white);
+        graphics2d.drawString("Draw time: " + drawTime, 10, 500);
     }
 }

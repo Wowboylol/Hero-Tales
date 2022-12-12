@@ -16,6 +16,10 @@ public class Keyboard implements KeyListener
 {
     // Attributes
     private final Set<Integer> pressedKeys = new HashSet<>();
+    private boolean debugConsole = false;
+
+    // Returns whether debug console is toggled
+    public boolean getDebugConsole() { return debugConsole; }
 
     // Returns whether requested direction is pressed (throw if invalid direction)
     public boolean getDirection(Direction d)
@@ -68,7 +72,9 @@ public class Keyboard implements KeyListener
         if(ASCII == KeyEvent.VK_W || ASCII == KeyEvent.VK_S || ASCII == KeyEvent.VK_A || ASCII == KeyEvent.VK_D)
         {
             pressedKeys.add(ASCII);
+            return;
         }
+        if(ASCII == KeyEvent.VK_EQUALS) debugConsole = !debugConsole;
     }
 
     @Override
