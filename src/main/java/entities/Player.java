@@ -74,8 +74,7 @@ public class Player extends AnimateEntity
         else if(keyboard.getDirection(Direction.DOWN) == true) this.setDirection(Direction.DOWN);
     }
 
-    // Move player based on which directional (WASD) key is pressed
-    // If player is on path, increase movespeed by 1
+    // Move player based on which directional (WASD) key is pressed, increasing movespeed if player is on a path
     public void movePlayer()
     {
         int velocity = this.getMoveSpeed();

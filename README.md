@@ -17,8 +17,19 @@ Description placeholder
 - [ ] Add game states
 - [ ] Create prototype NPC
 - [ ] Add dialogue interactions
-- [ ] Create prototype monster
-- [ ] Create prototype hero
 - [ ] Implement title screen
 - [ ] Add events interactions
+- [ ] Create prototype monster
+- [ ] Add general UI (options, health bar, etc.)
+- [ ] Create unit tests
+
+### Development Cycle 3
+- [ ] Create prototype hero
+- [ ] Add inventory function
+- [ ] Add more maps
+- [ ] Finalize and add more NPCs
+- [ ] Finalize and add more monsters
+- [ ] Finalize and add more heroes
+- [ ] Add marketplace/shop function
+- [ ] Create save/load function
 - [ ] Create unit tests
