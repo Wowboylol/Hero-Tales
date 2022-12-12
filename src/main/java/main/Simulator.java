@@ -119,22 +119,26 @@ public class Simulator extends JPanel implements Runnable
         player.draw(graphics2D);
 
         // DEBUG
-        if(keyboard.getDebugConsole()) displayDrawTime(graphics2D, drawStart);
+        if(keyboard.getDebugConsole()) debugConsole(graphics2D, drawStart);
 
         // Clean up resources
         graphics2D.dispose();
     }
 
     // Debug console
-    public void displayDrawTime(Graphics2D graphics2d, long drawStart)
+    public void debugConsole(Graphics2D graphics2d, long drawStart)
     {
-        long drawEnd = System.nanoTime();
-        long drawTime = drawEnd - drawStart;
+        long drawTime = System.nanoTime() - drawStart;
         long FPSBound = 1000000000/FPS;
+        Coordinate playerPosition = player.getWorldCoordinate();
+        int playerOriginX = player.getOriginPointX() + playerPosition.get_X();
+        int playerOriginY = player.getOriginPointY() + playerPosition.get_Y();
 
         if(drawTime > FPSBound) graphics2d.setColor(Color.red);
         else graphics2d.setColor(Color.white);
         
         graphics2d.drawString("Draw time: " + drawTime, 10, 600);
+        graphics2d.drawString("Player position: (" + playerPosition.get_X() + ", " + playerPosition.get_Y() + ")", 10, 615);
+        graphics2d.drawString("Player grid position: (" + playerOriginX/TILE_SIZE + ", " + playerOriginY/TILE_SIZE + ")", 10, 630);
     }
 }

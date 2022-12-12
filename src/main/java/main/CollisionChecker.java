@@ -74,8 +74,8 @@ public class CollisionChecker
     // Checks if collided tile is a path
     public boolean checkTilePath(AnimateEntity entity)
     {
-        int entityOriginCol = (entity.getWorldCoordinateX() + entity.getHitboxOriginPointX())/Simulator.TILE_SIZE;
-        int entityOriginRow = (entity.getWorldCoordinateY() + entity.getHitboxOriginPointY())/Simulator.TILE_SIZE;
+        int entityOriginCol = (entity.getWorldCoordinateX() + entity.getOriginPointX())/Simulator.TILE_SIZE;
+        int entityOriginRow = (entity.getWorldCoordinateY() + entity.getOriginPointY())/Simulator.TILE_SIZE;
         return (mapHandler.getTileType(entityOriginCol, entityOriginRow) == TileType.PATH) ? true : false;
     }
 }

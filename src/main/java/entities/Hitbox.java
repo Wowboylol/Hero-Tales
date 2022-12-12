@@ -24,6 +24,7 @@ public class Hitbox
     public Rectangle getHitbox() { return this.hitbox; }
     public int getOriginPointX() { return this.originPoint.get_X(); }
     public int getOriginPointY() { return this.originPoint.get_Y(); }
+    public Coordinate getOriginPoint() { return this.originPoint; }
 
     // Setters
     public void setHitbox(Rectangle hitbox) 
