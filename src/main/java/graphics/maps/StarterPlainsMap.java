@@ -11,6 +11,7 @@ import java.awt.Graphics2D;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import main.Simulator;
+import main.Utility;
 import graphics.Tile;
 import graphics.Camera;
 
@@ -53,7 +54,7 @@ public class StarterPlainsMap implements MapStrategy
                     tileImages[tileIndex].getImage(), 
                     camera.getTileScreenPositionX(mapColumn, MAP_SIZE_PIXEL_X), 
                     camera.getTileScreenPositionY(mapRow, MAP_SIZE_PIXEL_Y), 
-                    Simulator.TILE_SIZE, Simulator.TILE_SIZE, null
+                    null
                 );
             }
             mapColumn++;
@@ -84,80 +85,89 @@ public class StarterPlainsMap implements MapStrategy
     // Get tile images and set consecutive indexs of tile image array to the loaded images
     private void getTileImages()
     {
+        imageSetup(0, "/tilesets/starter_plains/tiles/grass_1.png", false);
+        imageSetup(1, "/tilesets/starter_plains/tiles/grass_2.png", false);
+        imageSetup(2, "/tilesets/starter_plains/tiles/grass_3.png", false);
+        imageSetup(3, "/tilesets/starter_plains/tiles/grass_4.png", false);
+        imageSetup(4, "/tilesets/starter_plains/tiles/grass_5.png", false);
+        imageSetup(5, "/tilesets/starter_plains/tiles/path.png", false);
+        imageSetup(6, "/tilesets/starter_plains/tiles/path_corner_1.png", false);
+        imageSetup(7, "/tilesets/starter_plains/tiles/path_corner_2.png", false);
+        imageSetup(8, "/tilesets/starter_plains/tiles/path_corner_3.png", false);
+        imageSetup(9, "/tilesets/starter_plains/tiles/path_corner_4.png", false);
+        imageSetup(10, "/tilesets/starter_plains/tiles/path_inner_1.png", false);
+        imageSetup(11, "/tilesets/starter_plains/tiles/path_inner_2.png", false);
+        imageSetup(12, "/tilesets/starter_plains/tiles/path_inner_3.png", false);
+        imageSetup(13, "/tilesets/starter_plains/tiles/path_inner_4.png", false);
+        imageSetup(14, "/tilesets/starter_plains/tiles/path_side_1.png", false);
+        imageSetup(15, "/tilesets/starter_plains/tiles/path_side_2.png", false);
+        imageSetup(16, "/tilesets/starter_plains/tiles/path_side_3.png", false);
+        imageSetup(17, "/tilesets/starter_plains/tiles/path_side_4.png", false);
+        imageSetup(18, "/tilesets/starter_plains/walls/wall.png", true);
+        imageSetup(19, "/tilesets/starter_plains/walls/wall_corner_1.png", true);
+        imageSetup(20, "/tilesets/starter_plains/walls/wall_corner_2.png", true);
+        imageSetup(21, "/tilesets/starter_plains/walls/wall_corner_3.png", true);
+        imageSetup(22, "/tilesets/starter_plains/walls/wall_corner_4.png", true);
+        imageSetup(23, "/tilesets/starter_plains/walls/wall_inner_1.png", true);
+        imageSetup(24, "/tilesets/starter_plains/walls/wall_inner_2.png", true);
+        imageSetup(25, "/tilesets/starter_plains/walls/wall_inner_3.png", true);
+        imageSetup(26, "/tilesets/starter_plains/walls/wall_inner_4.png", true);
+        imageSetup(27, "/tilesets/starter_plains/walls/wall_side_1.png", true);
+        imageSetup(28, "/tilesets/starter_plains/walls/wall_side_2.png", true);
+        imageSetup(29, "/tilesets/starter_plains/walls/wall_side_3.png", true);
+        imageSetup(30, "/tilesets/starter_plains/walls/wall_side_4.png", true);
+        imageSetup(31, "/tilesets/starter_plains/walls/water.png", true);
+        imageSetup(32, "/tilesets/starter_plains/walls/water_corner_1.png", true);
+        imageSetup(33, "/tilesets/starter_plains/walls/water_corner_2.png", true);
+        imageSetup(34, "/tilesets/starter_plains/walls/water_corner_3.png", true);
+        imageSetup(35, "/tilesets/starter_plains/walls/water_corner_4.png", true);
+        imageSetup(36, "/tilesets/starter_plains/walls/water_inner_1.png", true);
+        imageSetup(37, "/tilesets/starter_plains/walls/water_inner_2.png", true);
+        imageSetup(38, "/tilesets/starter_plains/walls/water_inner_3.png", true);
+        imageSetup(39, "/tilesets/starter_plains/walls/water_inner_4.png", true);
+        imageSetup(40, "/tilesets/starter_plains/walls/water_side_1.png", true);
+        imageSetup(41, "/tilesets/starter_plains/walls/water_side_2.png", true);
+        imageSetup(42, "/tilesets/starter_plains/walls/water_side_3.png", true);
+        imageSetup(43, "/tilesets/starter_plains/walls/water_side_4.png", true);
+        imageSetup(44, "/tilesets/starter_plains/tiles/flower_1.png", false);
+        imageSetup(45, "/tilesets/starter_plains/tiles/flower_2.png", false);
+        imageSetup(46, "/tilesets/starter_plains/tiles/flower_3.png", false);
+        imageSetup(47, "/tilesets/starter_plains/tiles/grass_6.png", false);
+        imageSetup(48, "/tilesets/starter_plains/tiles/grass_7.png", false);
+        imageSetup(49, "/tilesets/starter_plains/tiles/grass_8.png", false);
+        imageSetup(50, "/tilesets/starter_plains/tiles/grass_9.png", false);
+        imageSetup(51, "/tilesets/starter_plains/tiles/mushroom_1.png", false);
+        imageSetup(52, "/tilesets/starter_plains/tiles/mushroom_2.png", false);
+        imageSetup(53, "/tilesets/starter_plains/tiles/mushroom_3.png", false);
+        imageSetup(54, "/tilesets/starter_plains/tiles/mushroom_4.png", false);
+        imageSetup(55, "/tilesets/starter_plains/walls/water_lily_1.png", true);
+        imageSetup(56, "/tilesets/starter_plains/walls/water_lily_2.png", true);
+        imageSetup(57, "/tilesets/starter_plains/walls/water_lily_3.png", true);
+        imageSetup(58, "/tilesets/starter_plains/walls/water_lily_4.png", true);
+        imageSetup(59, "/tilesets/starter_plains/walls/water_lily_5.png", true);
+        imageSetup(60, "/tilesets/starter_plains/walls/fence.png", true);
+        imageSetup(61, "/tilesets/starter_plains/walls/fence_double_1.png", true);
+        imageSetup(62, "/tilesets/starter_plains/walls/fence_double_2.png", true);
+        imageSetup(63, "/tilesets/starter_plains/walls/fence_double_3.png", true);
+        imageSetup(64, "/tilesets/starter_plains/walls/fence_double_4.png", true);
+        imageSetup(65, "/tilesets/starter_plains/walls/fence_horizontal.png", true);
+        imageSetup(66, "/tilesets/starter_plains/walls/fence_single_1.png", true);
+        imageSetup(67, "/tilesets/starter_plains/walls/fence_single_2.png", true);
+        imageSetup(68, "/tilesets/starter_plains/walls/fence_single_3.png", true);
+        imageSetup(69, "/tilesets/starter_plains/walls/fence_single_4.png", true);
+        imageSetup(70, "/tilesets/starter_plains/walls/fence_vertical.png", true);
+        imageSetup(71, "/tilesets/starter_plains/tiles/path_diagonal_1.png", false);
+        imageSetup(72, "/tilesets/starter_plains/tiles/path_diagonal_2.png", false);
+    }
+
+    // Sets up the images for the tiles by scaling them to the correct size
+    private void imageSetup(int index, String imagePath, boolean collision) 
+    {
+        Utility utility = new Utility();
+
         try {
-            tileImages[0] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/tiles/grass_1.png")));
-            tileImages[1] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/tiles/grass_2.png")));
-            tileImages[2] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/tiles/grass_3.png")));
-            tileImages[3] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/tiles/grass_4.png")));
-            tileImages[4] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/tiles/grass_5.png")));
-            tileImages[5] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/tiles/path.png")));
-            tileImages[6] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/tiles/path_corner_1.png")));
-            tileImages[7] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/tiles/path_corner_2.png")));
-            tileImages[8] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/tiles/path_corner_3.png")));
-            tileImages[9] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/tiles/path_corner_4.png")));
-            tileImages[10] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/tiles/path_inner_1.png")));
-            tileImages[11] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/tiles/path_inner_2.png")));
-            tileImages[12] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/tiles/path_inner_3.png")));
-            tileImages[13] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/tiles/path_inner_4.png")));
-            tileImages[14] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/tiles/path_side_1.png")));
-            tileImages[15] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/tiles/path_side_2.png")));
-            tileImages[16] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/tiles/path_side_3.png")));
-            tileImages[17] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/tiles/path_side_4.png")));
-            tileImages[18] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/wall.png")), true);
-            tileImages[19] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/wall_corner_1.png")), true);
-            tileImages[20] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/wall_corner_2.png")), true);
-            tileImages[21] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/wall_corner_3.png")), true);
-            tileImages[22] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/wall_corner_4.png")), true);
-            tileImages[23] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/wall_inner_1.png")), true);
-            tileImages[24] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/wall_inner_2.png")), true);
-            tileImages[25] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/wall_inner_3.png")), true);
-            tileImages[26] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/wall_inner_4.png")), true);
-            tileImages[27] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/wall_side_1.png")), true);
-            tileImages[28] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/wall_side_2.png")), true);
-            tileImages[29] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/wall_side_3.png")), true);
-            tileImages[30] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/wall_side_4.png")), true);
-            tileImages[31] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/water.png")), true);
-            tileImages[32] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/water_corner_1.png")), true);
-            tileImages[33] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/water_corner_2.png")), true);
-            tileImages[34] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/water_corner_3.png")), true);
-            tileImages[35] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/water_corner_4.png")), true);
-            tileImages[36] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/water_inner_1.png")), true);
-            tileImages[37] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/water_inner_2.png")), true);
-            tileImages[38] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/water_inner_3.png")), true);
-            tileImages[39] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/water_inner_4.png")), true);
-            tileImages[40] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/water_side_1.png")), true);
-            tileImages[41] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/water_side_2.png")), true);
-            tileImages[42] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/water_side_3.png")), true);
-            tileImages[43] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/water_side_4.png")), true);
-            tileImages[44] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/tiles/flower_1.png")));
-            tileImages[45] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/tiles/flower_2.png")));
-            tileImages[46] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/tiles/flower_3.png")));
-            tileImages[47] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/tiles/grass_6.png")));
-            tileImages[48] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/tiles/grass_7.png")));
-            tileImages[49] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/tiles/grass_8.png")));
-            tileImages[50] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/tiles/grass_9.png")));
-            tileImages[51] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/tiles/mushroom_1.png")));
-            tileImages[52] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/tiles/mushroom_2.png")));
-            tileImages[53] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/tiles/mushroom_3.png")));
-            tileImages[54] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/tiles/mushroom_4.png")));
-            tileImages[55] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/water_lily_1.png")), true);
-            tileImages[56] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/water_lily_2.png")), true);
-            tileImages[57] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/water_lily_3.png")), true);
-            tileImages[58] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/water_lily_4.png")), true);
-            tileImages[59] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/water_lily_5.png")), true);
-            tileImages[60] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/fence.png")), true);
-            tileImages[61] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/fence_double_1.png")), true);
-            tileImages[62] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/fence_double_2.png")), true);
-            tileImages[63] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/fence_double_3.png")), true);
-            tileImages[64] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/fence_double_4.png")), true);
-            tileImages[65] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/fence_horizontal.png")), true);
-            tileImages[66] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/fence_single_1.png")), true);
-            tileImages[67] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/fence_single_2.png")), true);
-            tileImages[68] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/fence_single_3.png")), true);
-            tileImages[69] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/fence_single_4.png")), true);
-            tileImages[70] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/walls/fence_vertical.png")), true);
-            tileImages[71] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/tiles/path_diagonal_1.png")));
-            tileImages[72] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tilesets/starter_plains/tiles/path_diagonal_2.png")));
+            tileImages[index] = new Tile(ImageIO.read(getClass().getResourceAsStream(imagePath)), collision);
+            tileImages[index].setImage(utility.scaleImage(tileImages[index].getImage(), Simulator.TILE_SIZE, Simulator.TILE_SIZE));
         }
         catch(IOException exception) {
             exception.printStackTrace();
