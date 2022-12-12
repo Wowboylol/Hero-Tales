@@ -9,16 +9,16 @@ Description placeholder
 - [X] Implement world camera
 - [X] Draw tiles in world
 - [X] Implement collision detection
+- [ ] Implement projectile spawning
 - [ ] Add sound effects
 - [ ] Create unit tests
-- [ ] Refactoring
 
 ### Development Cycle 2
 - [ ] Add game states
-- [ ] Create NPCs
-- [ ] Implement hero system
+- [ ] Create prototype NPC
 - [ ] Add dialogue interactions
+- [ ] Create prototype monster
+- [ ] Create prototype hero
 - [ ] Implement title screen
 - [ ] Add events interactions
 - [ ] Create unit tests
-- [ ] Refactoring
