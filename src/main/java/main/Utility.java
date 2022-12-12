@@ -11,8 +11,8 @@ import java.awt.image.BufferedImage;
 
 public class Utility 
 {
-    // Scales image size prempitively
-    public BufferedImage scaleImage(BufferedImage image, int width, int height)
+    // Resizes image to specified width and height
+    public BufferedImage resizeImage(BufferedImage image, int width, int height)
     {
         BufferedImage scaledImage = new BufferedImage(width, height, image.getType());
         Graphics2D graphics2d = scaledImage.createGraphics();

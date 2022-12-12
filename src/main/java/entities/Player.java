@@ -146,34 +146,40 @@ public class Player extends AnimateEntity
                     image = right3;
                 break;
         }
-        graphics2D.drawImage(
-            image, playerScreenPositionX(), playerScreenPositionY(), 
-            Simulator.TILE_SIZE, Simulator.TILE_SIZE, null
-        );
+        graphics2D.drawImage(image, playerScreenPositionX(), playerScreenPositionY(), null);
     }
 
     // Load player sprites into BufferedImage, returns true if successful
-    public boolean getSprite()
+    public void getSprite()
     {
+        up1 = spriteSetup("player_up_1", Simulator.TILE_SIZE, Simulator.TILE_SIZE);
+        up2 = spriteSetup("player_up_2", Simulator.TILE_SIZE, Simulator.TILE_SIZE);
+        up3 = spriteSetup("player_up_3", Simulator.TILE_SIZE, Simulator.TILE_SIZE);
+        down1 = spriteSetup("player_down_1", Simulator.TILE_SIZE, Simulator.TILE_SIZE);
+        down2 = spriteSetup("player_down_2", Simulator.TILE_SIZE, Simulator.TILE_SIZE);
+        down3 = spriteSetup("player_down_3", Simulator.TILE_SIZE, Simulator.TILE_SIZE);
+        left1 = spriteSetup("player_left_1", Simulator.TILE_SIZE, Simulator.TILE_SIZE);
+        left2 = spriteSetup("player_left_2", Simulator.TILE_SIZE, Simulator.TILE_SIZE);
+        left3 = spriteSetup("player_left_3", Simulator.TILE_SIZE, Simulator.TILE_SIZE);
+        right1 = spriteSetup("player_right_1", Simulator.TILE_SIZE, Simulator.TILE_SIZE);
+        right2 = spriteSetup("player_right_2", Simulator.TILE_SIZE, Simulator.TILE_SIZE);
+        right3 = spriteSetup("player_right_3", Simulator.TILE_SIZE, Simulator.TILE_SIZE);
+    }
+
+    // Helper function: Sets up player sprites by resizing image from file
+    private BufferedImage spriteSetup(String imageName, int width, int height)
+    {
+        Utility utility = new Utility();
+        BufferedImage image = null;
+        
         try {
-            up1 = ImageIO.read(getClass().getResourceAsStream("/player/player_up_1.png"));
-            up2 = ImageIO.read(getClass().getResourceAsStream("/player/player_up_2.png"));
-            up3 = ImageIO.read(getClass().getResourceAsStream("/player/player_up_3.png"));
-            down1 = ImageIO.read(getClass().getResourceAsStream("/player/player_down_1.png"));
-            down2 = ImageIO.read(getClass().getResourceAsStream("/player/player_down_2.png"));
-            down3 = ImageIO.read(getClass().getResourceAsStream("/player/player_down_3.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("/player/player_left_1.png"));
-            left2 = ImageIO.read(getClass().getResourceAsStream("/player/player_left_2.png"));
-            left3 = ImageIO.read(getClass().getResourceAsStream("/player/player_left_3.png"));
-            right1 = ImageIO.read(getClass().getResourceAsStream("/player/player_right_1.png"));
-            right2 = ImageIO.read(getClass().getResourceAsStream("/player/player_right_2.png"));
-            right3 = ImageIO.read(getClass().getResourceAsStream("/player/player_right_3.png"));
-            return true;
+            image = ImageIO.read(getClass().getResourceAsStream("/player/" + imageName + ".png"));
+            image = utility.resizeImage(image, width, height);
         }
         catch(IOException e) {
             e.printStackTrace();
-            return false;
         }
+        return image;
     }
 
     // Helper function: Determines whether player is moving in given frame

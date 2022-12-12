@@ -160,14 +160,14 @@ public class StarterPlainsMap implements MapStrategy
         imageSetup(72, "/tilesets/starter_plains/tiles/path_diagonal_2.png", false);
     }
 
-    // Sets up the images for the tiles by scaling them to the correct size
+    // Sets up the images for the tiles by resizing them to the correct size
     private void imageSetup(int index, String imagePath, boolean collision) 
     {
         Utility utility = new Utility();
 
         try {
             tileImages[index] = new Tile(ImageIO.read(getClass().getResourceAsStream(imagePath)), collision);
-            tileImages[index].setImage(utility.scaleImage(tileImages[index].getImage(), Simulator.TILE_SIZE, Simulator.TILE_SIZE));
+            tileImages[index].setImage(utility.resizeImage(tileImages[index].getImage(), Simulator.TILE_SIZE, Simulator.TILE_SIZE));
         }
         catch(IOException exception) {
             exception.printStackTrace();
