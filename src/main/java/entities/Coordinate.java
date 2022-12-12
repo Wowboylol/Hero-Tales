@@ -21,13 +21,13 @@ public class Coordinate
     }
 
     // Getters
-    public int get_X() { return this.X; }
-    public int get_Y() { return this.Y; }
+    public int getX() { return this.X; }
+    public int getY() { return this.Y; }
 
     // Setters
-    public void set_X(int val) { this.X = val; }
-    public void set_Y(int val) { this.Y = val; }
+    public void setX(int val) { this.X = val; }
+    public void setY(int val) { this.Y = val; }
 
     // Return whether given coordinate is equal to this coordinate
-    public boolean equals(Coordinate other) { return (this.X == other.get_X() && this.Y == other.get_Y()) ? true : false; }
+    public boolean equals(Coordinate other) { return (this.X == other.getX() && this.Y == other.getY()) ? true : false; }
 }

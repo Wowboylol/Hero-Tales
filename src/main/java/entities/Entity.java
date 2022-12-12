@@ -23,15 +23,15 @@ public abstract class Entity
 
     // Getters
     public Coordinate getWorldCoordinate() { return this.worldPosition; }
-    public int getWorldCoordinateX() { return this.worldPosition.get_X(); }
-    public int getWorldCoordinateY() { return this.worldPosition.get_Y(); }
+    public int getWorldCoordinateX() { return this.worldPosition.getX(); }
+    public int getWorldCoordinateY() { return this.worldPosition.getY(); }
     public Rectangle getHitbox() { return this.hitbox.getHitbox(); }
     public int getOriginPointX() { return this.hitbox.getOriginPointX(); }
     public int getOriginPointY() { return this.hitbox.getOriginPointY(); }
 
     // Setters
     public void setWorldCoordinate(Coordinate coordinate) { this.worldPosition = coordinate; }
-    public void setWorldCoordinateX(int X) { this.worldPosition.set_X(X); }
-    public void setWorldCoordinateY(int Y) { this.worldPosition.set_Y(Y); }
+    public void setWorldCoordinateX(int X) { this.worldPosition.setX(X); }
+    public void setWorldCoordinateY(int Y) { this.worldPosition.setY(Y); }
     public void setHitbox(Rectangle hitbox) { this.hitbox.setHitbox(hitbox); }
 }
