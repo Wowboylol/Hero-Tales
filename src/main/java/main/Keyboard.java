@@ -10,7 +10,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.HashSet;
 import java.util.Set;
-import entities.Direction;
+import entities.MoveDirection;
 
 public class Keyboard implements KeyListener
 {
@@ -22,7 +22,7 @@ public class Keyboard implements KeyListener
     public boolean getDebugConsole() { return debugConsole; }
 
     // Returns whether requested direction is pressed (throw if invalid direction)
-    public boolean getDirection(Direction d)
+    public boolean getDirection(MoveDirection d)
     {
         try {
             switch(d)

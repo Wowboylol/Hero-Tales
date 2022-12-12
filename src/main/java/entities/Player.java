@@ -26,6 +26,7 @@ public class Player extends AnimateEntity
     // Attributes
     private Simulator simulator;
     private Keyboard keyboard;
+    private Mouse mouse;
     private CollisionChecker collisionChecker;
 
     // Default constructor (starting coordinate based on defaults)
@@ -42,9 +43,10 @@ public class Player extends AnimateEntity
     }
 
     // External injector injects required dependencies
-    public void inject(Keyboard keyboard, CollisionChecker collisionCheck)
+    public void inject(Keyboard keyboard, Mouse mouse, CollisionChecker collisionCheck)
     {
         this.keyboard = keyboard;
+        this.mouse = mouse;
         this.collisionChecker = collisionCheck;
     }
 
@@ -64,14 +66,14 @@ public class Player extends AnimateEntity
     // Set player direction based on which directional (WASD) key is pressed
     public void changeDirection()
     {
-        if(keyboard.getDirection(Direction.UPLEFT) == true) this.setDirection(Direction.UPLEFT);
-        else if(keyboard.getDirection(Direction.UPRIGHT) == true) this.setDirection(Direction.UPRIGHT);
-        else if(keyboard.getDirection(Direction.DOWNLEFT) == true) this.setDirection(Direction.DOWNLEFT);
-        else if(keyboard.getDirection(Direction.DOWNRIGHT) == true) this.setDirection(Direction.DOWNRIGHT);
-        else if(keyboard.getDirection(Direction.LEFT) == true) this.setDirection(Direction.LEFT);
-        else if(keyboard.getDirection(Direction.RIGHT) == true) this.setDirection(Direction.RIGHT);
-        else if(keyboard.getDirection(Direction.UP) == true) this.setDirection(Direction.UP);
-        else if(keyboard.getDirection(Direction.DOWN) == true) this.setDirection(Direction.DOWN);
+        if(keyboard.getDirection(MoveDirection.UPLEFT) == true) this.setDirection(MoveDirection.UPLEFT);
+        else if(keyboard.getDirection(MoveDirection.UPRIGHT) == true) this.setDirection(MoveDirection.UPRIGHT);
+        else if(keyboard.getDirection(MoveDirection.DOWNLEFT) == true) this.setDirection(MoveDirection.DOWNLEFT);
+        else if(keyboard.getDirection(MoveDirection.DOWNRIGHT) == true) this.setDirection(MoveDirection.DOWNRIGHT);
+        else if(keyboard.getDirection(MoveDirection.LEFT) == true) this.setDirection(MoveDirection.LEFT);
+        else if(keyboard.getDirection(MoveDirection.RIGHT) == true) this.setDirection(MoveDirection.RIGHT);
+        else if(keyboard.getDirection(MoveDirection.UP) == true) this.setDirection(MoveDirection.UP);
+        else if(keyboard.getDirection(MoveDirection.DOWN) == true) this.setDirection(MoveDirection.DOWN);
     }
 
     // Move player based on which directional (WASD) key is pressed, increasing movespeed if player is on a path
@@ -80,19 +82,19 @@ public class Player extends AnimateEntity
         int velocity = this.getMoveSpeed();
         if(collisionChecker.checkTilePath(this)) velocity++;
 
-        if(keyboard.getDirection(Direction.LEFT))
+        if(keyboard.getDirection(MoveDirection.LEFT))
         {
             this.setWorldCoordinateX(getWorldCoordinateX() - velocity);
         }
-        if(keyboard.getDirection(Direction.RIGHT))
+        if(keyboard.getDirection(MoveDirection.RIGHT))
         {
             this.setWorldCoordinateX(getWorldCoordinateX() + velocity);
         }
-        if(keyboard.getDirection(Direction.UP))
+        if(keyboard.getDirection(MoveDirection.UP))
         {
             this.setWorldCoordinateY(getWorldCoordinateY() - velocity);
         }
-        if(keyboard.getDirection(Direction.DOWN))
+        if(keyboard.getDirection(MoveDirection.DOWN))
         {
             this.setWorldCoordinateY(getWorldCoordinateY() + velocity);
         }
@@ -102,6 +104,12 @@ public class Player extends AnimateEntity
     public void draw(Graphics2D graphics2D)
     {
         BufferedImage image = null;
+
+        if(mouse.getMousePressed())
+        {
+            System.out.println(mouse.getAttackDirection(playerScreenPositionX()+getOriginPointX(), playerScreenPositionY()+getOriginPointY()));
+        }
+
         switch(this.getDirection())
         {
             case UPRIGHT:

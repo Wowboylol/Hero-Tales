@@ -7,7 +7,7 @@
 
 package main;
 import entities.AnimateEntity;
-import entities.Direction;
+import entities.MoveDirection;
 import graphics.MapHandler;
 import graphics.TileType;
 
@@ -38,30 +38,30 @@ public class CollisionChecker
         int entityTopRow = entityTopWorldY/Simulator.TILE_SIZE;
         int entityBottomRow = entityBottomWorldY/Simulator.TILE_SIZE;
         boolean tileCollisionA, tileCollisionB;
-        Direction direction = entity.getDirection();
+        MoveDirection direction = entity.getDirection();
 
-        if(direction == Direction.UP || direction == Direction.UPLEFT || direction == Direction.UPRIGHT)
+        if(direction == MoveDirection.UP || direction == MoveDirection.UPLEFT || direction == MoveDirection.UPRIGHT)
         {
             entityTopRow = (entityTopWorldY - entity.getMoveSpeed())/Simulator.TILE_SIZE;
             tileCollisionA = mapHandler.getTileCollision(entityLeftCol, entityTopRow);
             tileCollisionB = mapHandler.getTileCollision(entityRightCol, entityTopRow);
             if(tileCollisionA == true || tileCollisionB == true) { return true; }
         }
-        if(direction == Direction.DOWN || direction == Direction.DOWNLEFT || direction == Direction.DOWNRIGHT)
+        if(direction == MoveDirection.DOWN || direction == MoveDirection.DOWNLEFT || direction == MoveDirection.DOWNRIGHT)
         {
             entityBottomRow = (entityBottomWorldY + entity.getMoveSpeed())/Simulator.TILE_SIZE;
             tileCollisionA = mapHandler.getTileCollision(entityLeftCol, entityBottomRow);
             tileCollisionB = mapHandler.getTileCollision(entityRightCol, entityBottomRow);
             if(tileCollisionA == true || tileCollisionB == true) { return true; }
         }
-        if(direction == Direction.LEFT || direction == Direction.UPLEFT || direction == Direction.DOWNLEFT)
+        if(direction == MoveDirection.LEFT || direction == MoveDirection.UPLEFT || direction == MoveDirection.DOWNLEFT)
         {
             entityLeftCol = (entityLeftWorldX - entity.getMoveSpeed())/Simulator.TILE_SIZE;
             tileCollisionA = mapHandler.getTileCollision(entityLeftCol, entityTopRow);
             tileCollisionB = mapHandler.getTileCollision(entityLeftCol, entityBottomRow);
             if(tileCollisionA == true || tileCollisionB == true) { return true; }
         }
-        if(direction == Direction.RIGHT || direction == Direction.UPRIGHT || direction == Direction.DOWNRIGHT)
+        if(direction == MoveDirection.RIGHT || direction == MoveDirection.UPRIGHT || direction == MoveDirection.DOWNRIGHT)
         {
             entityRightCol = (entityRightWorldX + entity.getMoveSpeed())/Simulator.TILE_SIZE;
             tileCollisionA = mapHandler.getTileCollision(entityRightCol, entityTopRow);

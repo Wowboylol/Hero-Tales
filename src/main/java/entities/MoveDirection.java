@@ -1,13 +1,13 @@
 /*  
- *  Direction.java
+ *  MoveDirection.java
  *  
- *  Description: Enum for the four cardinal directions.
+ *  Description: Enum for the eight move directions.
  *
 */
 
 package entities;
 
-public enum Direction 
+public enum MoveDirection 
 {
     UP,
     DOWN,

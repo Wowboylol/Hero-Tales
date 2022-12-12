@@ -35,6 +35,7 @@ public class Simulator extends JPanel implements Runnable
 
     // Injectable services
     public final Keyboard keyboard = new Keyboard();
+    public final Mouse mouse = new Mouse();
     public final Player player = new Player(this);
     public final Camera camera = new Camera(this);
     public final CollisionChecker collisionChecker = new CollisionChecker(this);
@@ -50,6 +51,8 @@ public class Simulator extends JPanel implements Runnable
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyboard);
+        this.addMouseListener(mouse);
+        this.addMouseMotionListener(mouse);
         this.setFocusable(true);
     }
 
