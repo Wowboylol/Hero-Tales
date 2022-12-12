@@ -12,8 +12,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import main.Simulator;
 import main.Utility;
-import graphics.Tile;
-import graphics.Camera;
+import graphics.*;
 
 public class StarterPlainsMap implements MapStrategy
 {
@@ -79,94 +78,94 @@ public class StarterPlainsMap implements MapStrategy
     { 
         if(col < 0 || row < 0 || col > MAP_SIZE_TILE_X-1 || row > MAP_SIZE_TILE_Y-1) return false;
         int tileNum = this.mapTileGrid[col][row]; 
-        return tileImages[tileNum].getCanCollide();
+        return (tileImages[tileNum].getType() == TileType.WALL) ? true : false;
     }
 
     // Get tile images and set consecutive indexs of tile image array to the loaded images
     private void getTileImages()
     {
-        imageSetup(0, "/tilesets/starter_plains/tiles/grass_1.png", false);
-        imageSetup(1, "/tilesets/starter_plains/tiles/grass_2.png", false);
-        imageSetup(2, "/tilesets/starter_plains/tiles/grass_3.png", false);
-        imageSetup(3, "/tilesets/starter_plains/tiles/grass_4.png", false);
-        imageSetup(4, "/tilesets/starter_plains/tiles/grass_5.png", false);
-        imageSetup(5, "/tilesets/starter_plains/tiles/path.png", false);
-        imageSetup(6, "/tilesets/starter_plains/tiles/path_corner_1.png", false);
-        imageSetup(7, "/tilesets/starter_plains/tiles/path_corner_2.png", false);
-        imageSetup(8, "/tilesets/starter_plains/tiles/path_corner_3.png", false);
-        imageSetup(9, "/tilesets/starter_plains/tiles/path_corner_4.png", false);
-        imageSetup(10, "/tilesets/starter_plains/tiles/path_inner_1.png", false);
-        imageSetup(11, "/tilesets/starter_plains/tiles/path_inner_2.png", false);
-        imageSetup(12, "/tilesets/starter_plains/tiles/path_inner_3.png", false);
-        imageSetup(13, "/tilesets/starter_plains/tiles/path_inner_4.png", false);
-        imageSetup(14, "/tilesets/starter_plains/tiles/path_side_1.png", false);
-        imageSetup(15, "/tilesets/starter_plains/tiles/path_side_2.png", false);
-        imageSetup(16, "/tilesets/starter_plains/tiles/path_side_3.png", false);
-        imageSetup(17, "/tilesets/starter_plains/tiles/path_side_4.png", false);
-        imageSetup(18, "/tilesets/starter_plains/walls/wall.png", true);
-        imageSetup(19, "/tilesets/starter_plains/walls/wall_corner_1.png", true);
-        imageSetup(20, "/tilesets/starter_plains/walls/wall_corner_2.png", true);
-        imageSetup(21, "/tilesets/starter_plains/walls/wall_corner_3.png", true);
-        imageSetup(22, "/tilesets/starter_plains/walls/wall_corner_4.png", true);
-        imageSetup(23, "/tilesets/starter_plains/walls/wall_inner_1.png", true);
-        imageSetup(24, "/tilesets/starter_plains/walls/wall_inner_2.png", true);
-        imageSetup(25, "/tilesets/starter_plains/walls/wall_inner_3.png", true);
-        imageSetup(26, "/tilesets/starter_plains/walls/wall_inner_4.png", true);
-        imageSetup(27, "/tilesets/starter_plains/walls/wall_side_1.png", true);
-        imageSetup(28, "/tilesets/starter_plains/walls/wall_side_2.png", true);
-        imageSetup(29, "/tilesets/starter_plains/walls/wall_side_3.png", true);
-        imageSetup(30, "/tilesets/starter_plains/walls/wall_side_4.png", true);
-        imageSetup(31, "/tilesets/starter_plains/walls/water.png", true);
-        imageSetup(32, "/tilesets/starter_plains/walls/water_corner_1.png", true);
-        imageSetup(33, "/tilesets/starter_plains/walls/water_corner_2.png", true);
-        imageSetup(34, "/tilesets/starter_plains/walls/water_corner_3.png", true);
-        imageSetup(35, "/tilesets/starter_plains/walls/water_corner_4.png", true);
-        imageSetup(36, "/tilesets/starter_plains/walls/water_inner_1.png", true);
-        imageSetup(37, "/tilesets/starter_plains/walls/water_inner_2.png", true);
-        imageSetup(38, "/tilesets/starter_plains/walls/water_inner_3.png", true);
-        imageSetup(39, "/tilesets/starter_plains/walls/water_inner_4.png", true);
-        imageSetup(40, "/tilesets/starter_plains/walls/water_side_1.png", true);
-        imageSetup(41, "/tilesets/starter_plains/walls/water_side_2.png", true);
-        imageSetup(42, "/tilesets/starter_plains/walls/water_side_3.png", true);
-        imageSetup(43, "/tilesets/starter_plains/walls/water_side_4.png", true);
-        imageSetup(44, "/tilesets/starter_plains/tiles/flower_1.png", false);
-        imageSetup(45, "/tilesets/starter_plains/tiles/flower_2.png", false);
-        imageSetup(46, "/tilesets/starter_plains/tiles/flower_3.png", false);
-        imageSetup(47, "/tilesets/starter_plains/tiles/grass_6.png", false);
-        imageSetup(48, "/tilesets/starter_plains/tiles/grass_7.png", false);
-        imageSetup(49, "/tilesets/starter_plains/tiles/grass_8.png", false);
-        imageSetup(50, "/tilesets/starter_plains/tiles/grass_9.png", false);
-        imageSetup(51, "/tilesets/starter_plains/tiles/mushroom_1.png", false);
-        imageSetup(52, "/tilesets/starter_plains/tiles/mushroom_2.png", false);
-        imageSetup(53, "/tilesets/starter_plains/tiles/mushroom_3.png", false);
-        imageSetup(54, "/tilesets/starter_plains/tiles/mushroom_4.png", false);
-        imageSetup(55, "/tilesets/starter_plains/walls/water_lily_1.png", true);
-        imageSetup(56, "/tilesets/starter_plains/walls/water_lily_2.png", true);
-        imageSetup(57, "/tilesets/starter_plains/walls/water_lily_3.png", true);
-        imageSetup(58, "/tilesets/starter_plains/walls/water_lily_4.png", true);
-        imageSetup(59, "/tilesets/starter_plains/walls/water_lily_5.png", true);
-        imageSetup(60, "/tilesets/starter_plains/walls/fence.png", true);
-        imageSetup(61, "/tilesets/starter_plains/walls/fence_double_1.png", true);
-        imageSetup(62, "/tilesets/starter_plains/walls/fence_double_2.png", true);
-        imageSetup(63, "/tilesets/starter_plains/walls/fence_double_3.png", true);
-        imageSetup(64, "/tilesets/starter_plains/walls/fence_double_4.png", true);
-        imageSetup(65, "/tilesets/starter_plains/walls/fence_horizontal.png", true);
-        imageSetup(66, "/tilesets/starter_plains/walls/fence_single_1.png", true);
-        imageSetup(67, "/tilesets/starter_plains/walls/fence_single_2.png", true);
-        imageSetup(68, "/tilesets/starter_plains/walls/fence_single_3.png", true);
-        imageSetup(69, "/tilesets/starter_plains/walls/fence_single_4.png", true);
-        imageSetup(70, "/tilesets/starter_plains/walls/fence_vertical.png", true);
-        imageSetup(71, "/tilesets/starter_plains/tiles/path_diagonal_1.png", false);
-        imageSetup(72, "/tilesets/starter_plains/tiles/path_diagonal_2.png", false);
+        imageSetup(0, "/tilesets/starter_plains/tiles/grass_1.png", TileType.DEFAULT);
+        imageSetup(1, "/tilesets/starter_plains/tiles/grass_2.png", TileType.DEFAULT);
+        imageSetup(2, "/tilesets/starter_plains/tiles/grass_3.png", TileType.DEFAULT);
+        imageSetup(3, "/tilesets/starter_plains/tiles/grass_4.png", TileType.DEFAULT);
+        imageSetup(4, "/tilesets/starter_plains/tiles/grass_5.png", TileType.DEFAULT);
+        imageSetup(5, "/tilesets/starter_plains/tiles/path.png", TileType.PATH);
+        imageSetup(6, "/tilesets/starter_plains/tiles/path_corner_1.png", TileType.PATH);
+        imageSetup(7, "/tilesets/starter_plains/tiles/path_corner_2.png", TileType.PATH);
+        imageSetup(8, "/tilesets/starter_plains/tiles/path_corner_3.png", TileType.PATH);
+        imageSetup(9, "/tilesets/starter_plains/tiles/path_corner_4.png", TileType.PATH);
+        imageSetup(10, "/tilesets/starter_plains/tiles/path_inner_1.png", TileType.PATH);
+        imageSetup(11, "/tilesets/starter_plains/tiles/path_inner_2.png", TileType.PATH);
+        imageSetup(12, "/tilesets/starter_plains/tiles/path_inner_3.png", TileType.PATH);
+        imageSetup(13, "/tilesets/starter_plains/tiles/path_inner_4.png", TileType.PATH);
+        imageSetup(14, "/tilesets/starter_plains/tiles/path_side_1.png", TileType.PATH);
+        imageSetup(15, "/tilesets/starter_plains/tiles/path_side_2.png", TileType.PATH);
+        imageSetup(16, "/tilesets/starter_plains/tiles/path_side_3.png", TileType.PATH);
+        imageSetup(17, "/tilesets/starter_plains/tiles/path_side_4.png", TileType.PATH);
+        imageSetup(18, "/tilesets/starter_plains/walls/wall.png", TileType.WALL);
+        imageSetup(19, "/tilesets/starter_plains/walls/wall_corner_1.png", TileType.WALL);
+        imageSetup(20, "/tilesets/starter_plains/walls/wall_corner_2.png", TileType.WALL);
+        imageSetup(21, "/tilesets/starter_plains/walls/wall_corner_3.png", TileType.WALL);
+        imageSetup(22, "/tilesets/starter_plains/walls/wall_corner_4.png", TileType.WALL);
+        imageSetup(23, "/tilesets/starter_plains/walls/wall_inner_1.png", TileType.WALL);
+        imageSetup(24, "/tilesets/starter_plains/walls/wall_inner_2.png", TileType.WALL);
+        imageSetup(25, "/tilesets/starter_plains/walls/wall_inner_3.png", TileType.WALL);
+        imageSetup(26, "/tilesets/starter_plains/walls/wall_inner_4.png", TileType.WALL);
+        imageSetup(27, "/tilesets/starter_plains/walls/wall_side_1.png", TileType.WALL);
+        imageSetup(28, "/tilesets/starter_plains/walls/wall_side_2.png", TileType.WALL);
+        imageSetup(29, "/tilesets/starter_plains/walls/wall_side_3.png", TileType.WALL);
+        imageSetup(30, "/tilesets/starter_plains/walls/wall_side_4.png", TileType.WALL);
+        imageSetup(31, "/tilesets/starter_plains/walls/water.png", TileType.WALL);
+        imageSetup(32, "/tilesets/starter_plains/walls/water_corner_1.png", TileType.WALL);
+        imageSetup(33, "/tilesets/starter_plains/walls/water_corner_2.png", TileType.WALL);
+        imageSetup(34, "/tilesets/starter_plains/walls/water_corner_3.png", TileType.WALL);
+        imageSetup(35, "/tilesets/starter_plains/walls/water_corner_4.png", TileType.WALL);
+        imageSetup(36, "/tilesets/starter_plains/walls/water_inner_1.png", TileType.WALL);
+        imageSetup(37, "/tilesets/starter_plains/walls/water_inner_2.png", TileType.WALL);
+        imageSetup(38, "/tilesets/starter_plains/walls/water_inner_3.png", TileType.WALL);
+        imageSetup(39, "/tilesets/starter_plains/walls/water_inner_4.png", TileType.WALL);
+        imageSetup(40, "/tilesets/starter_plains/walls/water_side_1.png", TileType.WALL);
+        imageSetup(41, "/tilesets/starter_plains/walls/water_side_2.png", TileType.WALL);
+        imageSetup(42, "/tilesets/starter_plains/walls/water_side_3.png", TileType.WALL);
+        imageSetup(43, "/tilesets/starter_plains/walls/water_side_4.png", TileType.WALL);
+        imageSetup(44, "/tilesets/starter_plains/tiles/flower_1.png", TileType.DEFAULT);
+        imageSetup(45, "/tilesets/starter_plains/tiles/flower_2.png", TileType.DEFAULT);
+        imageSetup(46, "/tilesets/starter_plains/tiles/flower_3.png", TileType.DEFAULT);
+        imageSetup(47, "/tilesets/starter_plains/tiles/grass_6.png", TileType.DEFAULT);
+        imageSetup(48, "/tilesets/starter_plains/tiles/grass_7.png", TileType.DEFAULT);
+        imageSetup(49, "/tilesets/starter_plains/tiles/grass_8.png", TileType.DEFAULT);
+        imageSetup(50, "/tilesets/starter_plains/tiles/grass_9.png", TileType.DEFAULT);
+        imageSetup(51, "/tilesets/starter_plains/tiles/mushroom_1.png", TileType.DEFAULT);
+        imageSetup(52, "/tilesets/starter_plains/tiles/mushroom_2.png", TileType.DEFAULT);
+        imageSetup(53, "/tilesets/starter_plains/tiles/mushroom_3.png", TileType.DEFAULT);
+        imageSetup(54, "/tilesets/starter_plains/tiles/mushroom_4.png", TileType.DEFAULT);
+        imageSetup(55, "/tilesets/starter_plains/walls/water_lily_1.png", TileType.WALL);
+        imageSetup(56, "/tilesets/starter_plains/walls/water_lily_2.png", TileType.WALL);
+        imageSetup(57, "/tilesets/starter_plains/walls/water_lily_3.png", TileType.WALL);
+        imageSetup(58, "/tilesets/starter_plains/walls/water_lily_4.png", TileType.WALL);
+        imageSetup(59, "/tilesets/starter_plains/walls/water_lily_5.png", TileType.WALL);
+        imageSetup(60, "/tilesets/starter_plains/walls/fence.png", TileType.WALL);
+        imageSetup(61, "/tilesets/starter_plains/walls/fence_double_1.png", TileType.WALL);
+        imageSetup(62, "/tilesets/starter_plains/walls/fence_double_2.png", TileType.WALL);
+        imageSetup(63, "/tilesets/starter_plains/walls/fence_double_3.png", TileType.WALL);
+        imageSetup(64, "/tilesets/starter_plains/walls/fence_double_4.png", TileType.WALL);
+        imageSetup(65, "/tilesets/starter_plains/walls/fence_horizontal.png", TileType.WALL);
+        imageSetup(66, "/tilesets/starter_plains/walls/fence_single_1.png", TileType.WALL);
+        imageSetup(67, "/tilesets/starter_plains/walls/fence_single_2.png", TileType.WALL);
+        imageSetup(68, "/tilesets/starter_plains/walls/fence_single_3.png", TileType.WALL);
+        imageSetup(69, "/tilesets/starter_plains/walls/fence_single_4.png", TileType.WALL);
+        imageSetup(70, "/tilesets/starter_plains/walls/fence_vertical.png", TileType.WALL);
+        imageSetup(71, "/tilesets/starter_plains/tiles/path_diagonal_1.png", TileType.PATH);
+        imageSetup(72, "/tilesets/starter_plains/tiles/path_diagonal_2.png", TileType.PATH);
     }
 
     // Sets up the images for the tiles by resizing them to the correct size
-    private void imageSetup(int index, String imagePath, boolean collision) 
+    private void imageSetup(int index, String imagePath, TileType tileType) 
     {
         Utility utility = new Utility();
 
         try {
-            tileImages[index] = new Tile(ImageIO.read(getClass().getResourceAsStream(imagePath)), collision);
+            tileImages[index] = new Tile(ImageIO.read(getClass().getResourceAsStream(imagePath)), tileType);
             tileImages[index].setImage(utility.resizeImage(tileImages[index].getImage(), Simulator.TILE_SIZE, Simulator.TILE_SIZE));
         }
         catch(IOException exception) {

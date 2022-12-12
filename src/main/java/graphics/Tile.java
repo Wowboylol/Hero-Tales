@@ -12,27 +12,27 @@ public class Tile
 {
     // Attributes
     private BufferedImage image;
-    private boolean canCollide;
+    private TileType type;
 
     // Default constructor
     public Tile(BufferedImage image)
     {
         this.image = image;
-        this.canCollide = false;
+        this.type = TileType.DEFAULT;
     }
 
     // Parameterized constructor
-    public Tile(BufferedImage image, boolean canCollide)
+    public Tile(BufferedImage image, TileType type)
     {
         this.image = image;
-        this.canCollide = canCollide;
+        this.type = type;
     }
 
     // Getters
     public BufferedImage getImage() { return this.image; }
-    public boolean getCanCollide() { return this.canCollide; }
+    public TileType getType() { return this.type; }
 
     // Setters
     public void setImage(BufferedImage image) { this.image = image; }
-    public void setCanCollide(boolean val) { this.canCollide = val; }
+    public void setType(TileType type) { this.type = type; }
 }
