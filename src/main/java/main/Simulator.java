@@ -130,7 +130,11 @@ public class Simulator extends JPanel implements Runnable
     {
         long drawEnd = System.nanoTime();
         long drawTime = drawEnd - drawStart;
-        graphics2d.setColor(Color.white);
-        graphics2d.drawString("Draw time: " + drawTime, 10, 500);
+        long FPSBound = 1000000000/FPS;
+
+        if(drawTime > FPSBound) graphics2d.setColor(Color.red);
+        else graphics2d.setColor(Color.white);
+        
+        graphics2d.drawString("Draw time: " + drawTime, 10, 600);
     }
 }
