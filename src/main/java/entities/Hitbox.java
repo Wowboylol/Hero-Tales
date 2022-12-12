@@ -1,7 +1,7 @@
 /*  
- *  Player.java
+ *  Hitbox.java
  *  
- *  Description: Controls player movement and stats.
+ *  Description: Contains hitbox size and origin point
  *
 */
 
