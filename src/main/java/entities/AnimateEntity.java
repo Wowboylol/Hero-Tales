@@ -21,14 +21,14 @@ public abstract class AnimateEntity extends Entity
     // Defaultss
     private int moveSpeed = 0;
     private int animationSpeed = 0;
-    private MoveDirection direction = MoveDirection.DOWN;
+    private MoveDirection moveDirection = MoveDirection.DOWN;
 
     // Default constructor
     public AnimateEntity(Coordinate spawnPosition) { super(spawnPosition); }
 
     // Getters
     public int getMoveSpeed() { return this.moveSpeed; }
-    public MoveDirection getDirection() { return this.direction; }
+    public MoveDirection getMoveDirection() { return this.moveDirection; }
     public int getActionCount() { return this.actionCount; }
     public int getSpriteNum() { return this.spriteNum; }
     public boolean getIsMoving() { return this.isMoving; }
@@ -36,7 +36,7 @@ public abstract class AnimateEntity extends Entity
 
     // Setters
     public void setMoveSpeed(int speed) { this.moveSpeed = speed; }
-    public void setDirection(MoveDirection d) { this.direction = d; }
+    public void setMoveDirection(MoveDirection d) { this.moveDirection = d; }
     public void setAnimationSpeed(int speed) { this.animationSpeed = speed;}
     public void setIsMoving(boolean val) { this.isMoving = val; }
     public void setCollisionOn(boolean val) { this.collisionOn = val; }

@@ -38,7 +38,7 @@ public class CollisionChecker
         int entityTopRow = entityTopWorldY/Simulator.TILE_SIZE;
         int entityBottomRow = entityBottomWorldY/Simulator.TILE_SIZE;
         boolean tileCollisionA, tileCollisionB;
-        MoveDirection direction = entity.getDirection();
+        MoveDirection direction = entity.getMoveDirection();
 
         if(direction == MoveDirection.UP || direction == MoveDirection.UPLEFT || direction == MoveDirection.UPRIGHT)
         {

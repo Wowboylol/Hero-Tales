@@ -66,14 +66,14 @@ public class Player extends AnimateEntity
     // Set player direction based on which directional (WASD) key is pressed
     public void changeDirection()
     {
-        if(keyboard.getDirection(MoveDirection.UPLEFT) == true) this.setDirection(MoveDirection.UPLEFT);
-        else if(keyboard.getDirection(MoveDirection.UPRIGHT) == true) this.setDirection(MoveDirection.UPRIGHT);
-        else if(keyboard.getDirection(MoveDirection.DOWNLEFT) == true) this.setDirection(MoveDirection.DOWNLEFT);
-        else if(keyboard.getDirection(MoveDirection.DOWNRIGHT) == true) this.setDirection(MoveDirection.DOWNRIGHT);
-        else if(keyboard.getDirection(MoveDirection.LEFT) == true) this.setDirection(MoveDirection.LEFT);
-        else if(keyboard.getDirection(MoveDirection.RIGHT) == true) this.setDirection(MoveDirection.RIGHT);
-        else if(keyboard.getDirection(MoveDirection.UP) == true) this.setDirection(MoveDirection.UP);
-        else if(keyboard.getDirection(MoveDirection.DOWN) == true) this.setDirection(MoveDirection.DOWN);
+        if(keyboard.getDirection(MoveDirection.UPLEFT) == true) this.setMoveDirection(MoveDirection.UPLEFT);
+        else if(keyboard.getDirection(MoveDirection.UPRIGHT) == true) this.setMoveDirection(MoveDirection.UPRIGHT);
+        else if(keyboard.getDirection(MoveDirection.DOWNLEFT) == true) this.setMoveDirection(MoveDirection.DOWNLEFT);
+        else if(keyboard.getDirection(MoveDirection.DOWNRIGHT) == true) this.setMoveDirection(MoveDirection.DOWNRIGHT);
+        else if(keyboard.getDirection(MoveDirection.LEFT) == true) this.setMoveDirection(MoveDirection.LEFT);
+        else if(keyboard.getDirection(MoveDirection.RIGHT) == true) this.setMoveDirection(MoveDirection.RIGHT);
+        else if(keyboard.getDirection(MoveDirection.UP) == true) this.setMoveDirection(MoveDirection.UP);
+        else if(keyboard.getDirection(MoveDirection.DOWN) == true) this.setMoveDirection(MoveDirection.DOWN);
     }
 
     // Move player based on which directional (WASD) key is pressed, increasing movespeed if player is on a path
@@ -117,30 +117,33 @@ public class Player extends AnimateEntity
         int drawPositionX = playerScreenPositionX();
         int drawPositionY = playerScreenPositionY();
 
-        if(mouse.getMouseClickedOnly()) this.setSpriteNum(2);
         switch(mouse.getAttackDirection(playerScreenPositionX()+getOriginPointX(), playerScreenPositionY()+getOriginPointY()))
         {
             case UP:
-                if(this.getSpriteNum()%2 == 0) {
+                if(this.getSpriteNum()%2 != 0) {
                     drawPositionY = playerScreenPositionY() - Simulator.TILE_SIZE;
                     image = attackUp;
                 }
                 else image = up1;
+                this.setMoveDirection(MoveDirection.UP);
                 break;
             case DOWN:
-                if(this.getSpriteNum()%2 == 0) image = attackDown;
+                if(this.getSpriteNum()%2 != 0) image = attackDown;
                 else image = down1;
+                this.setMoveDirection(MoveDirection.DOWN);
                 break;
             case LEFT:
-                if(this.getSpriteNum()%2 == 0) {
+                if(this.getSpriteNum()%2 != 0) {
                     drawPositionX = playerScreenPositionX() - Simulator.TILE_SIZE;
                     image = attackLeft;
                 }
                 else image = left1;
+                this.setMoveDirection(MoveDirection.LEFT);
                 break;
             case RIGHT:
-                if(this.getSpriteNum()%2 == 0) image = attackRight;
+                if(this.getSpriteNum()%2 != 0) image = attackRight;
                 else image = right1;
+                this.setMoveDirection(MoveDirection.RIGHT);
                 break;
         }
         graphics2D.drawImage(image, drawPositionX, drawPositionY, null);
@@ -151,7 +154,7 @@ public class Player extends AnimateEntity
     {
         BufferedImage image = null;
 
-        switch(this.getDirection())
+        switch(this.getMoveDirection())
         {
             case UPRIGHT:
             case UPLEFT:
