@@ -103,77 +103,86 @@ public class Player extends AnimateEntity
     // Draw the class in window via the Simulator
     public void draw(Graphics2D graphics2D)
     {
+        if(mouse.getMousePressed()) 
+        { 
+            drawAttackSprite(graphics2D);
+        }
+        else drawMovingSprite(graphics2D);
+    }
+
+    // Set and draw image for attack sprite based on spriteNum
+    public void drawAttackSprite(Graphics2D graphics2D)
+    {
         BufferedImage image = null;
         int drawPositionX = playerScreenPositionX();
         int drawPositionY = playerScreenPositionY();
 
-        if(mouse.getMousePressed())
+        if(mouse.getMouseClickedOnly()) this.setSpriteNum(2);
+        switch(mouse.getAttackDirection(playerScreenPositionX()+getOriginPointX(), playerScreenPositionY()+getOriginPointY()))
         {
-            switch(mouse.getAttackDirection(playerScreenPositionX()+getOriginPointX(), playerScreenPositionY()+getOriginPointY()))
-            {
-                case UP:
-                    if(this.getSpriteNum()%2 != 0) drawPositionY = playerScreenPositionY() - Simulator.TILE_SIZE;
-                    if(this.getSpriteNum() == 1) image = attackUp;
-                    if(this.getSpriteNum() == 2) image = up1;
-                    if(this.getSpriteNum() == 3) image = attackUp;
-                    if(this.getSpriteNum() == 4) image = up1;
-                    break;
-                case DOWN:
-                    if(this.getSpriteNum() == 1) image = attackDown;
-                    if(this.getSpriteNum() == 2) image = down1;
-                    if(this.getSpriteNum() == 3) image = attackDown;
-                    if(this.getSpriteNum() == 4) image = down1;
-                    break;
-                case LEFT:
-                    if(this.getSpriteNum()%2 != 0) drawPositionX = playerScreenPositionX() - Simulator.TILE_SIZE;
-                    if(this.getSpriteNum() == 1) image = attackLeft;
-                    if(this.getSpriteNum() == 2) image = left1;
-                    if(this.getSpriteNum() == 3) image = attackLeft;
-                    if(this.getSpriteNum() == 4) image = left1;
-                    break;
-                case RIGHT:
-                    if(this.getSpriteNum() == 1) image = attackRight;
-                    if(this.getSpriteNum() == 2) image = right1;
-                    if(this.getSpriteNum() == 3) image = attackRight;
-                    if(this.getSpriteNum() == 4) image = right1;
-                    break;
-            }
-        }
-        else
-        {
-            switch(this.getDirection())
-            {
-                case UPRIGHT:
-                case UPLEFT:
-                case UP:
-                    if(this.getSpriteNum() == 1) image = up1;
-                    if(this.getSpriteNum() == 2) image = up2;
-                    if(this.getSpriteNum() == 3) image = up1;
-                    if(this.getSpriteNum() == 4) image = up3;
-                    break;
-                case DOWNRIGHT:
-                case DOWNLEFT:
-                case DOWN:
-                    if(this.getSpriteNum() == 1) image = down1;
-                    if(this.getSpriteNum() == 2) image = down2;
-                    if(this.getSpriteNum() == 3) image = down1;
-                    if(this.getSpriteNum() == 4) image = down3;
-                    break;
-                case LEFT:
-                    if(this.getSpriteNum() == 1) image = left1;
-                    if(this.getSpriteNum() == 2) image = left2;
-                    if(this.getSpriteNum() == 3) image = left1;
-                    if(this.getSpriteNum() == 4) image = left3;
-                    break;
-                case RIGHT:
-                    if(this.getSpriteNum() == 1) image = right1;
-                    if(this.getSpriteNum() == 2) image = right2;
-                    if(this.getSpriteNum() == 3) image = right1;
-                    if(this.getSpriteNum() == 4) image = right3;
-                    break;
-            }
+            case UP:
+                if(this.getSpriteNum()%2 == 0) {
+                    drawPositionY = playerScreenPositionY() - Simulator.TILE_SIZE;
+                    image = attackUp;
+                }
+                else image = up1;
+                break;
+            case DOWN:
+                if(this.getSpriteNum()%2 == 0) image = attackDown;
+                else image = down1;
+                break;
+            case LEFT:
+                if(this.getSpriteNum()%2 == 0) {
+                    drawPositionX = playerScreenPositionX() - Simulator.TILE_SIZE;
+                    image = attackLeft;
+                }
+                else image = left1;
+                break;
+            case RIGHT:
+                if(this.getSpriteNum()%2 == 0) image = attackRight;
+                else image = right1;
+                break;
         }
         graphics2D.drawImage(image, drawPositionX, drawPositionY, null);
+    }
+
+    // Set and draw image for moving sprite based on spriteNum
+    public void drawMovingSprite(Graphics2D graphics2D)
+    {
+        BufferedImage image = null;
+
+        switch(this.getDirection())
+        {
+            case UPRIGHT:
+            case UPLEFT:
+            case UP:
+                if(this.getSpriteNum() == 1) image = up1;
+                if(this.getSpriteNum() == 2) image = up2;
+                if(this.getSpriteNum() == 3) image = up1;
+                if(this.getSpriteNum() == 4) image = up3;
+                break;
+            case DOWNRIGHT:
+            case DOWNLEFT:
+            case DOWN:
+                if(this.getSpriteNum() == 1) image = down1;
+                if(this.getSpriteNum() == 2) image = down2;
+                if(this.getSpriteNum() == 3) image = down1;
+                if(this.getSpriteNum() == 4) image = down3;
+                break;
+            case LEFT:
+                if(this.getSpriteNum() == 1) image = left1;
+                if(this.getSpriteNum() == 2) image = left2;
+                if(this.getSpriteNum() == 3) image = left1;
+                if(this.getSpriteNum() == 4) image = left3;
+                break;
+            case RIGHT:
+                if(this.getSpriteNum() == 1) image = right1;
+                if(this.getSpriteNum() == 2) image = right2;
+                if(this.getSpriteNum() == 3) image = right1;
+                if(this.getSpriteNum() == 4) image = right3;
+                break;
+        }
+        graphics2D.drawImage(image, playerScreenPositionX(), playerScreenPositionY(), null);
     }
 
     // Load player sprites into BufferedImage, returns true if successful

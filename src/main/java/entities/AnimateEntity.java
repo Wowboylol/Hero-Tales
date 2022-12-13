@@ -41,6 +41,17 @@ public abstract class AnimateEntity extends Entity
     public void setIsMoving(boolean val) { this.isMoving = val; }
     public void setCollisionOn(boolean val) { this.collisionOn = val; }
 
+    // Sets spriteNum with precondition that 0 < spriteNum < 5, returns true if successful
+    public boolean setSpriteNum(int spriteNum) 
+    { 
+        if(spriteNum > 0 && spriteNum < 5)
+        {
+            this.spriteNum = spriteNum;
+            return true;
+        }
+        return false;
+    }
+
     // Increments actionCount which is used for sprite animation
     public void animateSprite() 
     {   

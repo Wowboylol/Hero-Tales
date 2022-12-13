@@ -16,22 +16,32 @@ public class Mouse implements MouseListener, MouseMotionListener
 {
     // Attributes
     private boolean mousePressed = false;
+    private boolean mouseClickedOnly = false;
     private Coordinate mousePosition = new Coordinate(0, 0);
 
     // Returns whether mouse is pressed
     public boolean getMousePressed() { return mousePressed; }
 
+    // Returns whether mouse is clicked only and not dragged
+    public boolean getMouseClickedOnly() { return mouseClickedOnly; }
+
     // Returns mouse position
     public Coordinate getMousePosition() { return mousePosition; }
 
-    // Calculate attack direction
-    public AttackDirection getAttackDirection(int playerOriginX, int playerOriginY)
+    // Calculate attack angle
+    public int getAttackAngle(int playerOriginX, int playerOriginY)
     {
         int deltaX = mousePosition.getX() - playerOriginX;
         int deltaY = mousePosition.getY() - playerOriginY;
         int angle = (int)Math.toDegrees(Math.atan2(deltaY, deltaX));
         if(angle < 0) angle += 360;
-        
+        return angle;
+    }
+
+    // Calculate attack direction
+    public AttackDirection getAttackDirection(int playerOriginX, int playerOriginY)
+    {
+        int angle = getAttackAngle(playerOriginX, playerOriginY);
         if(angle >= 0 && angle < 45) return AttackDirection.RIGHT;
         else if(angle >= 45 && angle < 135) return AttackDirection.DOWN;
         else if(angle >= 135 && angle < 225) return AttackDirection.LEFT;
@@ -43,17 +53,23 @@ public class Mouse implements MouseListener, MouseMotionListener
     public void mousePressed(MouseEvent e) 
     {
         mousePressed = true;
+        mouseClickedOnly = true;
+        if(e.getX() < 0 || e.getX() > Simulator.SCREEN_WIDTH || e.getY() < 0 || e.getY() > Simulator.SCREEN_HEIGHT) return;
+        mousePosition.setX(e.getX());
+        mousePosition.setY(e.getY());
     }
 
     @Override
     public void mouseReleased(MouseEvent e) 
     {
         mousePressed = false;
+        mouseClickedOnly = false;
     }
 
     @Override
     public void mouseDragged(MouseEvent e) 
     { 
+        mouseClickedOnly = false;
         if(e.getX() < 0 || e.getX() > Simulator.SCREEN_WIDTH || e.getY() < 0 || e.getY() > Simulator.SCREEN_HEIGHT) return;
         mousePosition.setX(e.getX());
         mousePosition.setY(e.getY());
