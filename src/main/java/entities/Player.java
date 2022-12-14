@@ -22,7 +22,7 @@ public class Player extends AnimateEntity
     public static final int PLAYER_SCREEN_X = Simulator.SCREEN_WIDTH/2 - (Simulator.TILE_SIZE/2);
     public static final int PLAYER_SCREEN_Y = Simulator.SCREEN_HEIGHT/2 - (Simulator.TILE_SIZE/2);
     public final Rectangle HITBOX_CONFIGURATIONS = new Rectangle(9, 12, 30, 30);
-    public final int ANIMATION_SPEED = 13;
+    public final int MOVE_ANIMATION_SPEED = 14;
 
     // Attributes
     private Simulator simulator;
@@ -40,7 +40,7 @@ public class Player extends AnimateEntity
         // Super class overriding
         this.setStats(new PlayerStats());
         this.setHitbox(HITBOX_CONFIGURATIONS);
-        this.setAnimationSpeed(ANIMATION_SPEED);
+        this.setMoveAnimationSpeed(MOVE_ANIMATION_SPEED);
     }
 
     // External injector injects required dependencies
@@ -57,6 +57,7 @@ public class Player extends AnimateEntity
         isMovingSetter();
         changeDirection();
         this.animateSprite();
+        this.decreaseFireRateCount();
         
         if(this.getIsMoving() && !collisionChecker.checkTileWall(this))
         {
@@ -104,8 +105,9 @@ public class Player extends AnimateEntity
     // Draw the class in window via the Simulator
     public void draw(Graphics2D graphics2D)
     {
-        if(mouse.getMousePressed()) 
+        if(mouse.getMousePressed() || this.isFiring()) 
         { 
+            if(this.isFiring() == false) this.resetFireRateCount();
             drawAttackSprite(graphics2D);
         }
         else drawMovingSprite(graphics2D);

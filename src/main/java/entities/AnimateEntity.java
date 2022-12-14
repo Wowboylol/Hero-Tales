@@ -15,13 +15,14 @@ public abstract class AnimateEntity extends Entity
     protected BufferedImage up1, up2, up3, down1, down2, down3, left1, left2, left3, right1, right2, right3;
     protected BufferedImage attackUp, attackDown, attackLeft, attackRight;
     private int actionCount = 0;
+    private int fireRateCount = 0;
     private int spriteNum = 1;
     private boolean isMoving = false;
     private boolean collisionOn = false;
 
     // Defaults
     private Stats entityStats;
-    private int animationSpeed = 0;
+    private int moveAnimationSpeed = 0;
     private MoveDirection moveDirection = MoveDirection.DOWN;
 
     // Default constructor
@@ -38,20 +39,15 @@ public abstract class AnimateEntity extends Entity
     // Setters
     public void setStats(Stats stats) { this.entityStats = stats; }
     public void setMoveDirection(MoveDirection d) { this.moveDirection = d; }
-    public void setAnimationSpeed(int speed) { this.animationSpeed = speed;}
+    public void setMoveAnimationSpeed(int speed) { this.moveAnimationSpeed = speed;}
     public void setIsMoving(boolean val) { this.isMoving = val; }
     public void setCollisionOn(boolean val) { this.collisionOn = val; }
 
-    // Sets spriteNum with precondition that 0 < spriteNum < 5, returns true if successful
-    public boolean setSpriteNum(int spriteNum) 
-    { 
-        if(spriteNum > 0 && spriteNum < 5)
-        {
-            this.spriteNum = spriteNum;
-            return true;
-        }
-        return false;
-    }
+    // Fire rate methods
+    public boolean isFiring() { return (fireRateCount > 0) ? true : false; }
+    public void decreaseFireRateCount() { if(fireRateCount > 0) fireRateCount--; }
+    public void resetFireRateCount() { this.fireRateCount = (int)(60/(0.08*entityStats.getDexterity()+1.5)); }
+    public int getFireRateCount() { return this.fireRateCount; }
 
     // Increments actionCount which is used for sprite animation
     public void animateSprite() 
@@ -59,6 +55,7 @@ public abstract class AnimateEntity extends Entity
         // Change sprite animation if entity is moving or in the middle of moving animation
         if(isMoving == true || (spriteNum % 2) == 0)
         {
+            int animationSpeed = isFiring() ? (int)(60/(0.08*entityStats.getDexterity()+1.5)) : moveAnimationSpeed;
             if(actionCount++ > animationSpeed)
             {
                 spriteNum = (spriteNum < 4) ? (spriteNum + 1) : 1;
