@@ -25,10 +25,12 @@ public interface Stats
     public void setDefense(int defense);
 
     // Dexterity: how fast an entity can attack
+    // Formula: Attack/sec = 1.5 + 0.08 * dexterity, where Attack/frame = 60/(Attack/sec)
     public int getDexterity();
     public void setDexterity(int dexterity);
 
     // Movespeed: how fast an entity can move
-    public int getMovespeed();
-    public void setMovespeed(int movespeed);
+    // Formula: 1 tile per 1 movespeed
+    public int getSpeed();
+    public void setSpeed(int movespeed);
 }

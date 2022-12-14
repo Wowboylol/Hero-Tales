@@ -7,6 +7,7 @@
 
 package entities;
 import java.awt.image.BufferedImage;
+import entities.stats.Stats;
 
 public abstract class AnimateEntity extends Entity
 {
@@ -19,7 +20,7 @@ public abstract class AnimateEntity extends Entity
     private boolean collisionOn = false;
 
     // Defaults
-    private int moveSpeed = 0;
+    private Stats entityStats;
     private int animationSpeed = 0;
     private MoveDirection moveDirection = MoveDirection.DOWN;
 
@@ -27,7 +28,7 @@ public abstract class AnimateEntity extends Entity
     public AnimateEntity(Coordinate spawnPosition) { super(spawnPosition); }
 
     // Getters
-    public int getMoveSpeed() { return this.moveSpeed; }
+    public Stats getStats() { return this.entityStats; }
     public MoveDirection getMoveDirection() { return this.moveDirection; }
     public int getActionCount() { return this.actionCount; }
     public int getSpriteNum() { return this.spriteNum; }
@@ -35,7 +36,7 @@ public abstract class AnimateEntity extends Entity
     public boolean getCollisionOn(boolean val) { return this.collisionOn; }
 
     // Setters
-    public void setMoveSpeed(int speed) { this.moveSpeed = speed; }
+    public void setStats(Stats stats) { this.entityStats = stats; }
     public void setMoveDirection(MoveDirection d) { this.moveDirection = d; }
     public void setAnimationSpeed(int speed) { this.animationSpeed = speed;}
     public void setIsMoving(boolean val) { this.isMoving = val; }

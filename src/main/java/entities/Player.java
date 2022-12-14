@@ -13,6 +13,8 @@ import java.awt.Rectangle;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
+import entities.stats.PlayerStats;
+
 public class Player extends AnimateEntity
 {
     // Configurations
@@ -20,7 +22,6 @@ public class Player extends AnimateEntity
     public static final int PLAYER_SCREEN_X = Simulator.SCREEN_WIDTH/2 - (Simulator.TILE_SIZE/2);
     public static final int PLAYER_SCREEN_Y = Simulator.SCREEN_HEIGHT/2 - (Simulator.TILE_SIZE/2);
     public final Rectangle HITBOX_CONFIGURATIONS = new Rectangle(9, 12, 30, 30);
-    public final int BASE_MOVE_SPEED = 2;
     public final int ANIMATION_SPEED = 13;
 
     // Attributes
@@ -37,8 +38,8 @@ public class Player extends AnimateEntity
         getSprite();
         
         // Super class overriding
+        this.setStats(new PlayerStats());
         this.setHitbox(HITBOX_CONFIGURATIONS);
-        this.setMoveSpeed(BASE_MOVE_SPEED);
         this.setAnimationSpeed(ANIMATION_SPEED);
     }
 
@@ -79,7 +80,7 @@ public class Player extends AnimateEntity
     // Move player based on which directional (WASD) key is pressed, increasing movespeed if player is on a path
     public void movePlayer()
     {
-        int velocity = this.getMoveSpeed();
+        int velocity = this.getStats().getSpeed();
         if(collisionChecker.checkTilePath(this)) velocity++;
 
         if(keyboard.getDirection(MoveDirection.LEFT))
