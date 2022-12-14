@@ -12,7 +12,7 @@ import java.awt.image.BufferedImage;
 import java.awt.Rectangle;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-
+import entities.enums.MoveDirection;
 import entities.stats.PlayerStats;
 
 public class Player extends AnimateEntity
@@ -54,10 +54,9 @@ public class Player extends AnimateEntity
     // Update the class data via the Simulator
     public void update()
     {
-        isMovingSetter();
+        actionStateSetter();
         changeDirection();
         this.animateSprite();
-        this.decreaseFireRateCount();
         
         if(this.getIsMoving() && !collisionChecker.checkTileWall(this))
         {
@@ -105,11 +104,7 @@ public class Player extends AnimateEntity
     // Draw the class in window via the Simulator
     public void draw(Graphics2D graphics2D)
     {
-        if(mouse.getMousePressed() || this.isFiring()) 
-        { 
-            if(this.isFiring() == false) this.resetFireRateCount();
-            drawAttackSprite(graphics2D);
-        }
+        if(mouse.getMousePressed()) drawAttackSprite(graphics2D);
         else drawMovingSprite(graphics2D);
     }
 
@@ -228,13 +223,11 @@ public class Player extends AnimateEntity
         return image;
     }
 
-    // Helper function: Determines whether player is moving or attacking in a given frame
-    private void isMovingSetter() 
+    // Helper function: Sets player action state
+    private void actionStateSetter()
     {
-        if(keyboard.isWASDPressed() || mouse.getMousePressed()) 
-            this.setIsMoving(true);
-        else 
-            this.setIsMoving(false);
+        this.setIsAttacking(mouse.getMousePressed());
+        this.setIsMoving(keyboard.isWASDPressed());
     }
 
     // Helper function: Determines player horizontal screen position

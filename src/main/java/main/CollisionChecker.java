@@ -7,7 +7,7 @@
 
 package main;
 import entities.AnimateEntity;
-import entities.MoveDirection;
+import entities.enums.MoveDirection;
 import graphics.MapHandler;
 import graphics.TileType;
 

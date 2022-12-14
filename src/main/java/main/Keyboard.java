@@ -10,7 +10,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.HashSet;
 import java.util.Set;
-import entities.MoveDirection;
+
+import entities.enums.MoveDirection;
 
 public class Keyboard implements KeyListener
 {

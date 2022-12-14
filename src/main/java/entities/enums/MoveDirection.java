@@ -5,7 +5,7 @@
  *
 */
 
-package entities;
+package entities.enums;
 
 public enum MoveDirection 
 {

@@ -9,8 +9,9 @@ package main;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import entities.AttackDirection;
+
 import entities.Coordinate;
+import entities.enums.AttackDirection;
 
 public class Mouse implements MouseListener, MouseMotionListener
 {
