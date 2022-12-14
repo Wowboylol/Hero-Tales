@@ -35,5 +35,5 @@ Description placeholder
 - [ ] Create unit tests
 
 ## Credits
-Starter plain tileset: https://game-endeavor.itch.io/
-Player sprites: https://www.patreon.com/pixelarchipel
+- Starter plain tileset: https://game-endeavor.itch.io/
+- Player sprites: https://www.patreon.com/pixelarchipel
