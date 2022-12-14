@@ -46,7 +46,7 @@ public abstract class AnimateEntity extends Entity
     // Fire rate methods
     public boolean isFiring() { return (fireRateCount > 0) ? true : false; }
     public void decreaseFireRateCount() { if(fireRateCount > 0) fireRateCount--; }
-    public void resetFireRateCount() { this.fireRateCount = (int)(60/(0.08*entityStats.getDexterity()+1.5)); }
+    public void resetFireRateCount() { this.fireRateCount = entityStats.calculateFramesPerAttack(); }
     public int getFireRateCount() { return this.fireRateCount; }
 
     // Increments actionCount which is used for sprite animation
@@ -55,7 +55,7 @@ public abstract class AnimateEntity extends Entity
         // Change sprite animation if entity is moving or in the middle of moving animation
         if(isMoving == true || (spriteNum % 2) == 0)
         {
-            int animationSpeed = isFiring() ? (int)(60/(0.08*entityStats.getDexterity()+1.5)) : moveAnimationSpeed;
+            int animationSpeed = isFiring() ? entityStats.calculateFramesPerAttack() : moveAnimationSpeed;
             if(actionCount++ > animationSpeed)
             {
                 spriteNum = (spriteNum < 4) ? (spriteNum + 1) : 1;

@@ -1,5 +1,5 @@
 /*  
- *  Stats.java
+ *  PlayerStats.java
  *  
  *  Description: A player has additional stats: level, exp, vitality, charisma, intelligence.
  *
@@ -73,4 +73,7 @@ public class PlayerStats implements Stats
     // Formula: Final cooldown = base cooldown * (100 / (100 + intelligence))
     public int getIntelligence() { return this.intelligence; }
     public void setIntelligence(int intelligence) { this.intelligence = intelligence; }
+
+    // Calculations
+    public int calculateFramesPerAttack() { return (int)(60/(0.1*dexterity+1.5)); }
 }
