@@ -18,7 +18,7 @@ public abstract class AnimateEntity extends Entity
     private boolean isMoving = false;
     private boolean collisionOn = false;
 
-    // Defaultss
+    // Defaults
     private int moveSpeed = 0;
     private int animationSpeed = 0;
     private MoveDirection moveDirection = MoveDirection.DOWN;
