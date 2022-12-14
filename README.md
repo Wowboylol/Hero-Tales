@@ -33,3 +33,7 @@ Description placeholder
 - [ ] Add marketplace/shop function
 - [ ] Create save/load function
 - [ ] Create unit tests
+
+## Credits
+Starter plain tileset: https://game-endeavor.itch.io/
+Player sprites: https://www.patreon.com/pixelarchipel
