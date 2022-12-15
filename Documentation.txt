@@ -1,6 +1,9 @@
 This text tiles contains notes about future concerns about current implementations. Will be deleted upon completion of game.
 
-|=== Player Draw Attack Sprite ===|
+|=== Player draw attack sprite ===|
 - In draw method
 - When player attacks the move direction changes correspondingly
 - May affect future implementations of player update method and external methods that run after player update method.
+
+|=== AnimationHandler future refactoring ===|
+- Could be reworked into Strategy method if more unique animations are required
