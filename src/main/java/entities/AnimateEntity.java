@@ -18,6 +18,7 @@ public abstract class AnimateEntity extends Entity
     protected BufferedImage attackUp, attackDown, attackLeft, attackRight;
     private int spriteNum = 1;
     private boolean collisionOn = false;
+    private int attackCooldown = 0;
 
     // States
     private AnimationHandler animationHandler;
@@ -41,25 +42,31 @@ public abstract class AnimateEntity extends Entity
     public Stats getStats() { return this.entityStats; }
     public MoveDirection getMoveDirection() { return this.moveDirection; }
     public int getSpriteNum() { return this.spriteNum; }
+    public boolean getCollisionOn(boolean val) { return this.collisionOn; }
     public boolean getIsMoving() { return this.isMoving; }
     public boolean getIsAttacking() { return this.isAttacking; }
     public boolean getIsDead() { return this.isDead; }
-    public boolean getCollisionOn(boolean val) { return this.collisionOn; }
 
     // Setters
     public void setStats(Stats stats) { this.entityStats = stats; }
     public void setMoveDirection(MoveDirection d) { this.moveDirection = d; }
     public void setMoveAnimationSpeed(int speed) { this.moveAnimationSpeed = speed;}
+    public void setCollisionOn(boolean val) { this.collisionOn = val; }
     public void setIsMoving(boolean val) { this.isMoving = val; }
     public void setIsAttacking(boolean val) { this.isAttacking = val; }
     public void setIsDead(boolean val) { this.isDead = val; }
-    public void setCollisionOn(boolean val) { this.collisionOn = val; }
 
-    // Sets spriteNum based on animation priority: death > attack > walk
+    // Projectile firing
+    public boolean canAttack() { return attackCooldown == 0; }
+    public void decreaseAttackCooldown() { if(attackCooldown > 0) attackCooldown--;}
+    public void startAttackCooldown() { attackCooldown = entityStats.calculateFramesPerAttack(); }
+
+    // Sets spriteNum based on animation priority: attack > walk > idle
     public void animateSprite() 
     {   
-        if(isDead) spriteNum = animationHandler.animateDeath(25); // FIXME: Death animation speed should be a stat
-        else if(isAttacking) spriteNum = animationHandler.animateAttack(entityStats.calculateFramesPerAttack());
-        else spriteNum = animationHandler.animateWalk(moveAnimationSpeed, isMoving);
+        if(isAttacking || canAttack() == false) 
+            spriteNum = animationHandler.animateAttack(entityStats.calculateFramesPerAttack(), canAttack());
+        else 
+            spriteNum = animationHandler.animateWalk(moveAnimationSpeed, isMoving);
     }
 }

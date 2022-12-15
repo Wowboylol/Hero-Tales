@@ -56,12 +56,11 @@ public class Player extends AnimateEntity
     {
         actionStateSetter();
         changeDirection();
+        this.decreaseAttackCooldown();
         this.animateSprite();
         
-        if(this.getIsMoving() && !collisionChecker.checkTileWall(this))
-        {
-            movePlayer();
-        }
+        if(this.getIsAttacking() && this.canAttack()) this.startAttackCooldown();
+        if(this.getIsMoving() && !collisionChecker.checkTileWall(this)) movePlayer();
     }
 
     // Set player direction based on which directional (WASD) key is pressed
@@ -104,7 +103,7 @@ public class Player extends AnimateEntity
     // Draw the class in window via the Simulator
     public void draw(Graphics2D graphics2D)
     {
-        if(mouse.getMousePressed()) drawAttackSprite(graphics2D);
+        if(this.getIsAttacking() || this.canAttack() == false) drawAttackSprite(graphics2D);
         else drawMovingSprite(graphics2D);
     }
 
