@@ -10,6 +10,7 @@ import main.*;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.awt.Rectangle;
+import java.awt.Color;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import entities.enums.MoveDirection;
@@ -21,7 +22,7 @@ public class Player extends AnimateEntity
     public static final Coordinate PLAYER_SPAWN_POSITION = new Coordinate(Simulator.TILE_SIZE*6, Simulator.TILE_SIZE*42);
     public static final int PLAYER_SCREEN_X = Simulator.SCREEN_WIDTH/2 - (Simulator.TILE_SIZE/2);
     public static final int PLAYER_SCREEN_Y = Simulator.SCREEN_HEIGHT/2 - (Simulator.TILE_SIZE/2);
-    public final Rectangle HITBOX_CONFIGURATIONS = new Rectangle(9, 12, 30, 30);
+    public final Rectangle HITBOX_CONFIGURATIONS = new Rectangle(12, 12, 24, 30);
     public final int MOVE_ANIMATION_SPEED = 14;
 
     // Attributes
@@ -105,6 +106,9 @@ public class Player extends AnimateEntity
     {
         if(this.getIsAttacking() || this.canAttack() == false) drawAttackSprite(graphics2D);
         else drawMovingSprite(graphics2D);
+
+        // DEBUG
+        if(keyboard.getDebugConsole()) debugConsole(graphics2D);
     }
 
     // Set and draw image for attack sprite based on spriteNum
@@ -204,6 +208,19 @@ public class Player extends AnimateEntity
         attackDown = spriteSetup("player_attack_down", Simulator.TILE_SIZE, Simulator.TILE_SIZE*2);
         attackLeft = spriteSetup("player_attack_left", Simulator.TILE_SIZE*2, Simulator.TILE_SIZE);
         attackRight = spriteSetup("player_attack_right", Simulator.TILE_SIZE*2, Simulator.TILE_SIZE);
+    }
+
+    // Draw debug information
+    public void debugConsole(Graphics2D graphics2D)
+    {
+        Rectangle hitbox = this.getHitbox();
+        graphics2D.setColor(Color.RED);
+        graphics2D.drawRect(
+            hitbox.x + playerScreenPositionX(), 
+            hitbox.y + playerScreenPositionY(), 
+            hitbox.width, 
+            hitbox.height
+        );
     }
 
     // Helper function: Sets up player sprites by resizing image from file
