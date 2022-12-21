@@ -16,7 +16,7 @@ import javax.imageio.ImageIO;
 import entities.enums.MoveDirection;
 import entities.stats.PlayerStats;
 
-public class Player extends AnimateEntity
+public class Player extends AnimateEntity implements Updateable
 {
     // Configurations
     public static final Coordinate PLAYER_SPAWN_POSITION = new Coordinate(Simulator.TILE_SIZE*6, Simulator.TILE_SIZE*42);
