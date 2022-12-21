@@ -189,7 +189,7 @@ public class Player extends AnimateEntity
         graphics2D.drawImage(image, playerScreenPositionX(), playerScreenPositionY(), null);
     }
 
-    // Load player sprites into BufferedImage, returns true if successful
+    // Load player sprites into BufferedImage
     public void getSprite()
     {
         up1 = spriteSetup("player_up_1", Simulator.TILE_SIZE, Simulator.TILE_SIZE);
