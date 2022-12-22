@@ -10,7 +10,11 @@ package items.weapons;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.IOException;
+import java.util.concurrent.ThreadLocalRandom;
+import main.Simulator;
 import main.Utility;
+import entities.Coordinate;
+import entities.Projectile;
 
 public class WoodenSword implements Weapon
 {
@@ -23,18 +27,21 @@ public class WoodenSword implements Weapon
     private int lifetime;
 
     // Attributes
+    private Simulator simulator;
     private BufferedImage weaponIcon;
     private BufferedImage projectileSprite;
 
     // Default constructor
-    public WoodenSword()
+    public WoodenSword(Simulator simulator)
     {
+        this.simulator = simulator;
+        loadSprite();
         this.tier = 0;
         this.minDamage = 25;
         this.maxDamage = 40;
         this.shots = 1;
-        this.projectileSpeed = 5;
-        this.lifetime = 60;
+        this.projectileSpeed = 7;
+        this.lifetime = 40;
     }
 
     // Getters
@@ -54,10 +61,19 @@ public class WoodenSword implements Weapon
     public void setProjectileSpeed(int speed) { this.projectileSpeed = speed; }
     public void setLifetime(int lifetime) { this.lifetime = lifetime; }
 
-    // Load weapon sprites into BufferedImage
-    public void loadSprites()
+    @Override
+    public void attack(Coordinate spawnPosition, int angle)
     {
-        this.weaponIcon = spriteSetup("wooden_sword", 48, 48);
+        int damage = ThreadLocalRandom.current().nextInt(minDamage, maxDamage + 1);
+        Projectile projectile = new Projectile(spawnPosition, projectileSprite, damage, projectileSpeed, angle, lifetime);
+        this.simulator.projectiles.add(projectile);
+    }
+
+    @Override
+    public void loadSprite()
+    {
+        weaponIcon = spriteSetup("/weapons/wooden_sword.png", Simulator.TILE_SIZE, Simulator.TILE_SIZE);
+        projectileSprite = spriteSetup("/projectiles/test_slash.png", Simulator.TILE_SIZE, Simulator.TILE_SIZE);
     }
 
     // Helper function: Sets up player sprites by resizing image from file
@@ -67,7 +83,7 @@ public class WoodenSword implements Weapon
         BufferedImage image = null;
         
         try {
-            image = ImageIO.read(getClass().getResourceAsStream("/weapons/" + imageName + ".png"));
+            image = ImageIO.read(getClass().getResourceAsStream(imageName));
             image = utility.resizeImage(image, width, height);
         }
         catch(IOException e) {

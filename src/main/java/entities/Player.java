@@ -15,6 +15,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import entities.enums.MoveDirection;
 import entities.stats.PlayerStats;
+import items.weapons.Weapon;
+import items.weapons.WoodenSword;
 
 public class Player extends AnimateEntity implements Updateable
 {
@@ -30,13 +32,15 @@ public class Player extends AnimateEntity implements Updateable
     private Keyboard keyboard;
     private Mouse mouse;
     private CollisionChecker collisionChecker;
+    private Weapon weapon;
 
     // Default constructor (starting coordinate based on defaults)
     public Player(Simulator simulator)
     {
         super(PLAYER_SPAWN_POSITION);
         this.simulator = simulator;
-        getSprite();
+        this.weapon = new WoodenSword(simulator);    // FIXME: Testing purposes only
+        loadSprite();
         
         // Super class overriding
         this.setStats(new PlayerStats());
@@ -52,7 +56,7 @@ public class Player extends AnimateEntity implements Updateable
         this.collisionChecker = collisionCheck;
     }
 
-    // Update the class data via the Simulator
+    @Override
     public void update()
     {
         actionStateSetter();
@@ -60,7 +64,20 @@ public class Player extends AnimateEntity implements Updateable
         this.decreaseAttackCooldown();
         this.animateSprite();
         
-        if(this.getIsAttacking() && this.canAttack()) this.startAttackCooldown();
+        if(this.getIsAttacking() && this.canAttack()) 
+        {
+            this.startAttackCooldown();
+            this.weapon.attack(
+                new Coordinate(
+                    playerScreenPositionX()+getOriginPointX(), 
+                    playerScreenPositionY()+getOriginPointY()
+                ), 
+                this.mouse.getAttackAngle(
+                    playerScreenPositionX()+getOriginPointX(), 
+                    playerScreenPositionY()+getOriginPointY()
+                )
+            );
+        }
         if(this.getIsMoving() && !collisionChecker.checkTileWall(this)) movePlayer();
     }
 
@@ -101,7 +118,7 @@ public class Player extends AnimateEntity implements Updateable
         }
     }
 
-    // Draw the class in window via the Simulator
+    @Override
     public void draw(Graphics2D graphics2D)
     {
         if(this.getIsAttacking() || this.canAttack() == false) drawAttackSprite(graphics2D);
@@ -110,6 +127,9 @@ public class Player extends AnimateEntity implements Updateable
         // DEBUG
         if(keyboard.getDebugConsole()) debugConsole(graphics2D);
     }
+
+    @Override
+    public boolean isDestroyed() { return false; }
 
     // Set and draw image for attack sprite based on spriteNum
     public void drawAttackSprite(Graphics2D graphics2D)
@@ -190,7 +210,7 @@ public class Player extends AnimateEntity implements Updateable
     }
 
     // Load player sprites into BufferedImage
-    public void getSprite()
+    public void loadSprite()
     {
         up1 = spriteSetup("player_up_1", Simulator.TILE_SIZE, Simulator.TILE_SIZE);
         up2 = spriteSetup("player_up_2", Simulator.TILE_SIZE, Simulator.TILE_SIZE);

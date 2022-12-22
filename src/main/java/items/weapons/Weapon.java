@@ -10,6 +10,8 @@
 
 package items.weapons;
 
+import entities.Coordinate;
+
 public interface Weapon 
 {
     // Tier: how powerful and rare a weapon is
@@ -37,5 +39,8 @@ public interface Weapon
     public void setLifetime(int lifetime);
 
     // Load weapon sprites into BufferedImage
-    public void loadSprites();
+    public void loadSprite();
+
+    // Shoot a projectile
+    public void attack(Coordinate spawnPosition, int angle);
 }

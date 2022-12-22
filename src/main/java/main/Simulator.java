@@ -13,6 +13,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Color;
+import java.util.ArrayList;
 import entities.*;
 import graphics.*;
 
@@ -42,6 +43,9 @@ public class Simulator extends JPanel implements Runnable
 
     // Dependent services
     public final MapHandler mapHandler = new MapHandler(camera);
+
+    // Lists
+    public final ArrayList<Updateable> projectiles = new ArrayList<Updateable>();
 
     // Constructor (Singletons have a private constructor that creates a global instance on get_instance())
     private Simulator()
@@ -103,6 +107,13 @@ public class Simulator extends JPanel implements Runnable
     public void update()
     {
         player.update();
+        
+        // FIXME: This is a temporary solution to updating projectiles in a list
+        for(int i = 0; i < projectiles.size(); i++)
+        {
+            projectiles.get(i).update();
+            if(projectiles.get(i).isDestroyed()) projectiles.remove(i);
+        }
     }
 
     // Draw UI with updated information, called by repaint()
@@ -120,6 +131,12 @@ public class Simulator extends JPanel implements Runnable
         // Draw graphics by passing Graphics2D to various classes
         mapHandler.draw(graphics2D);
         player.draw(graphics2D);
+
+        // FIXME: This is a temporary solution to drawing projectiles in a list
+        for(int i = 0; i < projectiles.size(); i++) 
+        {
+            projectiles.get(i).draw(graphics2D);
+        }
 
         // DEBUG
         if(keyboard.getDebugConsole()) debugConsole(graphics2D, drawStart);
