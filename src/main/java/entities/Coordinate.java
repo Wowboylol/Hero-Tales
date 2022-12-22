@@ -30,4 +30,7 @@ public class Coordinate
 
     // Return whether given coordinate is equal to this coordinate
     public boolean equals(Coordinate other) { return (this.X == other.getX() && this.Y == other.getY()) ? true : false; }
+
+    // Create a shallow copy of this coordinate
+    public Coordinate copy() { return new Coordinate(this.X, this.Y); }
 }
