@@ -40,8 +40,8 @@ public class WoodenSword implements Weapon
         this.minDamage = 25;
         this.maxDamage = 40;
         this.shots = 1;
-        this.projectileSpeed = 7;
-        this.lifetime = 30;
+        this.projectileSpeed = 8;
+        this.lifetime = 25;
     }
 
     // Getters
