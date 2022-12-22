@@ -41,7 +41,7 @@ public class WoodenSword implements Weapon
         this.maxDamage = 40;
         this.shots = 1;
         this.projectileSpeed = 7;
-        this.lifetime = 40;
+        this.lifetime = 30;
     }
 
     // Getters
@@ -62,10 +62,10 @@ public class WoodenSword implements Weapon
     public void setLifetime(int lifetime) { this.lifetime = lifetime; }
 
     @Override
-    public void attack(Coordinate spawnPosition, int angle)
+    public void attack(Coordinate spawnPosition, Coordinate playerPosition, int angle)
     {
         int damage = ThreadLocalRandom.current().nextInt(minDamage, maxDamage + 1);
-        Projectile projectile = new Projectile(spawnPosition, projectileSprite, damage, projectileSpeed, angle, lifetime);
+        Projectile projectile = new Projectile(spawnPosition, playerPosition, projectileSprite, damage, projectileSpeed, angle, lifetime);
         this.simulator.projectiles.add(projectile);
     }
 

@@ -42,5 +42,5 @@ public interface Weapon
     public void loadSprite();
 
     // Shoot a projectile
-    public void attack(Coordinate spawnPosition, int angle);
+    public void attack(Coordinate spawnPosition, Coordinate playerPosition, int angle);
 }

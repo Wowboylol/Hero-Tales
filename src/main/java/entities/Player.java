@@ -69,9 +69,10 @@ public class Player extends AnimateEntity implements Updateable
             this.startAttackCooldown();
             this.weapon.attack(
                 new Coordinate(
-                    playerScreenPositionX()+getOriginPointX(), 
-                    playerScreenPositionY()+getOriginPointY()
-                ), 
+                    this.getWorldCoordinateX()+getOriginPointX(), 
+                    this.getWorldCoordinateY()+getOriginPointY()
+                ),
+                this.getWorldCoordinate(),
                 this.mouse.getAttackAngle(
                     playerScreenPositionX()+getOriginPointX(), 
                     playerScreenPositionY()+getOriginPointY()
