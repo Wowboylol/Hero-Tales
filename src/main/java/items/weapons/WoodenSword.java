@@ -79,12 +79,11 @@ public class WoodenSword implements Weapon
     // Helper function: Sets up player sprites by resizing image from file
     private BufferedImage spriteSetup(String imageName, int width, int height)
     {
-        Utility utility = new Utility();
         BufferedImage image = null;
         
         try {
             image = ImageIO.read(getClass().getResourceAsStream(imageName));
-            image = utility.resizeImage(image, width, height);
+            image = Utility.resizeImage(image, width, height);
         }
         catch(IOException e) {
             e.printStackTrace();

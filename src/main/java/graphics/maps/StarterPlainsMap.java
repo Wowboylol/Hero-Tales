@@ -162,11 +162,9 @@ public class StarterPlainsMap implements MapStrategy
     // Sets up the images for the tiles by resizing them to the correct size
     private void imageSetup(int index, String imagePath, TileType tileType) 
     {
-        Utility utility = new Utility();
-
         try {
             tileImages[index] = new Tile(ImageIO.read(getClass().getResourceAsStream(imagePath)), tileType);
-            tileImages[index].setImage(utility.resizeImage(tileImages[index].getImage(), Simulator.TILE_SIZE, Simulator.TILE_SIZE));
+            tileImages[index].setImage(Utility.resizeImage(tileImages[index].getImage(), Simulator.TILE_SIZE, Simulator.TILE_SIZE));
         }
         catch(IOException exception) {
             exception.printStackTrace();
