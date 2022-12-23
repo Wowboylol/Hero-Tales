@@ -1,5 +1,5 @@
 /*  
- *  DullIronSword.java
+ *  WoodenSword.java
  *  
  *  Description: Player's starter weapon.
  * 
@@ -8,23 +8,21 @@
 package items.weapons;
 
 import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
-import java.io.IOException;
 import java.util.concurrent.ThreadLocalRandom;
 import main.Simulator;
-import main.Utility;
 import entities.Coordinate;
 import entities.Projectile;
+import items.Wieldable;
 
-public class WoodenSword implements Weapon
+public class WoodenSword extends Weapon implements Wieldable
 {
     // Stats
-    private int tier;
-    private int minDamage;
-    private int maxDamage;
-    private int shots;
-    private int projectileSpeed;
-    private int lifetime;
+    public static final int TIER = 0;
+    public static final int MIN_DAMAGE = 25;
+    public static final int MAX_DAMAGE = 40;
+    public static final int SHOTS = 1;
+    public static final int PROJECTILE_SPEED = 8;
+    public static final int LIFETIME = 25;
 
     // Attributes
     private Simulator simulator;
@@ -34,60 +32,31 @@ public class WoodenSword implements Weapon
     // Default constructor
     public WoodenSword(Simulator simulator)
     {
+        super(TIER, MIN_DAMAGE, MAX_DAMAGE, SHOTS, PROJECTILE_SPEED, LIFETIME);
         this.simulator = simulator;
         loadSprite();
-        this.tier = 0;
-        this.minDamage = 25;
-        this.maxDamage = 40;
-        this.shots = 1;
-        this.projectileSpeed = 8;
-        this.lifetime = 25;
     }
 
     // Getters
-    public int getTier() { return this.tier; }
-    public int getMinDamage() { return this.minDamage; }
-    public int getMaxDamage() { return this.maxDamage; }
-    public int getShots() { return this.shots; }
-    public int getProjectileSpeed() { return this.projectileSpeed; }
-    public int getLifetime() { return this.lifetime; }
     public BufferedImage getWeaponIcon() { return this.weaponIcon; }
-
-    // Setters
-    public void setTier(int tier) { this.tier = tier; }
-    public void setMinDamage(int minDamage) { this.minDamage = minDamage; }
-    public void setMaxDamage(int maxDamage) { this.maxDamage = maxDamage; }
-    public void setShots(int shots) { this.shots = shots; }
-    public void setProjectileSpeed(int speed) { this.projectileSpeed = speed; }
-    public void setLifetime(int lifetime) { this.lifetime = lifetime; }
 
     @Override
     public void attack(Coordinate spawnPosition, Coordinate playerPosition, int angle)
     {
-        int damage = ThreadLocalRandom.current().nextInt(minDamage, maxDamage + 1);
-        Projectile projectile = new Projectile(spawnPosition, playerPosition, projectileSprite, damage, projectileSpeed, angle, lifetime);
+        int damage = ThreadLocalRandom.current().nextInt(this.getMinDamage(), this.getMaxDamage() + 1);
+        Projectile projectile = new Projectile(
+            spawnPosition, playerPosition, 
+            projectileSprite, damage, 
+            this.getProjectileSpeed(), angle, 
+            this.getLifetime()
+        );
         this.simulator.projectiles.add(projectile);
     }
 
     @Override
     public void loadSprite()
     {
-        weaponIcon = spriteSetup("/weapons/wooden_sword.png", Simulator.TILE_SIZE, Simulator.TILE_SIZE);
-        projectileSprite = spriteSetup("/projectiles/test_slash.png", Simulator.TILE_SIZE, Simulator.TILE_SIZE);
-    }
-
-    // Helper function: Sets up player sprites by resizing image from file
-    private BufferedImage spriteSetup(String imageName, int width, int height)
-    {
-        BufferedImage image = null;
-        
-        try {
-            image = ImageIO.read(getClass().getResourceAsStream(imageName));
-            image = Utility.resizeImage(image, width, height);
-        }
-        catch(IOException e) {
-            e.printStackTrace();
-        }
-        return image;
+        weaponIcon = this.spriteSetup("/weapons/wooden_sword.png", Simulator.TILE_SIZE, Simulator.TILE_SIZE);
+        projectileSprite = this.spriteSetup("/projectiles/test_slash.png", Simulator.TILE_SIZE, Simulator.TILE_SIZE);
     }
 }

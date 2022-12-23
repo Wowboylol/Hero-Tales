@@ -15,7 +15,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import entities.enums.MoveDirection;
 import entities.stats.PlayerStats;
-import items.weapons.Weapon;
+import items.Wieldable;
 import items.weapons.WoodenSword;
 
 public class Player extends AnimateEntity implements Updateable
@@ -32,7 +32,7 @@ public class Player extends AnimateEntity implements Updateable
     private Keyboard keyboard;
     private Mouse mouse;
     private CollisionChecker collisionChecker;
-    private Weapon weapon;
+    private Wieldable weapon;
 
     // Default constructor (starting coordinate based on defaults)
     public Player(Simulator simulator)
