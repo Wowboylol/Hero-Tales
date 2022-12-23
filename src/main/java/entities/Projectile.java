@@ -9,16 +9,24 @@ package entities;
 
 import java.awt.image.BufferedImage;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import main.Simulator;
+import main.CollisionChecker;
 import main.Utility;
+import entities.enums.EntityType;
 
 public class Projectile extends Entity implements Updateable
 {
     // Attributes
+    private CollisionChecker collisionChecker = Simulator.getInstance().collisionChecker;
     private BufferedImage sprite;
+    private EntityType user;
+    private int angle;
     private Coordinate playerPosition;
     private int mapPixelWidth = Simulator.getInstance().mapHandler.getCurrentMapWidth();
     private int mapPixelHeight = Simulator.getInstance().mapHandler.getCurrentMapHeight();
+
+    // Stats
     private int damage;
     private int projectileVelocity;
     private double xVelocity;
@@ -26,11 +34,16 @@ public class Projectile extends Entity implements Updateable
     private int lifetime;
 
     // Default constructor
-    public Projectile(Coordinate spawnPosition, Coordinate playerPosition, BufferedImage sprite, int damage, int speed, int angle, int lifetime)
+    public Projectile(Rectangle hitbox, Coordinate spawnPosition, Coordinate playerPosition, 
+        BufferedImage sprite, int damage, int speed, 
+        int angle, int lifetime, EntityType user)
     {
         super(spawnPosition);
-        this.playerPosition = playerPosition;
         this.sprite = Utility.rotateImage(sprite, (angle/8)*8);
+        this.angle = angle;
+        this.setHitbox(hitbox);
+        this.user = user;
+        this.playerPosition = playerPosition;
         this.damage = damage;
         this.projectileVelocity = speed;
         this.xVelocity = Math.cos(Math.toRadians(angle)) * this.projectileVelocity;
@@ -40,9 +53,13 @@ public class Projectile extends Entity implements Updateable
 
     // Getters
     public int getDamage() { return this.damage; }
+    public EntityType getUser() { return this.user; }
+    public double getXVelocity() { return this.xVelocity; }
+    public double getYVelocity() { return this.yVelocity; }
 
     public void update()
     {
+        if(collisionChecker.checkTileWall(this, angle)) lifetime = 0;
         this.setWorldCoordinateX((int)(this.getWorldCoordinateX() + xVelocity));
         this.setWorldCoordinateY((int)(this.getWorldCoordinateY() + yVelocity));
         lifetime--;
