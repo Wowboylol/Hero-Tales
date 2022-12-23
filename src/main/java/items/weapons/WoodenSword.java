@@ -26,7 +26,7 @@ public class WoodenSword extends Weapon implements Wieldable
     public static final int SHOTS = 1;
     public static final int PROJECTILE_SPEED = 8;
     public static final int LIFETIME = 25;
-    public final Rectangle HITBOX_CONFIGURATIONS = new Rectangle(13, 8, 21, 32);
+    public final Rectangle HITBOX_CONFIGURATIONS = new Rectangle(17, 12, 15, 23);
 
     // Attributes
     private Simulator simulator;
@@ -60,6 +60,6 @@ public class WoodenSword extends Weapon implements Wieldable
     public void loadSprite()
     {
         weaponIcon = this.spriteSetup("/weapons/wooden_sword.png", Simulator.TILE_SIZE, Simulator.TILE_SIZE);
-        projectileSprite = this.spriteSetup("/projectiles/test_slash.png", Simulator.TILE_SIZE, Simulator.TILE_SIZE);
+        projectileSprite = this.spriteSetup("/projectiles/wooden_slash.png", Simulator.TILE_SIZE, Simulator.TILE_SIZE);
     }
 }
