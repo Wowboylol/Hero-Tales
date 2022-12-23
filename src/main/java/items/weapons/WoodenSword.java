@@ -25,7 +25,7 @@ public class WoodenSword extends Weapon implements Wieldable
     public static final int MAX_DAMAGE = 40;
     public static final int SHOTS = 1;
     public static final int PROJECTILE_SPEED = 8;
-    public static final int LIFETIME = 50;
+    public static final int LIFETIME = 25;
     public final Rectangle HITBOX_CONFIGURATIONS = new Rectangle(13, 8, 21, 32);
 
     // Attributes
