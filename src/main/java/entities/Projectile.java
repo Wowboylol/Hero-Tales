@@ -10,6 +10,7 @@ package entities;
 import java.awt.image.BufferedImage;
 import java.awt.Graphics2D;
 import main.Simulator;
+import main.Utility;
 
 public class Projectile extends Entity implements Updateable
 {
@@ -29,7 +30,7 @@ public class Projectile extends Entity implements Updateable
     {
         super(spawnPosition);
         this.playerPosition = playerPosition;
-        this.sprite = sprite;
+        this.sprite = Utility.rotateImage(sprite, (angle/8)*8);
         this.damage = damage;
         this.projectileVelocity = speed;
         this.xVelocity = Math.cos(Math.toRadians(angle)) * this.projectileVelocity;
@@ -81,7 +82,7 @@ public class Projectile extends Entity implements Updateable
         return this.getWorldCoordinateY() - playerPosition.getY() + Player.PLAYER_SCREEN_Y;
     }
 
-    // Check if projectile is on screen
+    // Helper function: Check if projectile is on screen
     private boolean isProjectileOnScreen()
     {
         if(this.getWorldCoordinateX() + Simulator.TILE_SIZE <= playerPosition.getX() - Player.PLAYER_SCREEN_X) return false;
