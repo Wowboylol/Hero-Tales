@@ -34,6 +34,9 @@ public class Simulator extends JPanel implements Runnable
     private ServiceInjector serviceInjector = new ServiceInjector(this);
     private Thread gameThread;
 
+    // DEBUG
+    private long maxDrawTime = 0;
+    
     // Injectable services
     public final Keyboard keyboard = new Keyboard();
     public final Mouse mouse = new Mouse();
@@ -149,6 +152,7 @@ public class Simulator extends JPanel implements Runnable
     public void debugConsole(Graphics2D graphics2d, long drawStart)
     {
         long drawTime = System.nanoTime() - drawStart;
+        maxDrawTime = Math.max(maxDrawTime, drawTime);
         long FPSBound = 1000000000/FPS;
         Coordinate playerPosition = player.getWorldCoordinate();
         int playerOriginX = player.getOriginPointX() + playerPosition.getX();
@@ -158,7 +162,8 @@ public class Simulator extends JPanel implements Runnable
         else graphics2d.setColor(Color.white);
         
         graphics2d.drawString("Draw time: " + drawTime, 10, 600);
-        graphics2d.drawString("Player position: (" + playerPosition.getX() + ", " + playerPosition.getY() + ")", 10, 615);
-        graphics2d.drawString("Player grid position: (" + playerOriginX/TILE_SIZE + ", " + playerOriginY/TILE_SIZE + ")", 10, 630);
+        graphics2d.drawString("Max draw time: " + maxDrawTime, 10, 615);
+        graphics2d.drawString("Player position: (" + playerPosition.getX() + ", " + playerPosition.getY() + ")", 10, 630);
+        graphics2d.drawString("Player grid position: (" + playerOriginX/TILE_SIZE + ", " + playerOriginY/TILE_SIZE + ")", 10, 645);
     }
 }
