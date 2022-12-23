@@ -20,6 +20,13 @@ public class Hitbox
         this.hitbox = new Rectangle();
     }
 
+    // Parameterized constructor
+    public Hitbox(Rectangle hitbox)
+    {
+        this.hitbox = hitbox;
+        this.originPoint = new Coordinate(hitbox.x + hitbox.width/2, hitbox.y + hitbox.height/2);
+    }
+
     // Getters
     public Rectangle getHitbox() { return this.hitbox; }
     public int getOriginPointX() { return this.originPoint.getX(); }
