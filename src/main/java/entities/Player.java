@@ -56,6 +56,9 @@ public class Player extends AnimateEntity implements Updateable
         this.collisionChecker = collisionCheck;
     }
 
+    // Getters
+    public Wieldable getWeapon() { return this.weapon; }
+
     @Override
     public void update()
     {
@@ -79,7 +82,7 @@ public class Player extends AnimateEntity implements Updateable
                 )
             );
         }
-        if(this.getIsMoving() && !collisionChecker.checkTileWall(this)) movePlayer();
+        if(this.getIsMoving() && !collisionChecker.checkTileWall(this)) movePlayer(collisionChecker.checkTilePath(this));
     }
 
     // Set player direction based on which directional (WASD) key is pressed
@@ -96,10 +99,10 @@ public class Player extends AnimateEntity implements Updateable
     }
 
     // Move player based on which directional (WASD) key is pressed, increasing movespeed if player is on a path
-    public void movePlayer()
+    public void movePlayer(boolean isOnPath)
     {
         int velocity = this.getStats().getSpeed();
-        if(collisionChecker.checkTilePath(this)) velocity++;
+        if(isOnPath) velocity++;
 
         if(keyboard.getDirection(MoveDirection.LEFT))
         {

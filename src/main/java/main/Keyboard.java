@@ -22,6 +22,10 @@ public class Keyboard implements KeyListener
     // Returns whether debug console is toggled
     public boolean getDebugConsole() { return debugConsole; }
 
+    // Add/remove given key to pressedKeys
+    public void addPressedKey(int key) { pressedKeys.add(key); }
+    public void removePressedKey(int key) { pressedKeys.remove(key); }
+
     // Returns whether requested direction is pressed (throw if invalid direction)
     public boolean getDirection(MoveDirection d)
     {
