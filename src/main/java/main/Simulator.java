@@ -39,6 +39,7 @@ public class Simulator extends JPanel implements Runnable
     
     // Injectable services
     public final Keyboard keyboard = new Keyboard();
+    public final Sound sound = new Sound();
     public final Mouse mouse = new Mouse();
     public final Player player = new Player(this);
     public final Camera camera = new Camera(this);
@@ -165,5 +166,12 @@ public class Simulator extends JPanel implements Runnable
         graphics2d.drawString("Max draw time: " + maxDrawTime, 10, 615);
         graphics2d.drawString("Player position: (" + playerPosition.getX() + ", " + playerPosition.getY() + ")", 10, 630);
         graphics2d.drawString("Player grid position: (" + playerOriginX/TILE_SIZE + ", " + playerOriginY/TILE_SIZE + ")", 10, 645);
+    }
+
+    // Play sound effect
+    public void playSoundEffect(int soundID)
+    {
+        sound.setFile(soundID);
+        sound.play();
     }
 }

@@ -27,6 +27,7 @@ public class WoodenSword extends Weapon implements Wieldable
     public static final int PROJECTILE_SPEED = 8;
     public static final int LIFETIME = 25;
     public final Rectangle HITBOX_CONFIGURATIONS = new Rectangle(17, 12, 15, 23);
+    public final int SOUND_ID = 0;
 
     // Attributes
     private Simulator simulator;
@@ -54,6 +55,7 @@ public class WoodenSword extends Weapon implements Wieldable
             angle, this.getLifetime(), user
         );
         this.simulator.projectiles.add(projectile);
+        this.simulator.playSoundEffect(SOUND_ID);
     }
 
     @Override

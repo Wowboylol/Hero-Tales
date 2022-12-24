@@ -9,7 +9,7 @@ Description placeholder
 - [X] Implement world camera
 - [X] Draw tiles in world
 - [X] Implement collision detection
-- [ ] Implement projectile spawning
+- [X] Implement projectile spawning
 - [ ] Add sound effects
 - [ ] Create unit tests
 
