@@ -19,8 +19,8 @@ public class PlayerTest
 {
     // Attributes
     private Player player;
+    private Simulator simulator;
     private Keyboard keyboard;
-    private Mouse mouse;
 
     // Create the test case
     public PlayerTest()
@@ -28,7 +28,7 @@ public class PlayerTest
         Simulator simulator = Simulator.getInstance();
         this.player = simulator.player;
         this.keyboard = simulator.keyboard;
-        this.mouse = simulator.mouse;
+        this.simulator = simulator;
     }
 
     // Test that player isDestroyed() always returns false
@@ -54,7 +54,7 @@ public class PlayerTest
         keyboard.addPressedKey(KeyEvent.VK_W);
         player.changeDirection();
         keyboard.removePressedKey(KeyEvent.VK_W);
-        assertEquals(player.getMoveDirection(), MoveDirection.UP);
+        assertEquals(MoveDirection.UP, player.getMoveDirection());
     }
 
     // Test setting player direction when S (down) is pressed
@@ -64,7 +64,7 @@ public class PlayerTest
         keyboard.addPressedKey(KeyEvent.VK_S);
         player.changeDirection();
         keyboard.removePressedKey(KeyEvent.VK_S);
-        assertEquals(player.getMoveDirection(), MoveDirection.DOWN);
+        assertEquals(MoveDirection.DOWN, player.getMoveDirection());
     }
 
     // Test setting player direction when W (up) and A (left) are pressed
@@ -76,7 +76,7 @@ public class PlayerTest
         player.changeDirection();
         keyboard.removePressedKey(KeyEvent.VK_W);
         keyboard.removePressedKey(KeyEvent.VK_A);
-        assertEquals(player.getMoveDirection(), MoveDirection.UPLEFT);
+        assertEquals(MoveDirection.UPLEFT, player.getMoveDirection());
     }
 
     // Test setting player direction when S (down) and D (right) are pressed
@@ -88,10 +88,10 @@ public class PlayerTest
         player.changeDirection();
         keyboard.removePressedKey(KeyEvent.VK_S);
         keyboard.removePressedKey(KeyEvent.VK_D);
-        assertEquals(player.getMoveDirection(), MoveDirection.DOWNRIGHT);
+        assertEquals(MoveDirection.DOWNRIGHT, player.getMoveDirection());
     }
 
-    // Move player in down when not on path and test that player position is correct
+    // Move player down when not on path and test that player position is correct
     @Test
     public void testMovePlayerDownNotOnPath()
     {
@@ -99,10 +99,10 @@ public class PlayerTest
         keyboard.addPressedKey(KeyEvent.VK_S);
         player.movePlayer(false);
         keyboard.removePressedKey(KeyEvent.VK_S);
-        assertEquals(player.getWorldCoordinate().getY(), player.getStats().getSpeed());
+        assertEquals(player.getStats().getSpeed(), player.getWorldCoordinate().getY());
     }
 
-    // Move player in down when on path and test that player position is correct
+    // Move player down when on path and test that player position is correct
     @Test
     public void testMovePlayerDownOnPath()
     {
@@ -110,6 +110,82 @@ public class PlayerTest
         keyboard.addPressedKey(KeyEvent.VK_S);
         player.movePlayer(true);
         keyboard.removePressedKey(KeyEvent.VK_S);
-        assertEquals(player.getWorldCoordinate().getY(), player.getStats().getSpeed()+1);
+        assertEquals(player.getStats().getSpeed()+1, player.getWorldCoordinate().getY());
+    }
+
+    // Move player down and right when not on path and test that player position is correct
+    @Test
+    public void testMovePlayerDownRightNotOnPath()
+    {
+        player.setWorldCoordinate(new Coordinate(0, 0));
+        keyboard.addPressedKey(KeyEvent.VK_S);
+        keyboard.addPressedKey(KeyEvent.VK_D);
+        player.movePlayer(false);
+        keyboard.removePressedKey(KeyEvent.VK_S);
+        keyboard.removePressedKey(KeyEvent.VK_D);
+        assertEquals(player.getStats().getSpeed(), player.getWorldCoordinate().getY());
+        assertEquals(player.getStats().getSpeed(), player.getWorldCoordinate().getX());
+    }
+
+    // Move player down and right when on path and test that player position is correct
+    @Test
+    public void testMovePlayerDownRightOnPath()
+    {
+        player.setWorldCoordinate(new Coordinate(0, 0));
+        keyboard.addPressedKey(KeyEvent.VK_S);
+        keyboard.addPressedKey(KeyEvent.VK_D);
+        player.movePlayer(true);
+        keyboard.removePressedKey(KeyEvent.VK_S);
+        keyboard.removePressedKey(KeyEvent.VK_D);
+        assertEquals(player.getStats().getSpeed()+1, player.getWorldCoordinate().getY());
+        assertEquals(player.getStats().getSpeed()+1, player.getWorldCoordinate().getX());
+    }
+
+    // Assert that playerScreenPositionX() returns correct value at coordinate (0, 0)
+    @Test
+    public void testPlayerScreenXAtOrigin()
+    {
+        player.setWorldCoordinate(new Coordinate(0, 0));
+        assertEquals(0, player.playerScreenPositionX());
+    }
+
+    // Assert that playerScreenPositionX() returns correct value at coordinate (500, 500)
+    @Test
+    public void testPlayerScreenXAt500()
+    {
+        player.setWorldCoordinate(new Coordinate(500, 500));
+        assertEquals(Player.PLAYER_SCREEN_X, player.playerScreenPositionX());
+    }
+
+    // Assert that playerScreenPositionX() returns correct value at coordinate map edge
+    @Test
+    public void testPlayerScreenXAtMapEdge()
+    {
+        player.setWorldCoordinate(new Coordinate(simulator.getMapWidth(), 0));
+        assertEquals(Simulator.SCREEN_WIDTH, player.playerScreenPositionX());
+    }
+
+    // Assert that playerScreenPositionY() returns correct value at coordinate (0, 0)
+    @Test
+    public void testPlayerScreenYAtOrigin()
+    {
+        player.setWorldCoordinate(new Coordinate(0, 0));
+        assertEquals(0, player.playerScreenPositionY());
+    }
+
+    // Assert that playerScreenPositionY() returns correct value at coordinate (500, 500)
+    @Test
+    public void testPlayerScreenYAt500()
+    {
+        player.setWorldCoordinate(new Coordinate(500, 500));
+        assertEquals(Player.PLAYER_SCREEN_Y, player.playerScreenPositionY());
+    }
+
+    // Assert that playerScreenPositionY() returns correct value at coordinate map edge
+    @Test
+    public void testPlayerScreenYAtMapEdge()
+    {
+        player.setWorldCoordinate(new Coordinate(0, simulator.getMapHeight()));
+        assertEquals(Simulator.SCREEN_HEIGHT, player.playerScreenPositionY());
     }
 }

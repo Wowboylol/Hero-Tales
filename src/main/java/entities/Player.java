@@ -247,6 +247,34 @@ public class Player extends AnimateEntity implements Updateable
         );
     }
 
+    // Determines player horizontal screen position
+    public int playerScreenPositionX()
+    {
+        int x = PLAYER_SCREEN_X;
+        int rightOffset = Simulator.SCREEN_WIDTH - PLAYER_SCREEN_X;
+
+        if(PLAYER_SCREEN_X > this.getWorldCoordinateX()) x = this.getWorldCoordinateX();
+        if(rightOffset > simulator.getMapWidth() - this.getWorldCoordinateX())
+        {
+            x = Simulator.SCREEN_WIDTH - (simulator.getMapWidth() - this.getWorldCoordinateX());
+        }
+        return x;
+    }
+
+    // Determines player vertical screen position
+    public int playerScreenPositionY()
+    {
+        int y = PLAYER_SCREEN_Y;
+        int bottomOffset = Simulator.SCREEN_HEIGHT - PLAYER_SCREEN_Y;
+
+        if(PLAYER_SCREEN_Y > this.getWorldCoordinateY()) y = this.getWorldCoordinateY();
+        if(bottomOffset > simulator.getMapHeight() - this.getWorldCoordinateY()) 
+        {
+            y = Simulator.SCREEN_HEIGHT - (simulator.getMapHeight() - this.getWorldCoordinateY());
+        }
+        return y;
+    }
+
     // Helper function: Sets up player sprites by resizing image from file
     private BufferedImage spriteSetup(String imageName, int width, int height)
     {
@@ -267,33 +295,5 @@ public class Player extends AnimateEntity implements Updateable
     {
         this.setIsAttacking(mouse.getMousePressed());
         this.setIsMoving(keyboard.isWASDPressed());
-    }
-
-    // Helper function: Determines player horizontal screen position
-    private int playerScreenPositionX()
-    {
-        int x = PLAYER_SCREEN_X;
-        int rightOffset = Simulator.SCREEN_WIDTH - PLAYER_SCREEN_X;
-
-        if(PLAYER_SCREEN_X > this.getWorldCoordinateX()) x = this.getWorldCoordinateX();
-        if(rightOffset > simulator.getMapWidth() - this.getWorldCoordinateX())
-        {
-            x = Simulator.SCREEN_WIDTH - (2400 - this.getWorldCoordinateX());
-        }
-        return x;
-    }
-
-    // Helper function: Determines player vertical screen position
-    private int playerScreenPositionY()
-    {
-        int y = PLAYER_SCREEN_Y;
-        int bottomOffset = Simulator.SCREEN_HEIGHT - PLAYER_SCREEN_Y;
-
-        if(PLAYER_SCREEN_Y > this.getWorldCoordinateY()) y = this.getWorldCoordinateY();
-        if(bottomOffset > simulator.getMapHeight() - this.getWorldCoordinateY()) 
-        {
-            y = Simulator.SCREEN_HEIGHT - (2400 - this.getWorldCoordinateY());
-        }
-        return y;
     }
 }
