@@ -19,8 +19,9 @@ public class PlayerTest
 {
     // Attributes
     private Player player;
-    private Simulator simulator;
     private Keyboard keyboard;
+    private int mapWidth;
+    private int mapHeight;
 
     // Create the test case
     public PlayerTest()
@@ -28,7 +29,8 @@ public class PlayerTest
         Simulator simulator = Simulator.getInstance();
         this.player = simulator.player;
         this.keyboard = simulator.keyboard;
-        this.simulator = simulator;
+        this.mapWidth = simulator.getMapWidth();
+        this.mapHeight = simulator.getMapHeight();
     }
 
     // Test that player isDestroyed() always returns false
@@ -161,7 +163,7 @@ public class PlayerTest
     @Test
     public void testPlayerScreenXAtMapEdge()
     {
-        player.setWorldCoordinate(new Coordinate(simulator.getMapWidth(), 0));
+        player.setWorldCoordinate(new Coordinate(mapWidth, 0));
         assertEquals(Simulator.SCREEN_WIDTH, player.playerScreenPositionX());
     }
 
@@ -185,7 +187,7 @@ public class PlayerTest
     @Test
     public void testPlayerScreenYAtMapEdge()
     {
-        player.setWorldCoordinate(new Coordinate(0, simulator.getMapHeight()));
+        player.setWorldCoordinate(new Coordinate(0, mapHeight));
         assertEquals(Simulator.SCREEN_HEIGHT, player.playerScreenPositionY());
     }
 }
