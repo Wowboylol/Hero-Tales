@@ -22,8 +22,9 @@ public class Mouse implements MouseListener, MouseMotionListener
     // Getters
     public boolean getMousePressed() { return mousePressed; }
 
-    // Returns mouse position
+    // Mouse position methods
     public Coordinate getMousePosition() { return mousePosition; }
+    public void setMousePosition(Coordinate mousePosition) { this.mousePosition = mousePosition; }
 
     // Calculate attack angle
     public int getAttackAngle(int playerOriginX, int playerOriginY)
