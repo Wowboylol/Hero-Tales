@@ -10,7 +10,7 @@ Description placeholder
 - [X] Draw tiles in world
 - [X] Implement collision detection
 - [X] Implement projectile spawning
-- [ ] Add sound effects
+- [X] Add sound effects
 - [ ] Create unit tests
 
 ### Development Cycle 2
