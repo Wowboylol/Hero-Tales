@@ -5,14 +5,13 @@
  *
 */
 
-package main;
+package graphics;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-import graphics.MapHandler;
-import graphics.TileType;
 import graphics.maps.*;
+import main.Simulator;
 
 public class MapHandlerTest 
 {

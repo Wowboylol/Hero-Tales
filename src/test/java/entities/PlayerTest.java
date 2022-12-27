@@ -5,15 +5,15 @@
  *
 */
 
-package main;
+package entities;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
 
 import java.awt.event.KeyEvent;
-import entities.Player;
 import entities.enums.MoveDirection;
-import entities.Coordinate;
+import main.Keyboard;
+import main.Simulator;
 
 public class PlayerTest 
 {
