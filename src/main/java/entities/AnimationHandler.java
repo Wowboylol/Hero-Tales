@@ -18,6 +18,16 @@ public class AnimationHandler
     private int walkAnimationCount = 0;
     private int attackAnimationCount = 0;
 
+    // Getters
+    public int getWalkAnimationCount() { return walkAnimationCount; }
+    public int getAttackAnimationCount() { return attackAnimationCount; }
+
+    // Setters
+    public void setWalkAnimation(int walkAnimation) { this.walkAnimation = walkAnimation; }
+    public void setAttackAnimation(int attackAnimation) { this.attackAnimation = attackAnimation; }
+    public void setWalkAnimationCount(int walkAnimationCount) { this.walkAnimationCount = walkAnimationCount; }
+    public void setAttackAnimationCount(int attackAnimationCount) { this.attackAnimationCount = attackAnimationCount; }
+
     // Display attack animation when attack is on cooldown
     public int animateAttack(int attackAnimationSpeed, boolean canAttack)
     {
