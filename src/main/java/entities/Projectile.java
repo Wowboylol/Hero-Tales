@@ -46,9 +46,19 @@ public class Projectile extends Entity implements Updateable
         this.playerPosition = playerPosition;
         this.damage = damage;
         this.projectileVelocity = speed;
-        this.xVelocity = Math.cos(Math.toRadians(angle)) * this.projectileVelocity;
-        this.yVelocity = Math.sin(Math.toRadians(angle)) * this.projectileVelocity;
         this.lifetime = lifetime;
+        calculateVelocity();
+    }
+
+    // Parameterized constructor (for testing purposes)
+    public Projectile(Coordinate spawnPosition, Coordinate playerPosition, int speed, int angle, int lifetime)
+    {
+        super(spawnPosition);
+        this.angle = angle;
+        this.playerPosition = playerPosition;
+        this.projectileVelocity = speed;
+        this.lifetime = lifetime;
+        calculateVelocity();
     }
 
     // Getters
@@ -56,6 +66,12 @@ public class Projectile extends Entity implements Updateable
     public EntityType getUser() { return this.user; }
     public double getXVelocity() { return this.xVelocity; }
     public double getYVelocity() { return this.yVelocity; }
+
+    // Setters
+    public void setSpeed(int speed) { this.projectileVelocity = speed; calculateVelocity(); }
+    public void setAngle(int angle) { this.angle = angle; calculateVelocity(); }
+    public void setLifetime(int lifetime) { this.lifetime = lifetime; }
+    public void setPosition(Coordinate position) { this.setWorldCoordinate(position); }
 
     public void update()
     {
@@ -99,6 +115,13 @@ public class Projectile extends Entity implements Updateable
         return this.getWorldCoordinateY() - playerPosition.getY() + Player.PLAYER_SCREEN_Y;
     }
 
+    // Calculate xVelocity and yVelocity based on angle and speed
+    public void calculateVelocity()
+    {
+        this.xVelocity = Math.cos(Math.toRadians(angle)) * this.projectileVelocity;
+        this.yVelocity = Math.sin(Math.toRadians(angle)) * this.projectileVelocity;
+    }
+
     // Helper function: Check if projectile is on screen
     private boolean isProjectileOnScreen()
     {
@@ -108,4 +131,7 @@ public class Projectile extends Entity implements Updateable
         if(this.getWorldCoordinateY() - Simulator.TILE_SIZE >= playerPosition.getY() + Player.PLAYER_SCREEN_Y) return false;
         return true;
     }
+
+    // Testing only: Set player position, replacing playerPosition local reference
+    public void setPlayerPosition(Coordinate playerPosition) { this.playerPosition = playerPosition; }
 }
