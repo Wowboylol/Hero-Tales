@@ -16,7 +16,7 @@ import javax.imageio.ImageIO;
 import entities.enums.MoveDirection;
 import entities.stats.PlayerStats;
 import items.Wieldable;
-import items.weapons.WoodenSword;
+import items.weapons.*;
 
 public class Player extends AnimateEntity implements Updateable
 {
