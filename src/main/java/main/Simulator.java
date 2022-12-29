@@ -111,13 +111,7 @@ public class Simulator extends JPanel implements Runnable
     public void update()
     {
         player.update();
-        
-        // FIXME: This is a temporary solution to updating projectiles in a list
-        for(int i = 0; i < projectiles.size(); i++)
-        {
-            projectiles.get(i).update();
-            if(projectiles.get(i).isDestroyed()) projectiles.remove(i);
-        }
+        updateProjectiles();
     }
 
     // Draw UI with updated information, called by repaint()
@@ -135,12 +129,7 @@ public class Simulator extends JPanel implements Runnable
         // Draw graphics by passing Graphics2D to various classes
         mapHandler.draw(graphics2D);
         player.draw(graphics2D);
-
-        // FIXME: This is a temporary solution to drawing projectiles in a list
-        for(int i = 0; i < projectiles.size(); i++) 
-        {
-            projectiles.get(i).draw(graphics2D);
-        }
+        drawProjectiles(graphics2D);
 
         // DEBUG
         if(keyboard.getDebugConsole()) debugConsole(graphics2D, drawStart);
@@ -173,5 +162,19 @@ public class Simulator extends JPanel implements Runnable
     {
         sound.setFile(soundID);
         sound.play();
+    }
+
+    // Update and draw projectiles
+    public void updateProjectiles()
+    {
+        for(int i = 0; i < projectiles.size(); i++)
+        {
+            projectiles.get(i).update();
+            if(projectiles.get(i).isDestroyed()) projectiles.remove(i);
+        }
+    }
+    public void drawProjectiles(Graphics2D graphics2D)
+    {
+        for(int i = 0; i < projectiles.size(); i++) { projectiles.get(i).draw(graphics2D); }
     }
 }
