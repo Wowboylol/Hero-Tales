@@ -1,4 +1,4 @@
-This text tiles contains notes about future concerns about current implementations. Will be deleted upon completion of game.
+This text file contains notes about future concerns about current implementations. Will be deleted upon completion of game.
 
 |=== Player draw attack sprite ===|
 - In draw method

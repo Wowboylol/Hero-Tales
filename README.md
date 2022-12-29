@@ -11,7 +11,7 @@ Description placeholder
 - [X] Implement collision detection
 - [X] Implement projectile spawning
 - [X] Add sound effects
-- [ ] Create unit tests
+- [X] Create unit tests
 
 ### Development Cycle 2
 - [ ] Add game states
