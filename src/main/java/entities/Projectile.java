@@ -123,7 +123,7 @@ public class Projectile extends Entity implements Updateable
     }
 
     // Helper function: Check if projectile is on screen
-    private boolean isProjectileOnScreen()
+    public boolean isProjectileOnScreen()
     {
         if(this.getWorldCoordinateX() + Simulator.TILE_SIZE <= playerPosition.getX() - Player.PLAYER_SCREEN_X) return false;
         if(this.getWorldCoordinateX() - Simulator.TILE_SIZE >= playerPosition.getX() + Player.PLAYER_SCREEN_X) return false;

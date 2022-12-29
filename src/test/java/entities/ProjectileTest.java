@@ -75,4 +75,22 @@ public class ProjectileTest
         projectile.setPosition(new Coordinate(0, 2000));
         assertEquals(320, projectile.getScreenY());
     }
+
+    // Test that projectile is on screen when player coordinate is (0,0) and projectile coordinate is (0,0)
+    @Test
+    public void testProjectileIsOnScreen()
+    {
+        projectile.setPlayerPosition(new Coordinate(0,0));
+        projectile.setPosition(new Coordinate(0, 0));
+        assertTrue(projectile.isProjectileOnScreen());
+    }
+
+    // Test that projectile is not on screen when player coordinate is (0,0) and projectile coordinate is (0,1000)
+    @Test
+    public void testProjectileIsNotOnScreen()
+    {
+        projectile.setPlayerPosition(new Coordinate(0,0));
+        projectile.setPosition(new Coordinate(0, 1000));
+        assertFalse(projectile.isProjectileOnScreen());
+    }
 }
