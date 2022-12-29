@@ -50,6 +50,7 @@ public class Simulator extends JPanel implements Runnable
 
     // Lists
     public final ArrayList<Updateable> projectiles = new ArrayList<Updateable>();
+    public final ArrayList<Updateable> enemies = new ArrayList<Updateable>();
 
     // Constructor (Singletons have a private constructor that creates a global instance on get_instance())
     private Simulator()
@@ -111,6 +112,7 @@ public class Simulator extends JPanel implements Runnable
     public void update()
     {
         player.update();
+        updateEnemies();
         updateProjectiles();
     }
 
@@ -129,6 +131,7 @@ public class Simulator extends JPanel implements Runnable
         // Draw graphics by passing Graphics2D to various classes
         mapHandler.draw(graphics2D);
         player.draw(graphics2D);
+        drawEnemies(graphics2D);
         drawProjectiles(graphics2D);
 
         // DEBUG
@@ -176,5 +179,19 @@ public class Simulator extends JPanel implements Runnable
     public void drawProjectiles(Graphics2D graphics2D)
     {
         for(int i = 0; i < projectiles.size(); i++) { projectiles.get(i).draw(graphics2D); }
+    }
+
+    // Update and draw enemies
+    public void updateEnemies()
+    {
+        for(int i = 0; i < enemies.size(); i++)
+        {
+            enemies.get(i).update();
+            if(enemies.get(i).isDestroyed()) enemies.remove(i);
+        }
+    }
+    public void drawEnemies(Graphics2D graphics2D)
+    {
+        for(int i = 0; i < enemies.size(); i++) { enemies.get(i).draw(graphics2D); }
     }
 }
