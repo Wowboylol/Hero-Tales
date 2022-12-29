@@ -73,37 +73,44 @@ public class CollisionChecker
 
     public boolean checkTileWall(Projectile projectile, int angle)
     {
-        if(angle >= 0 && angle < 90)
-        {
-            int projectileRightWorldX = projectile.getWorldCoordinateX() + projectile.getHitbox().x + projectile.getHitbox().width;
-            int projectileBottomWorldY = projectile.getWorldCoordinateY() + projectile.getHitbox().y + projectile.getHitbox().height;
-            int projectileRightCol = (projectileRightWorldX - (int)projectile.getXVelocity())/Simulator.TILE_SIZE;
-            int projectileBottomRow = (projectileBottomWorldY - (int)projectile.getYVelocity())/Simulator.TILE_SIZE;
-            if(mapHandler.getTileCollision(projectileRightCol-1, projectileBottomRow-1) == true) { return true; }
+        try {
+            if(angle >= 0 && angle < 90)
+            {
+                int projectileRightWorldX = projectile.getWorldCoordinateX() + projectile.getHitbox().x + projectile.getHitbox().width;
+                int projectileBottomWorldY = projectile.getWorldCoordinateY() + projectile.getHitbox().y + projectile.getHitbox().height;
+                int projectileRightCol = (projectileRightWorldX - (int)projectile.getXVelocity())/Simulator.TILE_SIZE;
+                int projectileBottomRow = (projectileBottomWorldY - (int)projectile.getYVelocity())/Simulator.TILE_SIZE;
+                if(mapHandler.getTileCollision(projectileRightCol-1, projectileBottomRow-1) == true) { return true; }
+            }
+            else if(angle >= 90 && angle < 180)
+            {
+                int projectileLeftWorldX = projectile.getWorldCoordinateX() + projectile.getHitbox().x;
+                int projectileBottomWorldY = projectile.getWorldCoordinateY() + projectile.getHitbox().y + projectile.getHitbox().height;
+                int projectileLeftCol = (projectileLeftWorldX + (int)projectile.getXVelocity())/Simulator.TILE_SIZE;
+                int projectileBottomRow = (projectileBottomWorldY - (int)projectile.getYVelocity())/Simulator.TILE_SIZE;
+                if(mapHandler.getTileCollision(projectileLeftCol, projectileBottomRow-1) == true) { return true; }
+            }
+            else if(angle >= 180 && angle < 270)
+            {
+                int projectileLeftWorldX = projectile.getWorldCoordinateX() + projectile.getHitbox().x;
+                int projectileTopWorldY = projectile.getWorldCoordinateY() + projectile.getHitbox().y;
+                int projectileLeftCol = (projectileLeftWorldX + (int)projectile.getXVelocity())/Simulator.TILE_SIZE;
+                int projectileTopRow = (projectileTopWorldY + (int)projectile.getYVelocity())/Simulator.TILE_SIZE;
+                if(mapHandler.getTileCollision(projectileLeftCol, projectileTopRow) == true) { return true; }
+            }
+            else if(angle >= 270 && angle < 360)
+            {
+                int projectileRightWorldX = projectile.getWorldCoordinateX() + projectile.getHitbox().x + projectile.getHitbox().width;
+                int projectileTopWorldY = projectile.getWorldCoordinateY() + projectile.getHitbox().y;
+                int projectileRightCol = (projectileRightWorldX - (int)projectile.getXVelocity())/Simulator.TILE_SIZE;
+                int projectileTopRow = (projectileTopWorldY + (int)projectile.getYVelocity())/Simulator.TILE_SIZE;
+                if(mapHandler.getTileCollision(projectileRightCol-1, projectileTopRow) == true) { return true; }
+            }
+            else throw new IllegalArgumentException();
         }
-        else if(angle >= 90 && angle < 180)
-        {
-            int projectileLeftWorldX = projectile.getWorldCoordinateX() + projectile.getHitbox().x;
-            int projectileBottomWorldY = projectile.getWorldCoordinateY() + projectile.getHitbox().y + projectile.getHitbox().height;
-            int projectileLeftCol = (projectileLeftWorldX + (int)projectile.getXVelocity())/Simulator.TILE_SIZE;
-            int projectileBottomRow = (projectileBottomWorldY - (int)projectile.getYVelocity())/Simulator.TILE_SIZE;
-            if(mapHandler.getTileCollision(projectileLeftCol, projectileBottomRow-1) == true) { return true; }
-        }
-        else if(angle >= 180 && angle < 270)
-        {
-            int projectileLeftWorldX = projectile.getWorldCoordinateX() + projectile.getHitbox().x;
-            int projectileTopWorldY = projectile.getWorldCoordinateY() + projectile.getHitbox().y;
-            int projectileLeftCol = (projectileLeftWorldX + (int)projectile.getXVelocity())/Simulator.TILE_SIZE;
-            int projectileTopRow = (projectileTopWorldY + (int)projectile.getYVelocity())/Simulator.TILE_SIZE;
-            if(mapHandler.getTileCollision(projectileLeftCol, projectileTopRow) == true) { return true; }
-        }
-        else if(angle >= 270 && angle < 360)
-        {
-            int projectileRightWorldX = projectile.getWorldCoordinateX() + projectile.getHitbox().x + projectile.getHitbox().width;
-            int projectileTopWorldY = projectile.getWorldCoordinateY() + projectile.getHitbox().y;
-            int projectileRightCol = (projectileRightWorldX - (int)projectile.getXVelocity())/Simulator.TILE_SIZE;
-            int projectileTopRow = (projectileTopWorldY + (int)projectile.getYVelocity())/Simulator.TILE_SIZE;
-            if(mapHandler.getTileCollision(projectileRightCol-1, projectileTopRow) == true) { return true; }
+        catch(Exception e) { 
+            e.printStackTrace();
+            return true; 
         }
         return false;
     }
@@ -113,6 +120,6 @@ public class CollisionChecker
     {
         int entityOriginCol = (entity.getWorldCoordinateX() + entity.getOriginPointX())/Simulator.TILE_SIZE;
         int entityOriginRow = (entity.getWorldCoordinateY() + entity.getOriginPointY())/Simulator.TILE_SIZE;
-        return (mapHandler.getTileType(entityOriginCol, entityOriginRow) == TileType.PATH) ? true : false;
+        return (mapHandler.getTileType(entityOriginCol, entityOriginRow) == TileType.PATH);
     }
 }
