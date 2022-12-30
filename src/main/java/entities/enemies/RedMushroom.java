@@ -19,7 +19,7 @@ import entities.stats.EnemyStats;
 
 public class RedMushroom extends Enemy implements Updateable
 {
-    // Testing attributes
+    // Testing attributes FIXME: Remove after testing
     public static final Coordinate TESTING_SPAWN_POSITION = new Coordinate(Simulator.TILE_SIZE*5, Simulator.TILE_SIZE*41);
     private CollisionChecker collisionChecker;
 

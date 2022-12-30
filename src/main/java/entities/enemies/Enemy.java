@@ -38,7 +38,7 @@ public abstract class Enemy extends AnimateEntity
     {
         if(actionLockCounter++ >= 60)
         {
-            int random = ThreadLocalRandom.current().nextInt(1, 16 + 1);
+            int random = ThreadLocalRandom.current().nextInt(1, 20 + 1);
 
             if(random == 1) this.setMoveDirection(MoveDirection.UP);
             else if(random == 2) this.setMoveDirection(MoveDirection.DOWN);
