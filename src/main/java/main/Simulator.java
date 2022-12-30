@@ -15,6 +15,7 @@ import java.awt.Graphics2D;
 import java.awt.Color;
 import java.util.ArrayList;
 import entities.*;
+import entities.enemies.RedMushroom;
 import graphics.*;
 
 public class Simulator extends JPanel implements Runnable
@@ -63,11 +64,14 @@ public class Simulator extends JPanel implements Runnable
         this.addMouseListener(mouse);
         this.addMouseMotionListener(mouse);
         this.setFocusable(true);
+
+        enemies.add(new RedMushroom(this)); // FIXME: Remove this line after testing
     }
 
     // Getters
     public int getMapWidth() { return this.mapHandler.getCurrentMapWidth(); }
     public int getMapHeight() { return this.mapHandler.getCurrentMapHeight(); }
+    public Coordinate getPlayerCoordinate() { return this.player.getWorldCoordinate(); }
 
     // Getter for Simulator instance, creates a Simulator if it doesn't already exist
     public static Simulator getInstance()
