@@ -13,6 +13,8 @@ import javax.imageio.ImageIO;
 import main.Simulator;
 import main.Utility;
 import graphics.*;
+import entities.Coordinate;
+import entities.enemies.*;
 
 public class StarterPlainsMap implements MapStrategy
 {
@@ -26,6 +28,7 @@ public class StarterPlainsMap implements MapStrategy
     private int mapTileGrid[][];
     private MapLoader mapLoader;
     private Camera camera;
+    private boolean enemiesLoaded = false;
 
     // Default constructor
     public StarterPlainsMap(Camera camera)
@@ -64,6 +67,33 @@ public class StarterPlainsMap implements MapStrategy
                 mapRow++;
             }
         }
+        if(enemiesLoaded == false) 
+        {
+            buildEnemies();
+            enemiesLoaded = true;
+        }
+    }
+
+    // Build and load enemies
+    public void buildEnemies()
+    {
+        Simulator simulator = Simulator.getInstance();
+        int tileSize = Simulator.TILE_SIZE;
+        simulator.enemies.add(new RedMushroom(simulator, simulator.collisionChecker, new Coordinate(43*tileSize, 40*tileSize)));
+        simulator.enemies.add(new RedMushroom(simulator, simulator.collisionChecker, new Coordinate(43*tileSize, 45*tileSize)));
+        simulator.enemies.add(new RedMushroom(simulator, simulator.collisionChecker, new Coordinate(35*tileSize, 34*tileSize)));
+        simulator.enemies.add(new RedMushroom(simulator, simulator.collisionChecker, new Coordinate(45*tileSize, 27*tileSize)));
+        simulator.enemies.add(new RedMushroom(simulator, simulator.collisionChecker, new Coordinate(37*tileSize, 18*tileSize)));
+        simulator.enemies.add(new RedMushroom(simulator, simulator.collisionChecker, new Coordinate(37*tileSize, 4*tileSize)));
+        simulator.enemies.add(new RedMushroom(simulator, simulator.collisionChecker, new Coordinate(23*tileSize, 20*tileSize)));
+        simulator.enemies.add(new RedMushroom(simulator, simulator.collisionChecker, new Coordinate(31*tileSize, 22*tileSize)));
+        simulator.enemies.add(new RedMushroom(simulator, simulator.collisionChecker, new Coordinate(3*tileSize, 27*tileSize)));
+        simulator.enemies.add(new RedMushroom(simulator, simulator.collisionChecker, new Coordinate(10*tileSize, 30*tileSize)));
+        simulator.enemies.add(new RedMushroom(simulator, simulator.collisionChecker, new Coordinate(9*tileSize, 18*tileSize)));
+        simulator.enemies.add(new RedMushroom(simulator, simulator.collisionChecker, new Coordinate(15*tileSize, 17*tileSize)));
+        simulator.enemies.add(new RedMushroom(simulator, simulator.collisionChecker, new Coordinate(8*tileSize, 9*tileSize)));
+        simulator.enemies.add(new RedMushroom(simulator, simulator.collisionChecker, new Coordinate(14*tileSize, 4*tileSize)));
+        simulator.enemies.add(new RedMushroom(simulator, simulator.collisionChecker, new Coordinate(17*tileSize, 12*tileSize)));
     }
 
     // Getters

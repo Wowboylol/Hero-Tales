@@ -19,19 +19,18 @@ import entities.stats.EnemyStats;
 
 public class RedMushroom extends Enemy implements Updateable
 {
-    // Testing attributes FIXME: Remove after testing
-    public static final Coordinate TESTING_SPAWN_POSITION = new Coordinate(Simulator.TILE_SIZE*5, Simulator.TILE_SIZE*41);
-    private CollisionChecker collisionChecker;
-
     // Configurations
     public final Rectangle HITBOX_CONFIGURATIONS = new Rectangle(3, 9, 42, 36);
     public final EnemyStats ENEMY_STATS = new EnemyStats(100, 0, 0, 5, 2);
     public final int MOVE_ANIMATION_SPEED = 12;
 
+    // Attributes
+    private CollisionChecker collisionChecker;
+
     // Default constructor
-    public RedMushroom(Simulator simulator, CollisionChecker collisionChecker)
+    public RedMushroom(Simulator simulator, CollisionChecker collisionChecker, Coordinate spawnLocation)
     {
-        super(TESTING_SPAWN_POSITION, simulator);
+        super(spawnLocation, simulator);
         this.collisionChecker = collisionChecker;
         loadSprite();
 

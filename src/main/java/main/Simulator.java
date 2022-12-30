@@ -15,7 +15,6 @@ import java.awt.Graphics2D;
 import java.awt.Color;
 import java.util.ArrayList;
 import entities.*;
-import entities.enemies.RedMushroom;
 import graphics.*;
 
 public class Simulator extends JPanel implements Runnable
@@ -64,8 +63,6 @@ public class Simulator extends JPanel implements Runnable
         this.addMouseListener(mouse);
         this.addMouseMotionListener(mouse);
         this.setFocusable(true);
-
-        enemies.add(new RedMushroom(this, collisionChecker)); // FIXME: Remove this line after testing
     }
 
     // Getters
