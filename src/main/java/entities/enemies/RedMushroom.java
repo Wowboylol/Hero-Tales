@@ -10,38 +10,46 @@ package entities.enemies;
 
 import java.awt.image.BufferedImage;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 
 import main.Simulator;
+import main.CollisionChecker;
 import entities.*;
 import entities.stats.EnemyStats;
-import entities.enums.MoveDirection;
 
 public class RedMushroom extends Enemy implements Updateable
 {
     // Testing attributes
     public static final Coordinate TESTING_SPAWN_POSITION = new Coordinate(Simulator.TILE_SIZE*5, Simulator.TILE_SIZE*41);
+    private CollisionChecker collisionChecker;
 
     // Configurations
+    public final Rectangle HITBOX_CONFIGURATIONS = new Rectangle(3, 9, 42, 36);
+    public final EnemyStats ENEMY_STATS = new EnemyStats(100, 0, 0, 5, 2);
     public final int MOVE_ANIMATION_SPEED = 12;
 
     // Default constructor
-    public RedMushroom(Simulator simulator)
+    public RedMushroom(Simulator simulator, CollisionChecker collisionChecker)
     {
         super(TESTING_SPAWN_POSITION, simulator);
+        this.collisionChecker = collisionChecker;
         loadSprite();
 
         // Super class overloading
-        this.setStats(new EnemyStats(100, 0, 0, 5, 3));
+        this.setStats(ENEMY_STATS);
+        this.setHitbox(HITBOX_CONFIGURATIONS);
         this.setMoveAnimationSpeed(MOVE_ANIMATION_SPEED);
-
-        this.setIsMoving(true); // FIXME: Remove this line after testing
-        this.setMoveDirection(MoveDirection.RIGHT); // FIXME: Remove this line after testing
     }
 
     @Override
     public void update()
     {
-        if(this.onScreen()) this.animateSprite();
+        if(this.onScreen()) 
+        {
+            this.setAction();
+            this.animateSprite();
+            if(this.getIsMoving() && !collisionChecker.checkTileWall(this)) this.moveEnemy();
+        }
     }
 
     @Override
@@ -63,18 +71,18 @@ public class RedMushroom extends Enemy implements Updateable
             case DOWNRIGHT:
             case DOWNLEFT:
             case DOWN:
-                if(this.getSpriteNum() == 1) image = down1;
-                if(this.getSpriteNum() == 2) image = down2;
-                if(this.getSpriteNum() == 3) image = down3;
-                if(this.getSpriteNum() == 4) image = down2;
+                if(this.getSpriteNum() == 1) image = down2;
+                if(this.getSpriteNum() == 2) image = down1;
+                if(this.getSpriteNum() == 3) image = down2;
+                if(this.getSpriteNum() == 4) image = down3;
                 break;
             case UPRIGHT:
             case UPLEFT:
             case UP:
-                if(this.getSpriteNum() == 1) image = up1;
-                if(this.getSpriteNum() == 2) image = up2;
-                if(this.getSpriteNum() == 3) image = up3;
-                if(this.getSpriteNum() == 4) image = up2;
+                if(this.getSpriteNum() == 1) image = up2;
+                if(this.getSpriteNum() == 2) image = up1;
+                if(this.getSpriteNum() == 3) image = up2;
+                if(this.getSpriteNum() == 4) image = up3;
                 break;
             case LEFT:
                 if(this.getSpriteNum() == 1) image = left1;

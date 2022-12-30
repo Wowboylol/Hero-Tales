@@ -65,7 +65,7 @@ public class Simulator extends JPanel implements Runnable
         this.addMouseMotionListener(mouse);
         this.setFocusable(true);
 
-        enemies.add(new RedMushroom(this)); // FIXME: Remove this line after testing
+        enemies.add(new RedMushroom(this, collisionChecker)); // FIXME: Remove this line after testing
     }
 
     // Getters
