@@ -103,7 +103,7 @@ public class Projectile extends Entity implements Updateable
         return this.getWorldCoordinateX() - playerPosition.getX() + Player.PLAYER_SCREEN_X;
     }
 
-    // Get the x position of the projectile on the screen
+    // Get the y position of the projectile on the screen
     public int getScreenY()
     {
         if(Player.PLAYER_SCREEN_Y > playerPosition.getY())
