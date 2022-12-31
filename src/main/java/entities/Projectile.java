@@ -95,19 +95,6 @@ public class Projectile extends Entity implements Updateable
         return lifetime <= 0;
     }
 
-    // Draw debug information
-    public void debugConsole(Graphics2D graphics2D)
-    {
-        Rectangle hitbox = this.getHitbox();
-        graphics2D.setColor(Color.RED);
-        graphics2D.drawRect(
-            this.getDefaultHitboxX() + getScreenX(), 
-            this.getDefaultHitboxY() + getScreenY(), 
-            hitbox.width, 
-            hitbox.height
-        );
-    }
-
     // Get the x position of the projectile on the screen
     public int getScreenX()
     {
@@ -147,6 +134,19 @@ public class Projectile extends Entity implements Updateable
         if(this.getWorldCoordinateY() + Simulator.TILE_SIZE <= playerPosition.getY() - Player.PLAYER_SCREEN_Y) return false;
         if(this.getWorldCoordinateY() - Simulator.TILE_SIZE >= playerPosition.getY() + Player.PLAYER_SCREEN_Y) return false;
         return true;
+    }
+
+    // Draw debug information
+    public void debugConsole(Graphics2D graphics2D)
+    {
+        Rectangle hitbox = this.getHitbox();
+        graphics2D.setColor(Color.RED);
+        graphics2D.drawRect(
+            this.getDefaultHitboxX() + getScreenX(), 
+            this.getDefaultHitboxY() + getScreenY(), 
+            hitbox.width, 
+            hitbox.height
+        );
     }
 
     // Testing only: Set player position, replacing playerPosition local reference

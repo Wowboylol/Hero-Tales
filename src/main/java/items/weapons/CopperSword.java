@@ -51,7 +51,7 @@ public class CopperSword extends Weapon implements Wieldable
     {
         int damage = ThreadLocalRandom.current().nextInt(this.getMinDamage(), this.getMaxDamage() + 1);
         Projectile projectile = new Projectile(
-            HITBOX_CONFIGURATIONS, spawnPosition, playerPosition, 
+            new Rectangle(HITBOX_CONFIGURATIONS), spawnPosition, playerPosition, 
             projectileSprite, damage, this.getProjectileSpeed(),
             angle, this.getLifetime(), user
         );
