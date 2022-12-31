@@ -146,6 +146,7 @@ public class CollisionChecker
                 if(projectile.getHitbox().intersects(enemy.getHitbox()))
                 {
                     collision = true;
+                    enemy.damageEntity(projectile.getDamage());
                 }
                 enemy.getHitbox().x = enemy.getDefaultHitboxX();
                 enemy.getHitbox().y = enemy.getDefaultHitboxY();
