@@ -18,7 +18,7 @@ import entities.stats.PlayerStats;
 import items.Wieldable;
 import items.weapons.*;
 
-public class Player extends AnimateEntity implements Updateable
+public class Player extends AnimateEntity implements Damageable
 {
     // Configurations
     public static final Coordinate PLAYER_SPAWN_POSITION = new Coordinate(Simulator.TILE_SIZE*6, Simulator.TILE_SIZE*42);
@@ -135,6 +135,12 @@ public class Player extends AnimateEntity implements Updateable
     @Override
     public boolean isDestroyed() { return false; }
 
+    @Override
+    public void damageEntity(int damage) { this.getStats().damageEntity(damage); }
+
+    @Override
+    public void healEntity(int heal) { this.getStats().healEntity(heal); }
+
     // Set and draw image for attack sprite based on spriteNum
     public void drawAttackSprite(Graphics2D graphics2D)
     {
@@ -240,8 +246,8 @@ public class Player extends AnimateEntity implements Updateable
         Rectangle hitbox = this.getHitbox();
         graphics2D.setColor(Color.RED);
         graphics2D.drawRect(
-            hitbox.x + playerScreenPositionX(), 
-            hitbox.y + playerScreenPositionY(), 
+            (this.getOriginPointX() - hitbox.width/2) + playerScreenPositionX(), 
+            (this.getOriginPointY() - hitbox.height/2) + playerScreenPositionY(), 
             hitbox.width, 
             hitbox.height
         );

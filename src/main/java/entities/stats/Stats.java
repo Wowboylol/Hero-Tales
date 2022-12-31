@@ -10,9 +10,13 @@ package entities.stats;
 
 public interface Stats 
 {
-    // Health: how much damage an entity can take before dying.
-    public double getHealth();
-    public void setHealth(double health);
+    // Max Health: how much health an entity can have at most.
+    public int getMaxHealth();
+    public void setMaxHealth(int health);
+
+    // Current Health: how much damage an entity can take before dying.
+    public double getCurrentHealth();
+    public void setCurrentHealth(double health);
 
     // Attack: how much damage an entities attack and abilities deal.
     // Formula: Dmg = Weapon dmg * ((25+attack)/50)
@@ -36,4 +40,6 @@ public interface Stats
 
     // Calculations
     public int calculateFramesPerAttack();
+    public void damageEntity(int damage);
+    public void healEntity(int heal);
 }

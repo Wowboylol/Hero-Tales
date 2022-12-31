@@ -17,7 +17,7 @@ import main.CollisionChecker;
 import entities.*;
 import entities.stats.EnemyStats;
 
-public class RedMushroom extends Enemy implements Updateable
+public class RedMushroom extends Enemy implements Damageable
 {
     // Configurations
     public final Rectangle HITBOX_CONFIGURATIONS = new Rectangle(3, 9, 42, 36);
@@ -58,7 +58,13 @@ public class RedMushroom extends Enemy implements Updateable
     }
 
     @Override
-    public boolean isDestroyed() { return false; }
+    public boolean isDestroyed() { return this.getStats().getCurrentHealth() <= 0; }
+
+    @Override
+    public void damageEntity(int damage) { this.getStats().damageEntity(damage); }
+
+    @Override
+    public void healEntity(int heal) { this.getStats().healEntity(heal); }
 
     // Set and draw image for moving sprite based on spriteNum
     public void drawMovingSprite(Graphics2D graphics2D)

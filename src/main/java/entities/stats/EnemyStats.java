@@ -10,7 +10,8 @@ package entities.stats;
 public class EnemyStats implements Stats
 {
     // Stats
-    private double health;
+    private int maxHealth;
+    private double currentHealth;
     private double attack;
     private int defense;
     private int dexterity;
@@ -19,7 +20,8 @@ public class EnemyStats implements Stats
     // Default constructor, sets default stats
     public EnemyStats() 
     {
-        this.health = 100;
+        this.maxHealth = 100;
+        this.currentHealth = maxHealth;
         this.attack = 0;
         this.defense = 0;
         this.dexterity = 0;
@@ -27,9 +29,10 @@ public class EnemyStats implements Stats
     }
 
     // Parameterized constructor, sets stats to parameters
-    public EnemyStats(double health, double attack, int defense, int dexterity, int speed) 
+    public EnemyStats(int maxHealth, double attack, int defense, int dexterity, int speed) 
     {
-        this.health = health;
+        this.maxHealth = maxHealth;
+        this.currentHealth = maxHealth;
         this.attack = attack;
         this.defense = defense;
         this.dexterity = dexterity;
@@ -37,14 +40,16 @@ public class EnemyStats implements Stats
     }
 
     // Getters
-    public double getHealth() { return this.health; }
+    public int getMaxHealth() { return this.maxHealth; }
+    public double getCurrentHealth() { return this.currentHealth; }
     public double getAttack() { return this.attack; }
     public int getDefense() { return this.defense; }
     public int getDexterity() { return this.dexterity; }
     public int getSpeed() { return this.speed; }
 
     // Setters
-    public void setHealth(double health) { this.health = health; }
+    public void setMaxHealth(int health) { this.maxHealth = health; }
+    public void setCurrentHealth(double health) { this.currentHealth = health; }
     public void setAttack(double attack) { this.attack = attack; }
     public void setDefense(int defense) { this.defense = defense; }
     public void setDexterity(int dexterity) { this.dexterity = dexterity; }
@@ -52,4 +57,18 @@ public class EnemyStats implements Stats
 
     // Calculations
     public int calculateFramesPerAttack() { return (int)(60/(0.1*dexterity+1.5)); }
+    
+    public void damageEntity(int damage) 
+    { 
+        double maximumReduction = 0.1*damage;
+        double finalDamage = damage - defense;
+        if(finalDamage < maximumReduction) finalDamage = maximumReduction;
+        this.currentHealth -= finalDamage;
+    }
+    
+    public void healEntity(int heal) 
+    { 
+        this.currentHealth += heal;
+        if(this.currentHealth > this.maxHealth) this.currentHealth = this.maxHealth; 
+    }
 }
