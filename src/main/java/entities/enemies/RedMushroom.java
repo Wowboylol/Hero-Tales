@@ -23,6 +23,7 @@ public class RedMushroom extends Enemy implements Damageable
     public final Rectangle HITBOX_CONFIGURATIONS = new Rectangle(3, 9, 42, 36);
     public final EnemyStats ENEMY_STATS = new EnemyStats(200, 0, 0, 5, 2);
     public final int MOVE_ANIMATION_SPEED = 12;
+    public final int HP_BAR_OFFSET = 55;
 
     // Attributes
     private CollisionChecker collisionChecker;
@@ -54,7 +55,11 @@ public class RedMushroom extends Enemy implements Damageable
     @Override
     public void draw(Graphics2D graphics2D)
     {
-        if(this.onScreen()) drawMovingSprite(graphics2D);
+        if(this.onScreen()) 
+        {
+            drawMovingSprite(graphics2D);
+            this.drawHealthBar(graphics2D, HP_BAR_OFFSET);
+        }
     }
 
     @Override

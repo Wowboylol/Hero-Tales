@@ -11,6 +11,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.util.concurrent.ThreadLocalRandom;
+import java.awt.Graphics2D;
+import java.awt.Color;
 
 import main.Simulator;
 import main.Utility;
@@ -95,6 +97,21 @@ public abstract class Enemy extends AnimateEntity
                 this.setWorldCoordinateY(this.getWorldCoordinateY() + this.getStats().getSpeed());
                 break;
         }
+    }
+
+    // Draw health bar
+    public void drawHealthBar(Graphics2D graphics2d, int yOffset)
+    {
+        double healthPercentage = (double)this.getStats().getCurrentHealth() / (double)this.getStats().getMaxHealth();
+
+        graphics2d.setColor(new Color(35, 35, 35));
+        graphics2d.fillRect(getScreenX()-1, getScreenY()+yOffset-1, Simulator.TILE_SIZE+2, 8);
+
+        if(healthPercentage > 0.5) graphics2d.setColor(new Color(21, 183, 11));
+        else if(healthPercentage > 0.25) graphics2d.setColor(new Color(238, 119, 7));
+        else graphics2d.setColor(new Color(211, 59, 50));
+
+        graphics2d.fillRect(getScreenX(), getScreenY()+yOffset, (int)(Simulator.TILE_SIZE*healthPercentage), 6);
     }
 
     // Get the x position of this enemy on the screen
