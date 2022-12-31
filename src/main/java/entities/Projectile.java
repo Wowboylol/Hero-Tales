@@ -10,6 +10,7 @@ package entities;
 import java.awt.image.BufferedImage;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.Color;
 import main.Simulator;
 import main.CollisionChecker;
 import main.Utility;
@@ -41,6 +42,8 @@ public class Projectile extends Entity implements Updateable
         super(spawnPosition);
         this.sprite = Utility.rotateImage(sprite, (angle/8)*8);
         this.angle = angle;
+        hitbox.x = hitbox.x-(Simulator.TILE_SIZE/2);
+        hitbox.y = hitbox.y-(Simulator.TILE_SIZE/2);
         this.setHitbox(hitbox);
         this.user = user;
         this.playerPosition = playerPosition;
@@ -76,6 +79,7 @@ public class Projectile extends Entity implements Updateable
     public void update()
     {
         if(collisionChecker.checkTileWall(this, angle)) lifetime = 0;
+        if(collisionChecker.checkProjectileCollision(this)) lifetime = 0;
         this.setWorldCoordinateX((int)(this.getWorldCoordinateX() + xVelocity));
         this.setWorldCoordinateY((int)(this.getWorldCoordinateY() + yVelocity));
         lifetime--;
@@ -89,6 +93,19 @@ public class Projectile extends Entity implements Updateable
     public boolean isDestroyed()
     {
         return lifetime <= 0;
+    }
+
+    // Draw debug information
+    public void debugConsole(Graphics2D graphics2D)
+    {
+        Rectangle hitbox = this.getHitbox();
+        graphics2D.setColor(Color.RED);
+        graphics2D.drawRect(
+            this.getDefaultHitboxX() + getScreenX(), 
+            this.getDefaultHitboxY() + getScreenY(), 
+            hitbox.width, 
+            hitbox.height
+        );
     }
 
     // Get the x position of the projectile on the screen

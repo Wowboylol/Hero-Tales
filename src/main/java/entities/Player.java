@@ -246,8 +246,8 @@ public class Player extends AnimateEntity implements Damageable
         Rectangle hitbox = this.getHitbox();
         graphics2D.setColor(Color.RED);
         graphics2D.drawRect(
-            (this.getOriginPointX() - hitbox.width/2) + playerScreenPositionX(), 
-            (this.getOriginPointY() - hitbox.height/2) + playerScreenPositionY(), 
+            this.getDefaultHitboxX() + playerScreenPositionX(), 
+            this.getDefaultHitboxY() + playerScreenPositionY(), 
             hitbox.width, 
             hitbox.height
         );

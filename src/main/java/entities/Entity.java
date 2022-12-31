@@ -26,6 +26,8 @@ public abstract class Entity
     public int getWorldCoordinateX() { return this.worldPosition.getX(); }
     public int getWorldCoordinateY() { return this.worldPosition.getY(); }
     public Rectangle getHitbox() { return this.hitbox.getHitbox(); }
+    public int getDefaultHitboxX() { return this.hitbox.getDefaultHitboxX(); }
+    public int getDefaultHitboxY() { return this.hitbox.getDefaultHitboxY(); }
     public int getOriginPointX() { return this.hitbox.getOriginPointX(); }
     public int getOriginPointY() { return this.hitbox.getOriginPointY(); }
 

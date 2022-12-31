@@ -7,6 +7,7 @@
 
 package main;
 import entities.*;
+import entities.enums.EntityType;
 import entities.enums.MoveDirection;
 import graphics.MapHandler;
 import graphics.TileType;
@@ -14,10 +15,14 @@ import graphics.TileType;
 public class CollisionChecker 
 {
     // Attributes
+    private Simulator simulator;
     private MapHandler mapHandler;
 
     // Default constructor
-    public CollisionChecker(Simulator simulator) {}
+    public CollisionChecker(Simulator simulator) 
+    {
+        this.simulator = simulator;
+    }
 
     // Inject dependencies
     public void inject(MapHandler mapHandler)
@@ -80,7 +85,7 @@ public class CollisionChecker
                 int projectileBottomWorldY = projectile.getWorldCoordinateY() + projectile.getHitbox().y + projectile.getHitbox().height;
                 int projectileRightCol = (projectileRightWorldX - (int)projectile.getXVelocity())/Simulator.TILE_SIZE;
                 int projectileBottomRow = (projectileBottomWorldY - (int)projectile.getYVelocity())/Simulator.TILE_SIZE;
-                if(mapHandler.getTileCollision(projectileRightCol-1, projectileBottomRow-1) == true) { return true; }
+                if(mapHandler.getTileCollision(projectileRightCol, projectileBottomRow) == true) { return true; }
             }
             else if(angle >= 90 && angle < 180)
             {
@@ -88,7 +93,7 @@ public class CollisionChecker
                 int projectileBottomWorldY = projectile.getWorldCoordinateY() + projectile.getHitbox().y + projectile.getHitbox().height;
                 int projectileLeftCol = (projectileLeftWorldX + (int)projectile.getXVelocity())/Simulator.TILE_SIZE;
                 int projectileBottomRow = (projectileBottomWorldY - (int)projectile.getYVelocity())/Simulator.TILE_SIZE;
-                if(mapHandler.getTileCollision(projectileLeftCol, projectileBottomRow-1) == true) { return true; }
+                if(mapHandler.getTileCollision(projectileLeftCol, projectileBottomRow) == true) { return true; }
             }
             else if(angle >= 180 && angle < 270)
             {
@@ -104,7 +109,7 @@ public class CollisionChecker
                 int projectileTopWorldY = projectile.getWorldCoordinateY() + projectile.getHitbox().y;
                 int projectileRightCol = (projectileRightWorldX - (int)projectile.getXVelocity())/Simulator.TILE_SIZE;
                 int projectileTopRow = (projectileTopWorldY + (int)projectile.getYVelocity())/Simulator.TILE_SIZE;
-                if(mapHandler.getTileCollision(projectileRightCol-1, projectileTopRow) == true) { return true; }
+                if(mapHandler.getTileCollision(projectileRightCol, projectileTopRow) == true) { return true; }
             }
             else throw new IllegalArgumentException();
         }
@@ -121,5 +126,33 @@ public class CollisionChecker
         int entityOriginCol = (entity.getWorldCoordinateX() + entity.getOriginPointX())/Simulator.TILE_SIZE;
         int entityOriginRow = (entity.getWorldCoordinateY() + entity.getOriginPointY())/Simulator.TILE_SIZE;
         return (mapHandler.getTileType(entityOriginCol, entityOriginRow) == TileType.PATH);
+    }
+
+    // Check if projectile collides with entity
+    public boolean checkProjectileCollision(Projectile projectile)
+    {
+        boolean collision = false;
+        if(projectile.getUser() == EntityType.PLAYER)
+        {
+            projectile.getHitbox().x = projectile.getWorldCoordinateX() + projectile.getHitbox().x;
+            projectile.getHitbox().y = projectile.getWorldCoordinateY() + projectile.getHitbox().y;
+
+            for(int i=0; i<simulator.enemies.size(); i++)
+            {
+                Damageable enemy = simulator.enemies.get(i);
+                enemy.getHitbox().x = enemy.getWorldCoordinateX() + enemy.getHitbox().x;
+                enemy.getHitbox().y = enemy.getWorldCoordinateY() + enemy.getHitbox().y;
+
+                if(projectile.getHitbox().intersects(enemy.getHitbox()))
+                {
+                    collision = true;
+                }
+                enemy.getHitbox().x = enemy.getDefaultHitboxX();
+                enemy.getHitbox().y = enemy.getDefaultHitboxY();
+            }
+            projectile.getHitbox().x = projectile.getDefaultHitboxX();
+            projectile.getHitbox().y = projectile.getDefaultHitboxY();
+        }
+        return collision;
     }
 }
