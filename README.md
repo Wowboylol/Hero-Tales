@@ -37,3 +37,4 @@ Description placeholder
 ## Credits
 - Starter plain tileset: https://game-endeavor.itch.io/
 - Player sprites: https://www.patreon.com/pixelarchipel
+- Mushroom enemy sprites: https://www.patreon.com/vryell
