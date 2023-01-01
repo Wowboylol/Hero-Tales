@@ -78,6 +78,8 @@ public class CollisionChecker
 
     public boolean checkTileWall(Projectile projectile, int angle)
     {
+        if(angle > 360) { angle = angle % 360; }
+        else if(angle < 0) { angle = 360 + angle; }
         try {
             if(angle >= 0 && angle < 90)
             {
