@@ -20,6 +20,13 @@ public class Coordinate
         this.Y = setY;
     }
 
+    // Parameterized constructor
+    public Coordinate(Coordinate other)
+    {
+        this.X = other.getX();
+        this.Y = other.getY();
+    }
+
     // Getters
     public int getX() { return this.X; }
     public int getY() { return this.Y; }
