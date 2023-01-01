@@ -11,9 +11,11 @@ import java.awt.image.BufferedImage;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.Font;
+import javax.swing.JLabel;
 
 public class Utility 
 {
+    public static final Font DEFAULT_FONT = new JLabel().getFont(); // FIXME: Remove after testing
     public static final Font DAMAGE_TEXT_FONT = new Font("Arial", Font.BOLD, 25); // FIXME: Remove after testing
 
     // Resizes image to specified width and height

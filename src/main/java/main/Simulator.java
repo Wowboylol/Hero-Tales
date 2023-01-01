@@ -154,7 +154,8 @@ public class Simulator extends JPanel implements Runnable
 
         if(drawTime > FPSBound) graphics2d.setColor(Color.red);
         else graphics2d.setColor(Color.white);
-        
+
+        graphics2d.setFont(Utility.DEFAULT_FONT);
         graphics2d.drawString("Draw time: " + drawTime, 10, 600);
         graphics2d.drawString("Max draw time: " + maxDrawTime, 10, 615);
         graphics2d.drawString("Player position: (" + playerPosition.getX() + ", " + playerPosition.getY() + ")", 10, 630);

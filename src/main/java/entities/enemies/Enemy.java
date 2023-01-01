@@ -16,6 +16,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Map.Entry;
 import java.util.AbstractMap.SimpleEntry;
+import java.awt.FontMetrics;
 
 import main.Simulator;
 import main.Utility;
@@ -121,16 +122,20 @@ public abstract class Enemy extends AnimateEntity
     // Draw damage text
     public void drawDamageText(Graphics2D graphics2d)
     {
+        if(damageText.size() == 0) return;
+
+        FontMetrics metrics = graphics2d.getFontMetrics(Utility.DAMAGE_TEXT_FONT);
         graphics2d.setColor(new Color(240, 52, 24));
         graphics2d.setFont(Utility.DAMAGE_TEXT_FONT);
 
         for(int i=0; i<damageText.size(); i++)
         {
             int damageOffset = damageText.get(i).getValue();
-            damageText.get(i).setValue(damageOffset-1);
+            String text = damageText.get(i).getKey();
 
+            damageText.get(i).setValue(damageOffset-1);
             if(damageOffset < -45) damageText.remove(i);
-            else graphics2d.drawString(damageText.get(i).getKey(), getScreenX(), getScreenY()+damageOffset);
+            else graphics2d.drawString(text, getScreenX()+(Simulator.TILE_SIZE/2-metrics.stringWidth(text)/2)-2, getScreenY()+damageOffset);
         }
     }
 
