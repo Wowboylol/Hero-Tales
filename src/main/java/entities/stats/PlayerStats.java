@@ -81,17 +81,19 @@ public class PlayerStats implements Stats
     // Calculations
     public int calculateFramesPerAttack() { return (int)(60/(0.1*dexterity+1.5)); }
 
-    public void damageEntity(int damage) 
+    public int damageEntity(int damage) 
     { 
         double maximumReduction = 0.1*damage;
         double finalDamage = damage - defense;
         if(finalDamage < maximumReduction) finalDamage = maximumReduction;
         this.currentHealth -= finalDamage;
+        return (int)finalDamage;
     }
     
-    public void healEntity(int heal) 
+    public int healEntity(int heal) 
     { 
         this.currentHealth += heal;
-        if(this.currentHealth > this.maxHealth) this.currentHealth = this.maxHealth; 
+        if(this.currentHealth > this.maxHealth) this.currentHealth = this.maxHealth;
+        return heal;    
     }
 }
