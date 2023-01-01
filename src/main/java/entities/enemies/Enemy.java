@@ -13,6 +13,9 @@ import javax.imageio.ImageIO;
 import java.util.concurrent.ThreadLocalRandom;
 import java.awt.Graphics2D;
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Map.Entry;
+import java.util.AbstractMap.SimpleEntry;
 
 import main.Simulator;
 import main.Utility;
@@ -26,6 +29,7 @@ public abstract class Enemy extends AnimateEntity
     private int mapPixelWidth;
     private int mapPixelHeight;
     private int actionLockCounter;
+    private ArrayList<Entry<String, Integer>> damageText = new ArrayList<Entry<String, Integer>>();
 
     public Enemy(Coordinate spawnPosition, Simulator simulator)
     {
@@ -114,6 +118,22 @@ public abstract class Enemy extends AnimateEntity
         graphics2d.fillRect(getScreenX(), getScreenY()+yOffset, (int)(Simulator.TILE_SIZE*healthPercentage), 6);
     }
 
+    // Draw damage text
+    public void drawDamageText(Graphics2D graphics2d)
+    {
+        graphics2d.setColor(new Color(240, 52, 24));
+        graphics2d.setFont(Utility.DAMAGE_TEXT_FONT);
+
+        for(int i=0; i<damageText.size(); i++)
+        {
+            int damageOffset = damageText.get(i).getValue();
+            damageText.get(i).setValue(damageOffset-1);
+
+            if(damageOffset < -45) damageText.remove(i);
+            else graphics2d.drawString(damageText.get(i).getKey(), getScreenX(), getScreenY()+damageOffset);
+        }
+    }
+
     // Get the x position of this enemy on the screen
     public int getScreenX()
     {
@@ -146,6 +166,12 @@ public abstract class Enemy extends AnimateEntity
         if(this.getWorldCoordinateY() + Simulator.TILE_SIZE <= playerCoordinate.getY() - Player.PLAYER_SCREEN_Y) return false;
         if(this.getWorldCoordinateY() - Simulator.TILE_SIZE >= playerCoordinate.getY() + Player.PLAYER_SCREEN_Y) return false;
         return true;
+    }
+
+    // Add a damage text to the list
+    public void addDamageText(int damageText)
+    {
+        this.damageText.add(new SimpleEntry<String, Integer>("-" + Integer.toString(damageText), -5));
     }
 
     // Sets up enemy sprites by resizing image from file

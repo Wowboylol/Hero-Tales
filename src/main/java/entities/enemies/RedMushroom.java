@@ -59,6 +59,7 @@ public class RedMushroom extends Enemy implements Damageable
         {
             drawMovingSprite(graphics2D);
             this.drawHealthBar(graphics2D, HP_BAR_OFFSET);
+            this.drawDamageText(graphics2D);
         }
     }
 
@@ -66,7 +67,7 @@ public class RedMushroom extends Enemy implements Damageable
     public boolean isDestroyed() { return this.getStats().getCurrentHealth() <= 0; }
 
     @Override
-    public void damageEntity(int damage) { this.getStats().damageEntity(damage); }
+    public void damageEntity(int damage) { this.addDamageText(this.getStats().damageEntity(damage)); }
 
     @Override
     public void healEntity(int heal) { this.getStats().healEntity(heal); }
