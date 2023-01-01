@@ -40,10 +40,10 @@ public class Projectile extends Entity implements Updateable
         int angle, int lifetime, EntityType user)
     {
         super(spawnPosition);
-        this.sprite = Utility.rotateImage(sprite, (angle/8)*8);
+        this.sprite = Utility.rotateImage(sprite, (angle/8) << 3);
         this.angle = angle;
-        hitbox.x = hitbox.x-(Simulator.TILE_SIZE/2);
-        hitbox.y = hitbox.y-(Simulator.TILE_SIZE/2);
+        hitbox.x = hitbox.x-(Simulator.TILE_SIZE >> 1);
+        hitbox.y = hitbox.y-(Simulator.TILE_SIZE >> 1);
         this.setHitbox(hitbox);
         this.user = user;
         this.playerPosition = playerPosition;
