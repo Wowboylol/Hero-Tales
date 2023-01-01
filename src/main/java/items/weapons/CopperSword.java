@@ -27,7 +27,7 @@ public class CopperSword extends Weapon implements Wieldable
     public static final int SHOTS = 1;
     public static final int PROJECTILE_SPEED = 8;
     public static final int LIFETIME = 25;
-    public final Rectangle HITBOX_CONFIGURATIONS = new Rectangle(17, 12, 15, 23);
+    public final Rectangle HITBOX_CONFIGURATIONS = new Rectangle(14, 12, 21, 23);
     public final int SOUND_ID = 0;
 
     // Attributes
