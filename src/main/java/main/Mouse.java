@@ -29,11 +29,7 @@ public class Mouse implements MouseListener, MouseMotionListener
     // Calculate attack angle
     public int getAttackAngle(int playerOriginX, int playerOriginY)
     {
-        int deltaX = mousePosition.getX() - playerOriginX;
-        int deltaY = mousePosition.getY() - playerOriginY;
-        int angle = (int)Math.toDegrees(Math.atan2(deltaY, deltaX));
-        if(angle < 0) angle += 360;
-        return angle;
+        return Utility.calculateAngle(playerOriginX, playerOriginY, mousePosition.getX(), mousePosition.getY());
     }
 
     // Calculate attack direction

@@ -7,8 +7,8 @@
 
 package main;
 import entities.*;
-import entities.enums.EntityType;
-import entities.enums.MoveDirection;
+import entities.enums.*;
+import entities.enemies.*;
 import graphics.MapHandler;
 import graphics.TileType;
 
@@ -157,5 +157,19 @@ public class CollisionChecker
             projectile.getHitbox().y = projectile.getDefaultHitboxY();
         }
         return collision;
+    }
+
+    // Check if given enemy is in aggro range of player, and returns angle to the player if true
+    public int checkAggroRange(Enemy enemy, double tileAggroRange)
+    {
+        int enemyOriginX = (enemy.getWorldCoordinateX() + enemy.getOriginPointX());
+        int enemyOriginY = (enemy.getWorldCoordinateY() + enemy.getOriginPointY());
+        int playerOriginX = (simulator.player.getWorldCoordinateX() + simulator.player.getOriginPointX());
+        int playerOriginY = (simulator.player.getWorldCoordinateY() + simulator.player.getOriginPointY());
+        double distanceY = Math.abs((enemyOriginY - playerOriginY)/Simulator.TILE_SIZE);
+        double distanceX = Math.abs((enemyOriginX - playerOriginX)/Simulator.TILE_SIZE);
+
+        if(Math.hypot(distanceY, distanceX) <= tileAggroRange) return Utility.calculateAngle(enemyOriginX, enemyOriginY, playerOriginX, playerOriginY); 
+        return -1;
     }
 }

@@ -37,4 +37,20 @@ public class Utility
         AffineTransformOp op = new AffineTransformOp(rotate, AffineTransformOp.TYPE_BILINEAR);
         return op.filter(sprite, null);
     }
+
+    // Draw circle given graphics
+    public static void drawCircle(Graphics2D graphics2D, int x, int y, int radius)
+    {
+        graphics2D.drawOval(x - radius, y - radius, radius * 2, radius * 2);
+    }
+
+    // Calculate angle between origin and point
+    public static int calculateAngle(int originX, int originY, int pointX, int pointY)
+    {
+        int deltaX = pointX - originX;
+        int deltaY = pointY - originY;
+        double angle = Math.toDegrees(Math.atan2(deltaY, deltaX));
+        if(angle < 0) angle += 360;
+        return (int)angle;
+    }
 }
