@@ -1,11 +1,11 @@
 /*  
- *  WoodenSword.java
+ *  CopperSword.java
  *  
- *  Description: Player's starter weapo (T0).
+ *  Description: (T1) sword.
  * 
 */
 
-package items.weapons;
+package items.playerweapons;
 
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -17,13 +17,13 @@ import entities.Projectile;
 import entities.enums.EntityType;
 import items.Wieldable;
 
-public class WoodenSword extends Weapon implements Wieldable
+public class CopperSword extends Weapon implements Wieldable
 {
     // Stats
     public static final EntityType user = EntityType.PLAYER;
-    public static final int TIER = 0;
-    public static final int MIN_DAMAGE = 25;
-    public static final int MAX_DAMAGE = 40;
+    public static final int TIER = 1;
+    public static final int MIN_DAMAGE = 35;
+    public static final int MAX_DAMAGE = 50;
     public static final int SHOTS = 1;
     public static final int PROJECTILE_SPEED = 8;
     public static final int LIFETIME = 25;
@@ -36,7 +36,7 @@ public class WoodenSword extends Weapon implements Wieldable
     private BufferedImage projectileSprite;
 
     // Default constructor
-    public WoodenSword(Simulator simulator)
+    public CopperSword(Simulator simulator)
     {
         super(TIER, MIN_DAMAGE, MAX_DAMAGE, SHOTS, PROJECTILE_SPEED, LIFETIME);
         this.simulator = simulator;
@@ -62,7 +62,7 @@ public class WoodenSword extends Weapon implements Wieldable
     @Override
     public void loadSprite()
     {
-        weaponIcon = this.spriteSetup("/weapons/wooden_sword.png", Simulator.TILE_SIZE, Simulator.TILE_SIZE);
-        projectileSprite = this.spriteSetup("/projectiles/wooden_slash.png", Simulator.TILE_SIZE, Simulator.TILE_SIZE);
+        weaponIcon = this.spriteSetup("/weapons/copper_sword.png", Simulator.TILE_SIZE, Simulator.TILE_SIZE);
+        projectileSprite = this.spriteSetup("/projectiles/copper_slash.png", Simulator.TILE_SIZE, Simulator.TILE_SIZE);
     }
 }

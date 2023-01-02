@@ -7,7 +7,7 @@
  *
 */
 
-package items.weapons;
+package items.playerweapons;
 
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
