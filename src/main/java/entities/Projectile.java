@@ -11,6 +11,8 @@ import java.awt.image.BufferedImage;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.Color;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import main.Simulator;
 import main.CollisionChecker;
 import main.Utility;
@@ -19,6 +21,7 @@ import entities.enums.EntityType;
 public class Projectile extends Entity implements Updateable
 {
     // Attributes
+    private AtomicBoolean debugConsole = Simulator.getInstance().keyboard.getDebugConsoleReference();
     private CollisionChecker collisionChecker = Simulator.getInstance().collisionChecker;
     private BufferedImage sprite;
     private EntityType user;
@@ -87,7 +90,11 @@ public class Projectile extends Entity implements Updateable
 
     public void draw(Graphics2D graphics2D)
     {
-        if(isProjectileOnScreen()) graphics2D.drawImage(sprite, getScreenX()-(Simulator.TILE_SIZE/2), getScreenY()-(Simulator.TILE_SIZE/2), null);
+        if(isProjectileOnScreen()) 
+        {
+            graphics2D.drawImage(sprite, getScreenX()-(Simulator.TILE_SIZE/2), getScreenY()-(Simulator.TILE_SIZE/2), null);
+            if(debugConsole.get()) debugConsole(graphics2D);
+        }
     }
 
     public boolean isDestroyed()
@@ -139,13 +146,12 @@ public class Projectile extends Entity implements Updateable
     // Draw debug information
     public void debugConsole(Graphics2D graphics2D)
     {
-        Rectangle hitbox = this.getHitbox();
         graphics2D.setColor(Color.RED);
         graphics2D.drawRect(
             this.getDefaultHitboxX() + getScreenX(), 
             this.getDefaultHitboxY() + getScreenY(), 
-            hitbox.width, 
-            hitbox.height
+            this.getHitbox().width, 
+            this.getHitbox().height
         );
     }
 

@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.awt.Graphics2D;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ import entities.enums.*;
 public abstract class Enemy extends AnimateEntity
 {
     // Attributes
+    private AtomicBoolean debugConsole;
     private Coordinate playerCoordinate;
     private int mapPixelWidth;
     private int mapPixelHeight;
@@ -35,10 +37,13 @@ public abstract class Enemy extends AnimateEntity
     public Enemy(Coordinate spawnPosition, Simulator simulator)
     {
         super(spawnPosition);
+        this.debugConsole = simulator.keyboard.getDebugConsoleReference();
         this.playerCoordinate = simulator.getPlayerCoordinate();
         this.mapPixelWidth = simulator.getMapWidth();
         this.mapPixelHeight = simulator.getMapHeight();
     }
+
+    public boolean getDebugConsole() { return this.debugConsole.get(); }
 
     // Set this enemy next action
     public void setAction()
@@ -192,5 +197,17 @@ public abstract class Enemy extends AnimateEntity
             e.printStackTrace();
         }
         return image;
+    }
+
+    // Draw debug information
+    public void debugConsole(Graphics2D graphics2D)
+    {
+        graphics2D.setColor(Color.RED);
+        graphics2D.drawRect(
+            this.getDefaultHitboxX() + getScreenX(), 
+            this.getDefaultHitboxY() + getScreenY(), 
+            this.getHitbox().width, 
+            this.getHitbox().height
+        );
     }
 }

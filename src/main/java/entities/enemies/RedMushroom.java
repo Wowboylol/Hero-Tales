@@ -61,6 +61,7 @@ public class RedMushroom extends Enemy implements Damageable
             drawMovingSprite(graphics2D);
             this.drawHealthBar(graphics2D, HP_BAR_OFFSET);
             this.drawDamageText(graphics2D);
+            if(this.getDebugConsole()) this.debugConsole(graphics2D);
         }
     }
 

@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import entities.enums.MoveDirection;
 
@@ -17,10 +18,13 @@ public class Keyboard implements KeyListener
 {
     // Attributes
     private final Set<Integer> pressedKeys = new HashSet<>();
-    private boolean debugConsole = false;
+    private AtomicBoolean debugConsole = new AtomicBoolean(false);
 
     // Returns whether debug console is toggled
-    public boolean getDebugConsole() { return debugConsole; }
+    public boolean getDebugConsole() { return debugConsole.get(); }
+
+    // Returns reference to debug console
+    public AtomicBoolean getDebugConsoleReference() { return debugConsole; }
 
     // Add/remove given key to pressedKeys
     public void addPressedKey(int key) { pressedKeys.add(key); }
@@ -79,7 +83,7 @@ public class Keyboard implements KeyListener
             pressedKeys.add(ASCII);
             return;
         }
-        if(ASCII == KeyEvent.VK_EQUALS) debugConsole = !debugConsole;
+        if(ASCII == KeyEvent.VK_EQUALS) debugConsole.set(!getDebugConsole());
     }
 
     @Override
