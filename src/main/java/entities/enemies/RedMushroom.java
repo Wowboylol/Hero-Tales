@@ -80,7 +80,9 @@ public class RedMushroom extends Enemy implements Damageable
     public void draw(Graphics2D graphics2D)
     {
         if(this.onScreen() == false) return;
-        drawMovingSprite(graphics2D);
+        if(this.getIsAttacking() || this.canAttack() == false) drawAttackSprite(graphics2D);
+        else drawMovingSprite(graphics2D);
+
         this.drawHealthBar(graphics2D, HP_BAR_OFFSET);
         this.drawDamageText(graphics2D);
         if(this.getDebugConsole()) this.debugConsole(graphics2D, AGGRO_RANGE);
@@ -140,6 +142,37 @@ public class RedMushroom extends Enemy implements Damageable
         graphics2D.drawImage(image, this.getScreenX(), this.getScreenY(), null);
     }
 
+    // Set and draw image for attack sprite based on spriteNum
+    public void drawAttackSprite(Graphics2D graphics2D)
+    {
+        BufferedImage image = null;
+
+        switch(this.getMoveDirection())
+        {
+            case DOWNRIGHT:
+            case DOWNLEFT:
+            case DOWN:
+                if(this.getSpriteNum() == 1) image = down2;
+                if(this.getSpriteNum() == 2) image = attackDown;
+                break;
+            case UPRIGHT:
+            case UPLEFT:
+            case UP:
+                if(this.getSpriteNum() == 1) image = up2;
+                if(this.getSpriteNum() == 2) image = attackUp;
+                break;
+            case LEFT:
+                if(this.getSpriteNum() == 1) image = left1;
+                if(this.getSpriteNum() == 2) image = attackLeft;
+                break;
+            case RIGHT:
+                if(this.getSpriteNum() == 1) image = right1;
+                if(this.getSpriteNum() == 2) image = attackRight;
+                break;
+        }
+        graphics2D.drawImage(image, this.getScreenX(), this.getScreenY(), null);
+    }
+
     // Load player sprites into BufferedImage
     public void loadSprite()
     {
@@ -155,5 +188,9 @@ public class RedMushroom extends Enemy implements Damageable
         right1 = this.spriteSetup("walk_right_1", Simulator.TILE_SIZE, Simulator.TILE_SIZE);
         right2 = this.spriteSetup("walk_right_2", Simulator.TILE_SIZE, Simulator.TILE_SIZE);
         right3 = this.spriteSetup("walk_right_3", Simulator.TILE_SIZE, Simulator.TILE_SIZE);
+        attackUp = this.spriteSetup("attack_up", Simulator.TILE_SIZE, Simulator.TILE_SIZE);
+        attackDown = this.spriteSetup("attack_down", Simulator.TILE_SIZE, Simulator.TILE_SIZE);
+        attackLeft = this.spriteSetup("attack_left", Simulator.TILE_SIZE, Simulator.TILE_SIZE);
+        attackRight = this.spriteSetup("attack_right", Simulator.TILE_SIZE, Simulator.TILE_SIZE);
     }
 }

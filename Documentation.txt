@@ -7,3 +7,6 @@ This text file contains notes about future concerns about current implementation
 
 |=== AnimationHandler future refactoring ===|
 - Could be reworked into Strategy method if more unique animations are required
+
+|=== Enemy drawAttackSprite method future refactoring ===|
+- If statements could be changed to else if
