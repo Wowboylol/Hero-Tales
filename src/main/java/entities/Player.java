@@ -6,17 +6,20 @@
 */
 
 package entities;
-import main.*;
-import java.awt.Graphics2D;
+
+import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.awt.Rectangle;
-import java.awt.Color;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import java.util.ArrayList;
+import java.util.Map.Entry;
+
+import main.*;
 import entities.enums.MoveDirection;
 import entities.stats.PlayerStats;
 import items.Wieldable;
 import items.playerweapons.*;
+
 
 public class Player extends AnimateEntity implements Damageable
 {
@@ -134,6 +137,7 @@ public class Player extends AnimateEntity implements Damageable
         else drawMovingSprite(graphics2D);
 
         drawHealthBar(graphics2D, HP_BAR_OFFSET);
+        drawDamageText(graphics2D);
 
         // DEBUG
         if(keyboard.getDebugConsole()) debugConsole(graphics2D);
@@ -145,7 +149,7 @@ public class Player extends AnimateEntity implements Damageable
     @Override
     public void damageEntity(int damage) 
     { 
-        this.getStats().damageEntity(damage); 
+        this.addDamageText(this.getStats().damageEntity(damage));
 
         if(this.getStats().getCurrentHealth() > 0) simulator.playSoundEffect(SOUND_HIT_ID); 
         else simulator.playSoundEffect(SOUND_DEATH_ID); 
@@ -245,6 +249,34 @@ public class Player extends AnimateEntity implements Damageable
         else graphics2d.setColor(new Color(211, 59, 50));
 
         graphics2d.fillRect(playerScreenPositionX(), playerScreenPositionY()+yOffset, (int)(Simulator.TILE_SIZE*healthPercentage), 6);
+    }
+
+    // Draw damage text
+    public void drawDamageText(Graphics2D graphics2d)
+    {
+        ArrayList<Entry<String, Integer>> damageText = this.getDamageText();
+        if(damageText.size() == 0) return;
+
+        FontMetrics metrics = graphics2d.getFontMetrics(Utility.DAMAGE_TEXT_FONT);
+        graphics2d.setColor(new Color(240, 52, 24));
+        graphics2d.setFont(Utility.DAMAGE_TEXT_FONT);
+
+        for(int i=0; i<damageText.size(); i++)
+        {
+            int damageOffset = damageText.get(i).getValue();
+            String text = damageText.get(i).getKey();
+
+            damageText.get(i).setValue(damageOffset-1);
+            if(damageOffset < -45) damageText.remove(i);
+            else 
+            {
+                graphics2d.drawString(
+                    text, 
+                    playerScreenPositionX()+(Simulator.TILE_SIZE/2-metrics.stringWidth(text)/2)-2, 
+                    playerScreenPositionY()+damageOffset
+                );
+            }
+        }
     }
 
     // Load player sprites into BufferedImage

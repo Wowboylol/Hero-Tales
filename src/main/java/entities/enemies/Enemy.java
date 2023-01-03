@@ -16,7 +16,6 @@ import java.awt.Graphics2D;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Map.Entry;
-import java.util.AbstractMap.SimpleEntry;
 import java.awt.FontMetrics;
 
 import main.Simulator;
@@ -32,7 +31,6 @@ public abstract class Enemy extends AnimateEntity
     private int mapPixelWidth;
     private int mapPixelHeight;
     private int actionLockCounter;
-    private ArrayList<Entry<String, Integer>> damageText = new ArrayList<Entry<String, Integer>>();
 
     public Enemy(Coordinate spawnPosition, Simulator simulator)
     {
@@ -128,6 +126,7 @@ public abstract class Enemy extends AnimateEntity
     // Draw damage text
     public void drawDamageText(Graphics2D graphics2d)
     {
+        ArrayList<Entry<String, Integer>> damageText = this.getDamageText();
         if(damageText.size() == 0) return;
 
         FontMetrics metrics = graphics2d.getFontMetrics(Utility.DAMAGE_TEXT_FONT);
@@ -177,12 +176,6 @@ public abstract class Enemy extends AnimateEntity
         if(this.getWorldCoordinateY() + Simulator.TILE_SIZE <= playerCoordinate.getY() - Player.PLAYER_SCREEN_Y) return false;
         if(this.getWorldCoordinateY() - Simulator.TILE_SIZE >= playerCoordinate.getY() + Player.PLAYER_SCREEN_Y) return false;
         return true;
-    }
-
-    // Add a damage text to the list
-    public void addDamageText(int damageText)
-    {
-        this.damageText.add(new SimpleEntry<String, Integer>("-" + Integer.toString(damageText), -5));
     }
 
     // Sets up enemy sprites by resizing image from file
