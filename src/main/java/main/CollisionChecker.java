@@ -134,11 +134,11 @@ public class CollisionChecker
     public boolean checkProjectileCollision(Projectile projectile)
     {
         boolean collision = false;
+        projectile.getHitbox().x = projectile.getWorldCoordinateX() + projectile.getHitbox().x;
+        projectile.getHitbox().y = projectile.getWorldCoordinateY() + projectile.getHitbox().y;
+
         if(projectile.getUser() == EntityType.PLAYER)
         {
-            projectile.getHitbox().x = projectile.getWorldCoordinateX() + projectile.getHitbox().x;
-            projectile.getHitbox().y = projectile.getWorldCoordinateY() + projectile.getHitbox().y;
-
             for(int i=0; i<simulator.enemies.size(); i++)
             {
                 Damageable enemy = simulator.enemies.get(i);
@@ -153,9 +153,23 @@ public class CollisionChecker
                 enemy.getHitbox().x = enemy.getDefaultHitboxX();
                 enemy.getHitbox().y = enemy.getDefaultHitboxY();
             }
-            projectile.getHitbox().x = projectile.getDefaultHitboxX();
-            projectile.getHitbox().y = projectile.getDefaultHitboxY();
         }
+        else
+        {
+            Damageable player = simulator.player;
+            player.getHitbox().x = player.getWorldCoordinateX() + player.getHitbox().x;
+            player.getHitbox().y = player.getWorldCoordinateY() + player.getHitbox().y;
+
+            if(projectile.getHitbox().intersects(player.getHitbox()))
+            {
+                collision = true;
+                player.damageEntity(projectile.getDamage());
+            }
+            player.getHitbox().x = player.getDefaultHitboxX();
+            player.getHitbox().y = player.getDefaultHitboxY();
+        }
+        projectile.getHitbox().x = projectile.getDefaultHitboxX();
+        projectile.getHitbox().y = projectile.getDefaultHitboxY();
         return collision;
     }
 
