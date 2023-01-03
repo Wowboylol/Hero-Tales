@@ -174,16 +174,16 @@ public class CollisionChecker
     }
 
     // Check if given enemy is in aggro range of player, and returns angle to the player if true
-    public int checkAggro(Enemy enemy, double tileAggroRange)
+    public int checkAggro(Enemy enemy, double aggroRange)
     {
         int enemyOriginX = (enemy.getWorldCoordinateX() + enemy.getOriginPointX());
         int enemyOriginY = (enemy.getWorldCoordinateY() + enemy.getOriginPointY());
         int playerOriginX = (simulator.player.getWorldCoordinateX() + simulator.player.getOriginPointX());
         int playerOriginY = (simulator.player.getWorldCoordinateY() + simulator.player.getOriginPointY());
-        double distanceY = Math.abs((enemyOriginY - playerOriginY)/Simulator.TILE_SIZE);
-        double distanceX = Math.abs((enemyOriginX - playerOriginX)/Simulator.TILE_SIZE);
+        int distanceY = Math.abs((enemyOriginY - playerOriginY));
+        int distanceX = Math.abs((enemyOriginX - playerOriginX));
 
-        if(Math.hypot(distanceY, distanceX) <= tileAggroRange) return Utility.calculateAngle(enemyOriginX, enemyOriginY, playerOriginX, playerOriginY); 
+        if(Math.hypot(distanceY, distanceX) <= aggroRange) return Utility.calculateAngle(enemyOriginX, enemyOriginY, playerOriginX, playerOriginY); 
         return -1;
     }
 }

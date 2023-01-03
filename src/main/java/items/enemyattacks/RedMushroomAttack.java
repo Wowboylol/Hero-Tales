@@ -23,7 +23,7 @@ public class RedMushroomAttack extends Attack implements Wieldable
     public static final EntityType user = EntityType.ENEMY;
     public static final int DAMAGE = 10;
     public static final int PROJECTILE_SPEED = 5;
-    public static final int LIFETIME = 60;
+    public static final int LIFETIME = 80;
     public final Rectangle HITBOX_CONFIGURATIONS = new Rectangle(13, 15, 21, 15);
 
     // Attributes

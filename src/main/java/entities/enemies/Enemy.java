@@ -201,7 +201,7 @@ public abstract class Enemy extends AnimateEntity
     }
 
     // Draw debug information
-    public void debugConsole(Graphics2D graphics2D, int TILE_AGGRO_RANGE)
+    public void debugConsole(Graphics2D graphics2D, int AGGRO_RANGE)
     {
         graphics2D.setColor(Color.RED);
         graphics2D.drawRect(
@@ -214,7 +214,7 @@ public abstract class Enemy extends AnimateEntity
             graphics2D, 
             this.getOriginPointX() + this.getScreenX(), 
             this.getOriginPointY() + this.getScreenY(), 
-            TILE_AGGRO_RANGE*Simulator.TILE_SIZE
+            AGGRO_RANGE
         );
     }
 }
