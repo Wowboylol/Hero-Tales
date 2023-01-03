@@ -47,7 +47,7 @@ public abstract class Enemy extends AnimateEntity
     // Set this enemy next action
     public void setAction()
     {
-        if(actionLockCounter++ >= 60)
+        if(actionLockCounter++ >= 30)
         {
             int random = ThreadLocalRandom.current().nextInt(1, 20 + 1);
 
