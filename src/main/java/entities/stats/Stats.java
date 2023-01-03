@@ -40,6 +40,7 @@ public interface Stats
 
     // Calculations
     public int calculateFramesPerAttack();
+    public void regenerateHealth();
     public int damageEntity(int damage);
     public int healEntity(int heal);
 }

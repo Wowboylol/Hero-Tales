@@ -73,6 +73,7 @@ public class Player extends AnimateEntity implements Damageable
         actionStateSetter();
         changeDirection();
         this.decreaseAttackCooldown();
+        this.getStats().regenerateHealth();
         this.animateSprite();
         
         if(this.getIsAttacking() && this.canAttack()) 

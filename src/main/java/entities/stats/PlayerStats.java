@@ -65,7 +65,7 @@ public class PlayerStats implements Stats
     public void setExp(int experience) { this.exp = experience; }
 
     // Vitality: how fast the player can passively regenerate health.
-    // Formula: Regen = 2 + 0.2 * vitality
+    // Formula: Regen = 2.5 + 0.2 * vitality
     public double getVitality() { return this.vitality; }
     public void setVitality(double vitality) { this.vitality = vitality; }
 
@@ -80,6 +80,12 @@ public class PlayerStats implements Stats
 
     // Calculations
     public int calculateFramesPerAttack() { return (int)(60/(0.1*dexterity+1.5)); }
+
+    public void regenerateHealth() 
+    { 
+        currentHealth += (2.5 + 0.2*vitality)/60; 
+        if(currentHealth > maxHealth) currentHealth = maxHealth;
+    }
 
     public int damageEntity(int damage) 
     { 

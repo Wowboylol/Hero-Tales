@@ -2,6 +2,7 @@
  *  PlayerStats.java
  *  
  *  Description: An enemy has no additional stats beyond the default stats.
+ *               Enemies cannot regenerate health.
  *               Altered dexterity formula: Attack/sec = 1.0 + 0.1 * dexterity, where Attack/frame = 60/(Attack/sec)
  *
 */
@@ -74,4 +75,6 @@ public class EnemyStats implements Stats
         if(this.currentHealth > this.maxHealth) this.currentHealth = this.maxHealth;
         return heal;    
     }
+
+    public void regenerateHealth() {}
 }
