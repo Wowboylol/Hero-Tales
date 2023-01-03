@@ -28,6 +28,10 @@ public class Player extends AnimateEntity implements Damageable
     public final int MOVE_ANIMATION_SPEED = 14;
     public final int HP_BAR_OFFSET = 55;
 
+    // Sounds
+    public final int SOUND_HIT_ID = 1;
+    public final int SOUND_DEATH_ID = 2;
+
     // Attributes
     private Simulator simulator;
     private Keyboard keyboard;
@@ -139,7 +143,13 @@ public class Player extends AnimateEntity implements Damageable
     public boolean isDestroyed() { return false; }
 
     @Override
-    public void damageEntity(int damage) { this.getStats().damageEntity(damage); }
+    public void damageEntity(int damage) 
+    { 
+        this.getStats().damageEntity(damage); 
+
+        if(this.getStats().getCurrentHealth() > 0) simulator.playSoundEffect(SOUND_HIT_ID); 
+        else simulator.playSoundEffect(SOUND_DEATH_ID); 
+    }
 
     @Override
     public void healEntity(int heal) { this.getStats().healEntity(heal); }
@@ -226,7 +236,6 @@ public class Player extends AnimateEntity implements Damageable
     public void drawHealthBar(Graphics2D graphics2d, int yOffset)
     {
         double healthPercentage = (double)this.getStats().getCurrentHealth() / (double)this.getStats().getMaxHealth();
-        if(healthPercentage < 0) healthPercentage = 0;
 
         graphics2d.setColor(new Color(35, 35, 35));
         graphics2d.fillRect(playerScreenPositionX()-1, playerScreenPositionY()+yOffset-1, Simulator.TILE_SIZE+2, 8);

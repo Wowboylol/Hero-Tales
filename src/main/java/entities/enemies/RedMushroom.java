@@ -28,7 +28,12 @@ public class RedMushroom extends Enemy implements Damageable
     public final int HP_BAR_OFFSET = 55;
     public final int AGGRO_RANGE = 240;
 
+    // Sounds
+    public final int SOUND_HIT_ID = 3;
+    public final int SOUND_DEATH_ID = 4;
+
     // Attributes
+    private Simulator simulator;
     private CollisionChecker collisionChecker;
     private Wieldable attack;
 
@@ -36,6 +41,7 @@ public class RedMushroom extends Enemy implements Damageable
     public RedMushroom(Simulator simulator, CollisionChecker collisionChecker, Coordinate spawnLocation)
     {
         super(spawnLocation, simulator);
+        this.simulator = simulator;
         this.collisionChecker = collisionChecker;
         this.attack = new RedMushroomAttack(simulator);
         loadSprite();
@@ -84,7 +90,13 @@ public class RedMushroom extends Enemy implements Damageable
     public boolean isDestroyed() { return this.getStats().getCurrentHealth() <= 0; }
 
     @Override
-    public void damageEntity(int damage) { this.addDamageText(this.getStats().damageEntity(damage)); }
+    public void damageEntity(int damage) 
+    { 
+        this.addDamageText(this.getStats().damageEntity(damage));
+        
+        if(this.getStats().getCurrentHealth() > 0) simulator.playSoundEffect(SOUND_HIT_ID); 
+        else simulator.playSoundEffect(SOUND_DEATH_ID); 
+    }
 
     @Override
     public void healEntity(int heal) { this.getStats().healEntity(heal); }

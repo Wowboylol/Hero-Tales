@@ -86,7 +86,8 @@ public class PlayerStats implements Stats
         double maximumReduction = 0.1*damage;
         double finalDamage = damage - defense;
         if(finalDamage < maximumReduction) finalDamage = maximumReduction;
-        this.currentHealth -= finalDamage;
+        currentHealth -= finalDamage;
+        if(currentHealth < 0) currentHealth = 0;
         return (int)finalDamage;
     }
     

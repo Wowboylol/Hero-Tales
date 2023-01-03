@@ -26,6 +26,10 @@ public class Sound
     public Sound()
     {
         soundURL[0] = getClass().getResource("/sounds/effects/sword_swing.wav");
+        soundURL[1] = getClass().getResource("/sounds/effects/player_hit.wav");
+        soundURL[2] = getClass().getResource("/sounds/effects/player_death.wav");
+        soundURL[3] = getClass().getResource("/sounds/effects/humanoid_hit.wav");
+        soundURL[4] = getClass().getResource("/sounds/effects/humanoid_death.wav");
     }
 
     // Get audio from file
