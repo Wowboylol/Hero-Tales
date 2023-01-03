@@ -16,24 +16,28 @@ import main.Simulator;
 import main.CollisionChecker;
 import entities.*;
 import entities.stats.EnemyStats;
+import items.Wieldable;
+import items.enemyattacks.RedMushroomAttack;
 
 public class RedMushroom extends Enemy implements Damageable
 {
     // Configurations
     public final Rectangle HITBOX_CONFIGURATIONS = new Rectangle(3, 9, 42, 36);
-    public final EnemyStats ENEMY_STATS = new EnemyStats(200, 0, 0, 5, 2);
+    public final EnemyStats ENEMY_STATS = new EnemyStats(200, 0, 0, 0, 2);
     public final int MOVE_ANIMATION_SPEED = 12;
     public final int HP_BAR_OFFSET = 55;
     public final int AGGRO_RANGE = 5;
 
     // Attributes
     private CollisionChecker collisionChecker;
+    private Wieldable attack;
 
     // Default constructor
     public RedMushroom(Simulator simulator, CollisionChecker collisionChecker, Coordinate spawnLocation)
     {
         super(spawnLocation, simulator);
         this.collisionChecker = collisionChecker;
+        this.attack = new RedMushroomAttack(simulator);
         loadSprite();
 
         // Super class overloading
@@ -45,24 +49,35 @@ public class RedMushroom extends Enemy implements Damageable
     @Override
     public void update()
     {
-        if(this.onScreen()) 
+        if(this.onScreen() == false) return;
+        this.setAction();
+        this.decreaseAttackCooldown();
+        this.animateSprite();
+
+        int aggroAngle = collisionChecker.checkAggro(this, AGGRO_RANGE);
+        if(aggroAngle != -1 && this.canAttack())
         {
-            this.setAction();
-            this.animateSprite();
-            if(this.getIsMoving() && !collisionChecker.checkTileWall(this)) this.moveEnemy();
+            this.startAttackCooldown();
+            this.attack.attack(
+                new Coordinate(
+                    this.getWorldCoordinateX()+getOriginPointX(), 
+                    this.getWorldCoordinateY()+getOriginPointY()
+                ),
+                this.getPlayerCoordinate(),
+                aggroAngle
+            );
         }
+        if(this.getIsMoving() && !collisionChecker.checkTileWall(this)) this.moveEnemy();
     }
 
     @Override
     public void draw(Graphics2D graphics2D)
     {
-        if(this.onScreen()) 
-        {
-            drawMovingSprite(graphics2D);
-            this.drawHealthBar(graphics2D, HP_BAR_OFFSET);
-            this.drawDamageText(graphics2D);
-            if(this.getDebugConsole()) this.debugConsole(graphics2D);
-        }
+        if(this.onScreen() == false) return;
+        drawMovingSprite(graphics2D);
+        this.drawHealthBar(graphics2D, HP_BAR_OFFSET);
+        this.drawDamageText(graphics2D);
+        if(this.getDebugConsole()) this.debugConsole(graphics2D);
     }
 
     @Override

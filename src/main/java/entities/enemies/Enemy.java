@@ -44,6 +44,7 @@ public abstract class Enemy extends AnimateEntity
     }
 
     public boolean getDebugConsole() { return this.debugConsole.get(); }
+    public Coordinate getPlayerCoordinate() { return this.playerCoordinate; }
 
     // Set this enemy next action
     public void setAction()

@@ -1,7 +1,8 @@
 /*  
  *  PlayerStats.java
  *  
- *  Description: An enemy has additional stats...
+ *  Description: An enemy has no additional stats beyond the default stats.
+ *               Altered dexterity formula: Attack/sec = 1.0 + 0.1 * dexterity, where Attack/frame = 60/(Attack/sec)
  *
 */
 
@@ -56,7 +57,7 @@ public class EnemyStats implements Stats
     public void setSpeed(int speed) { this.speed = speed; }
 
     // Calculations
-    public int calculateFramesPerAttack() { return (int)(60/(0.1*dexterity+1.5)); }
+    public int calculateFramesPerAttack() { return (int)(60/(0.1*dexterity+1)); }
     
     public int damageEntity(int damage) 
     { 
