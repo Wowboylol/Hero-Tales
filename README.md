@@ -14,12 +14,12 @@ Description placeholder
 - [X] Create unit tests
 
 ### Development Cycle 2
+- [X] Create prototype monster
 - [ ] Add game states
 - [ ] Create prototype NPC
 - [ ] Add dialogue interactions
 - [ ] Implement title screen
 - [ ] Add events interactions
-- [ ] Create prototype monster
 - [ ] Add general UI (options, health bar, etc.)
 - [ ] Create unit tests
 
