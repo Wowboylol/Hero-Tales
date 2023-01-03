@@ -56,12 +56,12 @@ public class RedMushroom extends Enemy implements Damageable
     public void update()
     {
         if(this.onScreen() == false) return;
+        this.setIsAttacking(collisionChecker.checkAggro(this, AGGRO_RANGE) != -1);
         this.setAction();
         this.decreaseAttackCooldown();
         this.animateSprite();
 
-        int aggroAngle = collisionChecker.checkAggro(this, AGGRO_RANGE);
-        if(aggroAngle != -1 && this.canAttack())
+        if(this.getIsAttacking() && this.canAttack())
         {
             this.startAttackCooldown();
             this.attack.attack(
@@ -70,7 +70,7 @@ public class RedMushroom extends Enemy implements Damageable
                     this.getWorldCoordinateY()+getOriginPointY()
                 ),
                 this.getPlayerCoordinate(),
-                aggroAngle
+                collisionChecker.checkAggro(this, AGGRO_RANGE)
             );
         }
         if(this.getIsMoving() && !collisionChecker.checkTileWall(this)) this.moveEnemy();
@@ -152,22 +152,22 @@ public class RedMushroom extends Enemy implements Damageable
             case DOWNRIGHT:
             case DOWNLEFT:
             case DOWN:
-                if(this.getSpriteNum() == 1) image = down2;
-                if(this.getSpriteNum() == 2) image = attackDown;
+                if(this.getSpriteNum() == 1) image = attackDown;
+                if(this.getSpriteNum() == 2) image = down2;
                 break;
             case UPRIGHT:
             case UPLEFT:
             case UP:
-                if(this.getSpriteNum() == 1) image = up2;
-                if(this.getSpriteNum() == 2) image = attackUp;
+                if(this.getSpriteNum() == 1) image = attackUp;
+                if(this.getSpriteNum() == 2) image = up2;
                 break;
             case LEFT:
-                if(this.getSpriteNum() == 1) image = left1;
-                if(this.getSpriteNum() == 2) image = attackLeft;
+                if(this.getSpriteNum() == 1) image = attackLeft;
+                if(this.getSpriteNum() == 2) image = left1;
                 break;
             case RIGHT:
-                if(this.getSpriteNum() == 1) image = right1;
-                if(this.getSpriteNum() == 2) image = attackRight;
+                if(this.getSpriteNum() == 1) image = attackRight;
+                if(this.getSpriteNum() == 2) image = right1;
                 break;
         }
         graphics2D.drawImage(image, this.getScreenX(), this.getScreenY(), null);
