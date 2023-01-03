@@ -26,6 +26,7 @@ public class Player extends AnimateEntity implements Damageable
     public static final int PLAYER_SCREEN_Y = Simulator.SCREEN_HEIGHT/2 - (Simulator.TILE_SIZE/2);
     public final Rectangle HITBOX_CONFIGURATIONS = new Rectangle(12, 12, 24, 30);
     public final int MOVE_ANIMATION_SPEED = 14;
+    public final int HP_BAR_OFFSET = 55;
 
     // Attributes
     private Simulator simulator;
@@ -128,6 +129,8 @@ public class Player extends AnimateEntity implements Damageable
         if(this.getIsAttacking() || this.canAttack() == false) drawAttackSprite(graphics2D);
         else drawMovingSprite(graphics2D);
 
+        drawHealthBar(graphics2D, HP_BAR_OFFSET);
+
         // DEBUG
         if(keyboard.getDebugConsole()) debugConsole(graphics2D);
     }
@@ -217,6 +220,22 @@ public class Player extends AnimateEntity implements Damageable
                 break;
         }
         graphics2D.drawImage(image, playerScreenPositionX(), playerScreenPositionY(), null);
+    }
+
+    // Draw health bar
+    public void drawHealthBar(Graphics2D graphics2d, int yOffset)
+    {
+        double healthPercentage = (double)this.getStats().getCurrentHealth() / (double)this.getStats().getMaxHealth();
+        if(healthPercentage < 0) healthPercentage = 0;
+
+        graphics2d.setColor(new Color(35, 35, 35));
+        graphics2d.fillRect(playerScreenPositionX()-1, playerScreenPositionY()+yOffset-1, Simulator.TILE_SIZE+2, 8);
+
+        if(healthPercentage > 0.5) graphics2d.setColor(new Color(21, 183, 11));
+        else if(healthPercentage > 0.25) graphics2d.setColor(new Color(238, 119, 7));
+        else graphics2d.setColor(new Color(211, 59, 50));
+
+        graphics2d.fillRect(playerScreenPositionX(), playerScreenPositionY()+yOffset, (int)(Simulator.TILE_SIZE*healthPercentage), 6);
     }
 
     // Load player sprites into BufferedImage
