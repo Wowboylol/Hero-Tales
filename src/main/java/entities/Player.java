@@ -17,9 +17,6 @@ import java.util.Map.Entry;
 import main.*;
 import entities.enums.MoveDirection;
 import entities.stats.PlayerStats;
-import items.Wieldable;
-import items.playerweapons.*;
-
 
 public class Player extends AnimateEntity implements Damageable
 {
@@ -40,18 +37,16 @@ public class Player extends AnimateEntity implements Damageable
     private Keyboard keyboard;
     private Mouse mouse;
     private CollisionChecker collisionChecker;
-    private Wieldable weapon;
 
     // Default constructor (starting coordinate based on defaults)
     public Player(Simulator simulator)
     {
         super(PLAYER_SPAWN_POSITION);
         this.simulator = simulator;
-        this.weapon = new WoodenSword(simulator);    // FIXME: Testing purposes only
         loadSprite();
         
         // Super class overriding
-        this.setStats(new PlayerStats());
+        this.setStats(new PlayerStats(simulator));
         this.setHitbox(HITBOX_CONFIGURATIONS);
         this.setMoveAnimationSpeed(MOVE_ANIMATION_SPEED);
     }
@@ -63,9 +58,6 @@ public class Player extends AnimateEntity implements Damageable
         this.mouse = mouse;
         this.collisionChecker = collisionCheck;
     }
-
-    // Getters
-    public Wieldable getWeapon() { return this.weapon; }
 
     @Override
     public void update()
@@ -79,7 +71,7 @@ public class Player extends AnimateEntity implements Damageable
         if(this.getIsAttacking() && this.canAttack()) 
         {
             this.startAttackCooldown();
-            this.weapon.attack(
+            this.getStats().getWeapon().attack(
                 new Coordinate(
                     this.getWorldCoordinateX()+getOriginPointX(), 
                     this.getWorldCoordinateY()+getOriginPointY()

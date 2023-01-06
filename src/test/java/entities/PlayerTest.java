@@ -47,7 +47,7 @@ public class PlayerTest
 
     // Test that player has a weapon equipped
     @Test
-    public void testWeaponExist() { assertNotNull(player.getWeapon()); }
+    public void testWeaponExist() { assertNotNull(player.getStats().getWeapon()); }
 
     // Test setting player direction when W (up) is pressed
     @Test

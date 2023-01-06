@@ -9,6 +9,8 @@
 
 package entities.stats;
 
+import items.Wieldable;
+
 public class EnemyStats implements Stats
 {
     // Stats
@@ -18,6 +20,7 @@ public class EnemyStats implements Stats
     private int defense;
     private int dexterity;
     private int speed;
+    private Wieldable attackPattern;
 
     // Default constructor, sets default stats
     public EnemyStats() 
@@ -48,6 +51,7 @@ public class EnemyStats implements Stats
     public int getDefense() { return this.defense; }
     public int getDexterity() { return this.dexterity; }
     public int getSpeed() { return this.speed; }
+    public Wieldable getWeapon() { return this.attackPattern; }
 
     // Setters
     public void setMaxHealth(int health) { this.maxHealth = health; }
@@ -56,6 +60,7 @@ public class EnemyStats implements Stats
     public void setDefense(int defense) { this.defense = defense; }
     public void setDexterity(int dexterity) { this.dexterity = dexterity; }
     public void setSpeed(int speed) { this.speed = speed; }
+    public void setWeapon(Wieldable attackPattern) { this.attackPattern = attackPattern; }
 
     // Calculations
     public int calculateFramesPerAttack() { return (int)(60/(0.1*dexterity+1)); }

@@ -7,6 +7,10 @@
 
 package entities.stats;
 
+import main.Simulator;
+import items.Wieldable;
+import items.playerweapons.*;
+
 public class PlayerStats implements Stats
 {
     // Stats
@@ -23,9 +27,10 @@ public class PlayerStats implements Stats
     private double vitality;
     private int charisma;
     private int intelligence;
+    private Wieldable weapon;
 
     // Default constructor, sets default stats
-    public PlayerStats() 
+    public PlayerStats(Simulator simulator) 
     {
         this.maxHealth = 100;
         this.currentHealth = maxHealth;
@@ -38,6 +43,7 @@ public class PlayerStats implements Stats
         this.vitality = 0;
         this.charisma = 0;
         this.intelligence = 0;
+        this.weapon = new WoodenSword(simulator);
     }
 
     // Getters
@@ -47,6 +53,7 @@ public class PlayerStats implements Stats
     public int getDefense() { return this.defense; }
     public int getDexterity() { return this.dexterity; }
     public int getSpeed() { return this.speed; }
+    public Wieldable getWeapon() { return this.weapon; }
 
     // Setters
     public void setMaxHealth(int health) { this.maxHealth = health; }
@@ -55,6 +62,7 @@ public class PlayerStats implements Stats
     public void setDefense(int defense) { this.defense = defense; }
     public void setDexterity(int dexterity) { this.dexterity = dexterity; }
     public void setSpeed(int speed) { this.speed = speed; }
+    public void setWeapon(Wieldable weapon) { this.weapon = weapon; }
 
     // Level: how strong the player is in terms of experience.
     public int getLevel() { return this.level; }

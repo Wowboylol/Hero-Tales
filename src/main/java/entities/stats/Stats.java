@@ -8,6 +8,8 @@
 
 package entities.stats;
 
+import items.Wieldable;
+
 public interface Stats 
 {
     // Max Health: how much health an entity can have at most.
@@ -37,6 +39,10 @@ public interface Stats
     // Formula: 1 tile per 1 movespeed
     public int getSpeed();
     public void setSpeed(int movespeed);
+
+    // Weapon: the weapon (player & hero) or attack (enemy) an entity uses
+    public Wieldable getWeapon();
+    public void setWeapon(Wieldable weapon);
 
     // Calculations
     public int calculateFramesPerAttack();
