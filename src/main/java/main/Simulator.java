@@ -34,8 +34,9 @@ public class Simulator extends JPanel implements Runnable
     private ServiceInjector serviceInjector = new ServiceInjector(this);
     private Thread gameThread;
 
-    // DEBUG
+    // Attributes
     private long maxDrawTime = 0;
+    private GameState gameState;
     
     // Injectable services
     public final Keyboard keyboard = new Keyboard();
@@ -63,6 +64,7 @@ public class Simulator extends JPanel implements Runnable
         this.addMouseListener(mouse);
         this.addMouseMotionListener(mouse);
         this.setFocusable(true);
+        setupGame();
     }
 
     // Getters
@@ -76,6 +78,12 @@ public class Simulator extends JPanel implements Runnable
         if(instance == null)
             instance = new Simulator();
         return instance;
+    }
+
+    // Sets up the game
+    private void setupGame()
+    {
+        this.gameState = GameState.PLAY;
     }
 
     // Creates a thread which executes instruction seperately to the Main class
@@ -112,9 +120,17 @@ public class Simulator extends JPanel implements Runnable
     // Update information of the game
     public void update()
     {
-        updateEnemies();
-        player.update();
-        updateProjectiles();
+        setGameState();
+        if(gameState == GameState.PLAY)
+        {
+            updateEnemies();
+            player.update();
+            updateProjectiles();
+        }
+        if(gameState == GameState.PAUSE)
+        {
+            // FIXME: Nothing for now
+        }
     }
 
     // Draw UI with updated information, called by repaint()
@@ -195,5 +211,12 @@ public class Simulator extends JPanel implements Runnable
     public void drawEnemies(Graphics2D graphics2D)
     {
         for(int i = 0; i < enemies.size(); i++) { enemies.get(i).draw(graphics2D); }
+    }
+
+    // Helper: Sets game state
+    private void setGameState()
+    {
+        if(this.keyboard.getPause()) this.gameState = GameState.PAUSE;
+        else this.gameState = GameState.PLAY;
     }
 }

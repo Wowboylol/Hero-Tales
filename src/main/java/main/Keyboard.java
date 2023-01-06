@@ -19,12 +19,15 @@ public class Keyboard implements KeyListener
     // Attributes
     private final Set<Integer> pressedKeys = new HashSet<>();
     private AtomicBoolean debugConsole = new AtomicBoolean(false);
+    private AtomicBoolean pauseGame = new AtomicBoolean(false);
 
     // Returns whether debug console is toggled
     public boolean getDebugConsole() { return debugConsole.get(); }
+    public boolean getPause() { return pauseGame.get(); }
 
     // Returns reference to debug console
     public AtomicBoolean getDebugConsoleReference() { return debugConsole; }
+    public AtomicBoolean getPauseGameReference() { return pauseGame; }
 
     // Add/remove given key to pressedKeys
     public void addPressedKey(int key) { pressedKeys.add(key); }
@@ -84,6 +87,7 @@ public class Keyboard implements KeyListener
             return;
         }
         if(ASCII == KeyEvent.VK_EQUALS) debugConsole.set(!getDebugConsole());
+        if(ASCII == KeyEvent.VK_ESCAPE) pauseGame.set(!pauseGame.get());
     }
 
     @Override
