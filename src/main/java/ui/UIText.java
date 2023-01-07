@@ -61,12 +61,16 @@ public class UIText extends UIComponent
             graphics2d.setColor(dropShadowColor);
             graphics2d.drawString(
                 text, 
-                this.getPosition().getX()+this.getPadding().getLeft()+dropShadowOffset, 
+                this.getPosition().getX()+this.getPadding().getLeft()+this.getMargin().getLeft()+dropShadowOffset, 
                 fontSize+this.getPosition().getY()+dropShadowOffset
             );
         }
         graphics2d.setColor(fontColor);
-        graphics2d.drawString(text, this.getPosition().getX()+this.getPadding().getLeft(), fontSize+this.getPosition().getY());
+        graphics2d.drawString(
+            text, 
+            this.getPosition().getX()+this.getPadding().getLeft()+this.getMargin().getLeft(), 
+            fontSize+this.getPosition().getY()
+        );
     }
 
     private void createFont()
