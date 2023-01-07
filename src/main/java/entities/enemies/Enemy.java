@@ -131,7 +131,7 @@ public abstract class Enemy extends AnimateEntity
         if(damageText.size() == 0) return;
 
         FontMetrics metrics = graphics2d.getFontMetrics(UIHandler.DAMAGE_TEXT_FONT);
-        graphics2d.setColor(new Color(240, 52, 24));
+        graphics2d.setColor(new Color(110, 19, 5));
         graphics2d.setFont(UIHandler.DAMAGE_TEXT_FONT);
 
         for(int i=0; i<damageText.size(); i++)
@@ -141,7 +141,20 @@ public abstract class Enemy extends AnimateEntity
 
             damageText.get(i).setValue(damageOffset-1);
             if(damageOffset < -45) damageText.remove(i);
-            else graphics2d.drawString(text, getScreenX()+(Simulator.TILE_SIZE/2-metrics.stringWidth(text)/2)-2, getScreenY()+damageOffset);
+            else 
+            {
+                graphics2d.drawString(
+                    text, 
+                    getScreenX()+(Simulator.TILE_SIZE/2-metrics.stringWidth(text)/2)-1, 
+                    getScreenY()+damageOffset+1
+                );
+                graphics2d.setColor(new Color(240, 52, 24));
+                graphics2d.drawString(
+                    text, 
+                    getScreenX()+(Simulator.TILE_SIZE/2-metrics.stringWidth(text)/2)-2, 
+                    getScreenY()+damageOffset
+                );
+            }
         }
     }
 

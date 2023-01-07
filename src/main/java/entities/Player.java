@@ -251,7 +251,7 @@ public class Player extends AnimateEntity implements Damageable
         if(damageText.size() == 0) return;
 
         FontMetrics metrics = graphics2d.getFontMetrics(UIHandler.DAMAGE_TEXT_FONT);
-        graphics2d.setColor(new Color(240, 52, 24));
+        graphics2d.setColor(new Color(110, 19, 5));
         graphics2d.setFont(UIHandler.DAMAGE_TEXT_FONT);
 
         for(int i=0; i<damageText.size(); i++)
@@ -263,6 +263,12 @@ public class Player extends AnimateEntity implements Damageable
             if(damageOffset < -45) damageText.remove(i);
             else 
             {
+                graphics2d.drawString(
+                    text, 
+                    playerScreenPositionX()+(Simulator.TILE_SIZE/2-metrics.stringWidth(text)/2)-1, 
+                    playerScreenPositionY()+damageOffset+1
+                );
+                graphics2d.setColor(new Color(240, 52, 24));
                 graphics2d.drawString(
                     text, 
                     playerScreenPositionX()+(Simulator.TILE_SIZE/2-metrics.stringWidth(text)/2)-2, 
