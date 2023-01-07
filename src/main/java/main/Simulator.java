@@ -8,14 +8,17 @@
 */
 
 package main;
+
 import javax.swing.JPanel;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Color;
 import java.util.ArrayList;
+
 import entities.*;
 import graphics.*;
+import ui.*;
 
 public class Simulator extends JPanel implements Runnable
 {
@@ -45,18 +48,19 @@ public class Simulator extends JPanel implements Runnable
     public final Player player = new Player(this);
     public final Camera camera = new Camera(this);
     public final CollisionChecker collisionChecker = new CollisionChecker(this);
+    public final UIHandler uiHandler = new UIHandler(this);
 
     // Dependent services
     public final MapHandler mapHandler = new MapHandler(camera);
 
     // Lists
+    public final ArrayList<UIComponent> uiContainers = new ArrayList<UIComponent>();
     public final ArrayList<Updateable> projectiles = new ArrayList<Updateable>();
     public final ArrayList<Damageable> enemies = new ArrayList<Damageable>();
 
     // Constructor (Singletons have a private constructor that creates a global instance on get_instance())
     private Simulator()
     {
-        serviceInjector.injectDependencies();
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
@@ -83,7 +87,10 @@ public class Simulator extends JPanel implements Runnable
     // Sets up the game
     private void setupGame()
     {
-        this.gameState = GameState.PLAY;
+        gameState = GameState.PLAY;
+        serviceInjector.injectDependencies();
+        mapHandler.initializeMap();
+        uiHandler.intializeUI();
     }
 
     // Creates a thread which executes instruction seperately to the Main class
@@ -129,7 +136,7 @@ public class Simulator extends JPanel implements Runnable
         }
         if(gameState == GameState.PAUSE)
         {
-            // FIXME: Nothing for now
+            uiContainers.forEach(uiContainer -> uiContainer.update());
         }
     }
 
@@ -150,6 +157,7 @@ public class Simulator extends JPanel implements Runnable
         drawEnemies(graphics2D);
         player.draw(graphics2D);
         drawProjectiles(graphics2D);
+        uiContainers.forEach(uiContainer -> uiContainer.draw(graphics2D));
 
         // DEBUG
         if(keyboard.getDebugConsole()) debugConsole(graphics2D, drawStart);
@@ -171,7 +179,7 @@ public class Simulator extends JPanel implements Runnable
         if(drawTime > FPSBound) graphics2d.setColor(Color.red);
         else graphics2d.setColor(Color.white);
 
-        graphics2d.setFont(Utility.DEFAULT_FONT);
+        graphics2d.setFont(UIHandler.DEFAULT_FONT);
         graphics2d.drawString("Draw time: " + drawTime, 10, 600);
         graphics2d.drawString("Max draw time: " + maxDrawTime, 10, 615);
         graphics2d.drawString("Player position: (" + playerPosition.getX() + ", " + playerPosition.getY() + ")", 10, 630);

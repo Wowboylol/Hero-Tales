@@ -250,9 +250,9 @@ public class Player extends AnimateEntity implements Damageable
         ArrayList<Entry<String, Integer>> damageText = this.getDamageText();
         if(damageText.size() == 0) return;
 
-        FontMetrics metrics = graphics2d.getFontMetrics(Utility.DAMAGE_TEXT_FONT);
+        FontMetrics metrics = graphics2d.getFontMetrics(UIHandler.DAMAGE_TEXT_FONT);
         graphics2d.setColor(new Color(240, 52, 24));
-        graphics2d.setFont(Utility.DAMAGE_TEXT_FONT);
+        graphics2d.setFont(UIHandler.DAMAGE_TEXT_FONT);
 
         for(int i=0; i<damageText.size(); i++)
         {

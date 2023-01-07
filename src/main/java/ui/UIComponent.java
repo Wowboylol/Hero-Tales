@@ -10,10 +10,10 @@ package ui;
 import main.Utility;
 
 import java.awt.Dimension;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import java.awt.Graphics2D;
 
 import entities.Coordinate;
 
@@ -35,8 +35,8 @@ public abstract class UIComponent
     }
 
     // Methods
-    public abstract Image loadSprite();
     public abstract void update();
+    public abstract void draw(Graphics2D graphics2d);
 
     // Getters
     public Coordinate getPosition() { return position; }

@@ -1,27 +1,27 @@
 /*  
  *  UIContainer.java
  *  
- *  Description: FIXME: Placeholder
+ *  Description: A container for UIComponents. Can be used to group UIComponents together.
  *
 */
 
 package ui;
 
-import java.awt.Color;
 import java.awt.Image;
+import java.awt.Graphics2D;
 
 public class UIContainer extends UIComponent
 {
     // Attributes
-    private Color backgroundColor;
+    private Image sprite;
 
     // Default constructor
     public UIContainer()
     {
         super();
-        backgroundColor = new Color(255, 0, 0, 1);
         calculateSize();
         calculatePosition();
+        loadSprite();
     }
 
     // Helper: FIXME: calculate size with margin and padding
@@ -37,15 +37,21 @@ public class UIContainer extends UIComponent
     }
 
     @Override
-    public Image loadSprite() 
-    { 
-        return this.spriteSetup("/ui/wood_panel_test.png", this.getSize().width, this.getSize().height);
-    }
-
-    @Override
     public void update() 
     { 
         calculateSize();
         calculatePosition();
+    }
+
+    @Override
+    public void draw(Graphics2D graphics2d) 
+    { 
+        graphics2d.drawImage(sprite, this.getPosition().getX(), this.getPosition().getY(), null);
+    }
+
+    // Loads and stores sprite
+    private void loadSprite()
+    {
+        sprite = this.spriteSetup("wood_panel_test", this.getSize().width, this.getSize().height);
     }
 }

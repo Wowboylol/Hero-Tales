@@ -15,10 +15,11 @@ public class MapHandler
 {
     // Attributes
     private MapStrategy strategy;
+    private Camera camera;
 
     public MapHandler(Camera camera)
     {
-        setStrategy(new StarterPlainsMap(camera)); // FIXME: remove later
+        this.camera = camera;
     }
 
     // Setters
@@ -32,6 +33,12 @@ public class MapHandler
     public int getCurrentMapHeight() { return strategy.getMapHeight(); }
     public TileType getTileType(int col, int row) { return strategy.getTileType(col, row); }
     public boolean getTileCollision(int col, int row) { return (strategy.getTileType(col, row) == TileType.WALL) ? true : false; }
+
+    // Initializes map by setting strategy
+    public void initializeMap()
+    {
+        setStrategy(new StarterPlainsMap(camera));
+    }
 
     // Executes strategy of building a specific type of map
     public void draw(Graphics2D graphics2D)
