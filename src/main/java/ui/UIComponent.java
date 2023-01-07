@@ -30,7 +30,7 @@ public abstract class UIComponent
     {
         this.position = new Coordinate(0, 0);
         this.size = new Dimension(1, 1);
-        this.margin = new Spacing(0);
+        this.margin = new Spacing(5);
         this.padding = new Spacing(5);
     }
 
@@ -45,10 +45,10 @@ public abstract class UIComponent
     public Spacing getPadding() { return padding; }
 
     // Setters
-    public void setPosition(Coordinate position) { this.position = position; }
+    protected void setPosition(Coordinate position) { this.position = position; }
     public void setPosition(int x, int y) { this.position = new Coordinate(x, y); }
-    public void setSize(Dimension size) { this.size = size; }
-    public void setSize(int width, int height) { this.size = new Dimension(width, height); }
+    protected void setSize(Dimension size) { this.size = size; }
+    protected void setSize(int width, int height) { this.size = new Dimension(width, height); }
     public void setMargin(Spacing margin) { this.margin = margin; }
     public void setPadding(Spacing padding) { this.padding = padding; }
 

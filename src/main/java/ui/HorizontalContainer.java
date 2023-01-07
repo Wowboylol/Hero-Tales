@@ -1,7 +1,7 @@
 /*  
  *  HorizontalContainer.java
  *  
- *  Description: FIXME: Placeholder
+ *  Description: Spaces child UIComponents equally along the horizontal.
  *
 */
 
@@ -21,10 +21,10 @@ public class HorizontalContainer extends UIContainer
 
         for(UIComponent child : children)
         {
-            combinedChildWidth += child.getSize().getWidth() + child.getMargin().getHorizontal();
-            if(child.getSize().getHeight() > tallestChildHeight)
+            combinedChildWidth += child.getSize().width + child.getMargin().getHorizontal();
+            if(child.getSize().height > tallestChildHeight)
             {
-                tallestChildHeight = (int)child.getSize().getHeight();
+                tallestChildHeight = (int)child.getSize().height;
             }
         }
         return new Dimension(combinedChildWidth, tallestChildHeight);
@@ -39,13 +39,14 @@ public class HorizontalContainer extends UIContainer
         {
             currentX += child.getMargin().getLeft();
             child.setPosition(currentX, getPadding().getTop());
-            currentX += child.getSize().getWidth() + child.getMargin().getRight();
+            currentX += child.getSize().width + child.getMargin().getRight();
         }
     }
 
     @Override
     public void updateSprite()
     {
+        if(this.getSize().width <= 0 && this.getSize().height <= 0) return;
         this.setSprite(this.spriteSetup(SPRITE_NAME, this.getSize().width, this.getSize().height));
     }
 }
