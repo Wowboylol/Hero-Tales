@@ -1,7 +1,7 @@
 /*  
- *  HorizontalContainer.java
+ *  RowContainer.java
  *  
- *  Description: Spaces child UIComponents equally along the horizontal.
+ *  Description: A UIContainer that arranges its children in a row.
  *
 */
 
@@ -9,7 +9,7 @@ package ui;
 
 import java.awt.Dimension;
 
-public class HorizontalContainer extends UIContainer
+public class RowContainer extends UIContainer
 {
     public final String SPRITE_NAME = "wood_panel_test";
 

@@ -30,9 +30,9 @@ public class UIHandler
     // Create and add UI components
     public void intializeUI()
     {
-        UIContainer container = new VerticalContainer();
+        UIContainer container = new ColumnContainer();
         // container.setMargin(new Spacing(Simulator.SCREEN_WIDTH/2, Simulator.SCREEN_HEIGHT/2));
-        container.setPadding(new Spacing(80, 80));
+        container.setPadding(new Spacing(20));
 
         container.addUIComponent(new UIText("Hello World!"));
 

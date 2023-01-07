@@ -1,7 +1,7 @@
 /*  
- *  VerticalContainer.java
+ *  ColumnContainer.java
  *  
- *  Description: FIXME: Placeholder
+ *  Description: A UIContainer that arranges its children in a column.
  *
 */
 
@@ -9,7 +9,7 @@ package ui;
 
 import java.awt.Dimension;
 
-public class VerticalContainer extends UIContainer
+public class ColumnContainer extends UIContainer
 {
     public final String SPRITE_NAME = "wood_panel_test";
 
