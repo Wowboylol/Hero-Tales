@@ -133,10 +133,11 @@ public class Simulator extends JPanel implements Runnable
             updateEnemies();
             player.update();
             updateProjectiles();
+            uiContainers.forEach(uiContainer -> uiContainer.update());
         }
         if(gameState == GameState.PAUSE)
         {
-            uiContainers.forEach(uiContainer -> uiContainer.update());
+            // Do nothing for now
         }
     }
 
