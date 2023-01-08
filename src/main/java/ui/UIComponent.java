@@ -7,12 +7,7 @@
 
 package ui;
 
-import main.Utility;
-
 import java.awt.Dimension;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 import java.awt.Graphics2D;
 
 import entities.Coordinate;
@@ -51,19 +46,4 @@ public abstract class UIComponent
     protected void setSize(int width, int height) { this.size = new Dimension(width, height); }
     public void setMargin(Spacing margin) { this.margin = margin; }
     public void setPadding(Spacing padding) { this.padding = padding; }
-
-    // Helper: Sets up player sprites by resizing image from file
-    protected BufferedImage spriteSetup(String imageName, int width, int height)
-    {
-        BufferedImage image = null;
-        
-        try {
-            image = ImageIO.read(getClass().getResourceAsStream("/ui/" + imageName + ".png"));
-            image = Utility.resizeImage(image, width, height);
-        }
-        catch(IOException e) {
-            e.printStackTrace();
-        }
-        return image;
-    }
 }

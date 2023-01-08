@@ -32,6 +32,7 @@ public class UIHandler
     {
         UIContainer container = new ColumnContainer();
         container.setPadding(new Spacing(20));
+        container.setAlignment(new Alignment(Alignment.Position.CENTER, Alignment.Position.CENTER));
 
         container.addUIComponent(new UIText("Hello World!"));
 

@@ -61,14 +61,14 @@ public class UIText extends UIComponent
             graphics2d.setColor(dropShadowColor);
             graphics2d.drawString(
                 text, 
-                this.getPosition().getX()+this.getPadding().getLeft()+this.getMargin().getLeft()+dropShadowOffset, 
+                this.getPosition().getX()+this.getPadding().getLeft()+dropShadowOffset, 
                 fontSize+this.getPosition().getY()+dropShadowOffset
             );
         }
         graphics2d.setColor(fontColor);
         graphics2d.drawString(
             text, 
-            this.getPosition().getX()+this.getPadding().getLeft()+this.getMargin().getLeft(), 
+            this.getPosition().getX()+this.getPadding().getLeft(), 
             fontSize+this.getPosition().getY()
         );
     }
@@ -78,7 +78,6 @@ public class UIText extends UIComponent
         font = new Font(fontFamily, fontStyle, fontSize);
     }
 
-    // Calculate size of text
     private void calculateSize()
     {
         FontMetrics fontMetrics = new Canvas().getFontMetrics(font);

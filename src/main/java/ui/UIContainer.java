@@ -11,17 +11,25 @@ import java.awt.Image;
 import java.awt.Graphics2D;
 import java.awt.Dimension;
 import java.util.ArrayList;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+
+import main.Simulator;
+import main.Utility;
 
 public abstract class UIContainer extends UIComponent
 {
     // Attributes
     private Image sprite;
+    private Alignment alignment;
     protected ArrayList<UIComponent> children;
 
     // Default constructor
     public UIContainer()
     {
         super();
+        this.alignment = new Alignment(Alignment.Position.START, Alignment.Position.START);
         this.children = new ArrayList<UIComponent>();
         calculateSize();
         calculatePosition();
@@ -34,6 +42,7 @@ public abstract class UIContainer extends UIComponent
 
     // Setters
     public void setSprite(Image sprite) { this.sprite = sprite; }
+    public void setAlignment(Alignment alignment) { this.alignment = alignment; }
 
     // Add a child UIComponent to this container
     public void addUIComponent(UIComponent uiComponent)
@@ -72,7 +81,30 @@ public abstract class UIContainer extends UIComponent
     // Helper: calculate position based on top and left margins
     private void calculatePosition()
     {
-        this.setPosition(getMargin().getLeft(), getMargin().getTop());
+        int x = getMargin().getLeft();
+        if(alignment.horizontal == Alignment.Position.CENTER) x = Simulator.SCREEN_WIDTH/2 - this.getSize().width/2;
+        else if(alignment.horizontal == Alignment.Position.END) x = Simulator.SCREEN_WIDTH - this.getSize().width - getMargin().getRight();
+
+        int y = getMargin().getTop();
+        if(alignment.vertical == Alignment.Position.CENTER) y = Simulator.SCREEN_HEIGHT/2 - this.getSize().height/2;
+        else if(alignment.vertical == Alignment.Position.END) y = Simulator.SCREEN_HEIGHT - this.getSize().height - getMargin().getBottom();
+
+        this.setPosition(x, y);
         calculateContentPosition();
+    }
+
+    // Helper: Sets up player sprites by resizing image from file
+    protected BufferedImage spriteSetup(String imageName, int width, int height)
+    {
+        BufferedImage image = null;
+        
+        try {
+            image = ImageIO.read(getClass().getResourceAsStream("/ui/" + imageName + ".png"));
+            image = Utility.resizeImage(image, width, height);
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+        }
+        return image;
     }
 }

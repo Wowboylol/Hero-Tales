@@ -33,12 +33,12 @@ public class RowContainer extends UIContainer
     @Override
     protected void calculateContentPosition()
     {
-        int currentX = getPadding().getLeft();
+        int currentX = getPosition().getX() + getPadding().getLeft();
 
         for(UIComponent child : children)
         {
             currentX += child.getMargin().getLeft();
-            child.setPosition(currentX, getPadding().getTop());
+            child.setPosition(currentX, getPosition().getY() + getPadding().getTop());
             currentX += child.getSize().width + child.getMargin().getRight();
         }
     }
