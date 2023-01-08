@@ -32,10 +32,16 @@ public class UIHandler
     {
         UIContainer container = new ColumnContainer();
         container.setPadding(new Spacing(20));
-        container.setAlignment(new Alignment(Alignment.Position.CENTER, Alignment.Position.CENTER));
+        container.setAlignment(new Alignment(Alignment.Position.START, Alignment.Position.START));
+
+        UIContainer container2 = new ColumnContainer();
+        container2.setPadding(new Spacing(20));
+        container2.setAlignment(new Alignment(Alignment.Position.END, Alignment.Position.START));
 
         container.addUIComponent(new UIText("Hello World!"));
+        container2.addUIComponent(new UIText("Goodbye World!"));
 
         simulator.uiContainers.add(container);
+        simulator.uiContainers.add(container2);
     }
 }

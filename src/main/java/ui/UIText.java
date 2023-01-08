@@ -37,13 +37,23 @@ public class UIText extends UIComponent
         this.text = text;
         this.fontSize = 24;
         this.fontStyle = Font.PLAIN;
-        this.fontFamily = "MatchupPro";
+        this.fontFamily = "ExpressionPro";
         this.fontColor = Color.WHITE;
         this.dropShadow = true;
         this.dropShadowOffset = 2;
         this.dropShadowColor = new Color(140, 140, 140);
         updateFont();
     }
+
+    // Setters
+    public void setText(String text) { this.text = text; updateFont();}
+    public void setFontSize(int fontSize) { this.fontSize = fontSize; updateFont();}
+    public void setFontStyle(int fontStyle) { this.fontStyle = fontStyle; updateFont();}
+    public void setFontFamily(String fontFamily) { this.fontFamily = fontFamily; updateFont();}
+    public void setFontColor(Color fontColor) { this.fontColor = fontColor; }
+    public void setDropShadow(boolean dropShadow) { this.dropShadow = dropShadow; }
+    public void setDropShadowOffset(int dropShadowOffset) { this.dropShadowOffset = dropShadowOffset; }
+    public void setDropShadowColor(Color dropShadowColor) { this.dropShadowColor = dropShadowColor; }
 
     @Override
     public void update()
