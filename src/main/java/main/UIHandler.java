@@ -30,18 +30,23 @@ public class UIHandler
     // Create and add UI components
     public void intializeUI()
     {
-        UIContainer container = new ColumnContainer();
-        container.setPadding(new Spacing(20));
-        container.setAlignment(new Alignment(Alignment.Position.START, Alignment.Position.START));
+        UIContainer container = new ColumnContainer("wood_panel");
+        container.setPadding(new Spacing(32));
+        container.setAlignment(new Alignment(Alignment.Position.CENTER, Alignment.Position.CENTER));
 
-        UIContainer container2 = new ColumnContainer();
-        container2.setPadding(new Spacing(20));
-        container2.setAlignment(new Alignment(Alignment.Position.END, Alignment.Position.START));
+        UIComponent menuButton = new RowContainer("wood_menu_button");
+        menuButton.setPadding(new Spacing(128, 32));
 
-        container.addUIComponent(new UIText("Hello World!"));
-        container2.addUIComponent(new UIText("Goodbye World!"));
+        UIComponent settingsButton = new RowContainer("wood_settings_button");
+        settingsButton.setPadding(new Spacing(128, 32));
+        settingsButton.setMargin(new Spacing(0, 16));
 
+        UIComponent quitButton = new RowContainer("wood_quit_button");
+        quitButton.setPadding(new Spacing(128, 32));
+
+        container.addUIComponent(menuButton);
+        container.addUIComponent(settingsButton);
+        container.addUIComponent(quitButton);
         simulator.uiContainers.add(container);
-        simulator.uiContainers.add(container2);
     }
 }

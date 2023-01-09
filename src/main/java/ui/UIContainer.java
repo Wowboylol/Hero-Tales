@@ -22,23 +22,23 @@ public abstract class UIContainer extends UIComponent
 {
     // Attributes
     private Image sprite;
+    private String spriteName;
     private Alignment alignment;
     protected ArrayList<UIComponent> children;
 
     // Default constructor
-    public UIContainer()
+    public UIContainer(String imageName)
     {
         super();
+        this.spriteName = imageName;
         this.alignment = new Alignment(Alignment.Position.START, Alignment.Position.START);
         this.children = new ArrayList<UIComponent>();
         calculateSize();
         calculatePosition();
-        updateSprite();
     }
 
     protected abstract Dimension calculateContentSize();
     protected abstract void calculateContentPosition();
-    protected abstract void updateSprite();
 
     // Setters
     public void setSprite(Image sprite) { this.sprite = sprite; }
@@ -63,6 +63,13 @@ public abstract class UIContainer extends UIComponent
     { 
         graphics2d.drawImage(sprite, this.getPosition().getX(), this.getPosition().getY(), null);
         children.forEach(child -> child.draw(graphics2d));
+    }
+
+    // Rerender the sprite based on the current size
+    public void updateSprite()
+    {
+        if(this.getSize().width <= 0 && this.getSize().height <= 0) return;
+        this.setSprite(this.spriteSetup(spriteName, this.getSize().width, this.getSize().height));
     }
 
     // Helper: calculate size with margin and padding
