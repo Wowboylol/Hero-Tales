@@ -25,7 +25,7 @@ public class UIHandler
 
     // UI Display
     private UIContainer pauseUI;
-    private boolean showPauseUI = false;
+    private UIState currentUI;
 
     // Methods
     public void intializeUI()
@@ -43,15 +43,15 @@ public class UIHandler
 
     public void togglePauseUI(GameState gameState)
     {
-        if(gameState == GameState.PAUSE && showPauseUI == false) 
+        if(gameState == GameState.PAUSE && currentUI == null) 
         {
             uiContainers.add(pauseUI); 
-            showPauseUI = true;
+            currentUI = UIState.PAUSE;
         }
-        else if(gameState != GameState.PAUSE && showPauseUI == true)
+        else if(gameState != GameState.PAUSE && currentUI == UIState.PAUSE) 
         {
-            uiContainers.remove(pauseUI);
-            showPauseUI = false;
+            uiContainers.remove(pauseUI); 
+            currentUI = null;
         }
     }
     public void addPauseUI()
