@@ -18,7 +18,6 @@ import java.util.ArrayList;
 
 import entities.*;
 import graphics.*;
-import ui.*;
 
 public class Simulator extends JPanel implements Runnable
 {
@@ -39,7 +38,7 @@ public class Simulator extends JPanel implements Runnable
 
     // Attributes
     private long maxDrawTime = 0;
-    private GameState gameState;
+    private GameState gameState = GameState.PLAY;
     
     // Injectable services
     public final Keyboard keyboard = new Keyboard();
@@ -48,13 +47,12 @@ public class Simulator extends JPanel implements Runnable
     public final Player player = new Player(this);
     public final Camera camera = new Camera(this);
     public final CollisionChecker collisionChecker = new CollisionChecker(this);
-    public final UIHandler uiHandler = new UIHandler(this);
+    public final UIHandler uiHandler = new UIHandler();
 
     // Dependent services
     public final MapHandler mapHandler = new MapHandler(camera);
 
     // Lists
-    public final ArrayList<UIComponent> uiContainers = new ArrayList<UIComponent>();
     public final ArrayList<Updateable> projectiles = new ArrayList<Updateable>();
     public final ArrayList<Damageable> enemies = new ArrayList<Damageable>();
 
@@ -87,7 +85,6 @@ public class Simulator extends JPanel implements Runnable
     // Sets up the game
     private void setupGame()
     {
-        gameState = GameState.PLAY;
         serviceInjector.injectDependencies();
         mapHandler.initializeMap();
         uiHandler.intializeUI();
@@ -128,16 +125,13 @@ public class Simulator extends JPanel implements Runnable
     public void update()
     {
         setGameState();
+        uiHandler.updateUI(gameState);
+
         if(gameState == GameState.PLAY)
         {
             updateEnemies();
             player.update();
             updateProjectiles();
-            uiContainers.forEach(uiContainer -> uiContainer.update());
-        }
-        if(gameState == GameState.PAUSE)
-        {
-            // Do nothing for now
         }
     }
 
@@ -158,7 +152,7 @@ public class Simulator extends JPanel implements Runnable
         drawEnemies(graphics2D);
         player.draw(graphics2D);
         drawProjectiles(graphics2D);
-        uiContainers.forEach(uiContainer -> uiContainer.draw(graphics2D));
+        uiHandler.drawUI(graphics2D);
 
         // DEBUG
         if(keyboard.getDebugConsole()) debugConsole(graphics2D, drawStart);

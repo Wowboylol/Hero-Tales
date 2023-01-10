@@ -9,6 +9,8 @@ package main;
 
 import java.awt.Font;
 import javax.swing.JLabel;
+import java.util.ArrayList;
+import java.awt.Graphics2D;
 
 import ui.*;
 
@@ -19,16 +21,40 @@ public class UIHandler
     public static final Font DAMAGE_TEXT_FONT = new Font("Arial", Font.BOLD, 25);
 
     // Attributes
-    private Simulator simulator;
+    public final ArrayList<UIComponent> uiContainers = new ArrayList<UIComponent>();
 
-    // Constructor
-    public UIHandler(Simulator simulator)
+    // UI Display
+    private UIContainer pauseUI;
+    private boolean showPauseUI = false;
+
+    // Methods
+    public void intializeUI()
     {
-        this.simulator = simulator;
+        addPauseUI();
     }
 
-    // Create and add UI components
-    public void intializeUI()
+    public void updateUI(GameState gameState) 
+    { 
+        togglePauseUI(gameState);
+        uiContainers.forEach(uiContainer -> uiContainer.update()); 
+    }
+
+    public void drawUI(Graphics2D graphics2d) { uiContainers.forEach(uiContainer -> uiContainer.draw(graphics2d)); }
+
+    public void togglePauseUI(GameState gameState)
+    {
+        if(gameState == GameState.PAUSE && showPauseUI == false) 
+        {
+            uiContainers.add(pauseUI); 
+            showPauseUI = true;
+        }
+        else if(gameState != GameState.PAUSE && showPauseUI == true)
+        {
+            uiContainers.remove(pauseUI);
+            showPauseUI = false;
+        }
+    }
+    public void addPauseUI()
     {
         UIContainer container = new ColumnContainer("wood_panel");
         container.setPadding(new Spacing(32));
@@ -47,6 +73,6 @@ public class UIHandler
         container.addUIComponent(menuButton);
         container.addUIComponent(settingsButton);
         container.addUIComponent(quitButton);
-        simulator.uiContainers.add(container);
+        pauseUI = container;
     }
 }
