@@ -5,9 +5,12 @@
  *
 */
 
-package ui;
+package ui.elements;
 
 import java.awt.Graphics2D;
+
+import ui.UIComponent;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -71,15 +74,15 @@ public class UIText extends UIComponent
             graphics2d.setColor(dropShadowColor);
             graphics2d.drawString(
                 text, 
-                this.getPosition().getX()+this.getPadding().getLeft()+dropShadowOffset, 
-                fontSize+this.getPosition().getY()+dropShadowOffset
+                this.getRelativePosition().getX()+this.getPadding().getLeft()+dropShadowOffset, 
+                fontSize+this.getRelativePosition().getY()+dropShadowOffset
             );
         }
         graphics2d.setColor(fontColor);
         graphics2d.drawString(
             text, 
-            this.getPosition().getX()+this.getPadding().getLeft(), 
-            fontSize+this.getPosition().getY()
+            this.getRelativePosition().getX()+this.getPadding().getLeft(), 
+            fontSize+this.getRelativePosition().getY()
         );
     }
 

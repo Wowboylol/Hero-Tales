@@ -5,9 +5,12 @@
  *
 */
 
-package ui;
+package ui.elements;
 
 import java.awt.Dimension;
+
+import ui.UIComponent;
+import ui.UIContainer;
 
 public class ColumnContainer extends UIContainer
 {
@@ -36,12 +39,16 @@ public class ColumnContainer extends UIContainer
     @Override
     protected void calculateContentPosition()
     {
-        int currentY = getPosition().getY() + getPadding().getTop();
+        int currentY = getRelativePosition().getY() + getPadding().getTop();
 
         for(UIComponent child : children)
         {
             currentY += child.getMargin().getTop();
-            child.setPosition(getPosition().getX() + getPadding().getLeft(), currentY);
+            child.setRelativePosition(getRelativePosition().getX() + getPadding().getLeft(), currentY);
+            child.setAbsolutePosition(
+                getRelativePosition().getX() + getPadding().getLeft() + getAbsolutePosition().getX(),
+                currentY + getAbsolutePosition().getY()
+            );
             currentY += child.getSize().height + child.getMargin().getBottom();
         }
     }
