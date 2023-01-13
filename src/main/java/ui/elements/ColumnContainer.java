@@ -39,16 +39,12 @@ public class ColumnContainer extends UIContainer
     @Override
     protected void calculateContentPosition()
     {
-        int currentY = getRelativePosition().getY() + getPadding().getTop();
+        int currentY = getPosition().getY() + getPadding().getTop();
 
         for(UIComponent child : children)
         {
             currentY += child.getMargin().getTop();
-            child.setRelativePosition(getRelativePosition().getX() + getPadding().getLeft(), currentY);
-            child.setAbsolutePosition(
-                getRelativePosition().getX() + getPadding().getLeft() + getAbsolutePosition().getX(),
-                currentY + getAbsolutePosition().getY()
-            );
+            child.setPosition(getPosition().getX() + getPadding().getLeft(), currentY);
             currentY += child.getSize().height + child.getMargin().getBottom();
         }
     }

@@ -61,7 +61,7 @@ public abstract class UIContainer extends UIComponent
     @Override
     public void draw(Graphics2D graphics2d) 
     { 
-        graphics2d.drawImage(sprite, this.getRelativePosition().getX(), this.getRelativePosition().getY(), null);
+        graphics2d.drawImage(sprite, this.getPosition().getX(), this.getPosition().getY(), null);
         children.forEach(child -> child.draw(graphics2d));
     }
 
@@ -96,7 +96,7 @@ public abstract class UIContainer extends UIComponent
         if(alignment.vertical == Alignment.Position.CENTER) y = Simulator.SCREEN_HEIGHT/2 - this.getSize().height/2;
         else if(alignment.vertical == Alignment.Position.END) y = Simulator.SCREEN_HEIGHT - this.getSize().height - getMargin().getBottom();
 
-        this.setRelativePosition(x, y);
+        this.setPosition(x, y);
         calculateContentPosition();
     }
 
