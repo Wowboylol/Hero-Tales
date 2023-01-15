@@ -65,7 +65,6 @@ public class UIHandler
             mouse, 
             "wood_menu_button", 
             "wood_menu_button_hover", 
-            "wood_menu_button_click", 
             () -> { System.out.println("Menu button clicked!"); }
         );
         menuButton.setPadding(new Spacing(128, 32));

@@ -23,16 +23,14 @@ public class UIButton extends UIClickable
     // Containers
     private UIContainer defaultContainer;
     private UIContainer hoverContainer;
-    private UIContainer clickContainer;
 
     // Constructor
-    public UIButton(Mouse mouse, String defaultImageName, String hoverImageName, String clickImageName, Runnable clickEvent)
+    public UIButton(Mouse mouse, String defaultImageName, String hoverImageName, Runnable clickEvent)
     {
         super(mouse);
         this.clickEvent = clickEvent;
         this.defaultContainer = new RowContainer(defaultImageName);
         this.hoverContainer = new RowContainer(hoverImageName);
-        this.clickContainer = new RowContainer(clickImageName);
         this.currentContainer = defaultContainer;
     }
 
@@ -43,7 +41,6 @@ public class UIButton extends UIClickable
         super.setPadding(padding);
         defaultContainer.setPadding(padding); 
         hoverContainer.setPadding(padding);
-        clickContainer.setPadding(padding);
     }
     @Override
     public void setMargin(Spacing margin) 
@@ -51,7 +48,6 @@ public class UIButton extends UIClickable
         super.setMargin(margin);
         defaultContainer.setMargin(margin); 
         hoverContainer.setMargin(margin);
-        clickContainer.setMargin(margin);
     }
     @Override
     public void setPosition(Coordinate position)
@@ -59,7 +55,6 @@ public class UIButton extends UIClickable
         super.setPosition(position);
         defaultContainer.setPosition(position);
         hoverContainer.setPosition(position);
-        clickContainer.setPosition(position);
     }
     @Override
     public void setPosition(int x, int y)
@@ -67,7 +62,6 @@ public class UIButton extends UIClickable
         super.setPosition(x, y);
         defaultContainer.setPosition(x, y);
         hoverContainer.setPosition(x, y);
-        clickContainer.setPosition(x, y);
     }
     @Override
     public void setSize(int width, int height)
@@ -75,7 +69,6 @@ public class UIButton extends UIClickable
         super.setSize(width, height);
         defaultContainer.setSize(width, height);
         hoverContainer.setSize(width, height);
-        clickContainer.setSize(width, height);
         updateSprites();
     }
     @Override
@@ -84,7 +77,6 @@ public class UIButton extends UIClickable
         super.setSize(size);
         defaultContainer.setSize(size);
         hoverContainer.setSize(size);
-        clickContainer.setSize(size);
         updateSprites();
     }
 
@@ -96,7 +88,7 @@ public class UIButton extends UIClickable
         currentContainer.update();
 
         
-        if(this.isHovered && this.isPressed) currentContainer = clickContainer;
+        if(this.isHovered && this.isPressed) currentContainer = defaultContainer;
         else if(this.isHovered) currentContainer = hoverContainer;
         else currentContainer = defaultContainer;
     }
@@ -117,6 +109,5 @@ public class UIButton extends UIClickable
     {
         defaultContainer.updateSprite();
         hoverContainer.updateSprite();
-        clickContainer.updateSprite();
     }
 }
