@@ -18,9 +18,11 @@ public class Mouse implements MouseListener, MouseMotionListener
     // Attributes
     private boolean mousePressed = false;
     private Coordinate mousePosition = new Coordinate(0, 0);
+    private Coordinate mouseLocation = new Coordinate(0, 0);
 
     // Getters
     public boolean getMousePressed() { return mousePressed; }
+    public Coordinate getMouseLocation() { return mouseLocation; }
 
     // Mouse position methods
     public Coordinate getMousePosition() { return mousePosition; }
@@ -67,7 +69,12 @@ public class Mouse implements MouseListener, MouseMotionListener
     }
 
     @Override
-    public void mouseMoved(MouseEvent e) { }
+    public void mouseMoved(MouseEvent e) 
+    { 
+        if(e.getX() < 0 || e.getX() > Simulator.SCREEN_WIDTH || e.getY() < 0 || e.getY() > Simulator.SCREEN_HEIGHT) return;
+        mouseLocation.setX(e.getX());
+        mouseLocation.setY(e.getY());
+    }
 
     @Override
     public void mouseClicked(MouseEvent e) { }
