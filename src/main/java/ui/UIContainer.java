@@ -69,7 +69,7 @@ public abstract class UIContainer extends UIComponent
     public void updateSprite()
     {
         if(this.getSize().width <= 0 && this.getSize().height <= 0) return;
-        this.setSprite(this.spriteSetup(spriteName, this.getSize().width, this.getSize().height));
+        sprite = this.spriteSetup(spriteName, this.getSize().width, this.getSize().height);
     }
 
     // Helper: calculate size with margin and padding

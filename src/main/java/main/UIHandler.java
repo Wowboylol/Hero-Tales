@@ -29,9 +29,9 @@ public class UIHandler
     private UIState currentUI;
 
     // Methods
-    public void intializeUI()
+    public void intializeUI(Mouse mouse)
     {
-        addPauseUI();
+        addPauseUI(mouse);
     }
 
     public void updateUI(GameState gameState) 
@@ -55,13 +55,19 @@ public class UIHandler
             currentUI = null;
         }
     }
-    public void addPauseUI()
+    public void addPauseUI(Mouse mouse)
     {
         UIContainer container = new ColumnContainer("wood_panel");
         container.setPadding(new Spacing(32));
         container.setAlignment(new Alignment(Alignment.Position.CENTER, Alignment.Position.CENTER));
 
-        UIComponent menuButton = new RowContainer("wood_menu_button");
+        UIComponent menuButton = new UIButton(
+            mouse, 
+            "wood_menu_button", 
+            "wood_menu_button_hover", 
+            "wood_menu_button_click", 
+            () -> { System.out.println("Menu button clicked!"); }
+        );
         menuButton.setPadding(new Spacing(128, 32));
 
         UIComponent settingsButton = new RowContainer("wood_settings_button");

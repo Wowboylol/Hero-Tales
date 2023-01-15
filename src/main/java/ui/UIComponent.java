@@ -40,10 +40,10 @@ public abstract class UIComponent
     public Spacing getPadding() { return padding; }
 
     // Setters
-    protected void setPosition(Coordinate position) { this.position = position; }
+    public void setPosition(Coordinate position) { this.position = position; }
     public void setPosition(int x, int y) { this.position = new Coordinate(x, y); }
-    protected void setSize(Dimension size) { this.size = size; }
-    protected void setSize(int width, int height) { this.size = new Dimension(width, height); }
+    public void setSize(Dimension size) { this.size = size; }
+    public void setSize(int width, int height) { this.size = new Dimension(width, height); }
     public void setMargin(Spacing margin) { this.margin = margin; }
     public void setPadding(Spacing padding) { this.padding = padding; }
 }
