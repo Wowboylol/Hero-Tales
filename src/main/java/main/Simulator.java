@@ -133,6 +133,7 @@ public class Simulator extends JPanel implements Runnable
             player.update();
             updateProjectiles();
         }
+        mouse.clearMouseClicked();
     }
 
     // Draw UI with updated information, called by repaint()

@@ -16,17 +16,20 @@ import entities.enums.AttackDirection;
 public class Mouse implements MouseListener, MouseMotionListener
 {
     // Attributes
-    private boolean mousePressed = false;
     private Coordinate mouseClickPosition = new Coordinate(0, 0);
     private Coordinate cursorlocation = new Coordinate(0, 0);
+    private boolean mousePressed = false;
+    private boolean mouseClicked = false;
 
     // Getters
     public boolean getMousePressed() { return mousePressed; }
-    public Coordinate getCursorLocation() { return cursorlocation; }
+    public boolean getMouseClicked() { return mouseClicked; }
 
-    // Mouse position methods
+    // Mouse methods
     public Coordinate getMouseClickPosition() { return mouseClickPosition; }
     public void setMouseClickPosition(Coordinate mousePosition) { this.mouseClickPosition = mousePosition; }
+    public Coordinate getCursorLocation() { return cursorlocation; }
+    public void clearMouseClicked() { mouseClicked = false; }
 
     // Calculate attack angle
     public int getAttackAngle(int playerOriginX, int playerOriginY)
@@ -58,6 +61,7 @@ public class Mouse implements MouseListener, MouseMotionListener
     public void mouseReleased(MouseEvent e) 
     {
         mousePressed = false;
+        mouseClicked = true;
     }
 
     @Override

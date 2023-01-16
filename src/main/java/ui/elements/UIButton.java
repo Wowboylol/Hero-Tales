@@ -87,8 +87,7 @@ public class UIButton extends UIClickable
         setSize(getPadding().getHorizontal(), getPadding().getVertical());
         currentContainer.update();
 
-        
-        if(this.isHovered && this.isPressed) currentContainer = defaultContainer;
+        if(this.isPressed) currentContainer = defaultContainer;
         else if(this.isHovered) currentContainer = hoverContainer;
         else currentContainer = defaultContainer;
     }
