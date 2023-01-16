@@ -34,7 +34,7 @@ public abstract class UIClickable extends UIComponent
     public void update()
     {
         updateClickbox();
-        isHovered = clickbox.contains(mouse.getMouseLocation().getX(), mouse.getMouseLocation().getY());
+        isHovered = clickbox.contains(mouse.getCursorLocation().getX(), mouse.getCursorLocation().getY());
         isPressed = (isHovered && mouse.getMousePressed());
 
         if(isHovered && isPressed) onClick();

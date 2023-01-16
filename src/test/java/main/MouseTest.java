@@ -58,7 +58,7 @@ public class MouseTest
     {
         MouseEvent click = new MouseEvent(new Component(){}, 0, 0, 0, 500, 500, 0, false);
         mouse.mousePressed(click);
-        assertTrue(new Coordinate(500, 500).equals(mouse.getMousePosition()));
+        assertTrue(new Coordinate(500, 500).equals(mouse.getMouseClickPosition()));
         mouse.mouseReleased(click);
     }
 
@@ -66,7 +66,7 @@ public class MouseTest
     @Test
     public void testGetAttackAngle0()
     {
-        mouse.setMousePosition(new Coordinate(500, 0));
+        mouse.setMouseClickPosition(new Coordinate(500, 0));
         assertEquals(0, mouse.getAttackAngle(0, 0));
     }
 
@@ -74,7 +74,7 @@ public class MouseTest
     @Test
     public void testGetAttackAngle45()
     {
-        mouse.setMousePosition(new Coordinate(500, 500));
+        mouse.setMouseClickPosition(new Coordinate(500, 500));
         assertEquals(45, mouse.getAttackAngle(0, 0));
     }
 
@@ -82,7 +82,7 @@ public class MouseTest
     @Test
     public void testGetAttackAngle90()
     {
-        mouse.setMousePosition(new Coordinate(0, 500));
+        mouse.setMouseClickPosition(new Coordinate(0, 500));
         assertEquals(90, mouse.getAttackAngle(0, 0));
     }
 
@@ -90,7 +90,7 @@ public class MouseTest
     @Test
     public void testGetAttackAngle135()
     {
-        mouse.setMousePosition(new Coordinate(-500, 500));
+        mouse.setMouseClickPosition(new Coordinate(-500, 500));
         assertEquals(135, mouse.getAttackAngle(0, 0));
     }
 
@@ -98,7 +98,7 @@ public class MouseTest
     @Test
     public void testGetAttackAngle180()
     {
-        mouse.setMousePosition(new Coordinate(-500, 0));
+        mouse.setMouseClickPosition(new Coordinate(-500, 0));
         assertEquals(180, mouse.getAttackAngle(0, 0));
     }
 
@@ -106,7 +106,7 @@ public class MouseTest
     @Test
     public void testGetAttackAngle270()
     {
-        mouse.setMousePosition(new Coordinate(0, -500));
+        mouse.setMouseClickPosition(new Coordinate(0, -500));
         assertEquals(270, mouse.getAttackAngle(0, 0));
     }
 
@@ -114,7 +114,7 @@ public class MouseTest
     @Test
     public void testGetAttackDirectionRight()
     {
-        mouse.setMousePosition(new Coordinate(500, 0));
+        mouse.setMouseClickPosition(new Coordinate(500, 0));
         assertEquals(AttackDirection.RIGHT, mouse.getAttackDirection(0, 0));
     }
 
@@ -122,7 +122,7 @@ public class MouseTest
     @Test
     public void testGetAttackDirectionDown()
     {
-        mouse.setMousePosition(new Coordinate(0, 500));
+        mouse.setMouseClickPosition(new Coordinate(0, 500));
         assertEquals(AttackDirection.DOWN, mouse.getAttackDirection(0, 0));
     }
 
@@ -130,7 +130,7 @@ public class MouseTest
     @Test
     public void testGetAttackDirectionLeft()
     {
-        mouse.setMousePosition(new Coordinate(-500, 0));
+        mouse.setMouseClickPosition(new Coordinate(-500, 0));
         assertEquals(AttackDirection.LEFT, mouse.getAttackDirection(0, 0));
     }
 
@@ -138,7 +138,7 @@ public class MouseTest
     @Test
     public void testGetAttackDirectionUp()
     {
-        mouse.setMousePosition(new Coordinate(0, -500));
+        mouse.setMouseClickPosition(new Coordinate(0, -500));
         assertEquals(AttackDirection.UP, mouse.getAttackDirection(0, 0));
     }
 }

@@ -17,21 +17,21 @@ public class Mouse implements MouseListener, MouseMotionListener
 {
     // Attributes
     private boolean mousePressed = false;
-    private Coordinate mousePosition = new Coordinate(0, 0);
-    private Coordinate mouseLocation = new Coordinate(0, 0);
+    private Coordinate mouseClickPosition = new Coordinate(0, 0);
+    private Coordinate cursorlocation = new Coordinate(0, 0);
 
     // Getters
     public boolean getMousePressed() { return mousePressed; }
-    public Coordinate getMouseLocation() { return mouseLocation; }
+    public Coordinate getCursorLocation() { return cursorlocation; }
 
     // Mouse position methods
-    public Coordinate getMousePosition() { return mousePosition; }
-    public void setMousePosition(Coordinate mousePosition) { this.mousePosition = mousePosition; }
+    public Coordinate getMouseClickPosition() { return mouseClickPosition; }
+    public void setMouseClickPosition(Coordinate mousePosition) { this.mouseClickPosition = mousePosition; }
 
     // Calculate attack angle
     public int getAttackAngle(int playerOriginX, int playerOriginY)
     {
-        return Utility.calculateAngle(playerOriginX, playerOriginY, mousePosition.getX(), mousePosition.getY());
+        return Utility.calculateAngle(playerOriginX, playerOriginY, mouseClickPosition.getX(), mouseClickPosition.getY());
     }
 
     // Calculate attack direction
@@ -50,8 +50,8 @@ public class Mouse implements MouseListener, MouseMotionListener
     {
         mousePressed = true;
         if(e.getX() < 0 || e.getX() > Simulator.SCREEN_WIDTH || e.getY() < 0 || e.getY() > Simulator.SCREEN_HEIGHT) return;
-        mousePosition.setX(e.getX());
-        mousePosition.setY(e.getY());
+        mouseClickPosition.setX(e.getX());
+        mouseClickPosition.setY(e.getY());
     }
 
     @Override
@@ -64,16 +64,16 @@ public class Mouse implements MouseListener, MouseMotionListener
     public void mouseDragged(MouseEvent e) 
     { 
         if(e.getX() < 0 || e.getX() > Simulator.SCREEN_WIDTH || e.getY() < 0 || e.getY() > Simulator.SCREEN_HEIGHT) return;
-        mousePosition.setX(e.getX());
-        mousePosition.setY(e.getY());
+        mouseClickPosition.setX(e.getX());
+        mouseClickPosition.setY(e.getY());
     }
 
     @Override
     public void mouseMoved(MouseEvent e) 
     { 
         if(e.getX() < 0 || e.getX() > Simulator.SCREEN_WIDTH || e.getY() < 0 || e.getY() > Simulator.SCREEN_HEIGHT) return;
-        mouseLocation.setX(e.getX());
-        mouseLocation.setY(e.getY());
+        cursorlocation.setX(e.getX());
+        cursorlocation.setY(e.getY());
     }
 
     @Override
