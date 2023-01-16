@@ -69,11 +69,21 @@ public class UIHandler
         );
         menuButton.setPadding(new Spacing(128, 32));
 
-        UIComponent settingsButton = new RowContainer("wood_settings_button");
+        UIComponent settingsButton = new UIButton(
+            mouse, 
+            "wood_settings_button", 
+            "wood_settings_button_hover", 
+            () -> { System.out.println("Settings button clicked!"); }
+        );
         settingsButton.setPadding(new Spacing(128, 32));
         settingsButton.setMargin(new Spacing(0, 16));
 
-        UIComponent quitButton = new RowContainer("wood_quit_button");
+        UIComponent quitButton = new UIButton(
+            mouse, 
+            "wood_quit_button", 
+            "wood_quit_button_hover", 
+            () -> { System.exit(0); }
+        );
         quitButton.setPadding(new Spacing(128, 32));
 
         container.addUIComponent(menuButton);
