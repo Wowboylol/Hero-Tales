@@ -48,6 +48,7 @@ public class Simulator extends JPanel implements Runnable
     public final Camera camera = new Camera(this);
     public final CollisionChecker collisionChecker = new CollisionChecker(this);
     public final UIHandler uiHandler = new UIHandler();
+    public final ParticleHandler particleHandler = new ParticleHandler();
 
     // Dependent services
     public final MapHandler mapHandler = new MapHandler(camera);
@@ -132,6 +133,7 @@ public class Simulator extends JPanel implements Runnable
             updateEnemies();
             player.update();
             updateProjectiles();
+            particleHandler.updateParticles();
         }
         mouse.clearMouseClicked();
     }
@@ -153,6 +155,7 @@ public class Simulator extends JPanel implements Runnable
         drawEnemies(graphics2D);
         player.draw(graphics2D);
         drawProjectiles(graphics2D);
+        particleHandler.drawParticles(graphics2D);
         uiHandler.drawUI(graphics2D);
 
         // DEBUG

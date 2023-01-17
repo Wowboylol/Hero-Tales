@@ -11,11 +11,13 @@ package entities.enemies;
 import java.awt.image.BufferedImage;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.Color;
 
 import main.Simulator;
 import main.CollisionChecker;
 import entities.*;
 import entities.stats.EnemyStats;
+import graphics.effects.Particle;
 import items.Wieldable;
 import items.enemyattacks.RedMushroomAttack;
 
@@ -95,6 +97,7 @@ public class RedMushroom extends Enemy implements Damageable
     public void damageEntity(int damage) 
     { 
         this.addDamageText(this.getStats().damageEntity(damage));
+        generateParticle();
         
         if(this.getStats().getCurrentHealth() > 0) simulator.playSoundEffect(SOUND_HIT_ID); 
         else simulator.playSoundEffect(SOUND_DEATH_ID); 
@@ -171,6 +174,20 @@ public class RedMushroom extends Enemy implements Damageable
                 break;
         }
         graphics2D.drawImage(image, this.getScreenX(), this.getScreenY(), null);
+    }
+
+    // Animate particle animation
+    private void generateParticle()
+    {
+        Color color = new Color(172, 44, 68);
+        Coordinate origin = new Coordinate(
+            this.getWorldCoordinateX() + this.getOriginPointX(), 
+            this.getWorldCoordinateY() + this.getOriginPointY()
+        );
+        simulator.particleHandler.addParticle(new Particle(simulator, origin, color, -1, -1)); 
+        simulator.particleHandler.addParticle(new Particle(simulator, origin, color, 1, -1)); 
+        simulator.particleHandler.addParticle(new Particle(simulator, origin, color, -1, 1)); 
+        simulator.particleHandler.addParticle(new Particle(simulator, origin, color, 1, 1)); 
     }
 
     // Load player sprites into BufferedImage
