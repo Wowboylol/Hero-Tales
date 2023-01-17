@@ -74,8 +74,7 @@ public class Particle implements Updateable
         graphics2D.fillRect(
             Utility.getScreenX(simulator, particlePosition.getX()), 
             Utility.getScreenY(simulator, particlePosition.getY()), 
-            size, 
-            size
+            size, size
         );
     }
 

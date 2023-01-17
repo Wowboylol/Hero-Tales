@@ -17,6 +17,7 @@ import main.Simulator;
 import main.CollisionChecker;
 import main.Utility;
 import entities.enums.EntityType;
+import graphics.effects.Particle;
 
 public class Projectile extends Entity implements Updateable
 {
@@ -29,6 +30,7 @@ public class Projectile extends Entity implements Updateable
     private Coordinate playerPosition;
     private int mapPixelWidth = Simulator.getInstance().mapHandler.getCurrentMapWidth();
     private int mapPixelHeight = Simulator.getInstance().mapHandler.getCurrentMapHeight();
+    private Color spriteColor;
 
     // Stats
     private int damage;
@@ -43,6 +45,7 @@ public class Projectile extends Entity implements Updateable
         int angle, int lifetime, EntityType user)
     {
         super(spawnPosition);
+        this.spriteColor = new Color(sprite.getRGB(25, 24));
         this.sprite = Utility.rotateImage(sprite, (angle/8) << 3);
         this.angle = angle;
         hitbox.x = hitbox.x-(Simulator.TILE_SIZE >> 1);
@@ -81,7 +84,11 @@ public class Projectile extends Entity implements Updateable
 
     public void update()
     {
-        if(collisionChecker.checkTileWall(this, angle)) lifetime = 0;
+        if(collisionChecker.checkTileWall(this, angle)) 
+        {
+            lifetime = 0;
+            generateParticle();
+        }
         if(collisionChecker.checkProjectileCollision(this)) lifetime = 0;
         this.setWorldCoordinateX((int)(this.getWorldCoordinateX() + xVelocity));
         this.setWorldCoordinateY((int)(this.getWorldCoordinateY() + yVelocity));
@@ -124,6 +131,20 @@ public class Projectile extends Entity implements Updateable
             return Simulator.SCREEN_HEIGHT - (mapPixelHeight - this.getWorldCoordinateY());
 
         return this.getWorldCoordinateY() - playerPosition.getY() + Player.PLAYER_SCREEN_Y;
+    }
+
+    // Animate particle animation
+    private void generateParticle()
+    {
+        Simulator simulator = Simulator.getInstance();
+        Coordinate origin = new Coordinate(
+            this.getWorldCoordinateX() + this.getOriginPointX(), 
+            this.getWorldCoordinateY() + this.getOriginPointY()
+        );
+        simulator.particleHandler.addParticle(new Particle(simulator, origin, spriteColor, -1, -1)); 
+        simulator.particleHandler.addParticle(new Particle(simulator, origin, spriteColor, 1, -1)); 
+        simulator.particleHandler.addParticle(new Particle(simulator, origin, spriteColor, -1, 1)); 
+        simulator.particleHandler.addParticle(new Particle(simulator, origin, spriteColor, 1, 1)); 
     }
 
     // Calculate xVelocity and yVelocity based on angle and speed

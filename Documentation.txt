@@ -10,3 +10,7 @@ This text file contains notes about future concerns about current implementation
 
 |=== Enemy drawAttackSprite method future refactoring ===|
 - If statements could be changed to else if
+
+|=== Particle effect for projectile to wall collision ===|
+- Current a new Color class is created and Simulator.getInstance() is ran when particle is generator
+- Could be changed to decrease draw time in future
