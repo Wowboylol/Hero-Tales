@@ -1,7 +1,7 @@
 /*  
  *  Alignment.java
  *  
- *  Description: FIXME: placeholder
+ *  Description: Class that determines the position of the UIContainer on the screen.
  *
 */
 
