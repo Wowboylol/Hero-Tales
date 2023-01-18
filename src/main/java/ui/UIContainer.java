@@ -31,7 +31,7 @@ public abstract class UIContainer extends UIComponent
     {
         super();
         this.spriteName = imageName;
-        this.alignment = new Alignment(Alignment.Position.START, Alignment.Position.START);
+        this.alignment = new Alignment(Alignment.Position.NULL, Alignment.Position.NULL);
         this.children = new ArrayList<UIComponent>();
         calculateSize();
         calculatePosition();
@@ -61,6 +61,7 @@ public abstract class UIContainer extends UIComponent
     @Override
     public void draw(Graphics2D graphics2d) 
     { 
+        // System.out.println(spriteName + ": " + getPosition().getX() + ", " + getPosition().getY());
         graphics2d.drawImage(sprite, this.getPosition().getX(), this.getPosition().getY(), null);
         children.forEach(child -> child.draw(graphics2d));
     }
@@ -96,7 +97,7 @@ public abstract class UIContainer extends UIComponent
         if(alignment.vertical == Alignment.Position.CENTER) y = Simulator.SCREEN_HEIGHT/2 - this.getSize().height/2;
         else if(alignment.vertical == Alignment.Position.END) y = Simulator.SCREEN_HEIGHT - this.getSize().height - getMargin().getBottom();
 
-        this.setPosition(x, y);
+        if(alignment.horizontal != Alignment.Position.NULL && alignment.vertical != Alignment.Position.NULL) this.setPosition(x, y);
         calculateContentPosition();
     }
 

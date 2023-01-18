@@ -11,6 +11,7 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import java.util.ArrayList;
 import java.awt.Graphics2D;
+import java.awt.Color;
 
 import ui.*;
 import ui.elements.*;
@@ -115,15 +116,23 @@ public class UIHandler
         UIContainer container = new ColumnContainer("transparent");
         container.setAlignment(new Alignment(Alignment.Position.CENTER, Alignment.Position.END));
 
-        UIContainer hpBar = new ColumnContainer("hp_bar");
-        hpBar.setPadding(new Spacing(160, 32));
+        UIContainer hpContainer = new ColumnContainer("hp_bar");
+        hpContainer.setPadding(new Spacing(12, 12));
 
-        UIContainer expBar = new ColumnContainer("exp_bar");
-        expBar.setPadding(new Spacing(160, 32));
-        expBar.setMargin(new Spacing(0, -8));
+        UIComponent hpBar = new SolidElement(new Color(188, 17, 4));
+        hpBar.setPadding(new Spacing(108, 12));
 
-        container.addUIComponent(hpBar);
-        container.addUIComponent(expBar);
+        UIContainer expContainer = new ColumnContainer("exp_bar");
+        expContainer.setPadding(new Spacing(12, 18));
+        expContainer.setMargin(new Spacing(-12, -0, -4, 0));
+
+        UIComponent expBar = new SolidElement(new Color(99, 128, 49));
+        expBar.setPadding(new Spacing(108, 6));
+
+        hpContainer.addUIComponent(hpBar);
+        expContainer.addUIComponent(expBar);
+        container.addUIComponent(hpContainer);
+        container.addUIComponent(expContainer);
 
         playUI = container;
     }

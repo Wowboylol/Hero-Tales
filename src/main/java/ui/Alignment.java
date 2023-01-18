@@ -12,7 +12,7 @@ public class Alignment
     // Alignment positions
     public enum Position
     {
-        START, CENTER, END
+        START, CENTER, END, NULL
     }
 
     // Attributes
