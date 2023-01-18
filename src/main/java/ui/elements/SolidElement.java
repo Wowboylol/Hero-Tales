@@ -42,9 +42,9 @@ public class SolidElement extends UIComponent
         );
     }
 
-    // Helper: calculate size with margin and padding
-    private void calculateSize()
+    // Calculate size of solid rectangle with margin and padding
+    public void calculateSize()
     {
-        this.setSize(getPadding().getHorizontal(), getPadding().getVertical());
+        this.setSize(this.getPadding().getHorizontal(), this.getPadding().getVertical());
     }
 }

@@ -88,7 +88,7 @@ public class Simulator extends JPanel implements Runnable
     {
         serviceInjector.injectDependencies();
         mapHandler.initializeMap();
-        uiHandler.intializeUI(mouse);
+        uiHandler.intializeUI(mouse, player.getStats());
     }
 
     // Creates a thread which executes instruction seperately to the Main class

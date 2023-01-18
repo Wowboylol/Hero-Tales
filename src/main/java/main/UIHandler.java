@@ -15,6 +15,7 @@ import java.awt.Color;
 
 import ui.*;
 import ui.elements.*;
+import entities.stats.Stats;
 
 public class UIHandler 
 {
@@ -31,10 +32,10 @@ public class UIHandler
     private UIState currentUI;
 
     // Methods
-    public void intializeUI(Mouse mouse)
+    public void intializeUI(Mouse mouse, Stats playerStats)
     {
         addPauseUI(mouse);
-        addPlayUI();
+        addPlayUI(playerStats);
     }
 
     public void updateUI(GameState gameState) 
@@ -111,18 +112,18 @@ public class UIHandler
             currentUI = null;
         }
     }
-    public void addPlayUI()
+    public void addPlayUI(Stats playerStats)
     {
         UIContainer container = new ColumnContainer("transparent");
         container.setAlignment(new Alignment(Alignment.Position.CENTER, Alignment.Position.END));
 
-        UIContainer hpContainer = new ColumnContainer("hp_bar");
+        UIContainer hpContainer = new StaticContainer("hp_bar", 216, 24);
         hpContainer.setPadding(new Spacing(12, 12));
 
-        UIComponent hpBar = new SolidElement(new Color(188, 17, 4));
+        UIComponent hpBar = new UIPlayerHealthBar(new Color(188, 17, 4), playerStats);
         hpBar.setPadding(new Spacing(108, 12));
 
-        UIContainer expContainer = new ColumnContainer("exp_bar");
+        UIContainer expContainer = new StaticContainer("exp_bar", 216, 12);
         expContainer.setPadding(new Spacing(12, 18));
         expContainer.setMargin(new Spacing(-12, -0, -4, 0));
 
