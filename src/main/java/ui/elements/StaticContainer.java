@@ -1,7 +1,8 @@
 /*  
  *  StaticContainer.java
  *  
- *  Description: A UIContainer that wraps one children and does not resize with the child.
+ *  Description: A UIContainer that arranges its children on top of each other. 
+ *               This container does not resize with its children.
  *
 */
 
