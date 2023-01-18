@@ -65,13 +65,6 @@ public abstract class UIContainer extends UIComponent
         children.forEach(child -> child.draw(graphics2d));
     }
 
-    // Rerender the sprite based on the current size
-    public void updateSprite()
-    {
-        if(this.getSize().width <= 0 && this.getSize().height <= 0) return;
-        sprite = this.spriteSetup(spriteName, this.getSize().width, this.getSize().height);
-    }
-
     // Helper: calculate size with margin and padding
     private void calculateSize()
     {
@@ -83,6 +76,13 @@ public abstract class UIContainer extends UIComponent
             getPadding().getVertical() + (int)calculatedContentSize.getHeight()
         );
         if(oldWidth != this.getSize().width || oldHeight != this.getSize().height) updateSprite();
+    }
+
+    // Rerender the sprite based on the current size
+    public void updateSprite()
+    {
+        if(this.getSize().width <= 0 && this.getSize().height <= 0) return;
+        sprite = this.spriteSetup(spriteName, this.getSize().width, this.getSize().height);
     }
 
     // Helper: calculate position based on top and left margins

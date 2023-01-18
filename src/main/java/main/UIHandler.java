@@ -26,22 +26,26 @@ public class UIHandler
 
     // UI Display
     private UIContainer pauseUI;
+    private UIContainer playUI;
     private UIState currentUI;
 
     // Methods
     public void intializeUI(Mouse mouse)
     {
         addPauseUI(mouse);
+        addPlayUI();
     }
 
     public void updateUI(GameState gameState) 
     { 
+        togglePlayUI(gameState);
         togglePauseUI(gameState);
         uiContainers.forEach(uiContainer -> uiContainer.update()); 
     }
 
     public void drawUI(Graphics2D graphics2d) { uiContainers.forEach(uiContainer -> uiContainer.draw(graphics2d)); }
 
+    // Pause UI add and toggle
     public void togglePauseUI(GameState gameState)
     {
         if(gameState == GameState.PAUSE && currentUI == null) 
@@ -90,5 +94,37 @@ public class UIHandler
         container.addUIComponent(settingsButton);
         container.addUIComponent(quitButton);
         pauseUI = container;
+    }
+
+    // Play UI add and toggle
+    public void togglePlayUI(GameState gameState)
+    {
+        if(gameState == GameState.PLAY && currentUI == null) 
+        {
+            uiContainers.add(playUI); 
+            currentUI = UIState.PLAY;
+        }
+        else if(gameState != GameState.PLAY && currentUI == UIState.PLAY) 
+        {
+            uiContainers.remove(playUI); 
+            currentUI = null;
+        }
+    }
+    public void addPlayUI()
+    {
+        UIContainer container = new ColumnContainer("transparent");
+        container.setAlignment(new Alignment(Alignment.Position.CENTER, Alignment.Position.END));
+
+        UIContainer hpBar = new ColumnContainer("hp_bar");
+        hpBar.setPadding(new Spacing(160, 32));
+
+        UIContainer expBar = new ColumnContainer("exp_bar");
+        expBar.setPadding(new Spacing(160, 32));
+        expBar.setMargin(new Spacing(0, -8));
+
+        container.addUIComponent(hpBar);
+        container.addUIComponent(expBar);
+
+        playUI = container;
     }
 }

@@ -10,6 +10,7 @@ package main;
 public enum UIState 
 {
     PAUSE,
+    PLAY,
     INVENTORY,
     HEROES
 }
