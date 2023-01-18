@@ -7,12 +7,10 @@
 
 package entities;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Map.Entry;
-import java.util.AbstractMap.SimpleEntry;
 
 import entities.enums.MoveDirection;
 import entities.stats.Stats;
+import graphics.effects.DamageText;
 
 public abstract class AnimateEntity extends Entity
 {
@@ -22,7 +20,7 @@ public abstract class AnimateEntity extends Entity
     private int spriteNum = 1;
     private boolean collisionOn = false;
     private int attackCooldown = 0;
-    private ArrayList<Entry<String, Integer>> damageText = new ArrayList<Entry<String, Integer>>();
+    private DamageText damageText = new DamageText();
 
     // States
     private AnimationHandler animationHandler;
@@ -50,7 +48,7 @@ public abstract class AnimateEntity extends Entity
     public boolean getIsMoving() { return this.isMoving; }
     public boolean getIsAttacking() { return this.isAttacking; }
     public boolean getIsDead() { return this.isDead; }
-    public ArrayList<Entry<String, Integer>> getDamageText() { return this.damageText; }
+    public DamageText getDamageText() { return this.damageText; }
 
     // Setters
     public void setStats(Stats stats) { this.entityStats = stats; }
@@ -73,11 +71,5 @@ public abstract class AnimateEntity extends Entity
             spriteNum = animationHandler.animateAttack(entityStats.calculateFramesPerAttack(), canAttack());
         else 
             spriteNum = animationHandler.animateWalk(moveAnimationSpeed, isMoving);
-    }
-
-    // Add a damage text to the list
-    public void addDamageText(int damageText)
-    {
-        this.damageText.add(new SimpleEntry<String, Integer>("-" + Integer.toString(damageText), -5));
     }
 }

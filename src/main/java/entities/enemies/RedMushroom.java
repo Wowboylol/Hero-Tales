@@ -86,7 +86,7 @@ public class RedMushroom extends Enemy implements Damageable
         else drawMovingSprite(graphics2D);
 
         this.drawHealthBar(graphics2D, HP_BAR_OFFSET);
-        this.drawDamageText(graphics2D);
+        this.getDamageText().drawDamageText(graphics2D, this.getScreenX(), this.getScreenY());
         if(this.getDebugConsole()) this.debugConsole(graphics2D, AGGRO_RANGE);
     }
 
@@ -96,7 +96,7 @@ public class RedMushroom extends Enemy implements Damageable
     @Override
     public void damageEntity(int damage) 
     { 
-        this.addDamageText(this.getStats().damageEntity(damage));
+        this.getDamageText().addDamageText(this.getStats().damageEntity(damage));
         generateParticle();
         
         if(this.getStats().getCurrentHealth() > 0) simulator.playSoundEffect(SOUND_HIT_ID); 
