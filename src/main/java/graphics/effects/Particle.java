@@ -61,7 +61,7 @@ public class Particle implements Updateable
     public void update()
     {
         if(lifetime <= 0) return;
-        if(lifetime < maxLifetime/3) yDirection++;
+        if(lifetime < maxLifetime/2.5) yDirection++;
         particlePosition.setX(particlePosition.getX() + (xDirection * speed));
         particlePosition.setY(particlePosition.getY() + (yDirection * speed));
         lifetime--;
