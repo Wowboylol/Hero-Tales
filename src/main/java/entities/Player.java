@@ -15,6 +15,7 @@ import javax.imageio.ImageIO;
 import main.*;
 import entities.enums.MoveDirection;
 import entities.stats.PlayerStats;
+import graphics.effects.Particle;
 
 public class Player extends AnimateEntity implements Damageable
 {
@@ -142,6 +143,7 @@ public class Player extends AnimateEntity implements Damageable
     public void damageEntity(int damage) 
     { 
         this.getDamageText().addDamageText(this.getStats().damageEntity(damage));
+        generateParticle();
 
         if(this.getStats().getCurrentHealth() > 0) simulator.playSoundEffect(SOUND_HIT_ID); 
         else simulator.playSoundEffect(SOUND_DEATH_ID); 
@@ -241,6 +243,20 @@ public class Player extends AnimateEntity implements Damageable
         else graphics2d.setColor(new Color(211, 59, 50));
 
         graphics2d.fillRect(playerScreenPositionX(), playerScreenPositionY()+yOffset, (int)(Simulator.TILE_SIZE*healthPercentage), 6);
+    }
+
+    // Animate particle animation
+    private void generateParticle()
+    {
+        Color color = new Color(215, 30, 37);
+        Coordinate origin = new Coordinate(
+            this.getWorldCoordinateX() + this.getOriginPointX(), 
+            this.getWorldCoordinateY() + this.getOriginPointY()
+        );
+        simulator.particleHandler.addParticle(new Particle(simulator, origin, color, -1, -1)); 
+        simulator.particleHandler.addParticle(new Particle(simulator, origin, color, 1, -1)); 
+        simulator.particleHandler.addParticle(new Particle(simulator, origin, color, -1, 1)); 
+        simulator.particleHandler.addParticle(new Particle(simulator, origin, color, 1, 1)); 
     }
 
     // Load player sprites into BufferedImage
