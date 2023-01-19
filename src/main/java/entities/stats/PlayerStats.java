@@ -11,16 +11,8 @@ import main.Simulator;
 import items.Wieldable;
 import items.playerweapons.*;
 
-public class PlayerStats implements Stats
+public class PlayerStats extends Stats
 {
-    // Stats
-    private int maxHealth;
-    private double currentHealth;
-    private double attack;
-    private int defense;
-    private int dexterity;
-    private int speed;
-
     // Player stats
     private int level;
     private int exp;
@@ -32,12 +24,7 @@ public class PlayerStats implements Stats
     // Default constructor, sets default stats
     public PlayerStats(Simulator simulator) 
     {
-        this.maxHealth = 100;
-        this.currentHealth = maxHealth;
-        this.attack = 0;
-        this.defense = 0;
-        this.dexterity = 0;
-        this.speed = 2;
+        super(100, 0, 0, 0, 2);
         this.level = 0;
         this.exp = 0;
         this.vitality = 0;
@@ -46,22 +33,8 @@ public class PlayerStats implements Stats
         this.weapon = new WoodenSword(simulator);
     }
 
-    // Getters
-    public int getMaxHealth() { return this.maxHealth; }
-    public double getCurrentHealth() { return this.currentHealth; }
-    public double getAttack() { return this.attack; }
-    public int getDefense() { return this.defense; }
-    public int getDexterity() { return this.dexterity; }
-    public int getSpeed() { return this.speed; }
+    // Weapon: Determines the attack pattern and base damage of player.
     public Wieldable getWeapon() { return this.weapon; }
-
-    // Setters
-    public void setMaxHealth(int health) { this.maxHealth = health; }
-    public void setCurrentHealth(double health) { this.currentHealth = health; }
-    public void setAttack(double attack) { this.attack = attack; }
-    public void setDefense(int defense) { this.defense = defense; }
-    public void setDexterity(int dexterity) { this.dexterity = dexterity; }
-    public void setSpeed(int speed) { this.speed = speed; }
     public void setWeapon(Wieldable weapon) { this.weapon = weapon; }
 
     // Level: how strong the player is in terms of experience.
@@ -87,14 +60,20 @@ public class PlayerStats implements Stats
     public void setIntelligence(int intelligence) { this.intelligence = intelligence; }
 
     // Calculations
+    @Override
     public int calculateFramesPerAttack() { return (int)(60/(0.1*dexterity+1.5)); }
 
+    @Override
+    public double calculateDamageMultiplier() { return (25+attack)/50; }
+
+    @Override
     public void regenerateHealth() 
     { 
         currentHealth += (2.5 + 0.2*vitality)/60; 
         if(currentHealth > maxHealth) currentHealth = maxHealth;
     }
 
+    @Override
     public int damageEntity(int damage) 
     { 
         double maximumReduction = 0.1*damage;
@@ -105,6 +84,7 @@ public class PlayerStats implements Stats
         return (int)finalDamage;
     }
     
+    @Override
     public int healEntity(int heal) 
     { 
         this.currentHealth += heal;

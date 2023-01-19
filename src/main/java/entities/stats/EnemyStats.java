@@ -11,60 +11,35 @@ package entities.stats;
 
 import items.Wieldable;
 
-public class EnemyStats implements Stats
+public class EnemyStats extends Stats
 {
-    // Stats
-    private int maxHealth;
-    private double currentHealth;
-    private double attack;
-    private int defense;
-    private int dexterity;
-    private int speed;
+    // Enemy stats
     private Wieldable attackPattern;
 
     // Default constructor, sets default stats
     public EnemyStats() 
     {
-        this.maxHealth = 100;
-        this.currentHealth = maxHealth;
-        this.attack = 0;
-        this.defense = 0;
-        this.dexterity = 0;
-        this.speed = 2;
+        super(100, 0, 0, 0, 2);
     }
 
     // Parameterized constructor, sets stats to parameters
     public EnemyStats(int maxHealth, double attack, int defense, int dexterity, int speed) 
     {
-        this.maxHealth = maxHealth;
-        this.currentHealth = maxHealth;
-        this.attack = attack;
-        this.defense = defense;
-        this.dexterity = dexterity;
-        this.speed = speed;
+        super(maxHealth, attack, defense, dexterity, speed);
     }
 
-    // Getters
-    public int getMaxHealth() { return this.maxHealth; }
-    public double getCurrentHealth() { return this.currentHealth; }
-    public double getAttack() { return this.attack; }
-    public int getDefense() { return this.defense; }
-    public int getDexterity() { return this.dexterity; }
-    public int getSpeed() { return this.speed; }
+    // Weapon: Determines the attack pattern and base damage of enemy
     public Wieldable getWeapon() { return this.attackPattern; }
-
-    // Setters
-    public void setMaxHealth(int health) { this.maxHealth = health; }
-    public void setCurrentHealth(double health) { this.currentHealth = health; }
-    public void setAttack(double attack) { this.attack = attack; }
-    public void setDefense(int defense) { this.defense = defense; }
-    public void setDexterity(int dexterity) { this.dexterity = dexterity; }
-    public void setSpeed(int speed) { this.speed = speed; }
     public void setWeapon(Wieldable attackPattern) { this.attackPattern = attackPattern; }
 
     // Calculations
+    @Override
     public int calculateFramesPerAttack() { return (int)(60/(0.1*dexterity+1)); }
+
+    @Override
+    public double calculateDamageMultiplier() { return (25+attack)/50; }
     
+    @Override
     public int damageEntity(int damage) 
     { 
         double maximumReduction = 0.1*damage;
@@ -74,6 +49,7 @@ public class EnemyStats implements Stats
         return (int)finalDamage;
     }
     
+    @Override
     public int healEntity(int heal) 
     { 
         this.currentHealth += heal;
@@ -81,5 +57,6 @@ public class EnemyStats implements Stats
         return heal;    
     }
 
+    @Override
     public void regenerateHealth() {}
 }

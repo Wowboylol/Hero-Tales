@@ -18,14 +18,13 @@ import main.CollisionChecker;
 import entities.*;
 import entities.stats.EnemyStats;
 import graphics.effects.Particle;
-import items.Wieldable;
 import items.enemyattacks.RedMushroomAttack;
 
 public class RedMushroom extends Enemy implements Damageable
 {
     // Configurations
     public final Rectangle HITBOX_CONFIGURATIONS = new Rectangle(3, 9, 42, 36);
-    public final EnemyStats ENEMY_STATS = new EnemyStats(200, 0, 0, 0, 2);
+    public final EnemyStats ENEMY_STATS = new EnemyStats(200, 25, 0, 0, 2);
     public final int MOVE_ANIMATION_SPEED = 10;
     public final int HP_BAR_OFFSET = 55;
     public final int AGGRO_RANGE = 300;
@@ -37,7 +36,6 @@ public class RedMushroom extends Enemy implements Damageable
     // Attributes
     private Simulator simulator;
     private CollisionChecker collisionChecker;
-    private Wieldable attack;
 
     // Default constructor
     public RedMushroom(Simulator simulator, CollisionChecker collisionChecker, Coordinate spawnLocation)
@@ -45,11 +43,11 @@ public class RedMushroom extends Enemy implements Damageable
         super(spawnLocation, simulator);
         this.simulator = simulator;
         this.collisionChecker = collisionChecker;
-        this.attack = new RedMushroomAttack(simulator);
         loadSprite();
 
         // Super class overloading
         this.setStats(ENEMY_STATS);
+        this.getStats().setWeapon(new RedMushroomAttack(simulator));
         this.setHitbox(HITBOX_CONFIGURATIONS);
         this.setMoveAnimationSpeed(MOVE_ANIMATION_SPEED);
     }
@@ -66,7 +64,7 @@ public class RedMushroom extends Enemy implements Damageable
         if(this.getIsAttacking() && this.canAttack())
         {
             this.startAttackCooldown();
-            this.attack.attack(
+            this.getStats().getWeapon().attack(
                 new Coordinate(
                     this.getWorldCoordinateX()+getOriginPointX(), 
                     this.getWorldCoordinateY()+getOriginPointY()
