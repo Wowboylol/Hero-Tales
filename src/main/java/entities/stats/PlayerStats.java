@@ -16,6 +16,7 @@ public class PlayerStats extends Stats
     // Player stats
     private int level;
     private int exp;
+    private int maxExp;
     private double vitality;
     private int charisma;
     private int intelligence;
@@ -25,7 +26,8 @@ public class PlayerStats extends Stats
     public PlayerStats(Simulator simulator) 
     {
         super(100, 0, 0, 0, 2);
-        this.level = 0;
+        this.level = 1;
+        this.maxExp = calculateMaxExp();
         this.exp = 0;
         this.vitality = 0;
         this.charisma = 0;
@@ -40,6 +42,10 @@ public class PlayerStats extends Stats
     // Level: how strong the player is in terms of experience.
     public int getLevel() { return this.level; }
     public void setLevel(int level) { this.level = level; }
+
+    // Max experience: how much experience the player needs to level up.
+    public int getMaxExp() { return this.maxExp; }
+    public void setMaxExp(int maxExperience) { this.maxExp = maxExperience; }
 
     // Experience: how much experience the player has.
     public int getExp() { return this.exp; }
@@ -92,6 +98,18 @@ public class PlayerStats extends Stats
         return heal;    
     }
 
+    // Calculate maxExp needed based on player level
+    public int calculateMaxExp() { return (100 * (level-1)) + 50; }
+
     // Add experience by given amount
-    public void addExp(int exp) { this.exp += exp; }
+    public void addExp(int exp) 
+    { 
+        this.exp += exp; 
+        if(this.exp >= this.maxExp) 
+        {
+            this.level++;
+            this.maxExp = calculateMaxExp();
+            this.exp = 0;
+        }
+    }
 }
