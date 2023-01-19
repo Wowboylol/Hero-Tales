@@ -24,7 +24,7 @@ public class RedMushroom extends Enemy implements Damageable
 {
     // Configurations
     public final Rectangle HITBOX_CONFIGURATIONS = new Rectangle(3, 9, 42, 36);
-    public final EnemyStats ENEMY_STATS = new EnemyStats(200, 25, 0, 0, 2);
+    public final EnemyStats ENEMY_STATS = new EnemyStats(120, 25, 0, 0, 2);
     public final int MOVE_ANIMATION_SPEED = 10;
     public final int HP_BAR_OFFSET = 55;
     public final int AGGRO_RANGE = 300;
