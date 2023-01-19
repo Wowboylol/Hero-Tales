@@ -28,6 +28,7 @@ public class RedMushroom extends Enemy implements Damageable
     public final int MOVE_ANIMATION_SPEED = 10;
     public final int HP_BAR_OFFSET = 55;
     public final int AGGRO_RANGE = 300;
+    public final int EXP_DROP = 5;
 
     // Sounds
     public final int SOUND_HIT_ID = 3;
@@ -90,7 +91,15 @@ public class RedMushroom extends Enemy implements Damageable
     }
 
     @Override
-    public boolean isDestroyed() { return this.getStats().getCurrentHealth() <= 0; }
+    public boolean isDestroyed() 
+    { 
+        if(this.getStats().getCurrentHealth() <= 0)
+        {
+            simulator.getPlayerStats().addExp(EXP_DROP);
+            return true;
+        }
+        return false;
+    }
 
     @Override
     public void damageEntity(int damage) 

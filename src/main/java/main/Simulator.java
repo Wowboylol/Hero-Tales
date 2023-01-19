@@ -17,6 +17,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 import entities.*;
+import entities.stats.*;
 import graphics.*;
 
 public class Simulator extends JPanel implements Runnable
@@ -74,6 +75,7 @@ public class Simulator extends JPanel implements Runnable
     public int getMapWidth() { return this.mapHandler.getCurrentMapWidth(); }
     public int getMapHeight() { return this.mapHandler.getCurrentMapHeight(); }
     public Coordinate getPlayerCoordinate() { return this.player.getWorldCoordinate(); }
+    public PlayerStats getPlayerStats() { return this.player.getStats(); }
 
     // Getter for Simulator instance, creates a Simulator if it doesn't already exist
     public static Simulator getInstance()

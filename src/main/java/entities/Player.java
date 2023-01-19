@@ -36,6 +36,7 @@ public class Player extends AnimateEntity implements Damageable
     private Keyboard keyboard;
     private Mouse mouse;
     private CollisionChecker collisionChecker;
+    private PlayerStats playerStats;
 
     // Default constructor (starting coordinate based on defaults)
     public Player(Simulator simulator)
@@ -45,7 +46,8 @@ public class Player extends AnimateEntity implements Damageable
         loadSprite();
         
         // Super class overriding
-        this.setStats(new PlayerStats(simulator));
+        this.playerStats = new PlayerStats(simulator);
+        this.setStats(playerStats);
         this.setHitbox(HITBOX_CONFIGURATIONS);
         this.setMoveAnimationSpeed(MOVE_ANIMATION_SPEED);
     }
@@ -151,6 +153,9 @@ public class Player extends AnimateEntity implements Damageable
 
     @Override
     public void healEntity(int heal) { this.getStats().healEntity(heal); }
+
+    @Override
+    public PlayerStats getStats() { return playerStats; }
 
     // Set and draw image for attack sprite based on spriteNum
     public void drawAttackSprite(Graphics2D graphics2D)

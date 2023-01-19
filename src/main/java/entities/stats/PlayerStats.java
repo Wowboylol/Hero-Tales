@@ -91,4 +91,7 @@ public class PlayerStats extends Stats
         if(this.currentHealth > this.maxHealth) this.currentHealth = this.maxHealth;
         return heal;    
     }
+
+    // Add experience by given amount
+    public void addExp(int exp) { this.exp += exp; }
 }
