@@ -101,9 +101,11 @@ public class PlayerStats extends Stats
     // Calculate maxExp needed based on player level
     public int calculateMaxExp() { return (100 * (level-1)) + 50; }
 
-    // Add experience by given amount
+    // Add experience by given amount, which cannot exceed 10% of maxExp
     public void addExp(int exp) 
     { 
+        int expCap = this.maxExp/10;
+        if(exp > expCap) exp = expCap;
         this.exp += exp; 
         if(this.exp >= this.maxExp) 
         {
