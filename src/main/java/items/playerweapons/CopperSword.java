@@ -47,9 +47,9 @@ public class CopperSword extends Weapon implements Wieldable
     public BufferedImage getWeaponIcon() { return this.weaponIcon; }
 
     @Override
-    public void attack(Coordinate spawnPosition, Coordinate playerPosition, int angle)
+    public void attack(Coordinate spawnPosition, Coordinate playerPosition, int angle, double damageMultiplier)
     {
-        int damage = ThreadLocalRandom.current().nextInt(this.getMinDamage(), this.getMaxDamage() + 1);
+        int damage = (int)(ThreadLocalRandom.current().nextInt(this.getMinDamage(), this.getMaxDamage() + 1) * damageMultiplier);
         Projectile projectile = new Projectile(
             new Rectangle(HITBOX_CONFIGURATIONS), spawnPosition, playerPosition, 
             projectileSprite, damage, this.getProjectileSpeed(),

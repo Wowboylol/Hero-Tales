@@ -78,7 +78,8 @@ public class Player extends AnimateEntity implements Damageable
                 this.mouse.getAttackAngle(
                     playerScreenPositionX()+getOriginPointX(), 
                     playerScreenPositionY()+getOriginPointY()
-                )
+                ),
+                this.getStats().calculateDamageMultiplier()
             );
         }
         if(this.getIsMoving() && !collisionChecker.checkTileWall(this)) movePlayer(collisionChecker.checkTilePath(this));

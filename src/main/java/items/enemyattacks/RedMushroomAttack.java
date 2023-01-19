@@ -39,11 +39,12 @@ public class RedMushroomAttack extends Attack implements Wieldable
     }
 
     @Override
-    public void attack(Coordinate spawnPosition, Coordinate playerPosition, int angle)
+    public void attack(Coordinate spawnPosition, Coordinate playerPosition, int angle, double damageMultiplier)
     {
+        int damage = (int)(this.getDamage() * damageMultiplier);
         Projectile projectile = new Projectile(
             new Rectangle(HITBOX_CONFIGURATIONS), spawnPosition, playerPosition, 
-            projectileSprite, this.getDamage(), this.getProjectileSpeed(),
+            projectileSprite, damage, this.getProjectileSpeed(),
             angle, this.getLifetime(), user
         );
         this.simulator.projectiles.add(projectile);

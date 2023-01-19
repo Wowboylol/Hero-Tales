@@ -70,7 +70,8 @@ public class RedMushroom extends Enemy implements Damageable
                     this.getWorldCoordinateY()+getOriginPointY()
                 ),
                 this.getPlayerCoordinate(),
-                collisionChecker.checkAggro(this, AGGRO_RANGE)
+                collisionChecker.checkAggro(this, AGGRO_RANGE),
+                this.getStats().calculateDamageMultiplier()
             );
         }
         if(this.getIsMoving() && !collisionChecker.checkTileWall(this)) this.moveEnemy();
