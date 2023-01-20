@@ -7,7 +7,7 @@
 		"aggroRange": 300,
 		"expDrop": 5,
 		"hitboxConfig": [3, 9, 42, 36],
-		"enemyStats": [20, 25, 0, 0, 2],
+		"enemyStats": [120, 25, 0, 0, 2],
 		"particleColor": [172, 44, 68]
 	},
 	"sound": {
