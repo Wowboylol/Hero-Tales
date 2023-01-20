@@ -34,7 +34,7 @@ public class PlayerStats extends Stats
         this.vitality = 0;
         this.charisma = 0;
         this.intelligence = 0;
-        this.weapon = new WoodenSword(simulator);
+        this.weapon = new BasicWeapon(simulator, "/weapons/wooden_sword.json");
     }
 
     // Weapon: Determines the attack pattern and base damage of player.

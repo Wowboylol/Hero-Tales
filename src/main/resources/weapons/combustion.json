@@ -1,0 +1,19 @@
+{
+    "type": "basic",
+    "name": "Combustion Spear",
+    "config": {
+        "tier": 10,
+        "minDamage": 80,
+        "maxDamage": 95,
+        "shots": 8,
+        "projectileSpeed": 8,
+        "lifetime": 15,
+        "hitboxConfig": [11, 9, 26, 30]
+    },
+    "soundID": 0,
+    "sprite": {
+        "icon": "/weapons/icons/combustion_spear.png",
+        "projectile": "/projectiles/flame_thrust.png"
+    },
+    "projectileOffsets": [0, 45, 90, 135, 180, 225, 270, 315]
+}

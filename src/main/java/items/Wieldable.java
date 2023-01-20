@@ -14,7 +14,4 @@ public interface Wieldable
 {
     // Shoot projectile(s)
     public void attack(Coordinate spawnPosition, Coordinate playerPosition, int angle, double damageMultiplier);
-
-    // Load sprites of item and projectile
-    public void loadSprite();
 }

@@ -50,7 +50,6 @@ public class RedMushroomAttack extends Attack implements Wieldable
         this.simulator.projectiles.add(projectile);
     }
 
-    @Override
     public void loadSprite()
     {
         projectileSprite = this.spriteSetup("/projectiles/red_orb.png", Simulator.TILE_SIZE, Simulator.TILE_SIZE);

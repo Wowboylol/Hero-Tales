@@ -17,33 +17,22 @@ import main.Utility;
 public abstract class Weapon 
 {
     // Tier: how powerful and rare a weapon is
-    private int tier;
+    protected int tier;
 
     // Min base damage: the minimum damage a weapon can deal
-    private int minDamage;
+    protected int minDamage;
 
     // Max base damage: the maximum damage a weapon can deal
-    private int maxDamage;
+    protected int maxDamage;
 
     // Number of shots: how many projectiles are fired per shot
-    private int shots;
+    protected int shots;
 
     // Projectile speed: how fast a projectile travels per update (in pixels)
-    private int projectileSpeed;
+    protected int projectileSpeed;
 
     // Lifetime: how much frames a shot projectile can last before disappearing
-    private int lifetime;
-
-    // Default constructor
-    public Weapon(int tier, int minDamage, int maxDamage, int shots, int projectileSpeed, int lifetime)
-    {
-        this.tier = tier;
-        this.minDamage = minDamage;
-        this.maxDamage = maxDamage;
-        this.shots = shots;
-        this.projectileSpeed = projectileSpeed;
-        this.lifetime = lifetime;
-    }
+    protected int lifetime;
 
     // Getters
     public int getTier() { return this.tier; }

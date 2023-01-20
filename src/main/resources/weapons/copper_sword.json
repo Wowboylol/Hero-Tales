@@ -1,0 +1,19 @@
+{
+    "type": "basic",
+    "name": "Copper Sword",
+    "config": {
+        "tier": 1,
+        "minDamage": 35,
+        "maxDamage": 50,
+        "shots": 1,
+        "projectileSpeed": 8,
+        "lifetime": 25,
+        "hitboxConfig": [14, 12, 21, 23]
+    },
+    "soundID": 0,
+    "sprite": {
+        "icon": "/weapons/icons/copper_sword.png",
+        "projectile": "/projectiles/copper_slash.png"
+    },
+    "projectileOffsets": [0]
+}
