@@ -20,7 +20,7 @@ Description placeholder
 - [ ] Add dialogue interactions
 - [ ] Implement title screen
 - [ ] Add events interactions
-- [ ] Add general UI (options, health bar, etc.)
+- [X] Add general UI (options, health bar, etc.)
 - [ ] Create unit tests
 
 ### Development Cycle 3
