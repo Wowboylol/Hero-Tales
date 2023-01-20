@@ -7,6 +7,8 @@
 
 package entities.stats;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 import main.Simulator;
 import items.Wieldable;
 import items.playerweapons.*;
@@ -109,9 +111,23 @@ public class PlayerStats extends Stats
         this.exp += exp; 
         if(this.exp >= this.maxExp) 
         {
-            this.level++;
+            levelUp();
             this.maxExp = calculateMaxExp();
             this.exp = 0;
         }
+    }
+
+    // Level up character and randomly increase stats while refreshing current health to max
+    private void levelUp()
+    {
+        level++;
+        this.maxHealth += ThreadLocalRandom.current().nextInt(20, 30 + 1);
+        this.currentHealth = maxHealth;
+        this.attack += ThreadLocalRandom.current().nextInt(0, 2 + 1);
+        this.defense += ThreadLocalRandom.current().nextInt(0, 2 + 1);
+        this.dexterity += ThreadLocalRandom.current().nextInt(0, 2 + 1);
+        vitality += ThreadLocalRandom.current().nextInt(0, 2 + 1);
+        charisma += ThreadLocalRandom.current().nextInt(0, 2 + 1);
+        intelligence += ThreadLocalRandom.current().nextInt(0, 2 + 1);
     }
 }

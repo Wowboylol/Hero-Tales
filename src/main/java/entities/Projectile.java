@@ -45,7 +45,7 @@ public class Projectile extends Entity implements Updateable
         int angle, int lifetime, EntityType user)
     {
         super(spawnPosition);
-        this.spriteColor = new Color(sprite.getRGB(25, 24));
+        this.spriteColor = new Color(sprite.getRGB(27, 24));
         this.sprite = Utility.rotateImage(sprite, (angle/8) << 3);
         this.angle = angle;
         hitbox.x = hitbox.x-(Simulator.TILE_SIZE >> 1);
