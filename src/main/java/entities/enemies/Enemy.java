@@ -160,7 +160,7 @@ public abstract class Enemy extends AnimateEntity
         BufferedImage image = null;
         
         try {
-            image = ImageIO.read(getClass().getResourceAsStream("/enemies/mobs/red_mushroom/" + imageName + ".png"));
+            image = ImageIO.read(getClass().getResourceAsStream("/enemies/mobs/" + imageName + ".png"));
             image = Utility.resizeImage(image, width, height);
         }
         catch(IOException e) {
