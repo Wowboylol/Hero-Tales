@@ -31,5 +31,6 @@
 		"attackDown": "red_mushroom/attack_down",
 		"attackLeft": "red_mushroom/attack_left",
 		"attackRight": "red_mushroom/attack_right"
-	}
+	},
+	"weapon": "/enemies/mobs/red_mushroom/red_mushroom_attack.json"
 }

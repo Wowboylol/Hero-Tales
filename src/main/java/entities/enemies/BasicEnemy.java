@@ -24,7 +24,7 @@ import main.CollisionChecker;
 import entities.*;
 import entities.stats.EnemyStats;
 import graphics.effects.Particle;
-import items.enemyattacks.RedMushroomAttack;
+import items.enemyattacks.BasicAttack;
 
 public class BasicEnemy extends Enemy implements Damageable
 {
@@ -56,7 +56,6 @@ public class BasicEnemy extends Enemy implements Damageable
 
         // Super class overloading
         this.setStats(enemyStats);
-        this.getStats().setWeapon(new RedMushroomAttack(simulator));
         this.setHitbox(hitboxConfigurations);
         this.setMoveAnimationSpeed(moveAnimationSpeed);
     }
@@ -83,6 +82,7 @@ public class BasicEnemy extends Enemy implements Damageable
         setupConfigurations(json);
         setupSoundID(json);
         setupSprites(json);
+        setupAttack(json);
     }
 
     // Setup enemy configurations from JSON file
@@ -147,6 +147,12 @@ public class BasicEnemy extends Enemy implements Damageable
         attackDown = this.spriteSetup(spritePaths.getString("attackDown"), Simulator.TILE_SIZE, Simulator.TILE_SIZE);
         attackLeft = this.spriteSetup(spritePaths.getString("attackLeft"), Simulator.TILE_SIZE, Simulator.TILE_SIZE);
         attackRight = this.spriteSetup(spritePaths.getString("attackRight"), Simulator.TILE_SIZE, Simulator.TILE_SIZE);
+    }
+
+    // Setup enemy attack pattern from JSON file
+    private void setupAttack(JSONObject json)
+    {
+        this.enemyStats.setWeapon(new BasicAttack(simulator, json.getString("weapon")));
     }
 
     @Override

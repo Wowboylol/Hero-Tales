@@ -17,21 +17,16 @@ import main.Utility;
 public abstract class Attack 
 {
     // Damage: the damage an attack deals
-    private int damage;
+    protected int damage;
+
+    // Number of shots: how many projectiles are fired per attack
+    protected int shots;
 
     // Projectile speed: how fast a projectile travels per update (in pixels)
-    private int projectileSpeed;
+    protected int projectileSpeed;
 
     // Lifetime: how much frames a shot projectile can last before disappearing
-    private int lifetime;
-
-    // Default constructor
-    public Attack(int damage, int projectileSpeed, int lifetime)
-    {
-        this.damage = damage;
-        this.projectileSpeed = projectileSpeed;
-        this.lifetime = lifetime;
-    }
+    protected int lifetime;
 
     // Getters
     public int getDamage() { return this.damage; }
