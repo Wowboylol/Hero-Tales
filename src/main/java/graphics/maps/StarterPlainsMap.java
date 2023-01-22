@@ -79,22 +79,23 @@ public class StarterPlainsMap implements MapStrategy
     {
         Simulator simulator = Simulator.getInstance();
         int tileSize = Simulator.TILE_SIZE;
-        String jsonPath = "/enemies/mobs/red_mushroom/red_mushroom.json";
-        simulator.enemies.add(new BasicEnemy(simulator, simulator.collisionChecker, new Coordinate(43*tileSize, 40*tileSize), jsonPath));
-        simulator.enemies.add(new BasicEnemy(simulator, simulator.collisionChecker, new Coordinate(43*tileSize, 45*tileSize), jsonPath));
-        simulator.enemies.add(new BasicEnemy(simulator, simulator.collisionChecker, new Coordinate(35*tileSize, 34*tileSize), jsonPath));
-        simulator.enemies.add(new BasicEnemy(simulator, simulator.collisionChecker, new Coordinate(45*tileSize, 27*tileSize), jsonPath));
-        simulator.enemies.add(new BasicEnemy(simulator, simulator.collisionChecker, new Coordinate(37*tileSize, 18*tileSize), jsonPath));
-        simulator.enemies.add(new BasicEnemy(simulator, simulator.collisionChecker, new Coordinate(37*tileSize, 4*tileSize), jsonPath));
-        simulator.enemies.add(new BasicEnemy(simulator, simulator.collisionChecker, new Coordinate(23*tileSize, 20*tileSize), jsonPath));
-        simulator.enemies.add(new BasicEnemy(simulator, simulator.collisionChecker, new Coordinate(31*tileSize, 22*tileSize), jsonPath));
-        simulator.enemies.add(new BasicEnemy(simulator, simulator.collisionChecker, new Coordinate(3*tileSize, 27*tileSize), jsonPath));
-        simulator.enemies.add(new BasicEnemy(simulator, simulator.collisionChecker, new Coordinate(10*tileSize, 30*tileSize), jsonPath));
-        simulator.enemies.add(new BasicEnemy(simulator, simulator.collisionChecker, new Coordinate(9*tileSize, 18*tileSize), jsonPath));
-        simulator.enemies.add(new BasicEnemy(simulator, simulator.collisionChecker, new Coordinate(15*tileSize, 17*tileSize), jsonPath));
-        simulator.enemies.add(new BasicEnemy(simulator, simulator.collisionChecker, new Coordinate(8*tileSize, 9*tileSize), jsonPath));
-        simulator.enemies.add(new BasicEnemy(simulator, simulator.collisionChecker, new Coordinate(14*tileSize, 4*tileSize), jsonPath));
-        simulator.enemies.add(new BasicEnemy(simulator, simulator.collisionChecker, new Coordinate(17*tileSize, 12*tileSize), jsonPath));
+        String redMushroom = "/enemies/mobs/red_mushroom/red_mushroom.json";
+        String blueMushroom = "/enemies/mobs/blue_mushroom/blue_mushroom.json";
+        simulator.enemies.add(new BasicEnemy(simulator, simulator.collisionChecker, new Coordinate(43*tileSize, 40*tileSize), redMushroom));
+        simulator.enemies.add(new BasicEnemy(simulator, simulator.collisionChecker, new Coordinate(43*tileSize, 45*tileSize), redMushroom));
+        simulator.enemies.add(new BasicEnemy(simulator, simulator.collisionChecker, new Coordinate(35*tileSize, 34*tileSize), redMushroom));
+        simulator.enemies.add(new BasicEnemy(simulator, simulator.collisionChecker, new Coordinate(45*tileSize, 27*tileSize), redMushroom));
+        simulator.enemies.add(new BasicEnemy(simulator, simulator.collisionChecker, new Coordinate(37*tileSize, 18*tileSize), redMushroom));
+        simulator.enemies.add(new BasicEnemy(simulator, simulator.collisionChecker, new Coordinate(37*tileSize, 4*tileSize), redMushroom));
+        simulator.enemies.add(new BasicEnemy(simulator, simulator.collisionChecker, new Coordinate(23*tileSize, 20*tileSize), redMushroom));
+        simulator.enemies.add(new BasicEnemy(simulator, simulator.collisionChecker, new Coordinate(31*tileSize, 22*tileSize), redMushroom));
+        simulator.enemies.add(new BasicEnemy(simulator, simulator.collisionChecker, new Coordinate(3*tileSize, 27*tileSize), redMushroom));
+        simulator.enemies.add(new BasicEnemy(simulator, simulator.collisionChecker, new Coordinate(10*tileSize, 30*tileSize), blueMushroom));
+        simulator.enemies.add(new BasicEnemy(simulator, simulator.collisionChecker, new Coordinate(9*tileSize, 18*tileSize), blueMushroom));
+        simulator.enemies.add(new BasicEnemy(simulator, simulator.collisionChecker, new Coordinate(15*tileSize, 17*tileSize), redMushroom));
+        simulator.enemies.add(new BasicEnemy(simulator, simulator.collisionChecker, new Coordinate(8*tileSize, 9*tileSize), redMushroom));
+        simulator.enemies.add(new BasicEnemy(simulator, simulator.collisionChecker, new Coordinate(14*tileSize, 4*tileSize), blueMushroom));
+        simulator.enemies.add(new BasicEnemy(simulator, simulator.collisionChecker, new Coordinate(17*tileSize, 12*tileSize), redMushroom));
     }
 
     // Getters

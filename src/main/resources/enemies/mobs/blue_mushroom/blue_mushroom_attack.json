@@ -1,0 +1,14 @@
+{
+    "type": "basic",
+    "config": {
+        "damage": 12,
+        "shots": 2,
+        "projectileSpeed": 5,
+        "lifetime": 100,
+        "hitboxConfig": [13, 15, 21, 15]
+    },
+    "sprite": {
+        "projectile": "/projectiles/blue_orb.png"
+    },
+    "projectileOffsets": [-15, 15]
+}

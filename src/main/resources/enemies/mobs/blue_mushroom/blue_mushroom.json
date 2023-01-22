@@ -1,0 +1,36 @@
+{
+	"type": "basic",
+	"name": "Blue Mushroom",
+	"config": {
+		"moveAnimationSpeed": 10,
+		"hpBarOffset": 55,
+		"aggroRange": 300,
+		"expDrop": 10,
+		"hitboxConfig": [3, 9, 42, 36],
+		"enemyStats": [150, 25, 0, 0, 2],
+		"particleColor": [78, 165, 185]
+	},
+	"sound": {
+		"hitID": 3,
+		"deathID": 4
+	},
+	"sprite": {
+		"down1": "blue_mushroom/walk_down_1",
+		"down2": "blue_mushroom/walk_down_2",
+		"down3": "blue_mushroom/walk_down_3",
+		"up1": "blue_mushroom/walk_up_1",
+		"up2": "blue_mushroom/walk_up_2",
+		"up3": "blue_mushroom/walk_up_3",
+		"left1": "blue_mushroom/walk_left_1",
+		"left2": "blue_mushroom/walk_left_2",
+		"left3": "blue_mushroom/walk_left_3",
+		"right1": "blue_mushroom/walk_right_1",
+		"right2": "blue_mushroom/walk_right_2",
+		"right3": "blue_mushroom/walk_right_3",
+		"attackUp": "blue_mushroom/attack_up",
+		"attackDown": "blue_mushroom/attack_down",
+		"attackLeft": "blue_mushroom/attack_left",
+		"attackRight": "blue_mushroom/attack_right"
+	},
+	"weapon": "/enemies/mobs/blue_mushroom/blue_mushroom_attack.json"
+}
