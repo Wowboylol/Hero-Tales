@@ -68,23 +68,7 @@ public class Player extends AnimateEntity implements Damageable
         this.decreaseAttackCooldown();
         this.getStats().regenerateHealth();
         this.animateSprite();
-        
-        if(this.getIsAttacking() && this.canAttack()) 
-        {
-            this.startAttackCooldown();
-            this.getStats().getWeapon().attack(
-                new Coordinate(
-                    this.getWorldCoordinateX()+getOriginPointX(), 
-                    this.getWorldCoordinateY()+getOriginPointY()
-                ),
-                this.getWorldCoordinate(),
-                this.mouse.getAttackAngle(
-                    playerScreenPositionX()+getOriginPointX(), 
-                    playerScreenPositionY()+getOriginPointY()
-                ),
-                this.getStats().calculateDamageMultiplier()
-            );
-        }
+        attack();
         if(this.getIsMoving() && !collisionChecker.checkTileWall(this)) movePlayer(collisionChecker.checkTilePath(this));
     }
 
@@ -122,6 +106,27 @@ public class Player extends AnimateEntity implements Damageable
         if(keyboard.getDirection(MoveDirection.DOWN))
         {
             this.setWorldCoordinateY(getWorldCoordinateY() + velocity);
+        }
+    }
+
+    // Attack using currently equipped weapon
+    public void attack()
+    {
+        if(this.getIsAttacking() && this.canAttack()) 
+        {
+            this.startAttackCooldown();
+            this.getStats().getWeapon().attack(
+                new Coordinate(
+                    this.getWorldCoordinateX()+getOriginPointX(), 
+                    this.getWorldCoordinateY()+getOriginPointY()
+                ),
+                this.getWorldCoordinate(),
+                this.mouse.getAttackAngle(
+                    playerScreenPositionX()+getOriginPointX(), 
+                    playerScreenPositionY()+getOriginPointY()
+                ),
+                this.getStats().calculateDamageMultiplier()
+            );
         }
     }
 
