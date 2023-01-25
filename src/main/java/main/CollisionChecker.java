@@ -113,10 +113,11 @@ public class CollisionChecker
                 int projectileTopRow = (projectileTopWorldY + (int)projectile.getYVelocity())/Simulator.TILE_SIZE;
                 if(mapHandler.getTileCollision(projectileRightCol, projectileTopRow) == true) { return true; }
             }
-            else throw new IllegalArgumentException();
+            else throw new IllegalArgumentException("Angle must be between 0 and 360" + angle);
         }
         catch(Exception e) { 
             e.printStackTrace();
+            System.out.println("Angle: " + angle);
             return true; 
         }
         return false;
