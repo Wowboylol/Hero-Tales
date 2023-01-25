@@ -15,6 +15,7 @@ import javax.imageio.ImageIO;
 import main.*;
 import entities.enums.MoveDirection;
 import entities.stats.PlayerStats;
+import entities.projectiles.Projectile;
 import graphics.effects.Particle;
 
 public class Player extends AnimateEntity implements Damageable
@@ -352,4 +353,10 @@ public class Player extends AnimateEntity implements Damageable
         this.setIsAttacking(mouse.getMousePressed());
         this.setIsMoving(keyboard.isWASDPressed());
     }
+
+    @Override
+    public void addToHitList(Projectile projectile) { }
+
+    @Override
+    public boolean isOnHitList(Projectile projectile) { return false; }
 }

@@ -34,6 +34,9 @@ public abstract class Weapon
     // Lifetime: how much frames a shot projectile can last before disappearing
     protected int lifetime;
 
+    // Pierce: detemines if a projectile can pierce through multiple entities
+    protected boolean pierce;
+
     // Getters
     public int getTier() { return this.tier; }
     public int getMinDamage() { return this.minDamage; }
@@ -41,6 +44,7 @@ public abstract class Weapon
     public int getShots() { return this.shots; }
     public int getProjectileSpeed() { return this.projectileSpeed; }
     public int getLifetime() { return this.lifetime; }
+    public boolean getPierce() { return this.pierce; }
 
     // Helper function: Sets up projectile sprites by resizing image from file
     protected BufferedImage spriteSetup(String imageName, int width, int height)

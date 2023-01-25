@@ -18,6 +18,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.Color;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 
 import main.Simulator;
 import main.CollisionChecker;
@@ -25,6 +26,7 @@ import entities.*;
 import entities.stats.EnemyStats;
 import graphics.effects.Particle;
 import items.enemyattacks.BasicAttack;
+import entities.projectiles.*;
 
 public class BasicEnemy extends Enemy implements Damageable
 {
@@ -32,6 +34,7 @@ public class BasicEnemy extends Enemy implements Damageable
     private Simulator simulator;
     private CollisionChecker collisionChecker;
     private String name;
+    protected ArrayList<Projectile> hitList = new ArrayList<Projectile>();
 
     // Configurations
     private Rectangle hitboxConfigurations;
@@ -215,6 +218,16 @@ public class BasicEnemy extends Enemy implements Damageable
 
     @Override
     public void healEntity(int heal) { this.getStats().healEntity(heal); }
+
+    @Override
+    public void addToHitList(Projectile projectile) { hitList.add(projectile); }
+
+    @Override
+    public boolean isOnHitList(Projectile projectile)
+    {
+        for(Projectile p : hitList) if(p == projectile) return true;
+        return false;
+    }
 
     // Set and draw image for moving sprite based on spriteNum
     public void drawMovingSprite(Graphics2D graphics2D)

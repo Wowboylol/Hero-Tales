@@ -149,8 +149,19 @@ public class CollisionChecker
 
                 if(projectile.getHitbox().intersects(enemy.getHitbox()))
                 {
-                    collision = true;
-                    enemy.damageEntity(projectile.getDamage());
+                    if(projectile.getPierce())
+                    {
+                        if(enemy.isOnHitList(projectile) == false)
+                        {
+                            enemy.damageEntity(projectile.getDamage());
+                            enemy.addToHitList(projectile);
+                        }
+                    }
+                    else
+                    {
+                        collision = true;
+                        enemy.damageEntity(projectile.getDamage());
+                    }
                 }
                 enemy.getHitbox().x = enemy.getDefaultHitboxX();
                 enemy.getHitbox().y = enemy.getDefaultHitboxY();

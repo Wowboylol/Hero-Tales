@@ -109,7 +109,7 @@ public class BasicAttack extends Attack implements Wieldable
             Projectile projectile = new Projectile(
                 new Rectangle(hitboxConfigurations), new Coordinate(spawnPosition), playerPosition, 
                 projectileSprite, damage, this.getProjectileSpeed(),
-                angle + projectileAngleOffsets[i], this.getLifetime(), user
+                angle + projectileAngleOffsets[i], this.getLifetime(), user, false
             );
             this.simulator.projectiles.add(projectile);
         }

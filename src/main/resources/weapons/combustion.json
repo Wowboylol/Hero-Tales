@@ -8,6 +8,7 @@
         "shots": 8,
         "projectileSpeed": 8,
         "lifetime": 15,
+        "pierce": false,
         "hitboxConfig": [11, 9, 26, 30]
     },
     "soundID": 0,

@@ -88,6 +88,7 @@ public class BasicWeapon extends Weapon implements Wieldable
         this.shots = config.getInt("shots");
         this.projectileSpeed = config.getInt("projectileSpeed");
         this.lifetime = config.getInt("lifetime");
+        this.pierce = config.getBoolean("pierce");
 
         JSONArray hitboxConfigJson = config.getJSONArray("hitboxConfig");
         hitboxConfigurations = new Rectangle(
@@ -134,7 +135,7 @@ public class BasicWeapon extends Weapon implements Wieldable
             Projectile projectile = new Projectile(
                 new Rectangle(hitboxConfigurations), new Coordinate(spawnPosition), playerPosition, 
                 projectileSprite, damage, this.getProjectileSpeed(),
-                angle + projectileAngleOffsets[i], this.getLifetime(), user
+                angle + projectileAngleOffsets[i], this.getLifetime(), user, pierce
             );
             this.simulator.projectiles.add(projectile);
         }

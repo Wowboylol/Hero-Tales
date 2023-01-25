@@ -40,11 +40,12 @@ public class Projectile extends Entity implements Updateable
     private double xVelocity;
     private double yVelocity;
     private int lifetime;
+    private boolean pierce;
 
     // Default constructor
     public Projectile(Rectangle hitbox, Coordinate spawnPosition, Coordinate playerPosition, 
         BufferedImage sprite, int damage, int speed, 
-        int angle, int lifetime, EntityType user)
+        int angle, int lifetime, EntityType user, boolean canPierce)
     {
         super(spawnPosition);
         this.spriteColor = new Color(sprite.getRGB(27, 24));
@@ -58,6 +59,7 @@ public class Projectile extends Entity implements Updateable
         this.damage = damage;
         this.projectileVelocity = speed;
         this.lifetime = lifetime;
+        this.pierce = canPierce;
         calculateVelocity();
     }
 
@@ -77,6 +79,7 @@ public class Projectile extends Entity implements Updateable
     public EntityType getUser() { return this.user; }
     public double getXVelocity() { return this.xVelocity; }
     public double getYVelocity() { return this.yVelocity; }
+    public boolean getPierce() { return this.pierce; }
 
     // Setters
     public void setSpeed(int speed) { this.projectileVelocity = speed; calculateVelocity(); }
