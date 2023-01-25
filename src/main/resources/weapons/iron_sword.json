@@ -1,0 +1,19 @@
+{
+    "type": "basic",
+    "name": "Iron Sword",
+    "config": {
+        "tier": 2,
+        "minDamage": 50,
+        "maxDamage": 60,
+        "shots": 1,
+        "projectileSpeed": 8,
+        "lifetime": 25,
+        "hitboxConfig": [14, 12, 21, 23]
+    },
+    "soundID": 0,
+    "sprite": {
+        "icon": "/weapons/icons/iron_sword.png",
+        "projectile": "/projectiles/iron_slash.png"
+    },
+    "projectileOffsets": [0]
+}
