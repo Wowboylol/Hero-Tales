@@ -12,8 +12,8 @@ import org.junit.Test;
 
 import java.awt.Rectangle;
 import entities.Player;
+import entities.projectiles.Projectile;
 import entities.Coordinate;
-import entities.Projectile;
 
 public class CollisionCheckerTest 
 {

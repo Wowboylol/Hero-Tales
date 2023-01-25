@@ -5,7 +5,7 @@
  *
 */
 
-package entities;
+package entities.projectiles;
 
 import java.awt.image.BufferedImage;
 import java.awt.Graphics2D;
@@ -16,6 +16,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import main.Simulator;
 import main.CollisionChecker;
 import main.Utility;
+import entities.*;
+import entities.Updateable;
 import entities.enums.EntityType;
 import graphics.effects.Particle;
 

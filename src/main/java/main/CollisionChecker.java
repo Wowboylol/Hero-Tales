@@ -8,6 +8,7 @@
 package main;
 import entities.*;
 import entities.enums.*;
+import entities.projectiles.Projectile;
 import entities.enemies.*;
 import graphics.MapHandler;
 import graphics.TileType;

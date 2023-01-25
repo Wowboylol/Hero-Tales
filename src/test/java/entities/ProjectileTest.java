@@ -10,6 +10,8 @@ package entities;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+import entities.projectiles.Projectile;
+
 public class ProjectileTest 
 {
     private Projectile projectile;

@@ -21,8 +21,8 @@ import java.nio.charset.StandardCharsets;
 import main.Simulator;
 import main.Utility;
 import entities.Coordinate;
-import entities.Projectile;
 import entities.enums.EntityType;
+import entities.projectiles.Projectile;
 import items.Wieldable;
 
 public class BasicWeapon extends Weapon implements Wieldable

@@ -18,8 +18,8 @@ import java.nio.charset.StandardCharsets;
 
 import main.Simulator;
 import entities.Coordinate;
-import entities.Projectile;
 import entities.enums.EntityType;
+import entities.projectiles.Projectile;
 import items.Wieldable;
 
 public class BasicAttack extends Attack implements Wieldable
