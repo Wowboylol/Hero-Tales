@@ -19,6 +19,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.nio.charset.StandardCharsets;
 
 import main.Simulator;
+import main.Utility;
 import entities.Coordinate;
 import entities.Projectile;
 import entities.enums.EntityType;
@@ -109,6 +110,8 @@ public class BasicWeapon extends Weapon implements Wieldable
         JSONObject spritePaths = json.getJSONObject("sprite");
         weaponIcon = this.spriteSetup(spritePaths.getString("icon"), Simulator.TILE_SIZE, Simulator.TILE_SIZE);
         projectileSprite = this.spriteSetup(spritePaths.getString("projectile"), Simulator.TILE_SIZE, Simulator.TILE_SIZE);
+
+        if(spritePaths.getBoolean("diagonal_orientation")) projectileSprite = Utility.rotateImage(projectileSprite, -45);
     }
 
     // Setup projectile offsets for multiple projectile shooting

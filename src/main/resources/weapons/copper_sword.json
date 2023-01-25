@@ -13,7 +13,8 @@
     "soundID": 0,
     "sprite": {
         "icon": "/weapons/icons/copper_sword.png",
-        "projectile": "/projectiles/copper_slash.png"
+        "projectile": "/projectiles/copper_slash.png",
+        "diagonal_orientation": false
     },
     "projectileOffsets": [0]
 }

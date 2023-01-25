@@ -1,0 +1,20 @@
+{
+    "type": "basic",
+    "name": "Amaterasu",
+    "config": {
+        "tier": 10,
+        "minDamage": 150,
+        "maxDamage": 175,
+        "shots": 1,
+        "projectileSpeed": 8,
+        "lifetime": 30,
+        "hitboxConfig": [12, 10, 24, 27]
+    },
+    "soundID": 0,
+    "sprite": {
+        "icon": "/weapons/icons/amaterasu_katana.png",
+        "projectile": "/projectiles/flame_slash.png",
+        "diagonal_orientation": true
+    },
+    "projectileOffsets": [0]
+}

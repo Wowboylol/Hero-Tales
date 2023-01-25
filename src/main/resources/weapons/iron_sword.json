@@ -13,7 +13,8 @@
     "soundID": 0,
     "sprite": {
         "icon": "/weapons/icons/iron_sword.png",
-        "projectile": "/projectiles/iron_slash.png"
+        "projectile": "/projectiles/iron_slash.png",
+        "diagonal_orientation": false
     },
     "projectileOffsets": [0]
 }
