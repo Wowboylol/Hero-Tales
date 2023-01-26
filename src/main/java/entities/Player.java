@@ -138,7 +138,7 @@ public class Player extends AnimateEntity implements Damageable
         else drawMovingSprite(graphics2D);
 
         drawHealthBar(graphics2D, HP_BAR_OFFSET);
-        this.getDamageText().drawDamageText(graphics2D, playerScreenPositionX(), playerScreenPositionY());
+        this.getPopUpText().drawPopUpText(graphics2D, playerScreenPositionX(), playerScreenPositionY());
 
         // DEBUG
         if(keyboard.getDebugConsole()) debugConsole(graphics2D);
@@ -150,7 +150,7 @@ public class Player extends AnimateEntity implements Damageable
     @Override
     public void damageEntity(int damage) 
     { 
-        this.getDamageText().addDamageText(this.getStats().damageEntity(damage));
+        this.getPopUpText().addHealText(this.getStats().damageEntity(damage));
         generateParticle();
 
         if(this.getStats().getCurrentHealth() > 0) simulator.playSoundEffect(SOUND_HIT_ID); 

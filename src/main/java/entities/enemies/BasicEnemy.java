@@ -191,7 +191,7 @@ public class BasicEnemy extends Enemy implements Damageable
         else drawMovingSprite(graphics2D);
 
         this.drawHealthBar(graphics2D, hpBarOffset);
-        this.getDamageText().drawDamageText(graphics2D, this.getScreenX(), this.getScreenY());
+        this.getPopUpText().drawPopUpText(graphics2D, this.getScreenX(), this.getScreenY());
         if(this.getDebugConsole()) this.debugConsole(graphics2D, aggroRange);
     }
 
@@ -209,7 +209,7 @@ public class BasicEnemy extends Enemy implements Damageable
     @Override
     public void damageEntity(int damage) 
     { 
-        this.getDamageText().addDamageText(this.getStats().damageEntity(damage));
+        this.getPopUpText().addDamageText(this.getStats().damageEntity(damage));
         generateParticle();
         
         if(this.getStats().getCurrentHealth() > 0) simulator.playSoundEffect(soundHitID); 

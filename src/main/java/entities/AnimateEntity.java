@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 
 import entities.enums.MoveDirection;
 import entities.stats.Stats;
-import graphics.effects.DamageText;
+import graphics.effects.PopUpText;
 
 public abstract class AnimateEntity extends Entity
 {
@@ -20,7 +20,7 @@ public abstract class AnimateEntity extends Entity
     private int spriteNum = 1;
     private boolean collisionOn = false;
     private int attackCooldown = 0;
-    private DamageText damageText = new DamageText();
+    private PopUpText popUpText = new PopUpText();
 
     // States
     private AnimationHandler animationHandler;
@@ -48,7 +48,7 @@ public abstract class AnimateEntity extends Entity
     public boolean getIsMoving() { return this.isMoving; }
     public boolean getIsAttacking() { return this.isAttacking; }
     public boolean getIsDead() { return this.isDead; }
-    public DamageText getDamageText() { return this.damageText; }
+    public PopUpText getPopUpText() { return this.popUpText; }
 
     // Setters
     public void setStats(Stats stats) { this.entityStats = stats; }
