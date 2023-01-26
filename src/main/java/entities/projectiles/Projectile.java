@@ -25,11 +25,11 @@ public class Projectile extends Entity implements Updateable
 {
     // Attributes
     private AtomicBoolean debugConsole = Simulator.getInstance().keyboard.getDebugConsoleReference();
-    private CollisionChecker collisionChecker = Simulator.getInstance().collisionChecker;
+    protected CollisionChecker collisionChecker = Simulator.getInstance().collisionChecker;
     private BufferedImage sprite;
     private EntityType user;
-    private int angle;
-    private Coordinate playerPosition;
+    protected int angle;
+    protected Coordinate playerPosition;
     private int mapPixelWidth = Simulator.getInstance().mapHandler.getCurrentMapWidth();
     private int mapPixelHeight = Simulator.getInstance().mapHandler.getCurrentMapHeight();
     private Color spriteColor;
@@ -77,8 +77,10 @@ public class Projectile extends Entity implements Updateable
     // Getters
     public int getDamage() { return this.damage; }
     public EntityType getUser() { return this.user; }
+    public double getProjectileVelocity() { return this.projectileVelocity; }
     public double getXVelocity() { return this.xVelocity; }
     public double getYVelocity() { return this.yVelocity; }
+    public int getLifetime() { return this.lifetime; }
     public boolean getPierce() { return this.pierce; }
 
     // Setters
@@ -86,7 +88,10 @@ public class Projectile extends Entity implements Updateable
     public void setAngle(int angle) { this.angle = angle; calculateVelocity(); }
     public void setLifetime(int lifetime) { this.lifetime = lifetime; }
     public void setPosition(Coordinate position) { this.setWorldCoordinate(position); }
+    public void setXVelocity(double xVelocity) { this.xVelocity = xVelocity; }
+    public void setYVelocity(double yVelocity) { this.yVelocity = yVelocity; }
 
+    @Override
     public void update()
     {
         if(collisionChecker.checkTileWall(this, angle)) 
@@ -100,6 +105,7 @@ public class Projectile extends Entity implements Updateable
         lifetime--;
     }
 
+    @Override
     public void draw(Graphics2D graphics2D)
     {
         if(isProjectileOnScreen()) 
@@ -139,7 +145,7 @@ public class Projectile extends Entity implements Updateable
     }
 
     // Animate particle animation
-    private void generateParticle()
+    public void generateParticle()
     {
         Simulator simulator = Simulator.getInstance();
         Coordinate origin = new Coordinate(
