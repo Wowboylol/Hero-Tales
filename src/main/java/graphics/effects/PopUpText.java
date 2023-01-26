@@ -23,6 +23,7 @@ public class PopUpText
     // Constants
     public static final Color DAMAGE_COLOR = new Color(240, 52, 24);
     public static final Color HEAL_COLOR = new Color(114, 243, 95);
+    public static final Color EXP_COLOR = new Color(207, 159, 255);
 
     // Attributes
     private ArrayList<Entry<Color, Entry<String, Integer>>> popUpText = new ArrayList<Entry<Color, Entry<String, Integer>>>();
@@ -46,16 +47,22 @@ public class PopUpText
         this.popUpText.add(new SimpleEntry<Color, Entry<String, Integer>>(HEAL_COLOR, content));
     }
 
+    public void addExpText(int expNumber)
+    {
+        SimpleEntry<String, Integer> content = new SimpleEntry<String, Integer>("+" + Integer.toString(expNumber) + "XP", -5);
+        this.popUpText.add(new SimpleEntry<Color, Entry<String, Integer>>(EXP_COLOR, content));
+    }
+
     public void drawPopUpText(Graphics2D graphics2d, int screenPositionX, int screenPositionY)
     {
         if(popUpText.size() == 0) return;
 
         FontMetrics metrics = graphics2d.getFontMetrics(UIHandler.DAMAGE_TEXT_FONT);
-        graphics2d.setColor(new Color(42, 39, 39));
         graphics2d.setFont(UIHandler.DAMAGE_TEXT_FONT);
 
         for(int i=0; i<popUpText.size(); i++)
         {
+            graphics2d.setColor(new Color(42, 39, 39));
             int popUpOffset = popUpText.get(i).getValue().getValue();
             String text = popUpText.get(i).getValue().getKey();
 

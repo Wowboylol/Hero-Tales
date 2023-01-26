@@ -10,12 +10,15 @@ package entities.stats;
 import java.util.concurrent.ThreadLocalRandom;
 
 import main.Simulator;
+import entities.Player;
+import graphics.effects.PopUpText;
 import items.Wieldable;
 import items.playerweapons.*;
 
 public class PlayerStats extends Stats
 {
     // Player stats
+    private Player player;
     private int level;
     private int exp;
     private int maxExp;
@@ -25,9 +28,10 @@ public class PlayerStats extends Stats
     private Wieldable weapon;
 
     // Default constructor, sets default stats
-    public PlayerStats(Simulator simulator) 
+    public PlayerStats(Simulator simulator, Player player) 
     {
         super(100, 0, 0, 0, 2);
+        this.player = player;
         this.level = 1;
         this.maxExp = calculateMaxExp();
         this.exp = 0;
@@ -97,6 +101,7 @@ public class PlayerStats extends Stats
     { 
         this.currentHealth += heal;
         if(this.currentHealth > this.maxHealth) this.currentHealth = this.maxHealth;
+        this.player.getPopUpText().addHealText(heal);
         return heal;    
     }
 
@@ -112,9 +117,11 @@ public class PlayerStats extends Stats
         if(this.exp >= this.maxExp) 
         {
             levelUp();
+            this.player.getPopUpText().addPopUpText(PopUpText.EXP_COLOR, "Level Up!");
             this.maxExp = calculateMaxExp();
             this.exp = 0;
         }
+        else this.player.getPopUpText().addExpText(exp);
     }
 
     // Level up character and randomly increase stats while refreshing current health to max

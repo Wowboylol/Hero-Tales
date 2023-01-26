@@ -47,7 +47,7 @@ public class Player extends AnimateEntity implements Damageable
         loadSprite();
         
         // Super class overriding
-        this.playerStats = new PlayerStats(simulator);
+        this.playerStats = new PlayerStats(simulator, this);
         this.setStats(playerStats);
         this.setHitbox(HITBOX_CONFIGURATIONS);
         this.setMoveAnimationSpeed(MOVE_ANIMATION_SPEED);
@@ -150,7 +150,7 @@ public class Player extends AnimateEntity implements Damageable
     @Override
     public void damageEntity(int damage) 
     { 
-        this.getPopUpText().addHealText(this.getStats().damageEntity(damage));
+        this.getPopUpText().addDamageText(this.getStats().damageEntity(damage));
         generateParticle();
 
         if(this.getStats().getCurrentHealth() > 0) simulator.playSoundEffect(SOUND_HIT_ID); 
