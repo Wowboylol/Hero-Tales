@@ -6,14 +6,15 @@
         "minDamage": 150,
         "maxDamage": 175,
         "shots": 1,
-        "projectileSpeed": 9,
+        "projectileSpeed": 8,
         "lifetime": 30,
         "pierce": false,
         "hitboxConfig": [12, 10, 24, 27]
     },
     "projectilePath": {
-        "amplitude": 50,
-        "frequency": 8
+        "amplitude": 60,
+        "frequency": 9,
+        "inverted": false
     },
     "soundID": 0,
     "sprite": {

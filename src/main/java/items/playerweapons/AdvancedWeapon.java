@@ -38,6 +38,7 @@ public class AdvancedWeapon extends Weapon implements Wieldable
     // Sinoisoidal transformation data
     private int amplitude;
     private int frequency;
+    private boolean inverted;
 
     // Sound
     private int soundAttackID;
@@ -108,8 +109,9 @@ public class AdvancedWeapon extends Weapon implements Wieldable
     private void setupProjectilePath(JSONObject json)
     {
         JSONObject projectilePath = json.getJSONObject("projectilePath");
-        this.amplitude = projectilePath.getInt("amplitude");
-        this.frequency = projectilePath.getInt("frequency");
+        amplitude = projectilePath.getInt("amplitude");
+        frequency = projectilePath.getInt("frequency");
+        inverted = projectilePath.getBoolean("inverted");
     }
 
     // Setup weapon sound ID from JSON file
@@ -151,7 +153,7 @@ public class AdvancedWeapon extends Weapon implements Wieldable
             SinusoidalProjectile projectile = new SinusoidalProjectile(
                 new Rectangle(hitboxConfigurations), new Coordinate(spawnPosition), playerPosition, 
                 projectileSprite, damage, this.getProjectileSpeed(), angle + projectileAngleOffsets[i],
-                this.getLifetime(), user, pierce, amplitude, frequency
+                this.getLifetime(), user, pierce, amplitude, frequency, inverted
             );
             this.simulator.projectiles.add(projectile);
         }
