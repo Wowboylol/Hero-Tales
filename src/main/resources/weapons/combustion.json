@@ -1,8 +1,8 @@
 {
     "type": "basic",
     "name": "Combustion Spear",
+    "tier": 8,
     "config": {
-        "tier": 8,
         "minDamage": 70,
         "maxDamage": 85,
         "shots": 8,

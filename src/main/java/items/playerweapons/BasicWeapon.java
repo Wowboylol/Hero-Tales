@@ -23,9 +23,8 @@ import main.Utility;
 import entities.Coordinate;
 import entities.enums.EntityType;
 import entities.projectiles.Projectile;
-import items.Wieldable;
 
-public class BasicWeapon extends Weapon implements Wieldable
+public class BasicWeapon extends Weapon
 {
     // Attributes
     private Simulator simulator;
@@ -52,6 +51,13 @@ public class BasicWeapon extends Weapon implements Wieldable
         loadFromJSON(jsonPath);
     }
 
+    // Constructor (called from MultiWeapon class)
+    public BasicWeapon(Simulator simulator, JSONObject json)
+    {
+        this.simulator = simulator;
+        loadFromJSON(json);
+    }
+
     // Getters
     public String getName() { return this.name; }
     public BufferedImage getWeaponIcon() { return this.weaponIcon; }
@@ -72,6 +78,27 @@ public class BasicWeapon extends Weapon implements Wieldable
         }
 
         name = json.getString("name");
+        tier = json.getInt("tier");
+        setupConfigurations(json);
+        setupSoundID(json);
+        setupSprites(json);
+        setupProjectileOffsets(json);
+    }
+
+    // Get data from given JSON object
+    private void loadFromJSON(JSONObject json)
+    {
+        try {
+            if(json.getString("type").equals("basic") == false) throw new IllegalArgumentException("JSON file is not of type \"basic\"." );
+        }
+        catch(Exception e) {
+            System.out.println(e);
+            e.printStackTrace();
+            return;
+        }
+
+        name = "Weapon component";
+        this.tier = -1;
         setupConfigurations(json);
         setupSoundID(json);
         setupSprites(json);
@@ -82,7 +109,6 @@ public class BasicWeapon extends Weapon implements Wieldable
     private void setupConfigurations(JSONObject json)
     {
         JSONObject config = json.getJSONObject("config");
-        this.tier = config.getInt("tier");
         this.minDamage = config.getInt("minDamage");
         this.maxDamage = config.getInt("maxDamage");
         this.shots = config.getInt("shots");

@@ -23,9 +23,8 @@ import main.Utility;
 import entities.Coordinate;
 import entities.enums.EntityType;
 import entities.projectiles.SinusoidalProjectile;
-import items.Wieldable;
 
-public class AdvancedWeapon extends Weapon implements Wieldable
+public class AdvancedWeapon extends Weapon
 {
     // Attributes
     private Simulator simulator;
@@ -57,6 +56,13 @@ public class AdvancedWeapon extends Weapon implements Wieldable
         loadFromJSON(jsonPath);
     }
 
+    // Constructor (called from MultiWeapon class)
+    public AdvancedWeapon(Simulator simulator, JSONObject json)
+    {
+        this.simulator = simulator;
+        loadFromJSON(json);
+    }
+
     // Getters
     public String getName() { return this.name; }
     public BufferedImage getWeaponIcon() { return this.weaponIcon; }
@@ -77,6 +83,28 @@ public class AdvancedWeapon extends Weapon implements Wieldable
         }
 
         name = json.getString("name");
+        this.tier = json.getInt("tier");
+        setupConfigurations(json);
+        setupProjectilePath(json);
+        setupSoundID(json);
+        setupSprites(json);
+        setupProjectileOffsets(json);
+    }
+
+    // Get data from given JSON object
+    private void loadFromJSON(JSONObject json)
+    {
+        try {
+            if(json.getString("type").equals("advanced") == false) throw new IllegalArgumentException("JSON file is not of type \"advanced\"." );
+        }
+        catch(Exception e) {
+            System.out.println(e);
+            e.printStackTrace();
+            return;
+        }
+
+        name = "Weapon component";
+        this.tier = -1;
         setupConfigurations(json);
         setupProjectilePath(json);
         setupSoundID(json);
@@ -88,7 +116,6 @@ public class AdvancedWeapon extends Weapon implements Wieldable
     private void setupConfigurations(JSONObject json)
     {
         JSONObject config = json.getJSONObject("config");
-        this.tier = config.getInt("tier");
         this.minDamage = config.getInt("minDamage");
         this.maxDamage = config.getInt("maxDamage");
         this.shots = config.getInt("shots");

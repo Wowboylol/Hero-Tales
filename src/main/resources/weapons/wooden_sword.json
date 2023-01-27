@@ -1,8 +1,8 @@
 {
     "type": "basic",
     "name": "Wooden Sword",
+    "tier": 0,
     "config": {
-        "tier": 0,
         "minDamage": 25,
         "maxDamage": 40,
         "shots": 1,

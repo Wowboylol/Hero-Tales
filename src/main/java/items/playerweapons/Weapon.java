@@ -14,7 +14,9 @@ import javax.imageio.ImageIO;
 import java.io.IOException;
 import main.Utility;
 
-public abstract class Weapon 
+import items.Wieldable;
+
+public abstract class Weapon implements Wieldable
 {
     // Tier: how powerful and rare a weapon is
     protected int tier;

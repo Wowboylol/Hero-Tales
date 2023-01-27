@@ -1,8 +1,8 @@
 {
     "type": "basic",
     "name": "Iron Sword",
+    "tier": 2,
     "config": {
-        "tier": 2,
         "minDamage": 50,
         "maxDamage": 60,
         "shots": 1,

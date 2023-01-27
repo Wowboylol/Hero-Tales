@@ -1,27 +1,81 @@
 {
-    "type": "advanced",
-    "name": "Amaterasu",
-    "config": {
-        "tier": 10,
-        "minDamage": 150,
-        "maxDamage": 175,
-        "shots": 1,
-        "projectileSpeed": 8,
-        "lifetime": 30,
-        "pierce": false,
-        "hitboxConfig": [12, 10, 24, 27]
-    },
-    "projectilePath": {
-        "amplitude": 60,
-        "frequency": 9,
-        "inverted": false
-    },
-    "soundID": 0,
-    "sprite": {
-        "icon": "/weapons/icons/amaterasu_katana.png",
-        "projectile": "/projectiles/flame_slash.png",
-        "spriteSize": [48, 48],
-        "diagonal_orientation": true
-    },
-    "projectileOffsets": [0]
+	"type": "multi",
+	"name": "Amaterasu",
+	"tier": 10,
+	"icon": "/weapons/icons/amaterasu_katana.png",
+    "attackSequenceLength": 5,
+	"weapons": [
+		{
+			"type": "advanced",
+			"config": {
+				"minDamage": 150,
+				"maxDamage": 175,
+				"shots": 1,
+				"projectileSpeed": 8,
+				"lifetime": 30,
+				"pierce": false,
+				"hitboxConfig": [12, 10, 24, 27]
+			},
+			"projectilePath": {
+				"amplitude": 60,
+				"frequency": 10,
+				"inverted": false
+			},
+			"soundID": 0,
+			"sprite": {
+                "icon": "/weapons/icons/amaterasu_katana.png",
+				"projectile": "/projectiles/flame_slash.png",
+				"spriteSize": [48, 48],
+				"diagonal_orientation": true
+			},
+			"attackSequence": [true, false, true, false, false],
+			"projectileOffsets": [0]
+		},
+		{
+			"type": "advanced",
+			"config": {
+				"minDamage": 150,
+				"maxDamage": 175,
+				"shots": 1,
+				"projectileSpeed": 8,
+				"lifetime": 30,
+				"pierce": false,
+				"hitboxConfig": [12, 10, 24, 27]
+			},
+			"projectilePath": {
+				"amplitude": 60,
+				"frequency": 10,
+				"inverted": true
+			},
+			"soundID": 0,
+			"sprite": {
+                "icon": "/weapons/icons/amaterasu_katana.png",
+				"projectile": "/projectiles/flame_slash.png",
+				"spriteSize": [48, 48],
+				"diagonal_orientation": true
+			},
+			"attackSequence": [false, true, false, true, false],
+			"projectileOffsets": [0]
+		},
+		{
+			"type": "basic",
+			"config": {
+				"minDamage": 400,
+				"maxDamage": 425,
+				"shots": 1,
+				"projectileSpeed": 8,
+				"lifetime": 35,
+				"pierce": true,
+				"hitboxConfig": [9, 9, 30, 30]
+			},
+			"soundID": 0,
+			"sprite": {
+                "icon": "/weapons/icons/amaterasu_katana.png",
+				"projectile": "/projectiles/fire_blast.png",
+				"diagonal_orientation": false
+			},
+			"attackSequence": [false, false, false, false, true],
+			"projectileOffsets": [0]
+		}
+	]
 }

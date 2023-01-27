@@ -1,8 +1,8 @@
 {
     "type": "basic",
     "name": "Copper Sword",
+    "tier": 1,
     "config": {
-        "tier": 1,
         "minDamage": 35,
         "maxDamage": 50,
         "shots": 1,
