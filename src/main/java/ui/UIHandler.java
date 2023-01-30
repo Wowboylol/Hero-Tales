@@ -17,7 +17,7 @@ import ui.elements.*;
 import entities.stats.PlayerStats;
 import main.GameState;
 import main.Mouse;
-import main.UIState;
+import main.Simulator;
 
 public class UIHandler 
 {
@@ -31,6 +31,7 @@ public class UIHandler
     // UI Display
     private UIContainer pauseUI;
     private UIContainer playUI;
+    private UIContainer characterUI;
     private UIState currentUI;
 
     // Methods
@@ -38,18 +39,20 @@ public class UIHandler
     {
         addPauseUI(mouse);
         addPlayUI(playerStats);
+        addCharacterUI();
     }
 
     public void updateUI(GameState gameState) 
     { 
         togglePlayUI(gameState);
         togglePauseUI(gameState);
+        toggleCharacterUI(gameState);
         uiContainers.forEach(uiContainer -> uiContainer.update()); 
     }
 
     public void drawUI(Graphics2D graphics2d) { uiContainers.forEach(uiContainer -> uiContainer.draw(graphics2d)); }
 
-    // Pause UI add and toggle
+    // Add and toggle pause UI
     public void togglePauseUI(GameState gameState)
     {
         if(gameState == GameState.PAUSE && currentUI == null) 
@@ -100,7 +103,7 @@ public class UIHandler
         pauseUI = container;
     }
 
-    // Play UI add and toggle
+    // Add and toggle play UI
     public void togglePlayUI(GameState gameState)
     {
         if(gameState == GameState.PLAY && currentUI == null) 
@@ -138,5 +141,32 @@ public class UIHandler
         container.addUIComponent(expContainer);
 
         playUI = container;
+    }
+
+    // Add and toggle character UI
+    public void toggleCharacterUI(GameState gameState)
+    {
+        if(gameState == GameState.CHARACTER && currentUI == null) 
+        {
+            uiContainers.add(characterUI); 
+            currentUI = UIState.CHARACTER;
+        }
+        else if(gameState != GameState.CHARACTER && currentUI == UIState.CHARACTER) 
+        {
+            uiContainers.remove(characterUI); 
+            currentUI = null;
+        }
+    }
+    public void addCharacterUI()
+    {
+        UIContainer container = new ColumnContainer("transparent");
+        container.setAlignment(new Alignment(Alignment.Position.START, Alignment.Position.START));
+        container.setMargin(new Spacing(Simulator.TILE_SIZE, 0, 0, Simulator.TILE_SIZE));
+
+        UIContainer background = new ColumnContainer("wood_panel_stats");
+        background.setPadding(new Spacing(208, 240));
+
+        container.addUIComponent(background);
+        characterUI = container;
     }
 }

@@ -5,12 +5,12 @@
  *
 */
 
-package main;
+package ui;
 
 public enum UIState 
 {
     PAUSE,
     PLAY,
-    INVENTORY,
+    CHARACTER,
     HEROES
 }

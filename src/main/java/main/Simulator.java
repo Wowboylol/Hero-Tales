@@ -226,7 +226,8 @@ public class Simulator extends JPanel implements Runnable
     // Helper: Sets game state
     private void setGameState()
     {
-        if(this.keyboard.getPause()) this.gameState = GameState.PAUSE;
+        if(keyboard.getPause()) this.gameState = GameState.PAUSE;
+        else if(keyboard.getCharacterMenu()) this.gameState = GameState.CHARACTER;
         else this.gameState = GameState.PLAY;
     }
 }
