@@ -11,5 +11,6 @@ public enum GameState
 {
     PAUSE,
     PLAY,
-    LOADING
+    LOADING,
+    CHARACTER
 }

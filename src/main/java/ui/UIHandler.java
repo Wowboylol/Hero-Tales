@@ -5,7 +5,7 @@
  *
 */
 
-package main;
+package ui;
 
 import java.awt.Font;
 import javax.swing.JLabel;
@@ -13,9 +13,11 @@ import java.util.ArrayList;
 import java.awt.Graphics2D;
 import java.awt.Color;
 
-import ui.*;
 import ui.elements.*;
 import entities.stats.PlayerStats;
+import main.GameState;
+import main.Mouse;
+import main.UIState;
 
 public class UIHandler 
 {

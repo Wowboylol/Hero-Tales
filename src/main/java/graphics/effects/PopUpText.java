@@ -16,7 +16,7 @@ import java.awt.FontMetrics;
 import java.util.AbstractMap.SimpleEntry;
 
 import main.Simulator;
-import main.UIHandler;
+import ui.UIHandler;
 
 public class PopUpText 
 {

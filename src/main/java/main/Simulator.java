@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import entities.*;
 import entities.stats.*;
 import graphics.*;
+import ui.UIHandler;
 
 public class Simulator extends JPanel implements Runnable
 {
