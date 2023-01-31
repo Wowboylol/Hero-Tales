@@ -39,7 +39,7 @@ public class UIHandler
     {
         addPauseUI(mouse);
         addPlayUI(playerStats);
-        addCharacterUI();
+        addCharacterUI(mouse);
     }
 
     public void updateUI(GameState gameState) 
@@ -157,16 +157,70 @@ public class UIHandler
             currentUI = null;
         }
     }
-    public void addCharacterUI()
+    public void addCharacterUI(Mouse mouse)
     {
-        UIContainer container = new ColumnContainer("transparent");
+        UIContainer container = new ColumnContainer("wood_panel_stats");
         container.setAlignment(new Alignment(Alignment.Position.START, Alignment.Position.START));
+        container.setPadding(new Spacing(24, 24, 180, 24));
         container.setMargin(new Spacing(Simulator.TILE_SIZE, 0, 0, Simulator.TILE_SIZE));
 
-        UIContainer background = new ColumnContainer("wood_panel_stats");
-        background.setPadding(new Spacing(208, 240));
+        UIContainer slotRowOne = new RowContainer("transparent");
+        slotRowOne.setMargin(new Spacing(0, 0, 12, 0));
 
-        container.addUIComponent(background);
+        UIComponent weaponSlotOne = new UIButton(
+            mouse, "weapon_slot", "weapon_slot_hover", 
+            () -> { System.out.println("Weapon slot one clicked!"); }
+        );
+        weaponSlotOne.setPadding(new Spacing(36));
+
+        UIComponent weaponSlotTwo = new UIButton(
+            mouse, "weapon_slot", "weapon_slot_hover", 
+            () -> { System.out.println("Weapon slot two clicked!"); }
+        );
+        weaponSlotTwo.setPadding(new Spacing(36));
+        weaponSlotTwo.setMargin(new Spacing(0, 0, 0, 24));
+
+        UIComponent armorSlot = new UIButton(
+            mouse, "armor_slot", "armor_slot_hover", 
+            () -> { System.out.println("Armor slot clicked!"); }
+        );
+        armorSlot.setPadding(new Spacing(36));
+        armorSlot.setMargin(new Spacing(0, 0, 0, 24));
+
+        UIContainer slotRowTwo = new RowContainer("transparent");
+        slotRowOne.setMargin(new Spacing(0, 0, 24, 0));
+
+        UIComponent runeSlotOne = new UIButton(
+            mouse, "rune_slot", "rune_slot_hover", 
+            () -> { System.out.println("Rune slot one clicked!"); }
+        );
+        runeSlotOne.setPadding(new Spacing(36));
+
+        UIComponent runeSlotTwo = new UIButton(
+            mouse, "rune_slot", "rune_slot_hover", 
+            () -> { System.out.println("Rune slot two clicked!"); }
+        );
+        runeSlotTwo.setPadding(new Spacing(36));
+        runeSlotTwo.setMargin(new Spacing(0, 0, 0, 24));
+
+        UIComponent leggingSlot = new UIButton(
+            mouse, "legging_slot", "legging_slot_hover", 
+            () -> { System.out.println("Legging slot clicked!"); }
+        );
+        leggingSlot.setPadding(new Spacing(36));
+        leggingSlot.setMargin(new Spacing(0, 0, 0, 24));
+
+        slotRowOne.addUIComponent(weaponSlotOne);
+        slotRowOne.addUIComponent(weaponSlotTwo);
+        slotRowOne.addUIComponent(armorSlot);
+
+        slotRowTwo.addUIComponent(runeSlotOne);
+        slotRowTwo.addUIComponent(runeSlotTwo);
+        slotRowTwo.addUIComponent(leggingSlot);
+
+        container.addUIComponent(slotRowOne);
+        container.addUIComponent(slotRowTwo);
+
         characterUI = container;
     }
 }
