@@ -5,7 +5,7 @@
  *
 */
 
-package ui.units;
+package ui.groups;
 
 import java.awt.Color;
 import java.awt.Graphics2D;

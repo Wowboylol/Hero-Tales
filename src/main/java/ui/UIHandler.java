@@ -14,8 +14,7 @@ import java.awt.Graphics2D;
 import java.awt.Color;
 
 import ui.elements.*;
-import ui.units.UIPlayerExpBar;
-import ui.units.UIPlayerHealthBar;
+import ui.groups.*;
 import entities.stats.PlayerStats;
 import main.GameState;
 import main.Mouse;
@@ -41,7 +40,7 @@ public class UIHandler
     {
         addPauseUI(mouse);
         addPlayUI(playerStats);
-        addCharacterUI(mouse);
+        addCharacterUI(mouse, playerStats);
     }
 
     public void updateUI(GameState gameState) 
@@ -159,11 +158,11 @@ public class UIHandler
             currentUI = null;
         }
     }
-    public void addCharacterUI(Mouse mouse)
+    public void addCharacterUI(Mouse mouse, PlayerStats playerStats)
     {
         UIContainer container = new ColumnContainer("wood_panel_stats");
         container.setAlignment(new Alignment(Alignment.Position.START, Alignment.Position.START));
-        container.setPadding(new Spacing(24, 24, 180, 24));
+        container.setPadding(new Spacing(24, 24, 24, 24));
         container.setMargin(new Spacing(Simulator.TILE_SIZE, 0, 0, Simulator.TILE_SIZE));
 
         UIContainer slotRowOne = new RowContainer("transparent");
@@ -190,7 +189,7 @@ public class UIHandler
         armorSlot.setMargin(new Spacing(0, 0, 0, 24));
 
         UIContainer slotRowTwo = new RowContainer("transparent");
-        slotRowOne.setMargin(new Spacing(0, 0, 24, 0));
+        slotRowTwo.setMargin(new Spacing(0, 0, 20, 0));
 
         UIComponent runeSlotOne = new UIButton(
             mouse, "rune_slot", "rune_slot_hover", 
@@ -222,6 +221,7 @@ public class UIHandler
 
         container.addUIComponent(slotRowOne);
         container.addUIComponent(slotRowTwo);
+        container.addUIComponent(new UIPlayerStats(playerStats));
 
         characterUI = container;
     }
