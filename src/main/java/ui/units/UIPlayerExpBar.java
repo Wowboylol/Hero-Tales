@@ -1,16 +1,18 @@
 /*  
  *  UIPlayerExpBar.java
  *  
- *  Description: Renders dynamic exo bar with exp and max exp for player.
+ *  Description: Renders dynamic exp bar with exp and max exp for player.
  *
 */
 
-package ui.elements;
+package ui.units;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
 
 import entities.stats.PlayerStats;
+import ui.elements.SolidElement;
+import ui.elements.UIText;
 
 public class UIPlayerExpBar extends SolidElement
 {

@@ -14,6 +14,8 @@ import java.awt.Graphics2D;
 import java.awt.Color;
 
 import ui.elements.*;
+import ui.units.UIPlayerExpBar;
+import ui.units.UIPlayerHealthBar;
 import entities.stats.PlayerStats;
 import main.GameState;
 import main.Mouse;

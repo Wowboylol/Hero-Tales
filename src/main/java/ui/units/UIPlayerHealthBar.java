@@ -5,12 +5,14 @@
  *
 */
 
-package ui.elements;
+package ui.units;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
 
 import entities.stats.Stats;
+import ui.elements.SolidElement;
+import ui.elements.UIText;
 
 public class UIPlayerHealthBar extends SolidElement
 {
